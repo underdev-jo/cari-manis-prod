@@ -50,6 +50,7 @@ export default function Home() {
             </p>
           </a>
         </div>
+
         <button className="btn">Sample Button</button>
       </main>
 

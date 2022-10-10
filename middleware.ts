@@ -11,7 +11,7 @@ export default function middleware(req: NextRequest) {
 
   const hostname = req.headers.get("host") || "";
 
-  const inLocal = "localhost:5000";
+  const inLocal = "localhost:3000";
   const inProd = "multi-wedding.vercel.app";
   const inDomain = "www.pengen-nikah.my.id";
 
@@ -30,7 +30,7 @@ export default function middleware(req: NextRequest) {
     hostname === inDomain
   )
     url.pathname = pathname;
-  else if (subdomain === "dashboard") url.pathname = "/_dashboard";
+  else if (subdomain === "onlymin") url.pathname = "/_dashboard";
   else url.pathname = "/404";
 
   return NextResponse.rewrite(url);
