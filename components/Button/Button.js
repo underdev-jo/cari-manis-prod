@@ -1,10 +1,10 @@
-export default function Button({
+const Button = ({
   model = "primary",
   children,
   type = "button",
   loading,
   disabled,
-}) {
+}) => {
   const property = "flex items-center m-2";
   const clsModel = `btn-${model} ${loading ? "loading" : ""}`;
   return (
@@ -16,4 +16,6 @@ export default function Button({
       {children}
     </button>
   );
-}
+};
+
+export default Button;

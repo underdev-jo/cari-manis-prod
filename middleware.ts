@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const config = {
-  matcher: ["/", "/_dashboard"],
+  matcher: ["/", "/_dashboard", "/_adminLogin", "/drinks", "/drinks/:id"],
 };
 
 export default function middleware(req: NextRequest) {
@@ -20,7 +20,8 @@ export default function middleware(req: NextRequest) {
 
   console.log("Middleware: ", { hostname, subdomain });
 
-  if (pathname.startsWith("/_dashboard")) url.pathname = "/404";
+  if (pathname.startsWith("/_dashboard") || pathname.startsWith("/_adminLogin"))
+    url.pathname = "/404";
   else if (
     subdomain === inLocal ||
     subdomain === inProd ||
@@ -30,8 +31,12 @@ export default function middleware(req: NextRequest) {
     hostname === inDomain
   )
     url.pathname = pathname;
-  else if (subdomain === "onlymin") url.pathname = "/_dashboard";
-  else url.pathname = "/404";
+  else if (subdomain === "onlymin") {
+    const adminCookie = req.cookies.get("onlymin");
+    const hasAdminData = adminCookie && Object.keys(adminCookie).length > 0;
+    if (hasAdminData) url.pathname = `/_dashboard${pathname}`;
+    else url.pathname = "/_adminLogin";
+  } else url.pathname = "/404";
 
   return NextResponse.rewrite(url);
 }
