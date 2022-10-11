@@ -1,4 +1,4 @@
-import Image from "next/image";
+import LogoCariManis from "../../public/logo-carimanis";
 import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
 export default function Header({ admin = false }) {
@@ -7,31 +7,11 @@ export default function Header({ admin = false }) {
       <div className="flex-none">
         <LinkWrapper href="/">
           <button className="btn btn-ghost">
-            <Image
-              width={86}
-              height={48}
-              src="/carimanis-logo-white.svg"
-              alt="Carimanis Logo"
-            />
+            <LogoCariManis />
           </button>
         </LinkWrapper>
       </div>
-      <div className="flex-none">
-        {/* <button className="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block w-7 h-7 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button> */}
+      <div className="flex-none text-white">
         <label className="btn btn-square btn-ghost swap swap-rotate">
           <input type="checkbox" />
           <svg
