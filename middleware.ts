@@ -12,8 +12,8 @@ export default function middleware(req: NextRequest) {
   const hostname = req.headers.get("host") || "";
 
   const inLocal = "localhost:3000";
-  const inProd = "multi-wedding.vercel.app";
-  const inDomain = "www.pengen-nikah.my.id";
+  const inProd = "cari-manis.vercel.app";
+  const inDomain = "www.cari-manis.my.id";
 
   const parts = hostname.split(".");
   const subdomain = parts.shift();
