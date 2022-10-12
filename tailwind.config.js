@@ -12,7 +12,11 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: { primary: "#017FFA", secondary: "#F0F6FF", black: "#222222" },
+        mytheme: {
+          primary: "#017FFA",
+          secondary: "#F0F6FF",
+          black: "#222222",
+        },
       },
       "winter",
     ],
