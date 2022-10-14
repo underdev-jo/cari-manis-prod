@@ -11,6 +11,15 @@ export default function DrinkCard({
   price,
 }) {
   const productUrl = `/${slugify(name)}/${id}`;
+  const productStr = JSON.stringify({
+    packaging,
+    name,
+    id,
+    image,
+    sugar,
+    price,
+  });
+  const dirty = `${productUrl}?product=${productStr}`;
   return (
     <Link href={productUrl}>
       <div className="btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">

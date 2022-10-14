@@ -1,11 +1,22 @@
+import { useRouter } from "next/router";
+import { runFunction } from "../../helpers/util";
 import LogoCariManis from "../../public/logo-carimanis";
 import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
-export default function Header({ admin = false }) {
+export default function Header({ admin = false, back }) {
+  const router = useRouter();
+  const defaultBack = () => router.back();
+  const doBack = () => runFunction(back, defaultBack);
   return (
     <header className="sticky top-0 z-50 bg-primary text-white">
       <div className="max-w-md mx-auto navbar justify-between">
-        <div className="flex-none">
+        <div className="flex flex-none">
+          {back && (
+            <button className="btn btn-ghost" onClick={doBack}>
+              {" "}
+              b{" "}
+            </button>
+          )}
           <LinkWrapper href="/">
             <button className="btn btn-ghost">
               <LogoCariManis />

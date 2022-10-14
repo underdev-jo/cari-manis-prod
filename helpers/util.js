@@ -16,3 +16,8 @@ export const slugify = (name = "") =>
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+export const runFunction = (fn, callback) => {
+  if (typeof fn === "function") fn();
+  else if (typeof callback === "function") callback();
+};
