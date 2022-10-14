@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Container from "../../components/Layout/Container";
 import { convertRupiah } from "../../helpers/util";
 
 export const ProductSummary = ({ name, packaging, harga }) => {
@@ -97,5 +98,16 @@ export function ProductInformation({
         </tr>
       </table>
     </div>
+  );
+}
+
+export default function ProductView({ product }) {
+  return (
+    <Container>
+      <ProductImage {...product} />
+      <ProductSummary {...product} />
+      <ProductNutrition {...product} />
+      <ProductInformation {...product} />
+    </Container>
   );
 }

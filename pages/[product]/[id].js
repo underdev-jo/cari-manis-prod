@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import PageHead from "../PageHead";
 import { supaKey, supaUrl } from "../../helpers/util";
 import Container from "../../components/Layout/Container";
-import {
+import ProductView, {
   ProductImage,
   ProductInformation,
   ProductNutrition,
@@ -49,12 +49,7 @@ export default function ProductDetail({ product }) {
   return (
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
-      <Container>
-        <ProductImage {...product} />
-        <ProductSummary {...product} />
-        <ProductNutrition {...product} />
-        <ProductInformation {...product} />
-      </Container>
+      <ProductView product={product} />
     </>
   );
 }
