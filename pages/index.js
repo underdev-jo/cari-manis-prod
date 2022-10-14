@@ -6,7 +6,6 @@ export async function getStaticProps() {
   const supabase = createClient(supaUrl(), supaKey());
 
   const res = await supabase.from("minuman").select("*");
-  console.log("Responnya emal: ", res);
 
   if (res.error)
     return {

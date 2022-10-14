@@ -7,11 +7,13 @@ export default function Header({ admin = false, back }) {
   const router = useRouter();
   const defaultBack = () => router.back();
   const doBack = () => runFunction(back, defaultBack);
+  const notHome = router.pathname !== "/";
+
   return (
     <header className="sticky top-0 z-50 bg-primary text-white">
       <div className="max-w-md mx-auto navbar justify-between">
         <div className="flex flex-none">
-          {back && (
+          {notHome && (
             <button className="btn btn-ghost" onClick={doBack}>
               {" "}
               b{" "}

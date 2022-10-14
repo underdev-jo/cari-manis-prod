@@ -21,3 +21,10 @@ export const runFunction = (fn, callback) => {
   if (typeof fn === "function") fn();
   else if (typeof callback === "function") callback();
 };
+
+export const convertRupiah = (number) => {
+  if (!number) return "";
+  return `Rp${parseInt(number, 10)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")},-`;
+};

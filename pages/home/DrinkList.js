@@ -9,9 +9,6 @@ export default function DrinkList({ drinkList = [] }) {
         {drinkList.map((drink) => (
           <DrinkCard key={drink.id} {...drink} />
         ))}
-        <DrinkCard />
-        <DrinkCard />
-        <DrinkCard />
       </div>
     </Section>
   );

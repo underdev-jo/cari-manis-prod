@@ -44,14 +44,22 @@ a {
 .text-small {
   @apply text-xs font-normal;
   letter-spacing: -0.005em;
-
-  &.medium {
-    @apply font-medium;
-  }
 }
 
 .text-medium {
   @apply text-sm font-normal leading-5;
+}
+
+.text-large {
+  @apply text-base font-normal leading-6;
+}
+
+.text-small,
+.text-medium,
+.text-large {
+  &.regular {
+    @apply font-normal;
+  }
 
   &.medium {
     @apply font-medium;

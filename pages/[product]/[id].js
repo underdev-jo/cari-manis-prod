@@ -1,8 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import PageHead from "../PageHead";
 import { supaKey, supaUrl } from "../../helpers/util";
-import Image from "next/image";
-import Header from "../../components/Header/Header";
+import Container from "../../components/Layout/Container";
+import {
+  ProductImage,
+  ProductInformation,
+  ProductNutrition,
+  ProductSummary,
+} from "./ProductView";
 
 export async function getStaticPaths() {
   const supabase = createClient(supaUrl(), supaKey());
@@ -44,18 +49,12 @@ export default function ProductDetail({ product }) {
   return (
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
-      <Header back />
-      <div>
-        <div>
-          <Image
-            width={100}
-            height={100}
-            src={product.image}
-            alt={product.name}
-            title={product.name}
-          />
-        </div>
-      </div>
+      <Container>
+        <ProductImage {...product} />
+        <ProductSummary {...product} />
+        <ProductNutrition {...product} />
+        <ProductInformation {...product} />
+      </Container>
     </>
   );
 }
