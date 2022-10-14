@@ -40,7 +40,7 @@ export const ProductImage = ({ image, name }) => {
   );
 };
 
-export function ProductNutrition() {
+export function ProductNutrition({ netto, gula, kalori }) {
   const Block = ({ title, info }) => (
     <div className="btn btn-ghost h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary">
       <div className="w-full text-small bold">{title}</div>
@@ -50,9 +50,9 @@ export function ProductNutrition() {
 
   return (
     <div className="flex justify-between px-6">
-      <Block title="Netto" info="220ml" />
-      <Block title="Gula" info="19gr" />
-      <Block title="Kalori" info="90kkal" />
+      <Block title="Netto" info={`${netto}ml`} />
+      <Block title="Gula" info={`${gula}gr`} />
+      <Block title="Kalori" info={`${kalori}kkal`} />
     </div>
   );
 }

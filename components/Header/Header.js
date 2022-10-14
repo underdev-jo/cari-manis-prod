@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { runFunction } from "../../helpers/util";
 import LogoCariManis from "../../public/logo-carimanis";
@@ -14,14 +15,28 @@ export default function Header({ admin = false, back }) {
       <div className="max-w-md mx-auto navbar justify-between">
         <div className="flex flex-none">
           {notHome && (
-            <button className="btn btn-ghost" onClick={doBack}>
-              {" "}
-              b{" "}
+            <button
+              className="btn btn-square btn-ghost text-white"
+              onClick={doBack}
+            >
+              <Image
+                src="/arrow-left-solid.svg"
+                alt="B"
+                title="Back"
+                width={26}
+                height={30}
+              />
             </button>
           )}
           <LinkWrapper href="/">
             <button className="btn btn-ghost">
-              <LogoCariManis />
+              <Image
+                src="/logo-carimanis.svg"
+                alt="Logo"
+                title="Logo cari manis"
+                width={68}
+                height={36}
+              />
             </button>
           </LinkWrapper>
         </div>
