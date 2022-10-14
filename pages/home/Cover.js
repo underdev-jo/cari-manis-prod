@@ -21,13 +21,13 @@ export default function HomepageCover() {
       </div>
       <div
         className="absolute right-0"
-        style={{ top: "50%", transform: "translate(-100%, -85%)" }}
+        style={{ top: "50%", transform: "translate(-55%, -85%)" }}
       >
         <CoffeeCup />
       </div>
       <div
         className="absolute right-0"
-        style={{ top: "50%", transform: "translate(-65%, -35%)" }}
+        style={{ top: "50%", transform: "translate(-35%, -35%)" }}
       >
         <CoffeeTime />
       </div>
