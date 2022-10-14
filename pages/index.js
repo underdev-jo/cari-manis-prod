@@ -1,16 +1,5 @@
-import Header from "../components/Header/Header";
-import Container from "../components/Layout/Container";
-import HomepageCover from "../pageLayout/Homepage/Cover";
-import PageHead from "./PageHead";
+import Home from "./home";
 
-export default function Home() {
-  return (
-    <>
-      <PageHead title="Cari Manis" />
-      <Header />
-      <Container>
-        <HomepageCover />
-      </Container>
-    </>
-  );
+export default function index() {
+  return <Home />;
 }

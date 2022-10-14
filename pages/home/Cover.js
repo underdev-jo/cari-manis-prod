@@ -1,21 +1,23 @@
 import InputSearch from "../../components/Input/InputSearch";
 import CoffeeCup from "../../public/CoffeeCup";
 import CoffeeTime from "../../public/CoffeeTime";
-import style from "./Cover.module.scss";
+import style from "../../styles/homepage/Cover.module.scss";
 
 export default function HomepageCover() {
   return (
     <div className={`${style.cover} bg-secondary relative`}>
-      <div className={`${style.textHead} mb-10`}>
-        <h2 className="cm-font-heading2">
-          <span className="text-primary">Cari</span> Informasi Kandungan{" "}
-          <span className="text-primary">Manis</span>
-        </h2>
-        <h3 className="cm-font-medium">
-          Temukan informasi kadar gula
-          <br />
-          dari minuman yang kamu konsumsi sehari-hari. Salam sehat!
-        </h3>
+      <div className="max-w-sm mx-auto mb-10">
+        <div className={style.textHead}>
+          <h2 className="cm-heading h2">
+            <span className="text-primary">Cari</span> Informasi Kandungan{" "}
+            <span className="text-primary">Manis</span>
+          </h2>
+          <h3 className="cm-font-medium">
+            Temukan informasi kadar gula
+            <br />
+            dari minuman yang kamu konsumsi sehari-hari. Salam manis!
+          </h3>
+        </div>
       </div>
       <div
         className="absolute right-0"
