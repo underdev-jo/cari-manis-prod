@@ -7,7 +7,7 @@ function ElementButton({ name, image }) {
       <div className="mr-3">
         <Image src={image} alt={name} title={name} width={32} height={32} />
       </div>
-      <div className="cm-font-medium">{name}</div>
+      <div className="text-small medium">{name}</div>
     </div>
   );
 }

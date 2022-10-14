@@ -12,7 +12,7 @@ export default function HomepageCover() {
             <span className="text-primary">Cari</span> Informasi Kandungan{" "}
             <span className="text-primary">Manis</span>
           </h2>
-          <h3 className="cm-font-medium">
+          <h3 className="text-small medium">
             Temukan informasi kadar gula
             <br />
             dari minuman yang kamu konsumsi sehari-hari. Salam manis!

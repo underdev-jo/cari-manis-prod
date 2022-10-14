@@ -4,6 +4,7 @@ import Section from "../../components/Sections/Section";
 import PageHead from "../PageHead";
 import Cover from "./Cover";
 import DrinkCategory from "./DrinkCategory";
+import DrinkList from "./DrinkList";
 import SweetInfo from "./SweetInfo";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <Cover />
         <DrinkCategory />
         <SweetInfo />
+        <DrinkList />
       </Container>
     </>
   );

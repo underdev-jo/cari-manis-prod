@@ -7,7 +7,7 @@ export default function SweetInfo() {
       <div className="rounded-xl p-4 flex items-center justify-between text-white bg-[#453E9E]">
         <div className="w-[90%] max-w-[267px]">
           <div className="cm-heading h4 mb-2">Tahukah kamu?</div>
-          <div className="cm-font-regular">
+          <div className="text-small">
             Diabetes melitus terjadi saat kadar gula di dalam darah terlalu
             tinggi. Ini terjadi saat jumlah hormon insulin dalam tubuh tidak
             cukup untuk mengubah glukosa menjadi energi.

@@ -41,15 +41,23 @@ a {
   }
 }
 
-.cm-font {
-  @apply leading-tight;
+.text-small {
+  @apply text-xs font-normal;
   letter-spacing: -0.005em;
 
-  &-medium {
-    @apply text-xs font-medium;
+  &.medium {
+    @apply font-medium;
+  }
+}
+
+.text-medium {
+  @apply text-sm font-normal leading-5;
+
+  &.medium {
+    @apply font-medium;
   }
 
-  &-regular {
-    @apply text-xs font-normal;
+  &.bold {
+    @apply font-bold;
   }
 }
