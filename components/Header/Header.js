@@ -3,7 +3,7 @@ import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
 export default function Header({ admin = false }) {
   return (
-    <div className="navbar bg-primary text-white justify-between">
+    <div className="sticky top-0 z-50 navbar bg-primary text-white justify-between">
       <div className="flex-none">
         <LinkWrapper href="/">
           <button className="btn btn-ghost">

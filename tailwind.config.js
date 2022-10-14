@@ -16,6 +16,8 @@ module.exports = {
           primary: "#017FFA",
           secondary: "#F0F6FF",
           black: "#222222",
+          "base-content": "#222222",
+          "neutral-content": "#222222",
         },
       },
       "winter",
