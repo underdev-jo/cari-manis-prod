@@ -1,13 +1,12 @@
 import Header from "../../components/Header/Header";
 import Container from "../../components/Layout/Container";
-import Section from "../../components/Sections/Section";
 import PageHead from "../PageHead";
 import Cover from "./Cover";
 import DrinkCategory from "./DrinkCategory";
 import DrinkList from "./DrinkList";
 import SweetInfo from "./SweetInfo";
 
-export default function Home() {
+export default function Home({ drinkList }) {
   return (
     <>
       <PageHead title="Cari Manis" />
@@ -16,7 +15,7 @@ export default function Home() {
         <Cover />
         <DrinkCategory />
         <SweetInfo />
-        <DrinkList />
+        <DrinkList drinkList={drinkList} />
       </Container>
     </>
   );
