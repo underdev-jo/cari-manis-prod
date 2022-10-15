@@ -46,6 +46,7 @@ export const ProductImage = ({ image, name }) => {
           title={name}
           className="block mx-auto"
           layout="responsive"
+          priority
         />
       </div>
     </div>
@@ -87,30 +88,32 @@ export function ProductInformation({
     <div className="my-10 px-6">
       <h3 className="cm-heading h4 mb-4">Informasi kandungan minuman</h3>
       <table className="table-fixed w-full border border-collapse border-[#E2E8F4]">
-        <tr>
-          <td className={colClass}>Netto</td>
-          <td className={`${colClass} ${valClass}`}>{netto}ml</td>
-        </tr>
-        <tr>
-          <td className={colClass}>Kandungan Gula</td>
-          <td className={`${colClass} ${valClass}`}>{gula}gr</td>
-        </tr>
-        <tr>
-          <td className={colClass}>Takaran Saji</td>
-          <td className={`${colClass} ${valClass}`}>{takaran_saji}ml</td>
-        </tr>
-        <tr>
-          <td className={colClass}>Kalori</td>
-          <td className={`${colClass} ${valClass}`}>{kalori}kkal</td>
-        </tr>
-        <tr>
-          <td className={colClass}>Jumlah Sajian</td>
-          <td className={`${colClass} ${valClass}`}>{jumlah_sajian}</td>
-        </tr>
-        <tr>
-          <td className={colClass}>Total Kandungan Gula</td>
-          <td className={`${colClass} ${valClass}`}>{total_gula}gr</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td className={colClass}>Netto</td>
+            <td className={`${colClass} ${valClass}`}>{netto}ml</td>
+          </tr>
+          <tr>
+            <td className={colClass}>Kandungan Gula</td>
+            <td className={`${colClass} ${valClass}`}>{gula}gr</td>
+          </tr>
+          <tr>
+            <td className={colClass}>Takaran Saji</td>
+            <td className={`${colClass} ${valClass}`}>{takaran_saji}ml</td>
+          </tr>
+          <tr>
+            <td className={colClass}>Kalori</td>
+            <td className={`${colClass} ${valClass}`}>{kalori}kkal</td>
+          </tr>
+          <tr>
+            <td className={colClass}>Jumlah Sajian</td>
+            <td className={`${colClass} ${valClass}`}>{jumlah_sajian}</td>
+          </tr>
+          <tr>
+            <td className={colClass}>Total Kandungan Gula</td>
+            <td className={`${colClass} ${valClass}`}>{total_gula}gr</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );

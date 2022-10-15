@@ -3,14 +3,13 @@ import { useRouter } from "next/router";
 import { runFunction } from "../../helpers/util";
 import Burger from "../../public/Burger";
 import Close from "../../public/Close";
-import LogoCariManis from "../../public/logo-carimanis";
 import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
 export default function Header({ admin = false, back }) {
-  const router = useRouter();
-  const defaultBack = () => router.back();
+  const { asPath, back: backRouter } = useRouter();
+  const defaultBack = () => backRouter();
   const doBack = () => runFunction(back, defaultBack);
-  const notHome = router.pathname !== "/";
+  const notHome = asPath !== "/";
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
