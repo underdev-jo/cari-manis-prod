@@ -59,8 +59,8 @@ export function ProductNutrition({ netto, gula, kalori }) {
       type="button"
       className="btn btn-ghost block h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary"
     >
-      <div className="w-full text-small bold">{title}</div>
-      <div className="w-full text-large regular">{info}</div>
+      <h1 className="w-full text-small bold">{title}</h1>
+      <h2 className="w-full text-large regular">{info}</h2>
     </button>
   );
 
@@ -85,7 +85,7 @@ export function ProductInformation({
   const valClass = "text-right text-small bold";
   return (
     <div className="my-10 px-6">
-      <div className="cm-heading h4 mb-4">Informasi kandungan minuman</div>
+      <h3 className="cm-heading h4 mb-4">Informasi kandungan minuman</h3>
       <table className="table-fixed w-full border border-collapse border-[#E2E8F4]">
         <tr>
           <td className={colClass}>Netto</td>
@@ -116,6 +116,15 @@ export function ProductInformation({
   );
 }
 
+export function ProductSource({ source }) {
+  return (
+    <div className="my-6 px-6">
+      <h3 className="cm-heading h4">Sumber informasi</h3>
+      <div className="text-sm">{source}</div>
+    </div>
+  );
+}
+
 export default function ProductView({ product }) {
   return (
     <Container>
@@ -123,6 +132,7 @@ export default function ProductView({ product }) {
       <ProductSummary {...product} />
       <ProductNutrition {...product} />
       <ProductInformation {...product} />
+      <ProductSource {...product} />
     </Container>
   );
 }

@@ -1,13 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import PageHead from "../PageHead";
 import { supaKey, supaUrl } from "../../helpers/util";
-import Container from "../../components/Layout/Container";
-import ProductView, {
-  ProductImage,
-  ProductInformation,
-  ProductNutrition,
-  ProductSummary,
-} from "./ProductView";
+import ProductView from "./ProductView";
 
 export async function getStaticPaths() {
   const supabase = createClient(supaUrl(), supaKey());
