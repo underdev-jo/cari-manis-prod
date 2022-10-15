@@ -2,6 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 import PageHead from "../PageHead";
 import { supaKey, supaUrl } from "../../helpers/util";
 import ProductView from "./ProductView";
+import { useState } from "react";
+import ProductInfo from "./ProductInfoPopup";
 
 export async function getStaticPaths() {
   const supabase = createClient(supaUrl(), supaKey());
@@ -39,11 +41,21 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProductDetail({ product }) {
+  const [popup, setPopup] = useState(false);
+
   if (!product) return "Loading...";
+
+  const close = () => setPopup(false);
+
   return (
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
-      <ProductView product={product} />
+      <ProductView product={product} setPopup={setPopup} />
+      <ProductInfo
+        isOpen={popup && typeof popup === "object"}
+        data={popup}
+        onClose={close}
+      />
     </>
   );
 }

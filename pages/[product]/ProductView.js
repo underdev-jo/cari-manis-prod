@@ -7,11 +7,10 @@ export const ProductSummary = ({ name, packaging, harga }) => {
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">
         <div className="text-large medium">{name}</div>
-        <label
-          className="w-full text-medium bold text-primary flex items-center cursor-pinter"
-          htmlFor="modal-price-info"
-        >
-          <div>{`Sekitar ${convertRupiah(harga)}`}</div>
+        <div className="text-medium bold text-primary flex items-center cursor-pinter">
+          <label htmlFor="modal-price-info">{`Sekitar ${convertRupiah(
+            harga
+          )}`}</label>
           <div className="ml-2 relative">
             <div className="absolute left-0 top-0 w-full h-full bg-primary opacity-30 rounded-lg animate-ping" />
             <label
@@ -21,7 +20,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
               i
             </label>
           </div>
-        </label>
+        </div>
       </div>
       <div>
         <div className="mb-1 text-small">
@@ -53,22 +52,23 @@ export const ProductImage = ({ image, name }) => {
   );
 };
 
-export function ProductNutrition({ netto, gula, kalori }) {
-  const Block = ({ title, info }) => (
-    <button
-      type="button"
-      className="btn btn-ghost block h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary"
-    >
-      <h1 className="w-full text-small bold">{title}</h1>
-      <h2 className="w-full text-large regular">{info}</h2>
-    </button>
-  );
+const Block = ({ title, info, setPopup }) => (
+  <button
+    type="button"
+    className="btn btn-ghost block h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary"
+    onClick={() => setPopup({ title, info })}
+  >
+    <h1 className="w-full text-small bold">{title}</h1>
+    <h2 className="w-full text-large regular">{info}</h2>
+  </button>
+);
 
+export function ProductNutrition({ netto, gula, kalori, setPopup }) {
   return (
     <div className="flex justify-between px-6">
-      <Block title="Netto" info={`${netto}ml`} />
-      <Block title="Gula" info={`${gula}gr`} />
-      <Block title="Kalori" info={`${kalori}kkal`} />
+      <Block title="Netto" info={`${netto}ml`} setPopup={setPopup} />
+      <Block title="Gula" info={`${gula}gr`} setPopup={setPopup} />
+      <Block title="Kalori" info={`${kalori}kkal`} setPopup={setPopup} />
     </div>
   );
 }
@@ -125,14 +125,15 @@ export function ProductSource({ source }) {
   );
 }
 
-export default function ProductView({ product }) {
+export default function ProductView({ product, setPopup }) {
   return (
     <Container>
       <ProductImage {...product} />
       <ProductSummary {...product} />
-      <ProductNutrition {...product} />
+      <ProductNutrition {...product} setPopup={setPopup} />
       <ProductInformation {...product} />
       <ProductSource {...product} />
+      <div className="h-10" />
     </Container>
   );
 }
