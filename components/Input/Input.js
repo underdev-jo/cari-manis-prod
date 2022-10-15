@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import IconMoon from "../../public/Moon";
 import IconSun from "../../public/Sun";
 
-const PasswordToggle = ({ type, inType, onToggle }) => {
+const PasswordToggle = ({ type, inType, onToggle, disabled }) => {
   if (type !== "password") return "";
   const iconSun = (
     <div className="swap-on fill-current w-6 h-6">
@@ -17,9 +17,10 @@ const PasswordToggle = ({ type, inType, onToggle }) => {
 
   return (
     <button
-      className="btn btn-square btn-outline"
+      className="btn btn-square btn-outline border-base-300 disabled:border-base-300 disabled:bg-base-300"
       type="button"
       onClick={onToggle}
+      disabled={disabled}
     >
       {inType === "password" ? iconSun : iconMoon}
     </button>
@@ -30,7 +31,8 @@ const Input = React.forwardRef(
   ({ label, type = "text", placeholder, ...props }, ref) => {
     const [inType, setInType] = useState(type);
 
-    const classInput = "input input-bordered w-full mb-2 focus:input-primary";
+    const classInput =
+      "input input-bordered border-base-300 w-full mb-2 focus:input-primary disabled:bg-base-300 disabled:border-base-300";
 
     const togglePassword = (e) => {
       e.preventDefault();
@@ -39,20 +41,28 @@ const Input = React.forwardRef(
       else setInType("password");
     };
 
+    let inputEl = (
+      <input
+        {...props}
+        ref={ref}
+        type={inType}
+        placeholder={placeholder}
+        className={classInput}
+      />
+    );
+
+    if (type !== "password")
+      return <div className="form-control">{inputEl}</div>;
+
     return (
       <div className="form-control">
         <div className="input-group">
-          <input
-            {...props}
-            ref={ref}
-            type={inType}
-            placeholder={placeholder}
-            className={classInput}
-          />
+          {inputEl}
           <PasswordToggle
             type={type}
             inType={inType}
             onToggle={togglePassword}
+            disabled={props.disabled}
           />
         </div>
       </div>

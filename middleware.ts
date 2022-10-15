@@ -18,8 +18,6 @@ export default function middleware(req: NextRequest) {
   const parts = hostname.split(".");
   const subdomain = parts.shift();
 
-  console.log("Middleware: ", { hostname, subdomain });
-
   if (pathname.startsWith("/_dashboard") || pathname.startsWith("/_adminLogin"))
     url.pathname = "/404";
   else if (
