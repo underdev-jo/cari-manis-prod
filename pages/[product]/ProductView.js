@@ -7,9 +7,21 @@ export const ProductSummary = ({ name, packaging, harga }) => {
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">
         <div className="text-large medium">{name}</div>
-        <div className="text-medium bold text-primary">{`Sekitar ${convertRupiah(
-          harga
-        )}`}</div>
+        <label
+          className="w-full text-medium bold text-primary flex items-center cursor-pinter"
+          htmlFor="modal-price-info"
+        >
+          <div>{`Sekitar ${convertRupiah(harga)}`}</div>
+          <div className="ml-2 relative">
+            <div className="absolute left-0 top-0 w-full h-full bg-primary opacity-30 rounded-lg animate-ping" />
+            <label
+              htmlFor="modal-price-info"
+              className="relative bg-white block badge badge-sm badge-primary badge-outline text-xs"
+            >
+              i
+            </label>
+          </div>
+        </label>
       </div>
       <div>
         <div className="mb-1 text-small">
@@ -43,10 +55,13 @@ export const ProductImage = ({ image, name }) => {
 
 export function ProductNutrition({ netto, gula, kalori }) {
   const Block = ({ title, info }) => (
-    <div className="btn btn-ghost h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary">
+    <button
+      type="button"
+      className="btn btn-ghost block h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary"
+    >
       <div className="w-full text-small bold">{title}</div>
       <div className="w-full text-large regular">{info}</div>
-    </div>
+    </button>
   );
 
   return (
