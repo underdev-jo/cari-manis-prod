@@ -6,10 +6,14 @@ import Close from "../../public/Close";
 import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
 export default function Header({ admin = false, back }) {
-  const { asPath, back: backRouter } = useRouter();
+  const router = useRouter();
+  const { pathname: path, asPath, back: backRouter } = router;
   const defaultBack = () => backRouter();
   const doBack = () => runFunction(back, defaultBack);
-  const notHome = asPath !== "/";
+  const notHome =
+    path !== "/_adminLogin" && path !== "/_dashboard" && path !== "/";
+
+  console.log(router);
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
@@ -37,6 +41,7 @@ export default function Header({ admin = false, back }) {
                 title="Logo cari manis"
                 width={68}
                 height={36}
+                priority
               />
             </button>
           </LinkWrapper>

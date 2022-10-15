@@ -8,6 +8,8 @@ export const setCookie = (name, value) =>
 
 export const getCookie = (name) => Cookies.get(name);
 
+export const removeCookie = (name) => Cookies.remove(name);
+
 export const slugify = (name = "") =>
   `${name}`
     .toLowerCase()
