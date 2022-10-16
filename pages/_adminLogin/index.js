@@ -29,8 +29,10 @@ export default function FormLogin() {
     if (data && data.length > 0 && typeof data === "object") {
       setCookie("onlymin", JSON.stringify(data[0]));
       window.location.reload();
-    } else if (data.length < 1 || error) setResErr(error || "Invalid!");
-    setLoading(false);
+    } else if (data.length < 1 || error) {
+      setLoading(false);
+      setResErr(error || "Invalid!");
+    }
   });
 
   return (

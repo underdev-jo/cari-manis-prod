@@ -1,9 +1,13 @@
-import { useForm, Controller } from "react-hook-form";
-import Input from "../../components/Input/Input";
+import { useForm } from "react-hook-form";
 import { removeCookie } from "../../helpers/util";
+import FormInputDrink from "./FormInputDrink";
 
 export default function FormDrink() {
-  const { control, register, handleSubmit } = useForm({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     defaultValues: {
       name: "",
       netto: 0,
@@ -20,7 +24,7 @@ export default function FormDrink() {
   });
 
   const onSubmit = handleSubmit((values) => {
-    alert(JSON.stringify(values));
+    // alert(JSON.stringify(values));
   });
 
   const logout = () => {
@@ -33,44 +37,19 @@ export default function FormDrink() {
   return (
     <div className="my-8">
       <div>
-        <h2 className="cm-heading h4">Tulis data minuman</h2>
+        <h2 className="cm-heading h4">TAMBAH DATA MINUMAN</h2>
       </div>
       <div>
         <form onSubmit={onSubmit}>
-          <div className="mb-4">
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  placeholder="Nama Minuman"
-                  label="Nama Minuman"
-                  {...field}
-                />
-              )}
-            />
+          <FormInputDrink control={control} errors={errors} />
+          <div className="btn-group mt-10">
+            <button className="btn btn-error" type="button" onClick={logout}>
+              Logout
+            </button>
+            <button className="btn btn-wide btn-primary" type="submit">
+              Submit
+            </button>
           </div>
-          <div className="mb-4">
-            <Controller
-              name="netto"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  placeholder="Jumlah berat bersih"
-                  label="Netto (ml)"
-                  {...field}
-                />
-              )}
-            />
-          </div>
-
-          <button className="btn btn-primary" type="submit">
-            Submit
-          </button>
-
-          <button className="btn btn-error" type="button" onClick={logout}>
-            Logout
-          </button>
         </form>
       </div>
     </div>
