@@ -1,7 +1,28 @@
+import { useRouter } from "next/router";
 import InputSearch from "../../components/Input/InputSearch";
 import CoffeeCup from "../../public/CoffeeCup";
 import CoffeeTime from "../../public/CoffeeTime";
 import style from "../../styles/homepage/Cover.module.scss";
+
+export function SearchDrink({ value = "" }) {
+  const { push, replace } = useRouter();
+
+  const onSearch = (keyword) => {
+    if (keyword) {
+      console.log("Searching: ", keyword);
+      const routing = value ? replace : push;
+      routing(`/search/?q=${keyword}`);
+    }
+  };
+
+  const props = {
+    placeholder: "Cari produk minuman...",
+    value,
+    onSearch,
+  };
+
+  return <InputSearch {...props} />;
+}
 
 export default function HomepageCover() {
   return (
@@ -31,7 +52,7 @@ export default function HomepageCover() {
       >
         <CoffeeTime />
       </div>
-      <InputSearch />
+      <SearchDrink />
     </div>
   );
 }

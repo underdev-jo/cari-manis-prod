@@ -2,14 +2,26 @@ import Section from "../../components/Sections/Section";
 
 import DrinkCard from "./DrinkCard";
 
+export const ThumbnailWrapper = ({ children }) => {
+  return (
+    <div className="flex flex-wrap justify-between [&>*]:w-[calc(50%-20px)]">
+      {children}
+    </div>
+  );
+};
+
+export const DrinkListView = ({ list }) => (
+  <ThumbnailWrapper>
+    {list.map((item, index) => (
+      <DrinkCard key={item.id || index} {...item} />
+    ))}
+  </ThumbnailWrapper>
+);
+
 export default function DrinkList({ drinkList = [] }) {
   return (
     <Section title="Daftar produk minuman">
-      <div className="flex flex-wrap justify-between [&>*]:w-[calc(50%-20px)]">
-        {drinkList.map((drink) => (
-          <DrinkCard key={drink.id} {...drink} />
-        ))}
-      </div>
+      <DrinkListView list={drinkList} />
     </Section>
   );
 }
