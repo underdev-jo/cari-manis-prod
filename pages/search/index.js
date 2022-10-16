@@ -6,6 +6,7 @@ import { apiSearch } from "../../helpers/util";
 import { SearchDrink } from "../home/Cover";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
+import FilterPackaging from "./FilterPackaging";
 
 export default function SearchPage() {
   const [loading, setLoading] = useState(true);
@@ -43,8 +44,9 @@ export default function SearchPage() {
       <PageHead title={`Cari: ${keyword || "manis"}`} />
       <Container>
         <div className="relative">
-          <div className="sticky top-[64px] bg-white p-2">
+          <div className="sticky top-[64.4px] bg-white p-2 z-50">
             <SearchDrink value={keyword} />
+            <FilterPackaging />
           </div>
           <div className="p-2">{render}</div>
         </div>

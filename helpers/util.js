@@ -44,3 +44,10 @@ export const apiSearch = (table, column, keyword) => {
     resolve({ data, error });
   });
 };
+
+export const apiGetList = (table) =>
+  new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa.from(table).select("*");
+    return resolve({ data, error });
+  });
