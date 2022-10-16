@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { removeCookie } from "../../helpers/util";
+import FormImage from "./FormImage";
 import FormInputDrink from "./FormInputDrink";
 
 export default function FormDrink() {
@@ -41,6 +42,7 @@ export default function FormDrink() {
       </div>
       <div>
         <form onSubmit={onSubmit}>
+          <FormImage />
           <FormInputDrink control={control} errors={errors} />
           <div className="btn-group mt-10">
             <button className="btn btn-error" type="button" onClick={logout}>
