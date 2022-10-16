@@ -53,8 +53,10 @@ export default function FormImage() {
             ))}
           </div>
           <div className="text-center">
-            Drag-drop atau {files.length > 0 ? "mengganti" : "pilih"} gambar
-            untuk data minuman
+            Drag-drop atau pilih gambar untuk
+            <br />
+            {files.length > 0 ? "mengganti" : "menambahkan"}
+            data minuman
           </div>
         </div>
       )}
