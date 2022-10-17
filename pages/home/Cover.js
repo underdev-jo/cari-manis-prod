@@ -8,11 +8,12 @@ export function SearchDrink({ value = "" }) {
   const { push, replace } = useRouter();
 
   const onSearch = (keyword) => {
+    const routing = value ? replace : push;
+
     if (keyword) {
       console.log("Searching: ", keyword);
-      const routing = value ? replace : push;
       routing(`/search/?q=${keyword}`);
-    }
+    } else routing(`/search/?q=`);
   };
 
   const props = {
