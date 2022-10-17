@@ -1,14 +1,19 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Section from "../../components/Sections/Section";
 
-function ElementButton({ name, image }) {
+function ElementButton({ name, image, slug }) {
+  const { push } = useRouter();
+  const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 h-auto flex justify-start items-center normal-case w-[173px] border-[#E2E8F5]`;
+  const onClick = () => push(`/search?kemasan=${encodeURIComponent(slug)}`);
+
   return (
-    <div className="my-2 btn py-3 px-2 h-auto flex justify-start items-center normal-case border-[#E2E8F5] hover:border-[#E2E8F5] w-[173px] bg-white hover:bg-[#E2E8F5]">
+    <button type="button" className={classBtnFilter} onClick={onClick}>
       <div className="mr-3">
         <Image src={image} alt={name} title={name} width={32} height={32} />
       </div>
       <div className="text-small medium">{name}</div>
-    </div>
+    </button>
   );
 }
 
@@ -16,18 +21,22 @@ const category = [
   {
     image: "/bottle.svg",
     name: "Minuman Botol",
+    slug: "Botol",
   },
   {
     image: "/cup.svg",
     name: "Minuman Kaleng",
+    slug: "Kaleng",
   },
   {
     image: "/carton.svg",
     name: "Minuman Karton",
+    slug: "Karton",
   },
   {
     image: "/sachet.svg",
     name: "Minuman Sachet",
+    slug: "Sachet",
   },
 ];
 

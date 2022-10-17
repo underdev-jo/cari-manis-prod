@@ -35,9 +35,7 @@ export default function FilterPackaging() {
       setPackages(res.data || res);
     };
 
-    if (!packages) {
-      hit();
-    }
+    if (!packages) hit();
   }, [packages]);
 
   return (

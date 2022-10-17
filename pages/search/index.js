@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Alert from "../../components/Alert/Alert";
+import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
 import { get, ilike, ilikeEq } from "../../helpers/api";
-import { SearchDrink } from "../home/Cover";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
 import FilterPackaging from "./FilterPackaging";
@@ -16,7 +16,7 @@ export default function SearchPage() {
   const router = useRouter();
   const { query } = router;
 
-  const keyword = query.q || query.kemasan || "";
+  const keyword = query.q || "";
 
   useEffect(() => {
     const search = async (name, kemasan) => {
@@ -63,7 +63,7 @@ export default function SearchPage() {
       <Container>
         <div className="relative">
           <div className="sticky top-[64.4px] bg-white p-2 z-50">
-            <SearchDrink value={keyword} allowEmpty />
+            <InputSearchDrink value={keyword} allowEmpty />
             <FilterPackaging />
           </div>
           <div className="p-2">{render}</div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
 import { convertRupiah } from "../../helpers/util";
 
@@ -11,14 +12,8 @@ export const ProductSummary = ({ name, packaging, harga }) => {
           <label htmlFor="modal-price-info">{`Sekitar ${convertRupiah(
             harga
           )}`}</label>
-          <div className="ml-2 relative">
-            <div className="absolute left-0 top-0 w-full h-full bg-primary opacity-30 rounded-lg animate-ping" />
-            <label
-              htmlFor="modal-price-info"
-              className="relative bg-white block badge badge-sm badge-primary badge-outline text-xs"
-            >
-              i
-            </label>
+          <div className="ml-2">
+            <InfoSymbol />
           </div>
         </div>
       </div>
@@ -56,7 +51,7 @@ export const ProductImage = ({ image, name }) => {
 const Block = ({ title, info, setPopup }) => (
   <button
     type="button"
-    className="btn btn-ghost block h-auto w-[110px] bg-primary-content hover:bg-primary-content p-4 normal-case text-primary"
+    className="btn btn-ghost block h-auto w-[110px] bg-primary-content p-4 normal-case text-primary"
     onClick={() => setPopup({ title, info })}
   >
     <h1 className="w-full text-small bold">{title}</h1>
