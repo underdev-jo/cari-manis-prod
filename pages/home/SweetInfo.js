@@ -4,7 +4,7 @@ import Section from "../../components/Sections/Section";
 export default function SweetInfo() {
   return (
     <Section>
-      <div className="rounded-xl p-4 flex items-center justify-between text-white bg-[#453E9E]">
+      <div className="rounded-xl p-4 flex items-center justify-between text-white bg-secondary">
         <div className="w-[90%] max-w-[267px]">
           <div className="cm-heading h4 mb-2">Tahukah kamu?</div>
           <div className="text-small">

@@ -4,7 +4,7 @@ import CoffeeCup from "../../public/CoffeeCup";
 import CoffeeTime from "../../public/CoffeeTime";
 import style from "../../styles/homepage/Cover.module.scss";
 
-export function SearchDrink({ value = "" }) {
+export function SearchDrink({ value = "", allowEmpty }) {
   const { push, replace } = useRouter();
 
   const onSearch = (keyword) => {
@@ -22,12 +22,12 @@ export function SearchDrink({ value = "" }) {
     onSearch,
   };
 
-  return <InputSearch {...props} />;
+  return <InputSearch {...props} allowEmpty={allowEmpty} />;
 }
 
 export default function HomepageCover() {
   return (
-    <div className={`${style.cover} bg-secondary relative`}>
+    <div className={`${style.cover} bg-primary-content relative`}>
       <div className="max-w-sm mx-auto mb-10">
         <div className={style.textHead}>
           <h2 className="cm-heading h2">
