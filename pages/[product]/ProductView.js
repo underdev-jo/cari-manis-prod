@@ -36,7 +36,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
 
 export const ProductImage = ({ image, name }) => {
   return (
-    <div className="bg-secondary">
+    <div className="bg-primary-content">
       <div className="relative h-auto max-h-[240px] aspect-square mx-auto">
         <Image
           width={240}
@@ -56,7 +56,7 @@ export const ProductImage = ({ image, name }) => {
 const Block = ({ title, info, setPopup }) => (
   <button
     type="button"
-    className="btn btn-ghost block h-auto w-[110px] bg-secondary hover:bg-secondary p-4 normal-case text-primary"
+    className="btn btn-ghost block h-auto w-[110px] bg-primary-content hover:bg-primary-content p-4 normal-case text-primary"
     onClick={() => setPopup({ title, info })}
   >
     <h1 className="w-full text-small bold">{title}</h1>
