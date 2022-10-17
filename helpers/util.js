@@ -34,14 +34,30 @@ export const convertRupiah = (number) => {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")},-`;
 };
 
-export const apiSearch = (table, column, keyword) => {
+export const apiSearch = (table, ilike = { column: "", value: "" }) => {
   return new Promise(async (resolve, reject) => {
     const supa = createClient(supaUrl(), supaKey());
     const { data, error } = await supa
       .from(table)
       .select("*")
-      .ilike(column, keyword);
+      .ilike(ilike.column, ilike.value);
     resolve({ data, error });
+  });
+};
+
+export const apiSearchEq = (
+  table,
+  ilike = { column: "", value: "" },
+  eq = { column: "", value: "" }
+) => {
+  return new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa
+      .from(table)
+      .select("*")
+      .ilike(ilike.column, ilike.value)
+      .eq(eq.column, eq.value);
+    return resolve({ data, error });
   });
 };
 

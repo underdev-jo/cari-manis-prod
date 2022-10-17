@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
-import { apiSearch } from "../../helpers/util";
+import { apiSearch, apiSearchEq } from "../../helpers/util";
 import { SearchDrink } from "../home/Cover";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
@@ -18,15 +18,21 @@ export default function SearchPage() {
   const keyword = query.q || query.kemasan || "";
 
   useEffect(() => {
-    const search = async (param) => {
+    const search = async (name, kemasan) => {
+      console.log("Searching: ", name, kemasan);
       setLoading(true);
-      const res = await apiSearch("minuman", "name", `%${param}%`);
+      const ilike = { column: "name", value: `%${name}%` };
+      const eq = { column: "packaging", value: kemasan };
+      const api = kemasan ? apiSearchEq : apiSearch;
+      const res = await api("minuman", ilike, eq);
       setRes(res);
       setLoading(false);
     };
 
-    if (keyword) search(keyword);
-  }, [keyword]);
+    const keys = query.kemasan || query.q;
+
+    if (keys) search(query.q, query.kemasan);
+  }, [query]);
 
   let render = <Spinner />;
   if (!loading && result.data.length > 0)
