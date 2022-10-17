@@ -20,15 +20,5 @@ export async function getStaticProps() {
 }
 
 export default function index({ drinkList }) {
-  return (
-    <>
-      <button className="btn">DEFAULT</button>
-      <button className="btn btn-primary">PRIMARY</button>
-      <button className="btn btn-secondary">SECONDARY</button>
-      <button className="btn btn-accent">ACCENT</button>
-      <button className="btn btn-ghost">GHOST</button>
-
-      <Home drinkList={drinkList} />
-    </>
-  );
+  return <Home drinkList={drinkList} />;
 }
