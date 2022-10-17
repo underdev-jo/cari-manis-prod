@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import Cookies from "js-cookie";
 
 export const supaUrl = () => process.env.NEXT_PUBLIC_supabaseUrl;
@@ -33,45 +32,3 @@ export const convertRupiah = (number) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")},-`;
 };
-
-export const apiSearch = (table) => {
-  return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa.from(table).select("*");
-    return resolve({ data, error });
-  });
-};
-
-export const apiSearchIlike = (table, ilike = { column: "", value: "" }) => {
-  return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
-      .from(table)
-      .select("*")
-      .ilike(ilike.column, ilike.value);
-    return resolve({ data, error });
-  });
-};
-
-export const apiSearchIlikeEq = (
-  table,
-  ilike = { column: "", value: "" },
-  eq = { column: "", value: "" }
-) => {
-  return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
-      .from(table)
-      .select("*")
-      .ilike(ilike.column, ilike.value)
-      .eq(eq.column, eq.value);
-    return resolve({ data, error });
-  });
-};
-
-export const apiGetList = (table) =>
-  new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa.from(table).select("*");
-    return resolve({ data, error });
-  });
