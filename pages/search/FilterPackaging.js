@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
-import { apiGetList } from "../../helpers/util";
+import { get } from "../../helpers/api";
 
 const Pressable = ({ children, id, disabled, query: queryProps }) => {
   const { replace, query } = useRouter();
@@ -31,7 +31,7 @@ export default function FilterPackaging() {
 
   useEffect(() => {
     const hit = async () => {
-      const res = await apiGetList("kemasan_minuman");
+      const res = await get("kemasan_minuman");
       setPackages(res.data || res);
     };
 
