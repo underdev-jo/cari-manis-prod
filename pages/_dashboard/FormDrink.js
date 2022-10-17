@@ -1,5 +1,5 @@
-import { Input } from "postcss";
 import { useForm, Controller } from "react-hook-form";
+import Input from "../../components/Input/Input";
 import { removeCookie } from "../../helpers/util";
 import FormImage from "./FormImage";
 // import FormInputDrink from "./FormInputDrink";
