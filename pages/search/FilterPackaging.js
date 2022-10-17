@@ -14,7 +14,7 @@ const Pressable = ({ children, id, disabled, query: queryProps }) => {
     <Button
       key={id}
       model="secondary"
-      className={`normal-case btn-xs ${disabled ? "btn-outline" : ""}`}
+      className={"normal-case btn-xs btn-outline"}
       disabled={disabled}
       onClick={go}
     >
