@@ -63,3 +63,29 @@ a {
     @apply font-bold;
   }
 }
+
+@keyframes running {
+  0% {
+    width: 30%;
+  }
+  50% {
+    width: 60%;
+  }
+  56% {
+    width: 100%;
+  }
+}
+
+.kprogress {
+  @apply relative w-full rounded-lg relative overflow-hidden border border-2 border-white h-2 mx-auto;
+  width: calc(100% - 32px);
+
+  &::after {
+    content: "";
+    @apply bg-white h-full;
+  }
+
+  &.animating::after {
+    animation: running 3s linear 1 forwards;
+  }
+}

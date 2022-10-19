@@ -31,10 +31,15 @@ export default function middleware(req: NextRequest) {
     url.pathname = pathname;
   else if (subdomain === "onlymin") {
     const adminCookie = req.cookies.get("onlymin");
+
     const hasAdminData = adminCookie && Object.keys(adminCookie).length > 0;
+
     if (hasAdminData) url.pathname = `/_dashboard${pathname}`;
     else url.pathname = "/_adminLogin";
   } else url.pathname = "/404";
 
-  return NextResponse.rewrite(url);
+  const res = NextResponse.rewrite(url);
+  if (!req.cookies.get("dailySugarLimit"))
+    res.cookies.set("dailySugarLimit", 50);
+  return res;
 }
