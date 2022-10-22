@@ -1,0 +1,22 @@
+$bulletWidth: 10px;
+
+.sweetInfoBullet {
+  position: relative;
+  margin-top: $bulletWidth;
+  transform: translate(0, $bulletWidth);
+  transition: all 0.25 ease-in-out;
+
+  :global(.swiper-pagination-bullet) {
+    transition: 0.35s ease-in-out;
+    cursor: pointer;
+    border: 1px solid #fff;
+    width: $bulletWidth;
+    height: $bulletWidth;
+    border-radius: $bulletWidth;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background: #fff;
+    width: calc(#{$bulletWidth} * 2.5);
+  }
+}
