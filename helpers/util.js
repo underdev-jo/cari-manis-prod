@@ -39,7 +39,6 @@ export function diffDate(date) {
   if (!date) return "";
   const date1 = new Date().getTime();
   const date2 = new Date(`${date}`).getTime();
-  console.log("Diff date: ", date1);
   const diff = Math.floor(date1 - date2);
 
   const hour = 1000 * 60 * 60;

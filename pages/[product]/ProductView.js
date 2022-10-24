@@ -1,7 +1,12 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
-import { convertRupiah } from "../../helpers/util";
+import { convertRupiah, getCookie } from "../../helpers/util";
+
+const Badge = ({ children, type = "primary" }) => (
+  <div className={`badge badge-${type} font-bold`}>{children}</div>
+);
 
 export const ProductSummary = ({ name, packaging, harga }) => {
   return (
@@ -59,12 +64,148 @@ const Block = ({ title, info, setPopup }) => (
   </button>
 );
 
-export function ProductNutrition({ netto, gula, kalori, setPopup }) {
+const CalorieInfo = ({ kalori }) => {
+  const dailyCal = parseInt(getCookie("dailyCalLimit") || 2100, 10);
+
+  const percent = Math.ceil((kalori / dailyCal) * 100);
+
   return (
-    <div className="flex justify-between px-6">
-      <Block title="Netto" info={`${netto}ml`} setPopup={setPopup} />
-      <Block title="Gula" info={`${gula}gr`} setPopup={setPopup} />
-      <Block title="Kalori" info={`${kalori}kkal`} setPopup={setPopup} />
+    <div className="border-primary p-2">
+      <div>
+        <div>
+          Bila mengonsumsi produk ini, setara dengan <Badge>{percent}%</Badge>{" "}
+          kebutuhan kalori harian kamu
+        </div>
+        <div className="relative pb-4">
+          <progress
+            className="progress progress-primary"
+            max={dailyCal}
+            value={kalori}
+          />
+          <div className="absolute bottom-0 right-0 text-xs">
+            Maks. {dailyCal}kkal
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
+  const dailySugar = parseInt(getCookie("dailySugarLimit") || 50, 10);
+  const percent = (gula / dailySugar) * 100;
+  return (
+    <div className="p-2">
+      <div>
+        <div>
+          Bila mengonsumsi produk ini, setara dengan <Badge>{percent}%</Badge>{" "}
+          kebutuhan gula harian kamu
+        </div>
+        <div className="relative pb-4">
+          <progress
+            className="progress progress-primary"
+            max={dailySugar}
+            value={gula}
+          />
+          <div className="absolute bottom-0 right-0 text-xs">
+            Maks. {dailySugar}gr
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
+  let tips = "Kamu bisa langsung menghabiskan produk ini";
+  if (jumlah_sajian > 1)
+    tips = `Disarankan hanya mengonsumsi ${takaran_saji}ml.`;
+
+  const RowNutrition = ({ sajian = 1 }) => (
+    <tr>
+      <td className="p-2 border">{sajian}</td>
+      <td className="p-2 border">
+        <table className="w-full">
+          <tr>
+            <td>{gula * sajian}gr</td>
+            <td>gula</td>
+          </tr>
+          <tr>
+            <td>{kalori * sajian}kkal</td>
+            <td>kalori</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  );
+
+  return (
+    <div className="p-2">
+      <div>
+        <div className="text-sm mb-4">
+          Produk ini memiliki{" "}
+          <Badge type={jumlah_sajian > 1 ? "warning" : "primary"}>
+            {jumlah_sajian}
+          </Badge>{" "}
+          jumlah sajian.
+          <br />
+          {tips}
+        </div>
+        <table className="table-fixed w-full border border-collapse border-[#E2E8F4] text-sm">
+          <tr>
+            <td className="p-2 border font-medium">Takaran Saji</td>
+            <td className="p-2 border font-medium">Kadar nutrisi</td>
+          </tr>
+          <RowNutrition sajian={1} />
+          {jumlah_sajian > 1 && <RowNutrition sajian={jumlah_sajian} />}
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export function ProductNutrition({
+  netto,
+  jumlah_sajian,
+  takaran_saji,
+  gula,
+  kalori,
+  setPopup,
+}) {
+  const [info, setInfo] = useState(false);
+
+  useEffect(() => {
+    console.log("Effect: ", info);
+  }, [info]);
+
+  const click = (e) => {
+    console.log("Click: ", info, e);
+    if (info === e.title) setInfo(false);
+    else setInfo(e.title);
+    setPopup(e);
+  };
+
+  const sugarData = { gula, jumlah_sajian };
+  const calorieData = { kalori };
+  const nettoData = { netto, takaran_saji, ...sugarData, ...calorieData };
+
+  return (
+    <div>
+      <div className="flex justify-between px-6">
+        <Block title="Netto" info={`${netto}ml`} setPopup={click} />
+        <Block title="Gula" info={`${gula}gr`} setPopup={click} />
+        <Block title="Kalori" info={`${kalori}kkal`} setPopup={click} />
+      </div>
+      <div
+        className={`bg-base-100 border mx-6 px-4 rounded-lg my-4 overflow-y-hidden ${
+          info ? "h-50 py-4 border-primary" : "h-0 py-0 border-transparent"
+        }`}
+        style={{ transition: "0.15s ease-in-out" }}
+      >
+        {info === "Gula" && <SugarInfo {...sugarData} />}
+        {info === "Kalori" && <CalorieInfo {...calorieData} />}
+        {info === "Netto" && <NettoInfo {...nettoData} />}
+      </div>
     </div>
   );
 }
