@@ -43,6 +43,7 @@ export default function ProductComment({ comment }) {
           <div className="text-white">Komentar</div>
         </div>
         <div className="h-60 overflow-y-auto mt-2">
+          {JSON.stringify(comment)}
           {comment &&
             comment.data.map((comm) => <CommentItem key={comm.id} {...comm} />)}
         </div>
