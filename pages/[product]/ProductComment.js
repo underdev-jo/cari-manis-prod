@@ -39,7 +39,9 @@ export default function ProductComment({ comment }) {
         onClick={topClick}
       >
         <div className="flex items-center p-4">
-          <div className="badge badge-primary mr-2">{comment.count || 0}</div>
+          <div className="badge badge-primary mr-2">
+            {(comment && comment.count) || 0}
+          </div>
           <div className="text-white">Komentar</div>
         </div>
         <div className="h-60 overflow-y-auto mt-2">
