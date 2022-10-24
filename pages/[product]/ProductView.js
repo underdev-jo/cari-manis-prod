@@ -8,6 +8,44 @@ const Badge = ({ children, type = "primary" }) => (
   <div className={`badge badge-${type} font-bold`}>{children}</div>
 );
 
+const Meter = ({ max, value, maxValue, type = "primary" }) => (
+  <div className="relative pb-4">
+    <progress className={`progress progress-${type}`} max={max} value={value} />
+    {maxValue && (
+      <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
+    )}
+  </div>
+);
+
+const ButtonServing = ({ setServing, serving, amount = 1 }) => {
+  const btnTab = "btn btn-xs btn-primary normal-case";
+
+  return (
+    <div
+      className={`${
+        amount > 1 ? "btn-group" : "flex"
+      } mb-4 mx-auto w-full justify-center`}
+    >
+      <buton
+        className={btnTab}
+        disabled={serving === 1}
+        onClick={() => setServing(1)}
+      >
+        1 takaran saji
+      </buton>
+      {amount > 1 && (
+        <button
+          className={btnTab}
+          disabled={serving === amount}
+          onClick={() => setServing(parseInt(amount, 10))}
+        >
+          {amount} takaran saji
+        </button>
+      )}
+    </div>
+  );
+};
+
 export const ProductSummary = ({ name, packaging, harga }) => {
   return (
     <div className="mt-8 mb-6 px-8">
@@ -64,53 +102,63 @@ const Block = ({ title, info, setPopup }) => (
   </button>
 );
 
-const CalorieInfo = ({ kalori }) => {
-  const dailyCal = parseInt(getCookie("dailyCalLimit") || 2100, 10);
+const CalorieInfo = ({ kalori, jumlah_sajian }) => {
+  const [serving, setServing] = useState(1);
 
-  const percent = Math.ceil((kalori / dailyCal) * 100);
+  const dailyCal = parseInt(getCookie("dailyCalLimit") || 2100, 10);
+  const value = kalori * serving;
+  const percent = Math.ceil((value / dailyCal) * 100);
+
+  let type = "primary";
+  if (percent >= 50) type = "error";
 
   return (
     <div className="border-primary p-2">
+      <ButtonServing
+        serving={serving}
+        setServing={setServing}
+        amount={jumlah_sajian}
+      />
       <div>
-        <div>
-          Bila mengonsumsi produk ini, setara dengan <Badge>{percent}%</Badge>{" "}
-          kebutuhan kalori harian kamu
+        <div className="text-sm">
+          Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
+          setara dengan <Badge>{percent}%</Badge> kebutuhan kalori harian kamu
         </div>
-        <div className="relative pb-4">
-          <progress
-            className="progress progress-primary"
-            max={dailyCal}
-            value={kalori}
-          />
-          <div className="absolute bottom-0 right-0 text-xs">
-            Maks. {dailyCal}kkal
-          </div>
-        </div>
+        <Meter max={dailyCal} value={value} maxValue={`${dailyCal}kkal`} />
       </div>
     </div>
   );
 };
 
 const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
+  const [serving, setServing] = useState(1);
+
   const dailySugar = parseInt(getCookie("dailySugarLimit") || 50, 10);
-  const percent = (gula / dailySugar) * 100;
+  const value = gula * serving;
+  const percent = (value / dailySugar) * 100;
+
+  let type = "primary";
+  if (percent >= 50) type = "error";
+
   return (
     <div className="p-2">
-      <div>
-        <div>
-          Bila mengonsumsi produk ini, setara dengan <Badge>{percent}%</Badge>{" "}
-          kebutuhan gula harian kamu
+      <ButtonServing
+        setServing={setServing}
+        serving={serving}
+        amount={jumlah_sajian}
+      />
+      <div className="mb-2">
+        <div className="text-sm">
+          Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
+          setara dengan <Badge type={type}>{percent}%</Badge> kebutuhan gula
+          harian.
         </div>
-        <div className="relative pb-4">
-          <progress
-            className="progress progress-primary"
-            max={dailySugar}
-            value={gula}
-          />
-          <div className="absolute bottom-0 right-0 text-xs">
-            Maks. {dailySugar}gr
-          </div>
-        </div>
+        <Meter
+          max={dailySugar}
+          value={value}
+          maxValue={`${dailySugar}gr`}
+          type={type}
+        />
       </div>
     </div>
   );
@@ -186,7 +234,7 @@ export function ProductNutrition({
   };
 
   const sugarData = { gula, jumlah_sajian };
-  const calorieData = { kalori };
+  const calorieData = { kalori, jumlah_sajian };
   const nettoData = { netto, takaran_saji, ...sugarData, ...calorieData };
 
   return (
