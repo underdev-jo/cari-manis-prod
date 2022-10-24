@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { diffDate } from "../../helpers/util";
+import Close from "../../public/Close";
 
 const CommentItem = ({ comment = "", created_at = "" }) => {
   const [open, setOpen] = useState(false);
@@ -7,12 +9,14 @@ const CommentItem = ({ comment = "", created_at = "" }) => {
 
   const toggle = () => setOpen(!open);
 
+  const timeView = diffDate(created_at);
+
   return (
     <div className="py-4 px-6" style={{ transition: "0.25s ease-in-out" }}>
       <div className={`mb-2 text-sm text-white ${line}`} onClick={toggle}>
         {comment}
       </div>
-      <div className="text-xs">{created_at}</div>
+      <div className="text-xs">{timeView}</div>
     </div>
   );
 };
@@ -48,14 +52,16 @@ export default function ProductComment({ comment }) {
           {comment &&
             comment.data.map((comm) => <CommentItem key={comm.id} {...comm} />)}
         </div>
-        {open && (
-          <button
-            className="btn btn-error btn-sm btn-circle absolute right-[10px] top-[10px]"
-            onClick={close}
-          >
-            X
-          </button>
-        )}
+        <button
+          className="btn btn-error btn-sm btn-circle absolute right-[10px] top-[10px]"
+          style={{
+            transition: "0.25s ease-in-out",
+            transform: `scale(${open ? 1 : 0})`,
+          }}
+          onClick={close}
+        >
+          <Close size={20} />
+        </button>
       </div>
     </div>
   );

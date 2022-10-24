@@ -34,3 +34,37 @@ export const convertRupiah = (number) => {
 };
 
 export const paramsValue = (value) => encodeURIComponent(value).toLowerCase();
+
+export function diffDate(date) {
+  if (!date) return "";
+  const date1 = new Date().getTime();
+  const date2 = new Date(`${date}`).getTime();
+  console.log("Diff date: ", date1);
+  const diff = Math.floor(date1 - date2);
+
+  const hour = 1000 * 60 * 60;
+  const day = hour * 24;
+  const month = day * 30;
+
+  const hours = Math.floor(diff / hour);
+  const days = Math.floor(diff / day);
+  const months = Math.floor(diff / month);
+
+  let message = "";
+
+  // var days = Math.floor(diff / day);
+  // var months = Math.floor(days / 31);
+  // var years = Math.floor(months / 12);
+
+  // var message = date2;
+  // message += " was ";
+  // message += days + " days ";
+  // message += months + " months ";
+  // message += years + " years ago \n";
+
+  if (days < 1) message = `${hours} jam lalu`;
+  else if (days < 30) message = `${days} hari lalu`;
+  else if (days >= 30) message = `${months} bulan lalu`;
+
+  return message;
+}
