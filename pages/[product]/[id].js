@@ -40,8 +40,6 @@ export async function getStaticProps({ params }) {
   const comment = { data: dataComm, error: errComm, count };
   const props = { product: data[0], comment };
 
-  console.log("GET STATIC PROPS: ", { data, error, count, dataComm, errComm });
-
   if (error)
     return {
       redirect: {
