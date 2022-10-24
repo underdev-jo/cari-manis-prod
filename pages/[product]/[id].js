@@ -5,6 +5,7 @@ import ProductView from "./ProductView";
 import { useState } from "react";
 import ProductInfo from "./ProductInfoPopup";
 import ProductComment from "./ProductComment";
+import { eq, getCount } from "../../helpers/api";
 
 export async function getStaticPaths() {
   const supabase = createClient(supaUrl(), supaKey());
@@ -24,10 +25,22 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const supabase = createClient(supaUrl(), supaKey());
 
-  const { data, error } = await supabase
-    .from("minuman")
-    .select("*")
-    .eq("id", params.id);
+  const { data, error } = await eq("minuman", {
+    column: "id",
+    value: params.id,
+  });
+
+  const commentParam = { column: "product_id", value: params.id };
+  const count = await getCount("product_comment", commentParam);
+  const { data: dataComm, error: errComm } = await eq(
+    "product_comment",
+    commentParam
+  );
+
+  const comment = { data: dataComm, error: errComm, count };
+  const props = { product: data[0], comment };
+
+  console.log("GET STATIC PROPS: ", { data, error, count, dataComm, errComm });
 
   if (error)
     return {
@@ -36,12 +49,10 @@ export async function getStaticProps({ params }) {
       },
     };
 
-  return {
-    props: { product: data[0] },
-  };
+  return { props };
 }
 
-export default function ProductDetail({ product }) {
+export default function ProductDetail({ product, comment }) {
   const [popup, setPopup] = useState(false);
 
   if (!product) return "Loading...";
@@ -57,7 +68,7 @@ export default function ProductDetail({ product }) {
         data={popup}
         onClose={close}
       />
-      <ProductComment product={product} />
+      <ProductComment comment={comment} />
     </>
   );
 }
