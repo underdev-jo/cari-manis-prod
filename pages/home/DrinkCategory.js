@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Section from "../../components/Sections/Section";
+import { slugify } from "../../helpers/util";
 
 function ElementButton({ name, image, slug }) {
   const { push } = useRouter();
   const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 h-auto flex justify-start items-center normal-case w-[173px] border-[#E2E8F5]`;
-  const onClick = () => push(`/search?kemasan=${encodeURIComponent(slug)}`);
+  const onClick = () => push(`/search?kemasan=${slugify(slug)}`);
 
   return (
     <button type="button" className={classBtnFilter} onClick={onClick}>

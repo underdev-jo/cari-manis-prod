@@ -4,6 +4,7 @@ import { supaKey, supaUrl } from "../../helpers/util";
 import ProductView from "./ProductView";
 import { useState } from "react";
 import ProductInfo from "./ProductInfoPopup";
+import ProductComment from "./ProductComment";
 
 export async function getStaticPaths() {
   const supabase = createClient(supaUrl(), supaKey());
@@ -56,6 +57,7 @@ export default function ProductDetail({ product }) {
         data={popup}
         onClose={close}
       />
+      <ProductComment product={product} />
     </>
   );
 }

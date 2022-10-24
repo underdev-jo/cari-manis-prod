@@ -32,3 +32,5 @@ export const convertRupiah = (number) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".")},-`;
 };
+
+export const paramsValue = (value) => encodeURIComponent(value).toLowerCase();

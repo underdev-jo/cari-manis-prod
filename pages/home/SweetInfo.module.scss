@@ -1,4 +1,4 @@
-$bulletWidth: 10px;
+$bulletWidth: 8px;
 
 .sweetInfoBullet {
   position: relative;
@@ -10,6 +10,7 @@ $bulletWidth: 10px;
     transition: 0.35s ease-in-out;
     cursor: pointer;
     border: 1px solid #fff;
+    background: #fff;
     width: $bulletWidth;
     height: $bulletWidth;
     border-radius: $bulletWidth;

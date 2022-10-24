@@ -131,7 +131,7 @@ export default function ProductView({ product, setPopup }) {
       <ProductNutrition {...product} setPopup={setPopup} />
       <ProductInformation {...product} />
       <ProductSource {...product} />
-      <div className="h-10" />
+      <div className="h-20" />
     </Container>
   );
 }

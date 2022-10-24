@@ -2,11 +2,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import { get } from "../../helpers/api";
+import { slugify } from "../../helpers/util";
 
 const Pressable = ({ children, id, disabled, query: queryProps }) => {
   const { replace, query } = useRouter();
-
-  let newQuery = { ...query, kemasan: `${queryProps || ""}` };
+  const kemasan = slugify(queryProps || "");
+  let newQuery = { ...query, kemasan };
   const params = new URLSearchParams(newQuery).toString();
   const go = () => replace(`/search?${params}`);
 
@@ -48,7 +49,7 @@ export default function FilterPackaging() {
             <Pressable
               key={item.id}
               id={item.id}
-              disabled={filtering === item.name}
+              disabled={filtering === `${item.name}`.toLowerCase()}
               query={item.name}
             >
               {item.name}
