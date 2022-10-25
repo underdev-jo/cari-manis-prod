@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
 import { badge, progress } from "../../helpers/daisyHelper";
-import { convertRupiah, daisyTail, getCookie } from "../../helpers/util";
+import { convertRupiah, getCookie } from "../../helpers/util";
 
 const Badge = ({ children, type = "primary" }) => (
   <div className={`${badge(type)} font-bold`}>{children}</div>
