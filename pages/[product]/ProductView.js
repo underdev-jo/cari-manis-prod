@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
+import Badge from "../../components/Daisy/Badge";
 import Container from "../../components/Layout/Container";
-import { badge, progress } from "../../helpers/daisyHelper";
+import { progress } from "../../helpers/daisyHelper";
 import { convertRupiah, getCookie } from "../../helpers/util";
 
-const Badge = ({ children, type = "primary" }) => (
-  <div className={`${badge[type]} font-bold`}>{children}</div>
+const NutritionBadge = ({ children, type }) => (
+  <Badge type={type} className="font-bold">
+    {children}
+  </Badge>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
@@ -118,8 +121,8 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
       <div>
         <div className="text-sm">
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
-          setara dengan <Badge type={type}>{percent}%</Badge> kebutuhan kalori
-          harian kamu
+          setara dengan <NutritionBadge type={type}>{percent}%</NutritionBadge>{" "}
+          kebutuhan kalori harian kamu
         </div>
         <Meter
           max={dailyCal}
@@ -152,8 +155,8 @@ const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
       <div className="mb-2">
         <div className="text-sm">
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
-          setara dengan <Badge type={type}>{percent}%</Badge> kebutuhan gula
-          harian.
+          setara dengan <NutritionBadge type={type}>{percent}%</NutritionBadge>{" "}
+          kebutuhan gula harian.
         </div>
         <Meter
           max={dailySugar}
@@ -185,7 +188,8 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
     <div className="p-2">
       <div>
         <div className="text-sm mb-4">
-          Produk ini memiliki <Badge type={badgeType}>{jumlah_sajian}</Badge>{" "}
+          Produk ini memiliki{" "}
+          <NutritionBadge type={badgeType}>{jumlah_sajian}</NutritionBadge>{" "}
           jumlah sajian.
           <br />
           {tips}
