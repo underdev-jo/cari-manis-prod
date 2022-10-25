@@ -11,22 +11,18 @@ const classBadge = {
 };
 
 const classProgresss = {
-  primary: "progress-primary",
-  warning: "progress-warning",
-  error: "progress-error",
+  primary: "progress progress-primary",
+  warning: "progress progress-warning",
+  error: "progress progress-error",
 };
 
 const Badge = ({ children, type = "primary" }) => (
-  <div className={`badge ${classBadge[type]} font-bold`}>{children}</div>
+  <div className={`${classBadge[type]} font-bold`}>{children}</div>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress
-      className={`progress ${classProgresss[type]}`}
-      max={max}
-      value={value}
-    />
+    <progress className={classProgresss[type]} max={max} value={value} />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}
