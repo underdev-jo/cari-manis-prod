@@ -67,3 +67,5 @@ export function diffDate(date) {
 
   return message;
 }
+
+export const tailwindStyle = (base, style) => `${base} ${base}-${style}`;

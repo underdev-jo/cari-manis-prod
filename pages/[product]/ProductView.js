@@ -2,27 +2,19 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
-import { convertRupiah, getCookie } from "../../helpers/util";
-
-const classBadge = {
-  primary: "badge-primary",
-  warning: "badge-warning",
-  error: "badge-error",
-};
-
-const classProgresss = {
-  primary: "progress progress-primary",
-  warning: "progress progress-warning",
-  error: "progress progress-error",
-};
+import { convertRupiah, getCookie, tailwindStyle } from "../../helpers/util";
 
 const Badge = ({ children, type = "primary" }) => (
-  <div className={`${classBadge[type]} font-bold`}>{children}</div>
+  <div className={`${tailwindStyle("badge", type)} font-bold`}>{children}</div>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress className={classProgresss[type]} max={max} value={value} />
+    <progress
+      className={tailwindStyle("progress", type)}
+      max={max}
+      value={value}
+    />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}
@@ -30,25 +22,19 @@ const Meter = ({ max, value, maxValue, type = "primary" }) => (
 );
 
 const ButtonServing = ({ setServing, serving, amount = 1 }) => {
+  const group = amount > 1 ? "btn-group" : "flex";
   const btnTab = "btn btn-xs btn-primary normal-case";
-
   return (
-    <div
-      className={`${
-        amount > 1 ? "btn-group" : "flex"
-      } mb-4 mx-auto w-full justify-center`}
-    >
+    <div className={`${group} mb-4 mx-auto w-full justify-center`}>
       <buton
-        className={btnTab}
-        disabled={serving === 1}
+        className={`${btnTab} ${serving === 1 ? "" : "btn-outline"}`}
         onClick={() => setServing(1)}
       >
         1 takaran saji
       </buton>
       {amount > 1 && (
         <button
-          className={btnTab}
-          disabled={serving === amount}
+          className={`${btnTab} ${serving === amount ? "" : "btn-outline"}`}
           onClick={() => setServing(parseInt(amount, 10))}
         >
           {amount} takaran saji
