@@ -2,19 +2,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
-import { convertRupiah, getCookie, tailwindStyle } from "../../helpers/util";
+import { convertRupiah, daisyTail, getCookie } from "../../helpers/util";
 
 const Badge = ({ children, type = "primary" }) => (
-  <div className={`${tailwindStyle("badge", type)} font-bold`}>{children}</div>
+  <div className={`${daisyTail("badge", type)} font-bold`}>{children}</div>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress
-      className={tailwindStyle("progress", type)}
-      max={max}
-      value={value}
-    />
+    <progress className={daisyTail("progress", type)} max={max} value={value} />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}
