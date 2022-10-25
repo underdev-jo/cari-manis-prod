@@ -162,23 +162,13 @@ const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
 const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
   let tips = "Kamu bisa langsung menghabiskan produk ini";
   if (jumlah_sajian > 1)
-    tips = `Disarankan hanya mengonsumsi ${takaran_saji}ml.`;
+    tips = `Disarankan hanya mengonsumsi 1 takaran saji (${takaran_saji}ml) per hari.`;
 
   const RowNutrition = ({ sajian = 1 }) => (
     <tr>
-      <td className="p-2 border">{sajian}</td>
-      <td className="p-2 border">
-        <table className="w-full">
-          <tr>
-            <td>{gula * sajian}gr</td>
-            <td>gula</td>
-          </tr>
-          <tr>
-            <td>{kalori * sajian}kkal</td>
-            <td>kalori</td>
-          </tr>
-        </table>
-      </td>
+      <td className="p-2 border text-center">{sajian}</td>
+      <td className="p-2 border text-center">{gula * sajian}gr</td>
+      <td className="p-2 border text-center">{kalori * sajian}kkal</td>
     </tr>
   );
 
@@ -196,8 +186,11 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
         </div>
         <table className="table-fixed w-full border border-collapse border-[#E2E8F4] text-sm">
           <tr>
-            <td className="p-2 border font-medium">Takaran Saji</td>
-            <td className="p-2 border font-medium">Kadar nutrisi</td>
+            <td className="p-2 border font-medium text-center">Takaran Saji</td>
+            <td className="p-2 border font-medium text-center">Kadar gula</td>
+            <td className="p-2 border font-medium text-center">
+              Jumlah Kalori
+            </td>
           </tr>
           <RowNutrition sajian={1} />
           {jumlah_sajian > 1 && <RowNutrition sajian={jumlah_sajian} />}
