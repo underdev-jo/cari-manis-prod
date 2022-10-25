@@ -4,9 +4,10 @@ import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
 import { convertRupiah, getCookie } from "../../helpers/util";
 
-const Badge = ({ children, type = "primary" }) => (
-  <div className={`badge badge-${type} font-bold`}>{children}</div>
-);
+const Badge = ({ children, type = "primary" }) => {
+  const bType = `badge-${type}`;
+  return <div className={`badge ${bType} font-bold`}>{children}</div>;
+};
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
