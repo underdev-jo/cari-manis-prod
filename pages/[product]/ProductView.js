@@ -6,12 +6,12 @@ import { badge, progress } from "../../helpers/daisyHelper";
 import { convertRupiah, getCookie } from "../../helpers/util";
 
 const Badge = ({ children, type = "primary" }) => (
-  <div className={`${badge(type)} font-bold`}>{children}</div>
+  <div className={`${badge[type]} font-bold`}>{children}</div>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress className={progress(type)} max={max} value={value} />
+    <progress className={progress[type]} max={max} value={value} />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}
