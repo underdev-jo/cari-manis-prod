@@ -1,4 +1,4 @@
-export const badge = (type) => {
+export const badge = (type = "primary") => {
   const classType = {
     primary: "badge badge-primary",
     secondary: "badge badge-secondary",
@@ -10,7 +10,7 @@ export const badge = (type) => {
   return classType[type];
 };
 
-export const progress = (type) => {
+export const progress = (type = "primary") => {
   const classType = {
     primary: "progress progress-primary",
     secondary: "progress progress-secondary",
