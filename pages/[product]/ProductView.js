@@ -6,12 +6,12 @@ import { badge, progress } from "../../helpers/daisyHelper";
 import { convertRupiah, getCookie } from "../../helpers/util";
 
 const Badge = ({ children, type = "primary" }) => (
-  <div className={`${badge(type)} font-bold`}>{children}</div>
+  <div className={`${badge[type]} font-bold`}>{children}</div>
 );
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress className={progress(type)} max={max} value={value} />
+    <progress className={progress[type]} max={max} value={value} />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}
@@ -105,7 +105,8 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
   const percent = Math.ceil((value / dailyCal) * 100);
 
   let type = "primary";
-  if (percent >= 30) type = "error";
+  if (percent >= 50) type = "error";
+  else if (percent >= 20) type = "warning";
 
   return (
     <div className="border-primary p-2">
@@ -117,7 +118,8 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
       <div>
         <div className="text-sm">
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
-          setara dengan <Badge>{percent}%</Badge> kebutuhan kalori harian kamu
+          setara dengan <Badge type={type}>{percent}%</Badge> kebutuhan kalori
+          harian kamu
         </div>
         <Meter
           max={dailyCal}
