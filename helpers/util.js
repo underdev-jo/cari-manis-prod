@@ -67,14 +67,3 @@ export function diffDate(date) {
 
   return message;
 }
-
-export const daisyTail = (base, style) => {
-  const list = {
-    primary: `${base} ${base}-primary`,
-    secondary: `${base} ${base}-secondary`,
-    accent: `${base} ${base}-accent`,
-    warning: `${base} ${base}-warning`,
-    error: `${base} ${base}-error`,
-  };
-  return list[style];
-};

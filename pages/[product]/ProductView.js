@@ -2,8 +2,25 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Container from "../../components/Layout/Container";
-import { badge, progress } from "../../helpers/daisyHelper";
 import { convertRupiah, getCookie } from "../../helpers/util";
+
+const badge = {
+  primary: "badge badge-primary",
+  secondary: "badge badge-secondary",
+  accent: "badge badge-accent",
+  warning: "badge badge-warning",
+  error: "badge badge-error",
+  info: "badge badge-info",
+};
+
+const progress = {
+  primary: "progress progress-primary",
+  secondary: "progress progress-secondary",
+  accent: "progress progress-accent",
+  warning: "progress progress-warning",
+  error: "progress progress-error",
+  info: "progress progress-info",
+};
 
 const Badge = ({ children, type = "primary" }) => (
   <div className={`${badge[type]} font-bold`}>{children}</div>
