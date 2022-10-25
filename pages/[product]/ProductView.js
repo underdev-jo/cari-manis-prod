@@ -2,8 +2,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoSymbol from "../../components/Action/InfoSymbol";
 import Badge from "../../components/Daisy/Badge";
+import Progress from "../../components/Daisy/Progress";
 import Container from "../../components/Layout/Container";
-import { progress } from "../../helpers/daisyHelper";
 import { convertRupiah, getCookie } from "../../helpers/util";
 
 const NutritionBadge = ({ children, type }) => (
@@ -14,7 +14,7 @@ const NutritionBadge = ({ children, type }) => (
 
 const Meter = ({ max, value, maxValue, type = "primary" }) => (
   <div className="relative pb-4">
-    <progress className={progress[type]} max={max} value={value} />
+    <Progress type={type} max={max} value={value} />
     {maxValue && (
       <div className="absolute bottom-0 right-0 text-xs">Maks. {maxValue}</div>
     )}

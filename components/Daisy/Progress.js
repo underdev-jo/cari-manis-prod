@@ -1,4 +1,4 @@
-export default function Progress({ type, className = "" }) {
+export default function Progress({ type, className = "", max, value }) {
   const color = {
     primary: "progress progress-primary",
     secondary: "progress progress-secondary",
@@ -8,7 +8,7 @@ export default function Progress({ type, className = "" }) {
     info: "progress progress-info",
   };
 
-  const fullClass = `${color(type)} ${className}`;
+  const fullClass = `${color[type]} ${className}`;
 
-  return <progress className={fullClass}></progress>;
+  return <progress className={fullClass} max={max} value={value} />;
 }
