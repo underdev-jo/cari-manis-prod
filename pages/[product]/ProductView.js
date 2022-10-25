@@ -105,7 +105,7 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
   const percent = Math.ceil((value / dailyCal) * 100);
 
   let type = "primary";
-  if (percent >= 50) type = "error";
+  if (percent >= 30) type = "error";
 
   return (
     <div className="border-primary p-2">
@@ -119,7 +119,12 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
           setara dengan <Badge>{percent}%</Badge> kebutuhan kalori harian kamu
         </div>
-        <Meter max={dailyCal} value={value} maxValue={`${dailyCal}kkal`} />
+        <Meter
+          max={dailyCal}
+          value={value}
+          maxValue={`${dailyCal}kkal`}
+          type={type}
+        />
       </div>
     </div>
   );
@@ -164,6 +169,8 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
   if (jumlah_sajian > 1)
     tips = `Disarankan hanya mengonsumsi 1 takaran saji (${takaran_saji}ml) per hari.`;
 
+  const badgeType = jumlah_sajian > 1 ? "warning" : "primary";
+
   const RowNutrition = ({ sajian = 1 }) => (
     <tr>
       <td className="p-2 border text-center">{sajian}</td>
@@ -176,10 +183,7 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
     <div className="p-2">
       <div>
         <div className="text-sm mb-4">
-          Produk ini memiliki{" "}
-          <Badge type={jumlah_sajian > 1 ? "warning" : "primary"}>
-            {jumlah_sajian}
-          </Badge>{" "}
+          Produk ini memiliki <Badge type={badgeType}>{jumlah_sajian}</Badge>{" "}
           jumlah sajian.
           <br />
           {tips}
