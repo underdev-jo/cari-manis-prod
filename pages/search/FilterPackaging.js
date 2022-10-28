@@ -1,20 +1,19 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Button from "../../components/Button/Button";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import { get } from "../../helpers/api";
 import { capitalize, slugify } from "../../helpers/util";
 
-export default function FilterPackaging() {
+export default function FilterPackaging({ query }) {
   const [packages, setPackages] = useState([]);
 
-  const { query, replace } = useRouter();
+  const { replace } = useRouter();
   const filtering = query.kemasan || "";
 
   useEffect(() => {
     const hit = async () => {
-      const res = await get("kemasan_minuman");
-      setPackages([{ id: "", name: "Semua Jenis" }, ...res.data] || res);
+      const { data = [] } = await get("kemasan_minuman");
+      setPackages([{ id: "", name: "Semua Jenis" }, ...data] || res);
     };
 
     if (packages.length < 1) hit();
@@ -23,8 +22,8 @@ export default function FilterPackaging() {
   const select = ({ value = "" }) => {
     const kemasan = value !== "Semua Jenis" ? slugify(value || "") : "";
     let newQuery = { ...query, kemasan };
-    const params = new URLSearchParams(newQuery).toString();
-    replace(`/search?${params}`);
+    const newParams = new URLSearchParams(newQuery).toString();
+    replace(`/search?${newParams}`);
   };
 
   // console.log(packages.find((item) => filtering === item.name));

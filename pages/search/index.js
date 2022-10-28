@@ -11,10 +11,10 @@ import FilterSugar from "./FilterSugar";
 
 export async function getServerSideProps(context) {
   const { query } = context;
-  return { props: { params: query } };
+  return { props: { query } };
 }
 
-export default function SearchPage({ params }) {
+export default function SearchPage({ query }) {
   const [loading, setLoading] = useState(true);
   const [result, setRes] = useState(false);
   const [keyword, setKeyword] = useState();
@@ -41,11 +41,11 @@ export default function SearchPage({ params }) {
       }, 1000);
     };
 
-    const keys = params.kemasan || params.q;
-    setKeyword(params.q || "");
-    if (keys) search(params.q, params.kemasan);
+    const keys = query.kemasan || query.q;
+    setKeyword(query.q || "");
+    if (keys) search(query.q, query.kemasan);
     else search("");
-  }, [params]);
+  }, [query]);
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)
@@ -68,8 +68,8 @@ export default function SearchPage({ params }) {
           <div className="sticky top-[64.4px] bg-white p-2 z-50">
             <InputSearchDrink value={keyword} allowEmpty />
             <div className="-mx-2">
-              <FilterSugar />
-              <FilterPackaging />
+              <FilterSugar query={query} />
+              <FilterPackaging query={query} />
             </div>
           </div>
           <div className="p-2">{render}</div>
