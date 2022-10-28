@@ -27,8 +27,6 @@ export default function FilterSugar({ query }) {
   };
 
   const onSelectSugar = (e) => {
-    console.log("Select sugar: ", e);
-    setSelected(e);
     replacePaarams(e.key);
   };
 

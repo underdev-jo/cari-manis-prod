@@ -3,15 +3,7 @@ import Alert from "../../components/Alert/Alert";
 import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
-import {
-  get,
-  ilike,
-  ilike2,
-  ilike2lt,
-  ilikelt,
-  ilikelte,
-  lte,
-} from "../../helpers/api";
+import { get, ilike, ilike2, ilike2lt, ilikelte, lte } from "../../helpers/api";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
 import FilterPackaging from "./FilterPackaging";
@@ -40,11 +32,6 @@ export default function SearchPage({ query }) {
       let col1 = false;
       let col2 = false;
       let col3 = false;
-
-      // if (name && kemasan) api = ilike2;
-      // else if (name && kemasan && gula) api = ilike2lt;
-      // else if (name && gula || kemasan&&gula) api = ilikelt;
-      // else if (name || kemasan) api = ilike;
 
       if (name && kemasan) {
         api = ilike2;
@@ -75,10 +62,6 @@ export default function SearchPage({ query }) {
           col1 = colGula;
         }
       }
-
-      // if (!name && kemasan) col1 = colPackage
-      // else if(!kemasan && gula) col2 = colGula;
-      console.log("RES: ", api);
 
       const res = await api("minuman", col1, col2, col3);
 
