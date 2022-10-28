@@ -34,6 +34,22 @@ export const ilike = (table, ilike = { column: "", value: "" }) => {
   });
 };
 
+export const ilikeilike = (
+  table,
+  col1 = { column: "", value: "" },
+  col2 = { column: "", value: "" }
+) => {
+  return new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa
+      .from(table)
+      .select("*")
+      .ilike(col1.column, col1.value)
+      .ilike(col2.column, col2.value);
+    return resolve({ data, error });
+  });
+};
+
 export const ilikeEq = (
   table,
   ilike = { column: "", value: "" },

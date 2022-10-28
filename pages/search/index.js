@@ -1,30 +1,31 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Alert from "../../components/Alert/Alert";
 import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
-import { get, ilike, ilikeEq } from "../../helpers/api";
+import { get, ilike, ilikeilike } from "../../helpers/api";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
 import FilterPackaging from "./FilterPackaging";
+import FilterSugar from "./FilterSugar";
 
-export default function SearchPage() {
+export async function getServerSideProps(context) {
+  const { query } = context;
+  return { props: { params: query } };
+}
+
+export default function SearchPage({ params }) {
   const [loading, setLoading] = useState(true);
   const [result, setRes] = useState(false);
-
-  const router = useRouter();
-  const { query } = router;
-
-  const keyword = query.q || "";
+  const [keyword, setKeyword] = useState();
 
   useEffect(() => {
     const search = async (name, kemasan) => {
-      let api = get;
-      if (name && kemasan) api = ilikeEq;
-      else if (name || kemasan) api = ilike;
-
       setLoading(true);
+
+      let api = get;
+      if (name && kemasan) api = ilikeilike;
+      else if (name || kemasan) api = ilike;
 
       let bodyName = { column: "name", value: `%${name}%` };
       const bodyPack = { column: "packaging", value: kemasan };
@@ -34,15 +35,17 @@ export default function SearchPage() {
 
       const res = await api("minuman", bodyName, bodyPack);
 
-      setRes(res);
-      setLoading(false);
+      setTimeout(() => {
+        setRes(res);
+        setLoading(false);
+      }, 1000);
     };
 
-    const keys = query.kemasan || query.q;
-
-    if (keys) search(query.q, query.kemasan);
+    const keys = params.kemasan || params.q;
+    setKeyword(params.q || "");
+    if (keys) search(params.q, params.kemasan);
     else search("");
-  }, [query]);
+  }, [params]);
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)
@@ -64,7 +67,10 @@ export default function SearchPage() {
         <div className="relative">
           <div className="sticky top-[64.4px] bg-white p-2 z-50">
             <InputSearchDrink value={keyword} allowEmpty />
-            <FilterPackaging />
+            <div className="-mx-2">
+              <FilterSugar />
+              <FilterPackaging />
+            </div>
           </div>
           <div className="p-2">{render}</div>
         </div>

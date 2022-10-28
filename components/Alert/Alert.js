@@ -61,14 +61,14 @@ const icon = {
   ),
 };
 
-const typeClass = {
-  info: "alert-info",
-  error: "alert-error",
-  success: "alert-success",
-  warning: "alert-warning",
-};
-
 export default function Alert({ type = "info", message = "Alert Info" }) {
+  const typeClass = {
+    info: "alert-info",
+    error: "alert-error",
+    success: "alert-success",
+    warning: "alert-warning",
+  };
+
   return (
     <div className={`alert ${typeClass[type]} shadow-lg`}>
       <div>
