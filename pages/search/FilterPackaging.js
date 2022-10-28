@@ -8,7 +8,7 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
   const [packages, setPackages] = useState([]);
 
   const { replace } = useRouter();
-  const filtering = query || "";
+  const filtering = query?.kemasan || "";
 
   useEffect(() => {
     const hit = async () => {
