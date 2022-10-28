@@ -78,9 +78,9 @@ export default function SearchPage({ query }) {
       }, 1000);
     };
 
-    const keys = query.kemasan || query.q;
+    const keys = query?.kemasan || query.q;
     setKeyword(query.q || "");
-    if (keys) search(query.q, query.kemasan, query.gula);
+    if (keys) search(query.q, query?.kemasan, query.gula);
     else search("");
   }, [query]);
 

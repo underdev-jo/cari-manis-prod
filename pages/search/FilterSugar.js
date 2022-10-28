@@ -1,11 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import { slugify } from "../../helpers/util";
 
-export default function FilterSugar({ query }) {
-  const [selected, setSelected] = useState({ key: "" });
-
+export default function FilterSugar({ query = { gula: "" } }) {
   const { replace } = useRouter();
   const filtering = query.gula || "";
 

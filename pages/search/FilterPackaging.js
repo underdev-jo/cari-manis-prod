@@ -4,11 +4,11 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import { get } from "../../helpers/api";
 import { capitalize, slugify } from "../../helpers/util";
 
-export default function FilterPackaging({ query }) {
+export default function FilterPackaging({ query = { kemasan: "" } }) {
   const [packages, setPackages] = useState([]);
 
   const { replace } = useRouter();
-  const filtering = query.kemasan || "";
+  const filtering = query || "";
 
   useEffect(() => {
     const hit = async () => {
