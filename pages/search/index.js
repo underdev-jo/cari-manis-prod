@@ -3,7 +3,14 @@ import Alert from "../../components/Alert/Alert";
 import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
-import { get, ilike, ilike2, ilike2lt, ilikelte, lte } from "../../helpers/api";
+import {
+  get,
+  ilike,
+  ilike2,
+  ilike2lte,
+  ilikelte,
+  lte,
+} from "../../helpers/api";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
 import FilterPackaging from "./FilterPackaging";
@@ -38,7 +45,7 @@ export default function SearchPage({ query }) {
         col1 = colName;
         col2 = colPackage;
         if (gula) {
-          api = ilike2lt;
+          api = ilike2lte;
           col3 = colGula;
         }
       } else if (!name && kemasan) {
