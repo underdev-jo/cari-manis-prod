@@ -34,7 +34,18 @@ export const ilike = (table, ilike = { column: "", value: "" }) => {
   });
 };
 
-export const ilikeilike = (
+export const lte = (table, col = { column: "", value: "" }) => {
+  return new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa
+      .from(table)
+      .select("*")
+      .lte(col.column, col.value);
+    return resolve({ data, error });
+  });
+};
+
+export const ilike2 = (
   table,
   col1 = { column: "", value: "" },
   col2 = { column: "", value: "" }
@@ -46,6 +57,40 @@ export const ilikeilike = (
       .select("*")
       .ilike(col1.column, col1.value)
       .ilike(col2.column, col2.value);
+    return resolve({ data, error });
+  });
+};
+
+export const ilikelte = (
+  table,
+  col1 = { column: "", value: "" },
+  col2 = { column: "", value: "" }
+) => {
+  return new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa
+      .from(table)
+      .select("*")
+      .ilike(col1.column, col1.value)
+      .lte(col2.column, col2.value);
+    return resolve({ data, error });
+  });
+};
+
+export const ilike2lte = (
+  table,
+  col1 = { column: "", value: "" },
+  col2 = { column: "", value: "" },
+  col3 = { column: "", value: "" }
+) => {
+  return new Promise(async (resolve, reject) => {
+    const supa = createClient(supaUrl(), supaKey());
+    const { data, error } = await supa
+      .from(table)
+      .select("*")
+      .ilike(col1.column, col1.value)
+      .ilike(col2.column, col2.value)
+      .lte(col3.column, col3.value);
     return resolve({ data, error });
   });
 };

@@ -16,7 +16,7 @@ export default function FilterSugar({ query }) {
     { key: `20`, value: "Max. 20gr" },
     { key: `30`, value: "Max. 30gr" },
     { key: `50`, value: "Max. 50gr" },
-    { key: `50+`, value: ">50gr" },
+    { key: `999`, value: ">50gr" },
   ];
 
   const replacePaarams = (value) => {

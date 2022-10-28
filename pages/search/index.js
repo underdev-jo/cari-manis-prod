@@ -3,7 +3,15 @@ import Alert from "../../components/Alert/Alert";
 import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
 import Container from "../../components/Layout/Container";
 import Spinner from "../../components/Spinner/Spinner";
-import { get, ilike, ilikeilike } from "../../helpers/api";
+import {
+  get,
+  ilike,
+  ilike2,
+  ilike2lt,
+  ilikelt,
+  ilikelte,
+  lte,
+} from "../../helpers/api";
 import { DrinkListView } from "../home/DrinkList";
 import PageHead from "../PageHead";
 import FilterPackaging from "./FilterPackaging";
@@ -20,20 +28,59 @@ export default function SearchPage({ query }) {
   const [keyword, setKeyword] = useState();
 
   useEffect(() => {
-    const search = async (name, kemasan) => {
+    const search = async (name, kemasan, gula) => {
       setLoading(true);
 
       let api = get;
-      if (name && kemasan) api = ilikeilike;
-      else if (name || kemasan) api = ilike;
 
-      let bodyName = { column: "name", value: `%${name}%` };
-      const bodyPack = { column: "packaging", value: kemasan };
+      let colName = { column: "name", value: `%${name}%` };
+      const colPackage = { column: "packaging", value: `%${kemasan}%` };
+      const colGula = { column: "gula", value: gula };
 
-      if (!name && kemasan)
-        bodyName = { column: "packaging", value: `%${kemasan}%` };
+      let col1 = false;
+      let col2 = false;
+      let col3 = false;
 
-      const res = await api("minuman", bodyName, bodyPack);
+      // if (name && kemasan) api = ilike2;
+      // else if (name && kemasan && gula) api = ilike2lt;
+      // else if (name && gula || kemasan&&gula) api = ilikelt;
+      // else if (name || kemasan) api = ilike;
+
+      if (name && kemasan) {
+        api = ilike2;
+        col1 = colName;
+        col2 = colPackage;
+        if (gula) {
+          api = ilike2lt;
+          col3 = colGula;
+        }
+      } else if (!name && kemasan) {
+        api = ilike;
+        col1 = colPackage;
+        if (gula) {
+          api = ilikelte;
+          col2 = colGula;
+        }
+      } else if (name && !kemasan) {
+        api = ilike;
+        col1 = colName;
+        if (gula) {
+          api = ilikelte;
+          col2 = colGula;
+        }
+      } else {
+        api = get;
+        if (gula) {
+          api = lte;
+          col1 = colGula;
+        }
+      }
+
+      // if (!name && kemasan) col1 = colPackage
+      // else if(!kemasan && gula) col2 = colGula;
+      console.log("RES: ", api);
+
+      const res = await api("minuman", col1, col2, col3);
 
       setTimeout(() => {
         setRes(res);
@@ -43,7 +90,7 @@ export default function SearchPage({ query }) {
 
     const keys = query.kemasan || query.q;
     setKeyword(query.q || "");
-    if (keys) search(query.q, query.kemasan);
+    if (keys) search(query.q, query.kemasan, query.gula);
     else search("");
   }, [query]);
 
