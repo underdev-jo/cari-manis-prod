@@ -51,11 +51,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@legendapp/state@^0.21.5":
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/@legendapp/state/-/state-0.21.5.tgz#4846a76a26cd4210153d4bae8cf9b790a5086896"
-  integrity sha512-ApQxgzMBb1eCwaT84gfrT/RHqANeoSCeintlJQmae3NKd0KQk2WOOCqFpwqwxZ3D2I/k2FZczPY3LMGEa9HTyg==
-
 "@next/env@12.3.1":
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.3.1.tgz#18266bd92de3b4aa4037b1927aa59e6f11879260"
