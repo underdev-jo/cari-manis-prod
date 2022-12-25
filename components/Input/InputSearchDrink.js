@@ -6,11 +6,7 @@ export function InputSearchDrink({ value = "", allowEmpty }) {
 
   const onSearch = (keyword = "") => {
     const routing = value ? replace : push;
-    routing(`/search/?q=${keyword}`);
-    // if (keyword) {
-    //   console.log("Searching: ", keyword);
-    //   routing(`/search/?q=${keyword}`);
-    // } else routing(`/search/?q=`);
+    routing(`/cari/?q=${keyword}`);
   };
 
   const props = {

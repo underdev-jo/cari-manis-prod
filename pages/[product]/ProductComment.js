@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { diffDate } from "../../helpers/util";
-import Close from "../../public/Close";
+import { diffDate } from "helpers/util";
+import { Close } from "public/icons";
 
 const CommentItem = ({ comment = "", created_at = "" }) => {
   const [open, setOpen] = useState(false);

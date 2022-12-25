@@ -20,7 +20,7 @@ export default function FilterSugar({ query = { gula: "" } }) {
     const gula = slugify(value || "");
     let newQuery = { ...query, gula };
     const params = new URLSearchParams(newQuery).toString();
-    replace(`/search?${params}`);
+    replace(`/cari?${params}`);
   };
 
   const onSelectSugar = (e) => {

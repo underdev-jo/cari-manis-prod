@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import InfoSymbol from "../../components/Action/InfoSymbol";
-import Badge from "../../components/Daisy/Badge";
-import Progress from "../../components/Daisy/Progress";
-import Container from "../../components/Layout/Container";
-import { convertRupiah, getCookie } from "../../helpers/util";
+import Container from "components/Layout/Container";
+import InfoSymbol from "components/Action/InfoSymbol";
+import Badge from "components/Daisy/Badge";
+import { convertRupiah, getCookie } from "helpers/util";
+import Progress from "components/Daisy/Progress";
+import style from "./Product.module.scss";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="font-bold">
@@ -92,11 +93,11 @@ export const ProductImage = ({ image, name }) => {
 const Block = ({ title, info, setPopup }) => (
   <button
     type="button"
-    className="btn btn-ghost block h-auto w-[110px] bg-primary-content p-4 normal-case text-primary"
+    className={style["info-cta"]}
     onClick={() => setPopup({ title, info })}
   >
-    <h1 className="w-full text-small bold">{title}</h1>
-    <h2 className="w-full text-large regular">{info}</h2>
+    <h1 className={style.title}>{title}</h1>
+    <h2 className={style.info}>{info}</h2>
   </button>
 );
 
@@ -216,7 +217,6 @@ export function ProductNutrition({
   takaran_saji,
   gula,
   kalori,
-  setPopup,
 }) {
   const [info, setInfo] = useState(false);
 
@@ -228,7 +228,6 @@ export function ProductNutrition({
     console.log("Click: ", info, e);
     if (info === e.title) setInfo(false);
     else setInfo(e.title);
-    setPopup(e);
   };
 
   const sugarData = { gula, jumlah_sajian };
@@ -266,10 +265,26 @@ export function ProductInformation({
 }) {
   const colClass = "text-small p-2.5 border border-[#E2E8F4]";
   const valClass = "text-right text-small bold";
+
+  const Row = ({ name, value }) => (
+    <div className="flex item-center justify-between p-2 w-full border-b-[1px] border-b-carman-gray-9 text-xs hover:bg-carman-gray-9">
+      <div className="flex-1">{name}</div>
+      <div className="flex-1 font-bold text-right">{value}</div>
+    </div>
+  );
+
   return (
-    <div className="my-10 px-6">
-      <h3 className="cm-heading h4 mb-4">Informasi kandungan minuman</h3>
-      <table className="table-fixed w-full border border-collapse border-[#E2E8F4]">
+    <div className={style["nutrition-table"]}>
+      <h3 className="text-heading4 mb-4">Informasi kandungan minuman</h3>
+      <div>
+        <Row name="Netto" value={`${netto}ml`} />
+        <Row name="Kandungan Gula" value={`${gula}gr`} />
+        <Row name="Takaran Saji" value={`${takaran_saji}ml`} />
+        <Row name="Kalori" value={`${kalori}ml`} />
+        <Row name="Jumlah Sajian" value={`${jumlah_sajian}ml`} />
+        <Row name="Total kandungan gula" value={`${total_gula}ml`} />
+      </div>
+      {/* <table className={style.table}>
         <tbody>
           <tr>
             <td className={colClass}>Netto</td>
@@ -296,7 +311,7 @@ export function ProductInformation({
             <td className={`${colClass} ${valClass}`}>{total_gula}gr</td>
           </tr>
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 }
@@ -310,12 +325,12 @@ export function ProductSource({ source }) {
   );
 }
 
-export default function ProductView({ product, setPopup }) {
+export default function ProductView({ product }) {
   return (
     <Container>
       <ProductImage {...product} />
       <ProductSummary {...product} />
-      <ProductNutrition {...product} setPopup={setPopup} />
+      <ProductNutrition {...product} />
       <ProductInformation {...product} />
       <ProductSource {...product} />
       <div className="h-20" />

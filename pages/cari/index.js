@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import Alert from "../../components/Alert/Alert";
-import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
-import Container from "../../components/Layout/Container";
-import Spinner from "../../components/Spinner/Spinner";
+import Alert from "components/Alert/Alert";
+import { InputSearchDrink } from "components/Input/InputSearchDrink";
+import Container from "components/Layout/Container";
+import Spinner from "components/Spinner/Spinner";
+import ErrorLayout from "layouts/Error";
 import {
   get,
   ilike,
@@ -89,10 +90,10 @@ export default function SearchPage({ query }) {
     render = <DrinkListView list={result.data} />;
   else if (!loading && (result.data?.length < 1 || result.length < 1))
     render = (
-      <div className="my-6 text-center">
-        <div className="text-3xl font-semibold mb-2">:(</div>
-        <div className="text-lg">Yang kamu cari tidak ditemukan</div>
-      </div>
+      <ErrorLayout
+        title="Yah, yang kamu cari gaada :("
+        imagePath="/faces/sad-face.svg"
+      />
     );
   else if (!loading && result.error)
     render = <Alert type="error" message={result.error?.message || "Error!"} />;

@@ -23,7 +23,7 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
     const kemasan = value !== "Semua Jenis" ? slugify(value || "") : "";
     let newQuery = { ...query, kemasan };
     const newParams = new URLSearchParams(newQuery).toString();
-    replace(`/search?${newParams}`);
+    replace(`/cari?${newParams}`);
   };
 
   // console.log(packages.find((item) => filtering === item.name));

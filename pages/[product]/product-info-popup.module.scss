@@ -1,0 +1,17 @@
+.popup {
+  @apply fixed left-0 right-0 bottom-0;
+  transition: 0.25s ease-in-out;
+  transform: translate(0, 100%);
+
+  &.open {
+    transform: translate(0, 0%);
+  }
+}
+
+.content {
+  @apply max-w-md mx-auto rounded-t-xl bg-white p-10 relative bg-primary-content;
+}
+
+.btn-close {
+  @apply absolute right-5 top-5 btn btn-sm btn-circle btn-error btn-outline;
+}

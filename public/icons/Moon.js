@@ -1,6 +1,6 @@
 import React from "react";
 
-function IconMoon() {
+function Moon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,4 +12,4 @@ function IconMoon() {
   );
 }
 
-export default IconMoon;
+export default Moon;

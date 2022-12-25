@@ -1,6 +1,6 @@
 import React from "react";
 
-function IconSun() {
+function Sun() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,4 +12,4 @@ function IconSun() {
   );
 }
 
-export default IconSun;
+export default Sun;

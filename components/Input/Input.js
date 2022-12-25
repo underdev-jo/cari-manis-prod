@@ -1,17 +1,16 @@
+import { Moon, Sun } from "public/icons";
 import React, { useState } from "react";
-import IconMoon from "../../public/Moon";
-import IconSun from "../../public/Sun";
 
 const PasswordToggle = ({ type, inType, onToggle, disabled }) => {
   if (type !== "password") return "";
   const iconSun = (
     <div className="swap-on fill-current w-6 h-6">
-      <IconSun />
+      <Sun />
     </div>
   );
   const iconMoon = (
     <div className="swap-on fill-current w-6 h-6">
-      <IconMoon />
+      <Moon />
     </div>
   );
 
