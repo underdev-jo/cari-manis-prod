@@ -1,0 +1,19 @@
+.footer {
+  @apply relative bg-carman-gray-1 text-white;
+}
+
+.product {
+  @apply pt-8 px-4 mb-6;
+}
+
+.action {
+  @apply flex justify-between pt-8 px-4;
+
+  & > div {
+    @apply flex-1;
+  }
+}
+
+.dev {
+  @apply relative p-3 bg-carman-gray-2 text-center flex justify-center items-center;
+}

@@ -10,8 +10,9 @@ export async function getStaticProps() {
   if (res.error)
     return {
       redirect: {
-        destination: "/404",
+        destination: "/502",
       },
+      // props: { drinkList: [] },
     };
 
   return {

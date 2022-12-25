@@ -1,7 +1,6 @@
-import { InputSearchDrink } from "../../components/Input/InputSearchDrink";
-import CoffeeCup from "../../public/CoffeeCup";
-import CoffeeTime from "../../public/CoffeeTime";
-import style from "../../styles/homepage/Cover.module.scss";
+import { CoffeeCup, CoffeeTime } from "public/icons";
+import { InputSearchDrink } from "components/Input/InputSearchDrink";
+import style from "./Cover.module.scss";
 
 export default function HomepageCover() {
   return (

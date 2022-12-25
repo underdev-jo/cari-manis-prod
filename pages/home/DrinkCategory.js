@@ -20,22 +20,22 @@ function ElementButton({ name, image, slug }) {
 
 const category = [
   {
-    image: "/bottle.svg",
+    image: "/icons/bottle.svg",
     name: "Minuman Botol",
     slug: "Botol",
   },
   {
-    image: "/cup.svg",
+    image: "/icons/cup.svg",
     name: "Minuman Kaleng",
     slug: "Kaleng",
   },
   {
-    image: "/carton.svg",
+    image: "/icons/carton.svg",
     name: "Minuman Karton",
     slug: "Karton",
   },
   {
-    image: "/sachet.svg",
+    image: "/icons/sachet.svg",
     name: "Minuman Sachet",
     slug: "Sachet",
   },

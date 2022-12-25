@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { runFunction } from "../../helpers/util";
-import Burger from "../../public/Burger";
-import Close from "../../public/Close";
-import LinkWrapper from "../LinkWrapper/LinkWrapper";
+import { runFunction } from "helpers/util";
+import LinkWrapper from "components/LinkWrapper/LinkWrapper";
+import { Burger, Close } from "public/icons";
 
 export default function Header({ admin = false, back }) {
   const router = useRouter();
@@ -23,7 +22,7 @@ export default function Header({ admin = false, back }) {
               onClick={doBack}
             >
               <Image
-                src="/arrow-left-solid.svg"
+                src="/icons/arrow-left-solid.svg"
                 alt="B"
                 title="Back"
                 width={26}
@@ -34,7 +33,7 @@ export default function Header({ admin = false, back }) {
           <LinkWrapper href="/">
             <button className="btn btn-ghost">
               <Image
-                src="/logo-carimanis.svg"
+                src="/legal/logo-carimanis.svg"
                 alt="Logo"
                 title="Logo cari manis"
                 width={68}

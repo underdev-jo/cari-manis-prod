@@ -35,6 +35,10 @@ a {
   }
 }
 
+.heading-3 {
+  @apply font-bold text-xl;
+}
+
 .text-small {
   @apply text-xs font-normal;
   letter-spacing: -0.005em;
@@ -74,4 +78,8 @@ a {
   56% {
     width: 100%;
   }
+}
+
+.content-wrapper {
+  @apply max-w-md mx-auto p-2;
 }

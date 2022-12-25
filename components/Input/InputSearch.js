@@ -1,6 +1,6 @@
+import { isFunction } from "helpers/util";
+import { IconSearch } from "public/icons";
 import { useEffect, useState } from "react";
-import { isFunction, runFunction } from "../../helpers/util";
-import IconSearch from "../../public/IconSearch";
 
 export default function InputSearch({
   onSearch,

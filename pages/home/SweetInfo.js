@@ -42,7 +42,7 @@ export default function SweetInfo() {
           <div className="flex items-center justify-center">
             <Image
               alt="Information"
-              src="/information.svg"
+              src="/icons/information.svg"
               width={63}
               height={77}
             />

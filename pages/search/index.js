@@ -45,27 +45,27 @@ export default function SearchPage({ query }) {
         col1 = colName;
         col2 = colPackage;
         if (gula) {
-          api = ilike2lte;
+          api = gula > 50 ? i : ilike2lte;
           col3 = colGula;
         }
       } else if (!name && kemasan) {
         api = ilike;
         col1 = colPackage;
         if (gula) {
-          api = ilikelte;
+          api = gula > 50 ? i : ilikelte;
           col2 = colGula;
         }
       } else if (name && !kemasan) {
         api = ilike;
         col1 = colName;
         if (gula) {
-          api = ilikelte;
+          api = gula > 50 ? i : ilikelte;
           col2 = colGula;
         }
       } else {
         api = get;
         if (gula) {
-          api = lte;
+          api = gula > 50 ? i : lte;
           col1 = colGula;
         }
       }
