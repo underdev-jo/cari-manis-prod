@@ -4,10 +4,10 @@
 
 .input-search {
   @apply rounded-lg py-3 px-4 border-2 input input-bordered w-full bg-transparent focus:border-primary;
+}
 
-  &.small {
-    @apply text-sm py-px px-3 input-md;
-  }
+.input-search.small {
+  @apply text-small py-px px-3 input-md;
 }
 
 .button-search {

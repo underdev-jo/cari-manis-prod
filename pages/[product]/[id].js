@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import ProductView from "./ProductView";
-import ProductComment from "./ProductComment";
+// import ProductComment from "./ProductComment";
 import { eq, getCount } from "helpers/api";
 import { supaKey, supaUrl } from "helpers/util";
 import PageHead from "pages/PageHead";
@@ -41,7 +41,7 @@ export default function ProductDetail({ product, comment }) {
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
       <ProductView product={product} />
-      <ProductComment comment={comment} />
+      {/* <ProductComment comment={comment} /> */}
     </>
   );
 }

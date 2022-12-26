@@ -7,7 +7,7 @@ export default function HomepageCover() {
     <div className={`${style.cover} bg-primary-content relative`}>
       <div className="max-w-sm mx-auto mb-10">
         <div className={style.textHead}>
-          <h2 className="cm-heading h2">
+          <h2 className="text-heading2">
             <span className="text-primary">Cari</span> Informasi Kandungan{" "}
             <span className="text-primary">Manis</span>
           </h2>

@@ -13,7 +13,7 @@ const CommentItem = ({ comment = "", created_at = "" }) => {
 
   return (
     <div className="py-4 px-6" style={{ transition: "0.25s ease-in-out" }}>
-      <div className={`mb-2 text-sm text-white ${line}`} onClick={toggle}>
+      <div className={`mb-2 text-small text-white ${line}`} onClick={toggle}>
         {comment}
       </div>
       <div className="text-xs">{timeView}</div>

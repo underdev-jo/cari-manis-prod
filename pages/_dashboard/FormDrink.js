@@ -48,7 +48,7 @@ export default function FormDrink() {
   return (
     <div className="my-8">
       <div>
-        <h2 className="cm-heading h4">TAMBAH DATA MINUMAN</h2>
+        <h2 className="text-heading4">TAMBAH DATA MINUMAN</h2>
       </div>
       <div>
         <form onSubmit={onSubmit}>

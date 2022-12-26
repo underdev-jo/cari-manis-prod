@@ -25,7 +25,7 @@ export default function SweetInfo() {
       >
         <div className="p-4 flex items-center justify-between">
           <div className="w-[90%] max-w-[267px]">
-            <div className="cm-heading h4 mb-2">Tahukah kamu?</div>
+            <div className="text-heading4 mb-2">Tahukah kamu?</div>
             <Swiper
               slidesPerView={1}
               autoplay={{ delay: 3000 }}

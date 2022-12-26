@@ -13,7 +13,7 @@ export default function ErrorLayout({
       <div className="mb-4">
         <Image width={144} height={146} alt="Error Face" src={imagePath} />
       </div>
-      <h2 className="text-carman-gray-2 heading-3 mb-3">{title}</h2>
+      <h2 className="text-carman-gray-2 text-heading3 mb-3">{title}</h2>
       <div className="p-2">{children}</div>
     </div>
   );

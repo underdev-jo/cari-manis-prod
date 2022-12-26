@@ -25,6 +25,16 @@ module.exports = {
       "2xl": ["1.5rem", "2rem"],
       "3xl": ["1.875rem", "2.25rem"],
       "4xl": ["2.25rem", "2.5rem"],
+      small: ["12px", "16px"],
+      medium: ["14px", "20px"],
+      large: ["16px", "24px"],
+      heading2: [
+        "24px",
+        {
+          lineHeight: "32px",
+          fontWeight: "bold",
+        },
+      ],
       heading3: [
         "20px",
         {

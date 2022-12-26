@@ -8,6 +8,7 @@ export default function InputSearch({
   placeholder = "Cari di sini",
   value = "",
   allowEmpty = false,
+  size = "",
 }) {
   const [inputValue, setValue] = useState("");
 
@@ -31,7 +32,7 @@ export default function InputSearch({
     <div className={style["input-search-group"]}>
       <form onSubmit={clickSearch}>
         <input
-          className={`${style["input-search"]} ${style["small"]}`}
+          className={`${style["input-search"]} ${style[size]}`}
           placeholder={placeholder}
           type="text"
           onChange={onChange}

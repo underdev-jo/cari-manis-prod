@@ -22,52 +22,6 @@ a {
   box-sizing: border-box;
 }
 
-.cm-heading {
-  @apply leading-tight mb-2;
-  letter-spacing: -0.002em;
-
-  &.h2 {
-    @apply text-2xl font-bold;
-  }
-
-  &.h4 {
-    @apply text-base font-bold;
-  }
-}
-
-.heading-3 {
-  @apply font-bold text-xl;
-}
-
-.text-small {
-  @apply text-xs font-normal;
-  letter-spacing: -0.005em;
-}
-
-.text-medium {
-  @apply text-sm font-normal leading-5;
-}
-
-.text-large {
-  @apply text-base font-normal leading-6;
-}
-
-.text-small,
-.text-medium,
-.text-large {
-  &.regular {
-    @apply font-normal;
-  }
-
-  &.medium {
-    @apply font-medium;
-  }
-
-  &.bold {
-    @apply font-bold;
-  }
-}
-
 @keyframes running {
   0% {
     width: 30%;

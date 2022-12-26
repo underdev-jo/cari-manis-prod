@@ -6,6 +6,7 @@ const { default: IconSearch } = require("./IconSearch");
 const { default: Close } = require("./Close");
 const { default: Moon } = require("./Moon");
 const { default: Sun } = require("./Sun");
+const { default: InfoCircle } = require("./InfoCircle");
 
 export {
   ArrowLeftSolid,
@@ -16,4 +17,5 @@ export {
   Close,
   Moon,
   Sun,
+  InfoCircle,
 };

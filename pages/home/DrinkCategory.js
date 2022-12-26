@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Section from "../../components/Sections/Section";
 import { slugify } from "../../helpers/util";
 
-function ButtonCategory({ name, image, slug }) {
+function ButtonProductCategory({ name, image, slug }) {
   const { push } = useRouter();
   const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 h-auto flex justify-start items-center normal-case w-[48%] max-w-[186px] border-[#E2E8F5]`;
   const onClick = () => push(`/cari?kemasan=${slugify(slug)}`);
@@ -18,7 +18,7 @@ function ButtonCategory({ name, image, slug }) {
   );
 }
 
-const category = [
+export const drinkCategory = [
   {
     image: "/icons/bottle.svg",
     name: "Botol",
@@ -45,8 +45,8 @@ export default function DrinkCategory() {
   return (
     <Section title="Cari berdasarkan kemasan">
       <div className="flex flex-wrap justify-between">
-        {category.map((item) => (
-          <ButtonCategory key={item.name} {...item} />
+        {drinkCategory.map((item) => (
+          <ButtonProductCategory key={item.name} {...item} />
         ))}
       </div>
     </Section>

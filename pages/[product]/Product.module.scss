@@ -2,7 +2,7 @@
   @apply btn btn-ghost block h-auto w-[30%] max-w-[110px] bg-primary-content p-4 normal-case text-primary;
 
   .title {
-    @apply w-full text-sm font-bold;
+    @apply w-full text-small font-bold;
   }
 
   .info {
@@ -15,5 +15,26 @@
 
   .table {
     @apply table-fixed w-full border border-collapse border-[#E2E8F4];
+  }
+}
+
+.nutrition-row {
+  @apply flex items-center justify-between p-2 w-full border-b-[1px] border-b-carman-gray-9 text-xs hover:bg-carman-gray-9;
+
+  & > div {
+    @apply flex-1;
+  }
+
+  .value {
+    @apply font-bold text-right;
+  }
+}
+
+.nutrition-box {
+  @apply bg-base-100 border mx-6 px-4 rounded-lg my-4 overflow-y-hidden h-0 py-0 border-transparent;
+  transition: 0.15s ease-in-out;
+
+  &.open {
+    @apply h-auto py-4 border-primary;
   }
 }

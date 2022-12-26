@@ -6,6 +6,7 @@ import Badge from "components/Daisy/Badge";
 import { convertRupiah, getCookie } from "helpers/util";
 import Progress from "components/Daisy/Progress";
 import style from "./Product.module.scss";
+import { drinkCategory } from "pages/home/DrinkCategory";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="font-bold">
@@ -46,11 +47,12 @@ const ButtonServing = ({ setServing, serving, amount = 1 }) => {
 };
 
 export const ProductSummary = ({ name, packaging, harga }) => {
+  const catProduct = drinkCategory.find((i) => i.slug === packaging);
   return (
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">
-        <div className="text-large medium">{name}</div>
-        <div className="text-medium bold text-primary flex items-center cursor-pinter">
+        <div className="text-large font-medium">{name}</div>
+        <div className="text-medium font-bold text-primary flex items-center cursor-pinter">
           <label htmlFor="modal-price-info">{`Sekitar ${convertRupiah(
             harga
           )}`}</label>
@@ -60,11 +62,14 @@ export const ProductSummary = ({ name, packaging, harga }) => {
         </div>
       </div>
       <div>
-        <div className="mb-1 text-small">
-          <span className="font-medium">Jenis minuman:</span>{" "}
-        </div>
-        <div className="text-small">
-          <span className="font-medium">Kemasan:</span> {packaging}
+        <div className="badge badge-primary badge-outline">
+          <Image
+            alt={catProduct.name}
+            src={catProduct.image}
+            width={16}
+            height={16}
+          />{" "}
+          <div className="text-small">Minuman {catProduct.name}</div>
         </div>
       </div>
     </div>
@@ -120,7 +125,7 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
         amount={jumlah_sajian}
       />
       <div>
-        <div className="text-sm">
+        <div className="text-small">
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
           setara dengan <NutritionBadge type={type}>{percent}%</NutritionBadge>{" "}
           kebutuhan kalori harian kamu
@@ -154,7 +159,7 @@ const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
         amount={jumlah_sajian}
       />
       <div className="mb-2">
-        <div className="text-sm">
+        <div className="text-small">
           Bila mengonsumsi produk ini sebanyak <b>{serving} takaran saji</b>,
           setara dengan <NutritionBadge type={type}>{percent}%</NutritionBadge>{" "}
           kebutuhan gula harian.
@@ -188,14 +193,14 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
   return (
     <div className="p-2">
       <div>
-        <div className="text-sm mb-4">
+        <div className="text-small mb-4">
           Produk ini memiliki{" "}
           <NutritionBadge type={badgeType}>{jumlah_sajian}</NutritionBadge>{" "}
           jumlah sajian.
           <br />
           {tips}
         </div>
-        <table className="table-fixed w-full border border-collapse border-[#E2E8F4] text-sm">
+        <table className="table-fixed w-full border border-collapse border-[#E2E8F4] text-small">
           <tr>
             <td className="p-2 border font-medium text-center">Takaran Saji</td>
             <td className="p-2 border font-medium text-center">Kadar gula</td>
@@ -241,12 +246,7 @@ export function ProductNutrition({
         <Block title="Gula" info={`${gula}gr`} setPopup={click} />
         <Block title="Kalori" info={`${kalori}kkal`} setPopup={click} />
       </div>
-      <div
-        className={`bg-base-100 border mx-6 px-4 rounded-lg my-4 overflow-y-hidden ${
-          info ? "h-50 py-4 border-primary" : "h-0 py-0 border-transparent"
-        }`}
-        style={{ transition: "0.15s ease-in-out" }}
-      >
+      <div className={`${style["nutrition-box"]} ${info ? style.open : ""}`}>
         {info === "Gula" && <SugarInfo {...sugarData} />}
         {info === "Kalori" && <CalorieInfo {...calorieData} />}
         {info === "Netto" && <NettoInfo {...nettoData} />}
@@ -263,13 +263,10 @@ export function ProductInformation({
   jumlah_sajian,
   total_gula,
 }) {
-  const colClass = "text-small p-2.5 border border-[#E2E8F4]";
-  const valClass = "text-right text-small bold";
-
   const Row = ({ name, value }) => (
-    <div className="flex item-center justify-between p-2 w-full border-b-[1px] border-b-carman-gray-9 text-xs hover:bg-carman-gray-9">
-      <div className="flex-1">{name}</div>
-      <div className="flex-1 font-bold text-right">{value}</div>
+    <div className={style["nutrition-row"]}>
+      <div>{name}</div>
+      <div className={style.value}>{value}</div>
     </div>
   );
 
@@ -284,34 +281,6 @@ export function ProductInformation({
         <Row name="Jumlah Sajian" value={`${jumlah_sajian}ml`} />
         <Row name="Total kandungan gula" value={`${total_gula}ml`} />
       </div>
-      {/* <table className={style.table}>
-        <tbody>
-          <tr>
-            <td className={colClass}>Netto</td>
-            <td className={`${colClass} ${valClass}`}>{netto}ml</td>
-          </tr>
-          <tr>
-            <td className={colClass}>Kandungan Gula</td>
-            <td className={`${colClass} ${valClass}`}>{gula}gr</td>
-          </tr>
-          <tr>
-            <td className={colClass}>Takaran Saji</td>
-            <td className={`${colClass} ${valClass}`}>{takaran_saji}ml</td>
-          </tr>
-          <tr>
-            <td className={colClass}>Kalori</td>
-            <td className={`${colClass} ${valClass}`}>{kalori}kkal</td>
-          </tr>
-          <tr>
-            <td className={colClass}>Jumlah Sajian</td>
-            <td className={`${colClass} ${valClass}`}>{jumlah_sajian}</td>
-          </tr>
-          <tr>
-            <td className={colClass}>Total Kandungan Gula</td>
-            <td className={`${colClass} ${valClass}`}>{total_gula}gr</td>
-          </tr>
-        </tbody>
-      </table> */}
     </div>
   );
 }
@@ -319,8 +288,8 @@ export function ProductInformation({
 export function ProductSource({ source }) {
   return (
     <div className="my-6 px-6">
-      <h3 className="cm-heading h4">Sumber informasi</h3>
-      <div className="text-sm">{source}</div>
+      <h3 className="text-heading4">Sumber informasi</h3>
+      <div className="text-small">{source}</div>
     </div>
   );
 }
