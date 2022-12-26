@@ -47,7 +47,8 @@ const ButtonServing = ({ setServing, serving, amount = 1 }) => {
 };
 
 export const ProductSummary = ({ name, packaging, harga }) => {
-  const catProduct = drinkCategory.find((i) => i.slug === packaging);
+  let catProduct = { name: "", image: "" };
+  if (packaging) catProduct = drinkCategory.find((i) => i.slug === packaging);
   return (
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">
@@ -61,7 +62,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
           </div>
         </div>
       </div>
-      <div>
+      {catProduct.name && (
         <div className="badge badge-primary badge-outline">
           <Image
             alt={catProduct.name}
@@ -71,7 +72,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
           />{" "}
           <div className="text-small">Minuman {catProduct.name}</div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
