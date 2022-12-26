@@ -1,7 +1,6 @@
 import { CoffeeCup, CoffeeTime } from "public/icons";
 import { InputSearchDrink } from "components/Input/InputSearchDrink";
 import style from "./Cover.module.scss";
-import Link from "next/link";
 
 export default function HomepageCover() {
   return (
