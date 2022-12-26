@@ -1,5 +1,4 @@
 import Button from "components/Button/Button";
-import Footer from "components/footer";
 import ErrorLayout from "layouts/Error";
 import PageHead from "./PageHead";
 
@@ -19,7 +18,6 @@ export default function Err505() {
           <Button model="plain">Kembali ke Home</Button>
         </div>
       </ErrorLayout>
-      <Footer />
     </div>
   );
 }

@@ -6,3 +6,11 @@
 .textHead {
   width: 220px;
 }
+
+.asset {
+  @apply absolute right-0 top-[50%];
+
+  .two {
+    transform: translate(-35%, -35%);
+  }
+}

@@ -1,6 +1,7 @@
 import { CoffeeCup, CoffeeTime } from "public/icons";
 import { InputSearchDrink } from "components/Input/InputSearchDrink";
 import style from "./Cover.module.scss";
+import Link from "next/link";
 
 export default function HomepageCover() {
   return (
@@ -18,16 +19,10 @@ export default function HomepageCover() {
           </h3>
         </div>
       </div>
-      <div
-        className="absolute right-0"
-        style={{ top: "50%", transform: "translate(-55%, -85%)" }}
-      >
+      <div className={`${style.asset} ${style.one}`}>
         <CoffeeCup />
       </div>
-      <div
-        className="absolute right-0"
-        style={{ top: "50%", transform: "translate(-35%, -35%)" }}
-      >
+      <div className={`${style.asset} ${style.two}`}>
         <CoffeeTime />
       </div>
       <InputSearchDrink />
