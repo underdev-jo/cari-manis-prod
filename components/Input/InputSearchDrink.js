@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import InputSearch from "./InputSearch";
 
-export function InputSearchDrink({ value = "", allowEmpty }) {
+export default function InputSearchDrink({ value = "", size, allowEmpty }) {
   const { push, replace } = useRouter();
 
   const onSearch = (keyword = "") => {
@@ -15,5 +15,5 @@ export function InputSearchDrink({ value = "", allowEmpty }) {
     onSearch,
   };
 
-  return <InputSearch {...props} allowEmpty={allowEmpty} />;
+  return <InputSearch size={size} {...props} allowEmpty={allowEmpty} />;
 }

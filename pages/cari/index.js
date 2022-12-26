@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 import Alert from "components/Alert/Alert";
-import { InputSearchDrink } from "components/Input/InputSearchDrink";
 import Container from "components/Layout/Container";
 import Spinner from "components/Spinner/Spinner";
 import ErrorLayout from "layouts/Error";
-import {
-  get,
-  ilike,
-  ilike2,
-  ilike2lte,
-  ilikelte,
-  lte,
-} from "../../helpers/api";
-import { DrinkListView } from "../home/DrinkList";
+import { get, ilike, ilike2, ilike2lte, ilikelte, lte } from "helpers/api";
 import PageHead from "../PageHead";
-import FilterPackaging from "./FilterPackaging";
-import FilterSugar from "./FilterSugar";
+import { DrinkListView } from "pages/home/DrinkList";
+import ProductSearch from "layouts/ProductSearch";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -101,18 +92,12 @@ export default function SearchPage({ query }) {
   return (
     <>
       <PageHead title={`Cari: ${keyword || "manis"}`} />
-      <Container>
-        <div className="relative">
-          <div className="sticky top-[64.4px] bg-white p-2 z-50">
-            <InputSearchDrink value={keyword} allowEmpty />
-            <div className="-mx-2">
-              <FilterSugar query={query} />
-              <FilterPackaging query={query} />
-            </div>
-          </div>
+      <div className="relative min-h-[400px]">
+        <ProductSearch keyword={keyword} />
+        <Container>
           <div className="p-2">{render}</div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 }

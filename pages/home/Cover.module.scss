@@ -10,7 +10,11 @@
 .asset {
   @apply absolute right-0 top-[50%];
 
-  .two {
+  &.one {
+    transform: translate(-55%, -85%);
+  }
+
+  &.two {
     transform: translate(-35%, -35%);
   }
 }

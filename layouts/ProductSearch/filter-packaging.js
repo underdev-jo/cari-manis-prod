@@ -1,8 +1,9 @@
+import { Dropdown } from "components";
+import { get } from "helpers/api";
+import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
+
 import { useEffect, useState } from "react";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import { get } from "../../helpers/api";
-import { capitalize, slugify } from "../../helpers/util";
 
 export default function FilterPackaging({ query = { kemasan: "" } }) {
   const [packages, setPackages] = useState([]);
@@ -30,6 +31,7 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
 
   return (
     <Dropdown
+      size="xs"
       text={`Kemasan${filtering ? `: ${capitalize(filtering)}` : ""}`}
       onSelect={select}
       list={packages.map((item) => ({ key: item.id, value: item.name }))}

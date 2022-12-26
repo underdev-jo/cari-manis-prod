@@ -1,6 +1,6 @@
+import { Dropdown } from "components";
+import { slugify } from "helpers/util";
 import { useRouter } from "next/router";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import { slugify } from "../../helpers/util";
 
 export default function FilterSugar({ query = { gula: "" } }) {
   const { replace } = useRouter();
@@ -39,6 +39,7 @@ export default function FilterSugar({ query = { gula: "" } }) {
       selected={filtering}
       text={textDropdown}
       onSelect={onSelectSugar}
+      size="xs"
     />
   );
 }
