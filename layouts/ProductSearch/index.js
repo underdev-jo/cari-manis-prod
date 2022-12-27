@@ -17,9 +17,11 @@ export default function ProductSearch({ keyword, query }) {
   useEffect(() => {
     const fn = () => {
       const posY = parseInt(window.pageYOffset, 10);
-      if (posY >= lastScroll) setScrolldir("down");
-      else setScrolldir("up");
-      console.log({ posY, lastScroll });
+      if (posY > lastScroll) {
+        setScrolldir("down");
+        const el = document.querySelector(":focus");
+        if (el) el.blur();
+      } else setScrolldir("up");
       lastScroll = posY <= 0 ? 0 : posY;
     };
 

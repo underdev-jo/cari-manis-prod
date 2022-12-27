@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isFunction } from "../../helpers/util";
 
 import Button from "../Button/Button";
@@ -9,11 +9,16 @@ export default function Dropdown({
   text = "Dropdown",
   size = "sm",
   selected,
+  isOpen,
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(isOpen);
 
   const toggle = () => setOpen(!open);
   const close = () => setTimeout(setOpen, 150, false);
+
+  useEffect(() => {
+    setOpen(isOpen);
+  }, [isOpen]);
 
   const sizeClass = {
     xs: "btn-xs",
