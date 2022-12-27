@@ -1,5 +1,19 @@
 .product-search {
   @apply sticky top-[64.4px] bg-white z-50 py-4 px-4 pb-2 bg-[#F0F6FF];
+  transition: 0.25s ease-in-out;
+
+  &.up {
+    transform: translate(0, 0%);
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  &.down {
+    transform: translate(0, -100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -9;
+  }
 }
 
 .inner {
@@ -11,15 +25,15 @@
   transition: 0.15s ease-in-out;
 
   &.hide {
-    // transform: translate(0, -100%);
-    margin-top: -20px;
+    transform: translate(0, -100%);
+    // margin-top: -20px;
     opacity: 0;
     pointer-events: none;
   }
 
   &.shown {
-    // transform: translate(0, 0%);
-    margin-top: 0px;
+    transform: translate(0, 0%);
+    // margin-top: 0px;
     opacity: 1;
     pointer-events: inherit;
   }
