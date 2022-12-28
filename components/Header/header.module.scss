@@ -13,6 +13,18 @@
   }
 }
 
+.linkWrapper {
+  @apply block hover:bg-carman-gray-9 py-3 border-b border-b-carman-gray-9;
+}
+
+.linkBlock {
+  @apply w-full flex justify-end py-3 max-w-sm mx-auto px-3 sm:px-0;
+}
+
+.linkText {
+  @apply mx-2 text-[24px];
+}
+
 .portfolio-experiment {
   @apply text-sm;
   color: #203e86;

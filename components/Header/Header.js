@@ -69,15 +69,15 @@ const RightSide = ({ toggleBurger, onBurger }) => {
   );
 };
 
-const MenuView = ({ onBurger }) => {
+const MenuView = ({ onBurger, toggleBurger }) => {
   return (
     <div className={`${style["menu-list"]} ${onBurger ? style.show : ""}`}>
       <div className="pt-20 max-w-md mx-auto">
         {linkList.map((item) => (
           <Link key={item.url} href={item.url} passHref>
-            <a className="block hover:bg-carman-gray-9 py-3 border-b border-b-carman-gray-9">
-              <div className="w-full flex justify-end py-3 max-w-sm mx-auto px-3 sm:px-0">
-                <div className="mx-2 text-[24px]">{item.text}</div>
+            <a onClick={toggleBurger} className={style.linkWrapper}>
+              <div className={style.linkBlock}>
+                <div className={style.linkText}>{item.text}</div>
                 <div>
                   <Image
                     alt={item.text}
@@ -110,7 +110,7 @@ export default function Header({ admin = false, back }) {
 
   return (
     <>
-      <MenuView onBurger={onBurger} />
+      <MenuView onBurger={onBurger} toggleBurger={toggleBurger} />
       <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
         <div className="max-w-md mx-auto navbar justify-between">
           <LeftSide />

@@ -7,7 +7,7 @@ const linkList = [
   },
   {
     text: "Kalkulator Manis",
-    url: "/kalkulatir",
+    url: "/kalkulator",
     image: "/icons/fluent_calculator-20-regular.svg",
     status: "soon",
   },
