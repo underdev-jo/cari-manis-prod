@@ -15,7 +15,9 @@ module.exports = {
       ...tailwindColors,
       "carman-gray-1": "#333333",
       "carman-gray-2": "#222222",
+      "carman-gray-5": "#BBBBBB",
       "carman-gray-9": "#E2E8F4",
+      "carman-gray-10": "#f0f6ff",
     },
     fontSize: {
       xs: ["0.75rem", "1rem"],

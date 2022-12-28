@@ -1,13 +1,7 @@
+import { linkList } from "helpers/menuList";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./footer.module.scss";
-
-const quickLink = [
-  { text: "Cari Minuman", url: "/cari" },
-  { text: "Kalkulator Manis", url: "/hitung-manis", status: "soon" },
-  { text: "Tentang Pembuat", url: "/tentang-pembuat" },
-  { text: "Sumber Informasi", url: "/informasi" },
-];
 
 const LinkItem = (item) => {
   return (
@@ -66,9 +60,11 @@ export default function Footer() {
         <div className={style.action}>
           <div>
             <div className="font-bold mb-2">QUICK LINK</div>
-            {quickLink.map((item) => (
-              <LinkItem {...item} key={item.url} />
-            ))}
+            {linkList
+              .filter((i) => i.url !== "/")
+              .map((item) => (
+                <LinkItem {...item} key={item.url} />
+              ))}
           </div>
           <div>
             <div className="font-bold mb-2">SARAN & FEEDBACK</div>

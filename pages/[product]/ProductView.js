@@ -201,7 +201,7 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
           <br />
           {tips}
         </div>
-        <table className="table-fixed w-full border border-collapse border-[#E2E8F4] text-small">
+        <table className="table-fixed w-full border border-collapse border-carman-gray-9 text-small">
           <tr>
             <td className="p-2 border font-medium text-center">Takaran Saji</td>
             <td className="p-2 border font-medium text-center">Kadar gula</td>

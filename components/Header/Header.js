@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { runFunction } from "helpers/util";
-import LinkWrapper from "components/LinkWrapper/LinkWrapper";
 import { Burger, Close } from "public/icons";
+import { LinkWrapper } from "components";
+import { useState } from "react";
+import style from "./header.module.scss";
+import { linkList } from "helpers/menuList";
+import Link from "next/link";
 
-export default function Header({ admin = false, back }) {
+const LeftSide = ({ back }) => {
   const router = useRouter();
   const { pathname: path, asPath, back: backRouter } = router;
   const defaultBack = () => backRouter();
@@ -12,49 +16,107 @@ export default function Header({ admin = false, back }) {
   const notHome =
     path !== "/_adminLogin" && path !== "/_dashboard" && path !== "/";
 
+  let backButton = "";
+  if (notHome)
+    backButton = (
+      <button className="btn btn-square btn-ghost text-white" onClick={doBack}>
+        <Image
+          src="/icons/arrow-left-solid.svg"
+          alt="Back"
+          title="Back"
+          width={26}
+          height={30}
+        />
+      </button>
+    );
+
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
-      <div className="max-w-md mx-auto navbar justify-between">
-        <div className="flex flex-none">
-          {notHome && (
-            <button
-              className="btn btn-square btn-ghost text-white"
-              onClick={doBack}
-            >
-              <Image
-                src="/icons/arrow-left-solid.svg"
-                alt="B"
-                title="Back"
-                width={26}
-                height={30}
-              />
-            </button>
-          )}
-          <LinkWrapper href="/">
-            <button className="btn btn-ghost">
-              <Image
-                src="/legal/logo-carimanis.svg"
-                alt="Logo"
-                title="Logo cari manis"
-                width={68}
-                height={36}
-                priority
-              />
-            </button>
-          </LinkWrapper>
+    <div className="flex flex-none">
+      {backButton}
+      <LinkWrapper href="/">
+        <button className="btn btn-ghost">
+          <Image
+            src="/legal/logo-carimanis.svg"
+            alt="Logo"
+            title="Logo cari manis"
+            width={68}
+            height={36}
+            priority
+          />
+        </button>
+      </LinkWrapper>
+    </div>
+  );
+};
+
+const RightSide = ({ toggleBurger, onBurger }) => {
+  return (
+    <div className="flex-none text-white">
+      <button
+        className={`btn btn-square btn-ghost swap swap-rotate ${
+          onBurger ? "swap-active" : ""
+        }`}
+        onClick={toggleBurger}
+      >
+        <div className="swap-off fill-current text-white">
+          <Burger />
         </div>
-        <div className="flex-none text-white">
-          <label className="btn btn-square btn-ghost swap swap-rotate">
-            <input type="checkbox" />
-            <div className="swap-off fill-current text-white">
-              <Burger />
-            </div>
-            <div className="swap-on fill-current text-white">
-              <Close />
-            </div>
-          </label>
+        <div className="swap-on fill-current text-white">
+          <Close />
+        </div>
+      </button>
+    </div>
+  );
+};
+
+const MenuView = ({ onBurger }) => {
+  return (
+    <div className={`${style["menu-list"]} ${onBurger ? style.show : ""}`}>
+      <div className="pt-20 max-w-md mx-auto">
+        {linkList.map((item) => (
+          <Link key={item.url} href={item.url} passHref>
+            <a className="block hover:bg-carman-gray-9 py-3 border-b border-b-carman-gray-9">
+              <div className="w-full flex justify-end py-3 max-w-sm mx-auto px-3 sm:px-0">
+                <div className="mx-2 text-[24px]">{item.text}</div>
+                <div>
+                  <Image
+                    alt={item.text}
+                    src={item.image}
+                    width={32}
+                    height={32}
+                  />
+                </div>
+              </div>
+            </a>
+          </Link>
+        ))}
+      </div>
+
+      <div className={style.devLabel}>
+        <div className={style["portfolio-experiment"]}>
+          Develop by underdev/
+          <span className={style["experiment-title"]}>underline</span> team ©
+          2022
         </div>
       </div>
-    </header>
+    </div>
+  );
+};
+
+export default function Header({ admin = false, back }) {
+  const [onBurger, setBurger] = useState(false);
+
+  const toggleBurger = () => setBurger(!onBurger);
+
+  return (
+    <>
+      <MenuView onBurger={onBurger} />
+      <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
+        <div className="max-w-md mx-auto navbar justify-between">
+          <LeftSide />
+          <RightSide onBurger={onBurger} toggleBurger={toggleBurger} />
+        </div>
+      </header>
+    </>
   );
 }
