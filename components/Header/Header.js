@@ -18,16 +18,17 @@ const LeftSide = ({ back }) => {
   let backButton = "";
   if (notHome)
     backButton = (
-      <Image
-        src="/icons/arrow-left-solid.svg"
-        alt="Back"
-        title="Back"
-        width={26}
-        height={30}
-        className="btn btn-square btn-ghost text-white"
-        onClick={doBack}
-        priority
-      />
+      <button className="btn btn-square btn-ghost text-white">
+        <Image
+          src="/icons/arrow-left-solid.svg"
+          alt="Back"
+          title="Back"
+          width={26}
+          height={30}
+          onClick={doBack}
+          priority
+        />
+      </button>
     );
 
   return (

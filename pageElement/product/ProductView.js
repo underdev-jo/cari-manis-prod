@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Container from "components/Layout/Container";
 import InfoSymbol from "components/Action/InfoSymbol";
 import Badge from "components/Daisy/Badge";
 import { convertRupiah, getCookie } from "helpers/util";
