@@ -57,7 +57,13 @@ export default function SearchPage({ query }) {
       <ErrorLayout
         title="Yah, yang kamu cari gaada :("
         imagePath="/faces/sad-face.svg"
-      />
+      >
+        <div>
+          Coba cari produk manis lain kayak kopi, susu, yogurt atau yang lain
+          deh. Atau cobain cari berdasarkan kemasan minuman manis favorit
+          gimana?
+        </div>
+      </ErrorLayout>
     );
   else if (!loading && result.error)
     render = <Alert type="error" message={result.error?.message || "Error!"} />;
