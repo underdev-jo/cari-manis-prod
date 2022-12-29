@@ -8,6 +8,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
+    "./pageElement/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
@@ -64,7 +65,6 @@ module.exports = {
           accent: "#EB5757",
         },
       },
-      "winter",
     ],
   },
 };

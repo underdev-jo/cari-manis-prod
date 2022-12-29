@@ -3,7 +3,7 @@ import InfoSymbol from "../Action/InfoSymbol";
 export default function ModalPriceInfo() {
   const modalName = "modal-price-info";
   return (
-    <div>
+    <>
       <input type="checkbox" id={modalName} className="modal-toggle" />
       <label htmlFor={modalName} className="modal cursor-pointer">
         <label className="modal-box relative bg-white" htmlFor="">
@@ -18,6 +18,6 @@ export default function ModalPriceInfo() {
           </p>
         </label>
       </label>
-    </div>
+    </>
   );
 }
