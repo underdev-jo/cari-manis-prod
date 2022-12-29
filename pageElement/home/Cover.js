@@ -3,7 +3,7 @@ import { CoffeeCup, CoffeeTime } from "public/icons";
 import style from "./Cover.module.scss";
 
 const Cover = () => (
-  <div className={`${style.cover} bg-primary-content relative`}>
+  <div className={style.cover}>
     <div className="max-w-sm mx-auto mb-10">
       <div className={style.textHead}>
         <h2 className="text-heading2">

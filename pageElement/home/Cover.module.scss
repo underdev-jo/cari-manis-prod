@@ -1,6 +1,6 @@
 .cover {
-  position: relative;
   padding: 80px 24px 32px;
+  @apply relative bg-primary-content;
 }
 
 .textHead {

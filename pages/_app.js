@@ -7,12 +7,12 @@ import ModalPriceInfo from "components/Modal/PriceInfo";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div>
       <Component {...pageProps} />
       <ModalPriceInfo />
       <Footer />
       <Header />
-    </>
+    </div>
   );
 }
 
