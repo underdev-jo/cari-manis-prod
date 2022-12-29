@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { runFunction } from "helpers/util";
 import { Burger, Close } from "public/icons";
-import LinkWrapper from "components/LinkWrapper/LinkWrapper";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
@@ -34,7 +33,7 @@ const LeftSide = ({ back }) => {
   return (
     <div className="flex flex-none">
       {backButton}
-      <LinkWrapper href="/">
+      <Link href="/">
         <button className="btn btn-ghost">
           <Image
             src="/legal/logo-carimanis.svg"
@@ -45,7 +44,7 @@ const LeftSide = ({ back }) => {
             priority
           />
         </button>
-      </LinkWrapper>
+      </Link>
     </div>
   );
 };
