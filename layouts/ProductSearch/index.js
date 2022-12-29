@@ -41,8 +41,8 @@ export default function ProductSearch({ keyword, query }) {
           <InputSearchDrink size="small" value={keyword} allowEmpty />
         </div>
         <div className={`${style["filter-group"]} ${classUp}`}>
-          <FilterSugar query={query} />
-          <FilterPackaging query={query} />
+          <FilterSugar />
+          <FilterPackaging />
         </div>
       </div>
     </div>

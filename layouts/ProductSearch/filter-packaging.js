@@ -2,13 +2,17 @@ import Dropdown from "components/Dropdown";
 import { get } from "helpers/api";
 import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
-
 import { useEffect, useState } from "react";
 
-export default function FilterPackaging({ query = { kemasan: "" } }) {
+export async function getServerSideProps(context) {
+  const { query } = context;
+  return { props: { query } };
+}
+
+export default function FilterPackaging({ query }) {
   const [packages, setPackages] = useState([]);
 
-  const { replace } = useRouter();
+  const { replace, query: queryParam } = useRouter();
   const filtering = query?.kemasan || "";
 
   useEffect(() => {
@@ -22,7 +26,7 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
 
   const select = ({ value = "" }) => {
     const kemasan = value !== "Semua Jenis" ? slugify(value || "") : "";
-    let newQuery = { ...query, kemasan };
+    let newQuery = { ...queryParam, kemasan };
     const newParams = new URLSearchParams(newQuery).toString();
     replace(`/cari?${newParams}`);
   };
@@ -30,7 +34,7 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
   return (
     <Dropdown
       size="xs"
-      text={`Kemasan${filtering ? `: ${capitalize(filtering)}` : ""}`}
+      text={`Kemasan${filtering ? `: ${capitalize(filtering)}` : ""} ⯆`}
       onSelect={select}
       list={packages.map((item) => ({ key: item.id, value: item.name }))}
       selected={
