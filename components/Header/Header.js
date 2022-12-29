@@ -1,16 +1,16 @@
+import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { runFunction } from "helpers/util";
 import { Burger, Close } from "public/icons";
-import { LinkWrapper } from "components";
+import LinkWrapper from "components/LinkWrapper/LinkWrapper";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
-import Link from "next/link";
 
 const LeftSide = ({ back }) => {
   const router = useRouter();
-  const { pathname: path, asPath, back: backRouter } = router;
+  const { pathname: path, back: backRouter } = router;
   const defaultBack = () => backRouter();
   const doBack = () => runFunction(back, defaultBack);
   const notHome =
@@ -19,15 +19,16 @@ const LeftSide = ({ back }) => {
   let backButton = "";
   if (notHome)
     backButton = (
-      <button className="btn btn-square btn-ghost text-white" onClick={doBack}>
-        <Image
-          src="/icons/arrow-left-solid.svg"
-          alt="Back"
-          title="Back"
-          width={26}
-          height={30}
-        />
-      </button>
+      <Image
+        src="/icons/arrow-left-solid.svg"
+        alt="Back"
+        title="Back"
+        width={26}
+        height={30}
+        className="btn btn-square btn-ghost text-white"
+        onClick={doBack}
+        priority
+      />
     );
 
   return (
@@ -70,21 +71,22 @@ const RightSide = ({ toggleBurger, onBurger }) => {
 };
 
 const MenuView = ({ onBurger, toggleBurger }) => {
-  const badgeSoon = (
-    <div className="relative">
-      <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
-      <div className="relative badge badge-lg badge-accent">soon</div>
-    </div>
-  );
   return (
     <div className={`${style["menu-list"]} ${onBurger ? style.show : ""}`}>
       <div className="pt-20 max-w-md mx-auto">
         {linkList.map((item) => (
           <Link key={item.url} href={item.url} passHref>
-            <a onClick={toggleBurger} className={style.linkWrapper}>
+            <div onClick={toggleBurger} className={style.linkWrapper}>
               <div className={style.linkBlock}>
                 <div className={style.linkText}>{item.text}</div>
-                {item.status === "soon" && badgeSoon}
+                {item.status === "soon" && (
+                  <div className="relative">
+                    <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
+                    <div className="relative badge badge-lg badge-accent">
+                      soon
+                    </div>
+                  </div>
+                )}
                 <div>
                   <Image
                     alt={item.text}
@@ -94,7 +96,7 @@ const MenuView = ({ onBurger, toggleBurger }) => {
                   />
                 </div>
               </div>
-            </a>
+            </div>
           </Link>
         ))}
       </div>
@@ -121,14 +123,14 @@ export default function Header({ admin = false, back }) {
   }, [path]);
 
   return (
-    <>
+    <header>
       <MenuView onBurger={onBurger} toggleBurger={toggleBurger} />
-      <header className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
+      <div className="fixed top-0 right-0 left-0 z-50 bg-primary text-white">
         <div className="max-w-md mx-auto navbar justify-between">
           <LeftSide />
           <RightSide onBurger={onBurger} toggleBurger={toggleBurger} />
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }

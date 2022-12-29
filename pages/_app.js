@@ -6,7 +6,15 @@ import Footer from "components/footer";
 import ModalPriceInfo from "components/Modal/PriceInfo";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <main>
+        <Component {...pageProps} />
+      </main>
+      <Footer />
+      <Header />
+    </>
+  );
 }
 
 export default MyApp;
