@@ -1,4 +1,4 @@
-import Button from "components/Button/Button";
+import Button from "components/Button";
 import ErrorLayout from "layouts/Error";
 import PageHead from "./PageHead";
 

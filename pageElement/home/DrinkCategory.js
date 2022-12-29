@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Section } from "components";
 import { slugify } from "helpers/util";
 import drinkCategory from "helpers/drinkCategory";
+import Section from "components/Section";
 
 function ButtonProductCategory({ name, image, slug }) {
   const { push } = useRouter();

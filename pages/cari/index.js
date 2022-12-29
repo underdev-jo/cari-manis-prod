@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import ErrorLayout from "layouts/Error";
 import { get, ilike, ilike2, ilike2lte, ilikelte, lte } from "helpers/api";
 import ProductSearch from "layouts/ProductSearch";
-import { Alert, Container, Spinner } from "components";
 import PageHead from "pages/PageHead";
-import { DrinkListView } from "layouts/Product";
+import Alert from "components/Alert";
+import Spinner from "components/Spinner";
+import { DrinkListView } from "layouts/Product/DrinkList";
 
 export async function getServerSideProps(context) {
   const { query } = context;

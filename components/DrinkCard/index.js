@@ -1,18 +1,18 @@
+import { slugify } from "helpers/util";
 import Image from "next/image";
 import Link from "next/link";
-import { slugify } from "../../helpers/util";
 
-export default function DrinkCard({
+const DrinkCard = ({
   packaging = "Minuman Kaleng",
   name = "Nescafe,Coffee Drink Thai Milk Coffee 220Ml Klg dan sebagainya",
   id = 1,
   image = "/sample-product-image.jpg",
   sugar,
   price,
-}) {
+}) => {
   const productUrl = `/${slugify(name)}/${id}`;
   return (
-    <Link href={productUrl}>
+    <Link href={productUrl} passHref>
       <div className="btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
         <Image
           src={image}
@@ -29,7 +29,7 @@ export default function DrinkCard({
           >
             {packaging}
           </div>
-          <Link href={productUrl} title={name}>
+          <Link href={productUrl} title={name} passHref>
             <div className="text-small medium line-clamp-2" title={name}>
               {name}
             </div>
@@ -38,4 +38,6 @@ export default function DrinkCard({
       </div>
     </Link>
   );
-}
+};
+
+export default DrinkCard;

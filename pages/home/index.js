@@ -1,5 +1,4 @@
-import { Container } from "components";
-import { DrinkList } from "layouts/Product";
+import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
 

@@ -71,3 +71,6 @@ export function diffDate(date) {
 export function capitalize(string = "") {
   return `${`${string}`.charAt(0).toUpperCase()}${`${string}`.slice(1)}`;
 }
+
+const helper = { capitalize, diffDate, slugify };
+export default helper;

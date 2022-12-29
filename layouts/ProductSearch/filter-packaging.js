@@ -1,4 +1,4 @@
-import { Dropdown } from "components";
+import Dropdown from "components/Dropdown";
 import { get } from "helpers/api";
 import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";

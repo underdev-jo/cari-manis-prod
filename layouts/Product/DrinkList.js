@@ -1,4 +1,5 @@
-import { DrinkCard, Section } from "components";
+import Section from "components/Section";
+import DrinkCard from "components/DrinkCard";
 
 export const ThumbnailWrapper = ({ children }) => {
   return (
@@ -16,10 +17,10 @@ export const DrinkListView = ({ list }) => (
   </ThumbnailWrapper>
 );
 
-export default function DrinkList({ drinkList = [] }) {
-  return (
-    <Section title="Daftar produk minuman">
-      <DrinkListView list={drinkList} />
-    </Section>
-  );
-}
+const DrinkList = ({ drinkList = [] }) => (
+  <Section title="Daftar produk minuman">
+    <DrinkListView list={drinkList} />
+  </Section>
+);
+
+export default DrinkList;
