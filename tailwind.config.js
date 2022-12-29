@@ -58,13 +58,6 @@ module.exports = {
   },
   plugins: [require("daisyui"), require("@tailwindcss/line-clamp")],
   daisyui: {
-    themes: [
-      {
-        winter: {
-          ...require("daisyui/src/colors/themes")["[data-theme=winter]"],
-          accent: "#EB5757",
-        },
-      },
-    ],
+    themes: ["winter"],
   },
 };
