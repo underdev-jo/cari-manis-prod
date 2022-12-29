@@ -1,5 +1,5 @@
 import Dropdown from "components/Dropdown";
-import drinkSugarLevel from "helpers/drinkSugarLevel";
+import { selectorSugar } from "helpers/drink-selector";
 import { slugify } from "helpers/util";
 import { useRouter } from "next/router";
 
@@ -21,12 +21,12 @@ export default function FilterSugar({ query = { gula: "" } }) {
   let textDropdown = "Kadar Gula";
   if (filtering)
     textDropdown = `Kadar Gula: ${
-      drinkSugarLevel.find((i) => i.key === filtering).value
+      selectorSugar.find((i) => i.key === filtering).value
     }`;
 
   return (
     <Dropdown
-      list={drinkSugarLevel}
+      list={selectorSugar}
       selected={filtering}
       text={textDropdown}
       onSelect={onSelectSugar}
