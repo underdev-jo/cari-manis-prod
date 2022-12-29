@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ErrorLayout from "layouts/Error";
-import { get, ilike, ilike2, ilike2lte, ilikelte, lte } from "helpers/api";
+import { get } from "helpers/api";
 import ProductSearch from "layouts/ProductSearch";
 import PageHead from "pages/PageHead";
 import Alert from "components/Alert";
 import Spinner from "components/Spinner";
 import { DrinkListView } from "layouts/Product/DrinkList";
+import { createClient } from "@supabase/supabase-js";
+import { supaKey, supaUrl } from "helpers/util";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -18,50 +20,22 @@ export default function SearchPage({ query }) {
   const [keyword, setKeyword] = useState();
 
   useEffect(() => {
-    const search = async (name, kemasan, gula) => {
+    const search = async (name = "", kemasan = "", gula = 0) => {
+      console.log("Search: ", { name, kemasan, gula });
       setLoading(true);
 
-      let api = get;
+      let api = get("minuman");
 
-      let colName = { column: "name", value: `%${name}%` };
-      const colPackage = { column: "packaging", value: `%${kemasan}%` };
-      const colGula = { column: "gula", value: gula };
+      const clientAPI = createClient(supaUrl(), supaKey());
+      if (name || kemasan || gula)
+        api = clientAPI
+          .from("minuman")
+          .select("*")
+          .ilike("name", `%${name}%`)
+          .ilike("packaging", `%${kemasan}%`)
+          .lte("gula", gula);
 
-      let col1 = false;
-      let col2 = false;
-      let col3 = false;
-
-      if (name && kemasan) {
-        api = ilike2;
-        col1 = colName;
-        col2 = colPackage;
-        if (gula) {
-          api = gula > 50 ? i : ilike2lte;
-          col3 = colGula;
-        }
-      } else if (!name && kemasan) {
-        api = ilike;
-        col1 = colPackage;
-        if (gula) {
-          api = gula > 50 ? i : ilikelte;
-          col2 = colGula;
-        }
-      } else if (name && !kemasan) {
-        api = ilike;
-        col1 = colName;
-        if (gula) {
-          api = gula > 50 ? i : ilikelte;
-          col2 = colGula;
-        }
-      } else {
-        api = get;
-        if (gula) {
-          api = gula > 50 ? i : lte;
-          col1 = colGula;
-        }
-      }
-
-      const res = await api("minuman", col1, col2, col3);
+      const res = await api;
 
       setTimeout(() => {
         setRes(res);
@@ -69,9 +43,10 @@ export default function SearchPage({ query }) {
       }, 1000);
     };
 
-    const keys = query?.kemasan || query.q;
+    const keys = Object.keys(query).length > 0;
+    const { gula = 0, kemasan = "", q = "" } = query;
     setKeyword(query.q || "");
-    if (keys) search(query.q, query?.kemasan, query.gula);
+    if (keys) search(q || "", kemasan || "", gula || 999);
     else search("");
   }, [query]);
 
