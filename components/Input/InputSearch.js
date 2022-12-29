@@ -32,7 +32,7 @@ export default function InputSearch({
     <div className={style["input-search-group"]}>
       <form onSubmit={clickSearch}>
         <input
-          className={`${style["input-search"]} ${style[size]}`}
+          className={`${style["input-search"]} ${size && style[size]}`}
           placeholder={placeholder}
           type="text"
           onChange={onChange}

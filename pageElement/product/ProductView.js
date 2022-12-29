@@ -5,7 +5,7 @@ import Badge from "components/Daisy/Badge";
 import { convertRupiah, getCookie } from "helpers/util";
 import Progress from "components/Daisy/Progress";
 import style from "./Product.module.scss";
-import drinkCategory from "helpers/drinkCategory";
+import { selectorPackaging } from "helpers/drink-selector";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="font-bold">
@@ -47,7 +47,8 @@ const ButtonServing = ({ setServing, serving, amount = 1 }) => {
 
 export const ProductSummary = ({ name, packaging, harga }) => {
   let catProduct = { name: "", image: "" };
-  if (packaging) catProduct = drinkCategory.find((i) => i.slug === packaging);
+  if (packaging)
+    catProduct = selectorPackaging.find((i) => i.slug === packaging);
   return (
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">

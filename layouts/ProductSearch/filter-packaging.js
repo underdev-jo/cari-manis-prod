@@ -27,8 +27,6 @@ export default function FilterPackaging({ query = { kemasan: "" } }) {
     replace(`/cari?${newParams}`);
   };
 
-  // console.log(packages.find((item) => filtering === item.name));
-
   return (
     <Dropdown
       size="xs"

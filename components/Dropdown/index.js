@@ -9,6 +9,9 @@ export default function Dropdown({
   size = "sm",
   selected,
   isOpen,
+  children,
+  className = "",
+  color = "primary",
 }) {
   const [open, setOpen] = useState(isOpen);
 
@@ -26,12 +29,12 @@ export default function Dropdown({
     lg: "btn-lg",
   };
 
-  const btnClass = `${sizeClass[size]} normal-case`;
+  const btnClass = `${sizeClass[size]} normal-case ${className} btn-${color}`;
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block z-50">
       <Button onClick={toggle} onBlur={close} outline className={btnClass}>
-        {text}
+        {children || text}
       </Button>
       {open && (
         <div className="absolute top-[100%] left-0 p-2 shadow bg-base-100 rounded-box w-52">
@@ -50,7 +53,7 @@ export default function Dropdown({
                 }}
                 disabled={isSelect}
                 model="ghost"
-                className="block w-full text-left m-0 btn-sm"
+                className="block w-full text-left m-0 btn-sm mb-2 last:mb-[0px]"
               >
                 {display}
               </Button>
