@@ -70,6 +70,12 @@ const RightSide = ({ toggleBurger, onBurger }) => {
 };
 
 const MenuView = ({ onBurger, toggleBurger }) => {
+  const badgeSoon = (
+    <div className="relative">
+      <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
+      <div className="relative badge badge-lg badge-accent">soon</div>
+    </div>
+  );
   return (
     <div className={`${style["menu-list"]} ${onBurger ? style.show : ""}`}>
       <div className="pt-20 max-w-md mx-auto">
@@ -78,6 +84,7 @@ const MenuView = ({ onBurger, toggleBurger }) => {
             <a onClick={toggleBurger} className={style.linkWrapper}>
               <div className={style.linkBlock}>
                 <div className={style.linkText}>{item.text}</div>
+                {item.status === "soon" && badgeSoon}
                 <div>
                   <Image
                     alt={item.text}
@@ -94,7 +101,7 @@ const MenuView = ({ onBurger, toggleBurger }) => {
 
       <div className={style.devLabel}>
         <div className={style["portfolio-experiment"]}>
-          Develop by underdev/
+          Develop by{" "}
           <span className={style["experiment-title"]}>underline</span> team ©
           2022
         </div>

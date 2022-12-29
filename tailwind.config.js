@@ -18,6 +18,7 @@ module.exports = {
       "carman-gray-5": "#BBBBBB",
       "carman-gray-9": "#E2E8F4",
       "carman-gray-10": "#f0f6ff",
+      "carman-red-1": "#EB5757",
     },
     fontSize: {
       xs: ["0.75rem", "1rem"],
@@ -56,6 +57,14 @@ module.exports = {
   },
   plugins: [require("daisyui"), require("@tailwindcss/line-clamp")],
   daisyui: {
-    themes: ["winter"],
+    themes: [
+      {
+        winter: {
+          ...require("daisyui/src/colors/themes")["[data-theme=winter]"],
+          accent: "#EB5757",
+        },
+      },
+      "winter",
+    ],
   },
 };

@@ -1,7 +1,6 @@
+import { Button } from "components";
+import { isFunction } from "helpers/util";
 import { useEffect, useState } from "react";
-import { isFunction } from "../../helpers/util";
-
-import Button from "../Button/Button";
 
 export default function Dropdown({
   list = [],

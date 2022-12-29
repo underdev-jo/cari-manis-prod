@@ -2,11 +2,10 @@ import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
-import { setCookie, supaKey, supaUrl } from "../../helpers/util";
-import Alert from "../../components/Alert/Alert";
-import PageHead from "../PageHead";
+import { Input } from "components/Input";
+import { Alert, Button } from "components";
+import { setCookie, supaKey, supaUrl } from "helpers/util";
+import PageHead from "pages/PageHead";
 
 export default function FormLogin() {
   const [loading, setLoading] = useState(false);

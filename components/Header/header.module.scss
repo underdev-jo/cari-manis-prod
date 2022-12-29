@@ -2,6 +2,7 @@
   @apply fixed top-0 left-0 right-0 pointer-events-none opacity-0 bg-carman-gray-10 w-screen h-screen z-50;
   transition: 0.15s ease-in-out;
   transform: translate(0, -100%);
+  // height: calc(100vh - 64px);
 
   &.show {
     @apply opacity-100 pointer-events-auto;
@@ -9,7 +10,7 @@
   }
 
   .devLabel {
-    @apply absolute bottom-0 right-0 left-0 text-carman-gray-5 text-center pb-4;
+    @apply absolute bottom-[64px] right-0 left-0 text-carman-gray-5 text-center pb-4;
   }
 }
 
@@ -18,7 +19,7 @@
 }
 
 .linkBlock {
-  @apply w-full flex justify-end py-3 max-w-sm mx-auto px-3 sm:px-0;
+  @apply w-full flex justify-end items-center py-3 max-w-sm mx-auto px-3 sm:px-0;
 }
 
 .linkText {

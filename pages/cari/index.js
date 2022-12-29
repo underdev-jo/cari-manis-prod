@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import Alert from "components/Alert/Alert";
-import Container from "components/Layout/Container";
-import Spinner from "components/Spinner/Spinner";
 import ErrorLayout from "layouts/Error";
 import { get, ilike, ilike2, ilike2lte, ilikelte, lte } from "helpers/api";
-import PageHead from "../PageHead";
 import { DrinkListView } from "pages/home/DrinkList";
 import ProductSearch from "layouts/ProductSearch";
+import { Alert, Container, Spinner } from "components";
+import PageHead from "pages/PageHead";
 
 export async function getServerSideProps(context) {
   const { query } = context;
