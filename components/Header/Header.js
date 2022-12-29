@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { runFunction } from "helpers/util";
 import { Burger, Close } from "public/icons";
 import { LinkWrapper } from "components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
 import Link from "next/link";
@@ -112,8 +112,13 @@ const MenuView = ({ onBurger, toggleBurger }) => {
 
 export default function Header({ admin = false, back }) {
   const [onBurger, setBurger] = useState(false);
+  const { pathname: path } = useRouter();
 
   const toggleBurger = () => setBurger(!onBurger);
+
+  useEffect(() => {
+    setBurger(false);
+  }, [path]);
 
   return (
     <>

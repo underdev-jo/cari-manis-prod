@@ -1,8 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
-import ProductView from "./ProductView";
-// import ProductComment from "./ProductComment";
 import { eq, getCount } from "helpers/api";
 import { supaKey, supaUrl } from "helpers/util";
+import { ProductView } from "pageElement/product";
 import PageHead from "pages/PageHead";
 
 export async function getServerSideProps({ params }) {

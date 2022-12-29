@@ -6,7 +6,7 @@ import Badge from "components/Daisy/Badge";
 import { convertRupiah, getCookie } from "helpers/util";
 import Progress from "components/Daisy/Progress";
 import style from "./Product.module.scss";
-import { drinkCategory } from "pageElement/home/DrinkCategory";
+import drinkCategory from "helpers/drinkCategory";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="font-bold">
@@ -54,12 +54,15 @@ export const ProductSummary = ({ name, packaging, harga }) => {
       <div className="mb-4">
         <div className="text-large font-medium">{name}</div>
         <div className="text-medium font-bold text-primary flex items-center cursor-pinter">
-          <label htmlFor="modal-price-info">{`Sekitar ${convertRupiah(
-            harga
-          )}`}</label>
-          <div className="ml-2">
-            <InfoSymbol />
-          </div>
+          <label
+            htmlFor="modal-price-info"
+            className="flex items-center cursor-pointer"
+          >
+            {`Sekitar ${convertRupiah(harga)}`}
+            <div className="ml-2 relative">
+              <InfoSymbol />
+            </div>
+          </label>
         </div>
       </div>
       {catProduct.name && (

@@ -3,7 +3,7 @@
 }
 
 .input-search {
-  @apply rounded-lg py-3 px-4 border-2 input input-bordered w-full bg-transparent focus:border-primary;
+  @apply rounded-lg py-3 px-4 border-2 input input-bordered w-full bg-transparent focus:border-primary h-[44px] text-medium font-normal;
 }
 
 .input-search.small {
