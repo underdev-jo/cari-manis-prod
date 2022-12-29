@@ -92,9 +92,9 @@ export default function SearchPage({ query }) {
       <PageHead title={`Cari: ${keyword || "manis"}`} />
       <div className="relative min-h-[400px]">
         <ProductSearch keyword={keyword} />
-        <Container>
+        <div className="container">
           <div className="p-2">{render}</div>
-        </Container>
+        </div>
       </div>
     </>
   );

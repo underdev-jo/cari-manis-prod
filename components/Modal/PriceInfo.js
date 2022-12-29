@@ -1,4 +1,4 @@
-import InfoSymbol from "../Action/InfoSymbol";
+import InfoSymbol from "components/Action/InfoSymbol";
 
 export default function ModalPriceInfo() {
   const modalName = "modal-price-info";

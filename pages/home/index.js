@@ -7,12 +7,12 @@ export default function Home({ drinkList }) {
   return (
     <>
       <PageHead title="Cari Manis" />
-      <Container>
+      <div className="container">
         <Cover />
         <DrinkCategory />
         <SweetInfo />
         <DrinkList drinkList={drinkList} />
-      </Container>
+      </div>
     </>
   );
 }

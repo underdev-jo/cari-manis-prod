@@ -37,3 +37,7 @@ a {
 .content-wrapper {
   @apply max-w-md mx-auto p-2;
 }
+
+.container {
+  @apply mx-auto max-w-md;
+}

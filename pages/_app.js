@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
       <main>
         <Component {...pageProps} />
       </main>
+      <ModalPriceInfo />
       <Footer />
       <Header />
     </>

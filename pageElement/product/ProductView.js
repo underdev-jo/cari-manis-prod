@@ -300,13 +300,13 @@ export function ProductSource({ source }) {
 
 export default function ProductView({ product }) {
   return (
-    <Container>
+    <div className="container">
       <ProductImage {...product} />
       <ProductSummary {...product} />
       <ProductNutrition {...product} />
       <ProductInformation {...product} />
       <ProductSource {...product} />
       <div className="h-20" />
-    </Container>
+    </div>
   );
 }
