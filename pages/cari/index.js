@@ -4,7 +4,7 @@ import { get, ilike, ilike2, ilike2lte, ilikelte, lte } from "helpers/api";
 import ProductSearch from "layouts/ProductSearch";
 import { Alert, Container, Spinner } from "components";
 import PageHead from "pages/PageHead";
-import { DrinkListView } from "pageElement/home";
+import { DrinkListView } from "layouts/Product";
 
 export async function getServerSideProps(context) {
   const { query } = context;
