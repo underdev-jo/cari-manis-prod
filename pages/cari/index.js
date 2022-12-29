@@ -21,7 +21,6 @@ export default function SearchPage({ query }) {
 
   useEffect(() => {
     const search = async (name = "", kemasan = "", gula = 0) => {
-      console.log("Search: ", { name, kemasan, gula });
       setLoading(true);
 
       let api = get("minuman");
