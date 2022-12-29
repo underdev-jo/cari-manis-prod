@@ -6,7 +6,7 @@ import Badge from "components/Daisy/Badge";
 import { convertRupiah, getCookie } from "helpers/util";
 import Progress from "components/Daisy/Progress";
 import style from "./Product.module.scss";
-import { drinkCategory } from "pages/home/DrinkCategory";
+import { drinkCategory } from "pageElement/home/DrinkCategory";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="font-bold">

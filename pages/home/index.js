@@ -1,9 +1,6 @@
-import Container from "../../components/Layout/Container";
-import PageHead from "../PageHead";
-import Cover from "./Cover";
-import DrinkCategory from "./DrinkCategory";
-import DrinkList from "./DrinkList";
-import SweetInfo from "./SweetInfo";
+import { Container } from "components";
+import { Cover, DrinkCategory, DrinkList, SweetInfo } from "pageElement/home";
+import PageHead from "pages/PageHead";
 
 export default function Home({ drinkList }) {
   return (

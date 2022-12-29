@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Section from "../../components/Sections/Section";
+import { Section } from "components";
 import style from "./SweetInfo.module.scss";
 
 SwiperCore.use([Autoplay, Pagination]);

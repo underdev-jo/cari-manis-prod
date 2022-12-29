@@ -1,6 +1,4 @@
-import Section from "../../components/Sections/Section";
-
-import DrinkCard from "./DrinkCard";
+import { DrinkCard, Section } from "components";
 
 export const ThumbnailWrapper = ({ children }) => {
   return (

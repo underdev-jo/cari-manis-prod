@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Section from "../../components/Sections/Section";
-import { slugify } from "../../helpers/util";
+import { Section } from "components";
+import { slugify } from "helpers/util";
+import drinkCategory from "helpers/drinkCategory";
 
 function ButtonProductCategory({ name, image, slug }) {
   const { push } = useRouter();
@@ -13,33 +14,10 @@ function ButtonProductCategory({ name, image, slug }) {
       <div className="mr-3">
         <Image src={image} alt={name} title={name} width={32} height={32} />
       </div>
-      <div className="text-small medium">{name}</div>
+      <div className="text-small medium">Minuman {name}</div>
     </button>
   );
 }
-
-export const drinkCategory = [
-  {
-    image: "/icons/bottle.svg",
-    name: "Botol",
-    slug: "Botol",
-  },
-  {
-    image: "/icons/cup.svg",
-    name: "Kaleng",
-    slug: "Kaleng",
-  },
-  {
-    image: "/icons/carton.svg",
-    name: "Karton",
-    slug: "Karton",
-  },
-  {
-    image: "/icons/sachet.svg",
-    name: "Sachet",
-    slug: "Sachet",
-  },
-];
 
 export default function DrinkCategory() {
   return (
