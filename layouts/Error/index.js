@@ -6,10 +6,7 @@ export default function ErrorLayout({
   imagePath = "/faces/flat-face.svg",
 }) {
   return (
-    <div
-      className="content-wrapper text-center py-4 mt-8 mb-8"
-      style={{ minHeight: "500px" }}
-    >
+    <div className="content-wrapper text-center py-4 mt-8 mb-8">
       <div className="mb-4">
         <Image width={144} height={146} alt="Error Face" src={imagePath} />
       </div>
