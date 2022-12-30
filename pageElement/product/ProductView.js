@@ -8,7 +8,7 @@ import style from "./Product.module.scss";
 import { selectorPackaging } from "helpers/drink-selector";
 
 const NutritionBadge = ({ children, type }) => (
-  <Badge type={type} className="font-bold">
+  <Badge type={type} className="badge-sm font-bold">
     {children}
   </Badge>
 );
@@ -27,12 +27,12 @@ const ButtonServing = ({ setServing, serving, amount = 1 }) => {
   const btnTab = "btn btn-xs btn-primary normal-case";
   return (
     <div className={`${group} mb-4 mx-auto w-full justify-center`}>
-      <buton
+      <button
         className={`${btnTab} ${serving === 1 ? "" : "btn-outline"}`}
         onClick={() => setServing(1)}
       >
         1 takaran saji
-      </buton>
+      </button>
       {amount > 1 && (
         <button
           className={`${btnTab} ${serving === amount ? "" : "btn-outline"}`}
@@ -46,9 +46,10 @@ const ButtonServing = ({ setServing, serving, amount = 1 }) => {
 };
 
 export const ProductSummary = ({ name, packaging, harga }) => {
-  let catProduct = { name: "", image: "" };
+  let catProduct = { value: "", image: "" };
   if (packaging)
-    catProduct = selectorPackaging.find((i) => i.slug === packaging);
+    catProduct = selectorPackaging.find((i) => i.key === packaging);
+
   return (
     <div className="mt-8 mb-6 px-8">
       <div className="mb-4">
@@ -65,15 +66,15 @@ export const ProductSummary = ({ name, packaging, harga }) => {
           </label>
         </div>
       </div>
-      {catProduct.name && (
+      {catProduct.value && (
         <div className="badge badge-primary badge-outline">
           <Image
-            alt={catProduct.name}
+            alt={catProduct.value}
             src={catProduct.image}
             width={16}
             height={16}
           />{" "}
-          <div className="text-small">Minuman {catProduct.name}</div>
+          <div className="text-small">Minuman {catProduct.value}</div>
         </div>
       )}
     </div>
@@ -205,15 +206,21 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
           {tips}
         </div>
         <table className="table-fixed w-full border border-collapse border-carman-gray-9 text-small">
-          <tr>
-            <td className="p-2 border font-medium text-center">Takaran Saji</td>
-            <td className="p-2 border font-medium text-center">Kadar gula</td>
-            <td className="p-2 border font-medium text-center">
-              Jumlah Kalori
-            </td>
-          </tr>
-          <RowNutrition sajian={1} />
-          {jumlah_sajian > 1 && <RowNutrition sajian={jumlah_sajian} />}
+          <thead>
+            <tr>
+              <td className="p-2 border font-medium text-center">
+                Takaran Saji
+              </td>
+              <td className="p-2 border font-medium text-center">Kadar gula</td>
+              <td className="p-2 border font-medium text-center">
+                Jumlah Kalori
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <RowNutrition sajian={1} />
+            {jumlah_sajian > 1 && <RowNutrition sajian={jumlah_sajian} />}
+          </tbody>
         </table>
       </div>
     </div>
@@ -229,12 +236,7 @@ export function ProductNutrition({
 }) {
   const [info, setInfo] = useState(false);
 
-  useEffect(() => {
-    console.log("Effect: ", info);
-  }, [info]);
-
   const click = (e) => {
-    console.log("Click: ", info, e);
     if (info === e.title) setInfo(false);
     else setInfo(e.title);
   };
@@ -245,6 +247,9 @@ export function ProductNutrition({
 
   return (
     <div>
+      <div className="text-medium font-medium mb-3 px-6">
+        Klik kotak berikut untuk informasi lebih detail
+      </div>
       <div className="flex justify-between px-6">
         <Block title="Netto" info={`${netto}ml`} setPopup={click} />
         <Block title="Gula" info={`${gula}gr`} setPopup={click} />

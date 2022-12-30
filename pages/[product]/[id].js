@@ -2,9 +2,10 @@ import { createClient } from "@supabase/supabase-js";
 import { eq, getCount } from "helpers/api";
 import { supaKey, supaUrl } from "helpers/util";
 import { ProductView } from "pageElement/product";
+import AddToCalculator from "pageElement/product/AddToCalculator";
 import PageHead from "pages/PageHead";
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   const supabase = createClient(supaUrl(), supaKey());
 
   const { data, error } = await eq("minuman", {
@@ -21,7 +22,7 @@ export async function getServerSideProps({ params }) {
     .order("created_at", { ascending: false });
 
   const comment = { data: dataComm, error: errComm, count };
-  const props = { product: data[0], comment };
+  const props = { product: data[0], comment, cookies: req.cookies };
 
   if (error)
     return {
@@ -33,13 +34,14 @@ export async function getServerSideProps({ params }) {
   return { props };
 }
 
-export default function ProductDetail({ product, comment }) {
+export default function ProductDetail({ product, comment, cookies }) {
   if (!product) return "Loading...";
 
   return (
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
       <ProductView product={product} />
+      <AddToCalculator cookies={cookies} />
       {/* <ProductComment comment={comment} /> */}
     </>
   );
