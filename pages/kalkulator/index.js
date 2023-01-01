@@ -3,13 +3,7 @@ import ProductListItem from "components/Product/list-item";
 import ErrorLayout from "layouts/Error";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
-
-export async function getServerSideProps(context) {
-  const {
-    req: { cookies },
-  } = context;
-  return { props: { cookies } };
-}
+import { useSelector } from "react-redux";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -45,24 +39,27 @@ const ViewSection = ({ product }) => {
         </div>
       </ErrorLayout>
     );
-  return product.map((item) => <CalculatedItem key={item.id} {...item} />);
+  return product.map((item, index) => (
+    <ProductListItem key={index} {...item} />
+  ));
 };
 
-export default function Kalkulator({ cookies = {} }) {
+export default function Kalkulator() {
   const [product, setProduct] = useState(false);
 
-  console.log("Kalkulator: ", cookies);
-
-  const { calculated = "" } = cookies;
-
-  console.log({ calculated });
+  const reducer = useSelector(({ calculated }) => calculated.product);
 
   useEffect(() => {
-    let res = [];
-    if (calculated) {
+    if (reducer && reducer.length) {
+      const unique = Array.from(new Set(reducer.map((item) => item.id))).map(
+        (id) => reducer.find((a) => a.id === id)
+      );
+      console.log({ unique });
+      setProduct(unique);
     }
-    setTimeout(setProduct, 3000, []);
-  }, [calculated]);
+  }, [reducer]);
+
+  console.log({ product });
 
   return (
     <>

@@ -9,7 +9,7 @@ export default function useProductCalculator() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let product = [];
+    let product = { product: [], total: 0 };
     if (calculated) product = JSON.parse(calculated);
     dispatch(setProduct(product));
   }, [calculated, dispatch]);

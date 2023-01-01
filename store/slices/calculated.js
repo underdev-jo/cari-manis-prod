@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const calculatedSlices = createSlice({
-  name: "calculatedSlices",
+const calculated = createSlice({
+  name: "calculated",
   initialState: {
     product: [],
   },
@@ -12,5 +12,5 @@ const calculatedSlices = createSlice({
   },
 });
 
-export const { setCalculatedProduct } = calculatedSlices.actions;
-export default calculatedSlices.reducer;
+export const { setCalculatedProduct } = calculated.actions;
+export default calculated.reducer;

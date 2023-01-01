@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import calculatedSlices from "./slices/calculated";
+import calculated from "./slices/calculated";
 
 export default configureStore({
-  reducer: { calculatedSlices },
+  reducer: { calculated },
 });
