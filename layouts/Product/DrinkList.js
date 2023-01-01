@@ -1,5 +1,5 @@
+import DrinkCard from "components/Product/drink-card";
 import Section from "components/Section";
-import DrinkCard from "components/DrinkCard";
 
 export const ThumbnailWrapper = ({ children }) => {
   return (

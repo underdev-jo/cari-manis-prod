@@ -12,6 +12,5 @@ export default function useProductCalculator() {
     let product = [];
     if (calculated) product = JSON.parse(calculated);
     dispatch(setProduct(product));
-    console.log("Hooks: ", { calculated, product });
   }, [calculated, dispatch]);
 }

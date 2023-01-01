@@ -1,11 +1,17 @@
+import { addToCalculator } from "helpers/product";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { setCalculatedProduct as setCalc } from "store/slices/calculated";
 
-export default function AddToCalculator({ cookies }) {
-  // const data = cookies && JSON.parse(cookies);
-  const { calculated } = cookies;
-  console.log({ cookies });
-  const data = calculated ? JSON.parse(calculated) : [];
-  const counter = data.length;
+export default function AddToCalculator({ product }) {
+  const dispatch = useDispatch();
+  const datas = useSelector(({ calculatedSlices }) => calculatedSlices.product);
+  const counter = datas ? datas.length : 0;
+
+  const fnAdd = () => {
+    const added = addToCalculator(product);
+    dispatch(setCalc(added));
+  };
 
   return (
     <div className="fixed left-0 right-0 bottom-0 py-4">
@@ -21,7 +27,10 @@ export default function AddToCalculator({ cookies }) {
             {counter}
           </span>
         </button>
-        <button className="btn btn-primary flex-1 block rounded-none bg-carman-black-1 normal-case">
+        <button
+          className="btn btn-primary flex-1 block rounded-none bg-carman-black-1 normal-case"
+          onClick={fnAdd}
+        >
           Tambah ke Kalkulator
         </button>
       </div>

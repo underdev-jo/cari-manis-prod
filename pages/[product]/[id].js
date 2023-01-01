@@ -22,7 +22,7 @@ export async function getServerSideProps({ params, req }) {
     .order("created_at", { ascending: false });
 
   const comment = { data: dataComm, error: errComm, count };
-  const props = { product: data[0], comment, cookies: req.cookies };
+  const props = { product: data[0], comment };
 
   if (error)
     return {
@@ -34,14 +34,14 @@ export async function getServerSideProps({ params, req }) {
   return { props };
 }
 
-export default function ProductDetail({ product, comment, cookies }) {
+export default function ProductDetail({ product, comment }) {
   if (!product) return "Loading...";
 
   return (
     <>
       <PageHead title={product.name || "Produk Detail - cari manis"} />
       <ProductView product={product} />
-      <AddToCalculator cookies={cookies} />
+      <AddToCalculator product={product} />
       {/* <ProductComment comment={comment} /> */}
     </>
   );
