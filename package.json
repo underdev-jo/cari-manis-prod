@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "@supabase/supabase-js": "^1.35.7",
     "@tailwindcss/line-clamp": "^0.4.2",
     "js-cookie": "^3.0.1",
@@ -17,6 +18,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.37.0",
+    "react-redux": "^8.0.5",
     "react-use-scroll-direction": "^0.1.0",
     "sass": "^1.55.0",
     "swiper": "^8.4.4"
