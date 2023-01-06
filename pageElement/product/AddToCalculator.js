@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { addToCalculator } from "helpers/product";
+import { addToCalculator } from "helpers/addToCalculator";
 import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct as setCalc } from "store/slices/calculated";
 
@@ -8,7 +8,7 @@ export default function AddToCalculator({ product }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const datas = useSelector(({ calculated }) => calculated.product);
-  const counter = datas ? datas.total : 0;
+  const counter = datas ? `${datas.total}` : 0;
 
   const fnAdd = () => {
     const added = addToCalculator(product);

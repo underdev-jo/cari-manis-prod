@@ -41,3 +41,23 @@ a {
 .container {
   @apply mx-auto max-w-md;
 }
+
+#nprogress .bar {
+  display: none;
+}
+
+#nprogress .spinner {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  @apply flex items-center justify-center py-10 rounded-md w-screen h-screen;
+  background: rgba(255, 255, 255, 0.7);
+
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.1);
+
+  .spinner-icon {
+    @apply border-t-carman-blue-1 border-[3px] border-l-carman-blue-1 w-[23px] h-[23px];
+  }
+}

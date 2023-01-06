@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { supaKey, supaUrl } from "helpers/util";
 import Home from "./home";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const supabase = createClient(supaUrl(), supaKey());
 
   const res = await supabase.from("minuman").select("*");

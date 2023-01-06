@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const calculated = createSlice({
   name: "calculated",
   initialState: {
-    product: [],
+    product: {
+      product: [],
+      total: 0,
+    },
   },
   reducers: {
     setCalculatedProduct: (state, action) => {

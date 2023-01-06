@@ -1,5 +1,6 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
+import { eq } from "helpers/api";
 import ErrorLayout from "layouts/Error";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
@@ -44,22 +45,44 @@ const ViewSection = ({ product }) => {
   ));
 };
 
-export default function Kalkulator() {
-  const [product, setProduct] = useState(false);
+// export function getServerSideProps({ req }) {
+//   const calculated = req.cookies.calculated || {};
+//   const parsed = JSON.parse(calculated);
+//   console.log("ssr: ", parsed);
+//   console.log("----------------------------------------");
+//   return {
+//     props: {
+//       calculated: req.cookies.calculated || "",
+//     },
+//   };
+// }
+
+export default function Kalkulator(props) {
+  const [isHit, setHit] = useState(false);
 
   const reducer = useSelector(({ calculated }) => calculated.product);
 
   useEffect(() => {
-    if (reducer && reducer.length) {
-      const unique = Array.from(new Set(reducer.map((item) => item.id))).map(
-        (id) => reducer.find((a) => a.id === id)
+    const run = async (productList) => {
+      setHit(true);
+      return Promise.all(
+        productList.map(async (item) => {
+          const res = await eq("minuman", { column: "id", value: item.id });
+          return res;
+        })
       );
-      console.log({ unique });
-      setProduct(unique);
-    }
-  }, [reducer]);
+    };
 
-  console.log({ product });
+    if (reducer.product && !isHit) {
+      const productList = [...reducer.product];
+
+      if (productList.length && !isHit) {
+        run(productList).then((resPromise) => {
+          console.log("Async done: ", resPromise);
+        });
+      }
+    }
+  }, [reducer.product, isHit]);
 
   return (
     <>
@@ -68,7 +91,7 @@ export default function Kalkulator() {
         <div className="content-wrapper">
           <div className="min-h-[400px] px-4 py-10">
             <HeadSection />
-            <ViewSection product={product} />
+            <ViewSection product={false} />
           </div>
         </div>
       </div>

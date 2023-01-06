@@ -13,24 +13,22 @@ export function addToCalculator(product) {
       if (typeof parsed.product === "object") {
         const targetProduct = parsed.product.filter((i) => i.id === product.id);
         const otherProduct = parsed.product.filter((i) => i.id !== product.id);
-        newProduct = [
-          ...otherProduct,
-          {
-            id: product.id,
-            count: targetProduct.length > 0 ? targetProduct[0].count + 1 : 1,
-          },
-        ];
+        const hasTarget = targetProduct.length > 0;
+
+        const count = hasTarget ? targetProduct[0].count + 1 : 1;
+        newProduct = [...otherProduct, { id: product.id, count }];
       }
     }
 
-    let totalProduct = newProduct.reduce(
-      (prev, curr) => prev.count + curr.count
-    );
+    let totalProduct = newProduct.reduce((prev, curr) => {
+      return { count: prev.count + curr.count };
+    });
 
     const productObj = {
       product: newProduct,
       total: totalProduct.count || totalProduct,
     };
+
     setCookie(productCookieName, JSON.stringify(productObj));
 
     return productObj;
