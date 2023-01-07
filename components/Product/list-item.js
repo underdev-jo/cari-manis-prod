@@ -52,6 +52,7 @@ export default function ProductListItem(props) {
         <Info {...props} phClass={phClass} />
         <Nutrition {...props} />
       </div>
+      <div className="w-1/4">hehe</div>
     </div>
   );
 }
