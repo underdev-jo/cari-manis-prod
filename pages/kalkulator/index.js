@@ -4,7 +4,6 @@ import { eq } from "helpers/api";
 import ErrorLayout from "layouts/Error";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -41,48 +40,46 @@ const ViewSection = ({ product }) => {
       </ErrorLayout>
     );
   return product.map((item, index) => (
-    <ProductListItem key={index} {...item} />
+    <ProductListItem key={index} {...item.data[0]} />
   ));
 };
 
-// export function getServerSideProps({ req }) {
-//   const calculated = req.cookies.calculated || {};
-//   const parsed = JSON.parse(calculated);
-//   console.log("ssr: ", parsed);
-//   console.log("----------------------------------------");
-//   return {
-//     props: {
-//       calculated: req.cookies.calculated || "",
-//     },
-//   };
-// }
+export function getServerSideProps({ req }) {
+  const { cookies } = req;
+  const data = cookies.calculated || "{}";
+  const parsed = JSON.parse(data);
+  return {
+    props: {
+      product: parsed.product || [],
+      total: parsed.total || 0,
+      calculated: parsed,
+    },
+  };
+}
 
-export default function Kalkulator(props) {
+export default function Kalkulator({ product, total }) {
   const [isHit, setHit] = useState(false);
-
-  const reducer = useSelector(({ calculated }) => calculated.product);
+  const [calcProduct, setProduct] = useState(false);
 
   useEffect(() => {
-    const run = async (productList) => {
-      setHit(true);
-      return Promise.all(
-        productList.map(async (item) => {
+    const run = (list) =>
+      Promise.all(
+        list.map(async (item) => {
           const res = await eq("minuman", { column: "id", value: item.id });
           return res;
         })
       );
-    };
 
-    if (reducer.product && !isHit) {
-      const productList = [...reducer.product];
-
-      if (productList.length && !isHit) {
-        run(productList).then((resPromise) => {
-          console.log("Async done: ", resPromise);
-        });
-      }
+    if (!isHit) setHit(true);
+    else if (isHit && product) {
+      const list = [...product];
+      run(list).then((resPromise) => {
+        setTimeout(setProduct, 2000, resPromise);
+        console.log("Async done: ", resPromise);
+      });
+      console.log("---------HELLO, i'm not hit", { isHit, product });
     }
-  }, [reducer.product, isHit]);
+  }, [isHit, product]);
 
   return (
     <>
@@ -91,7 +88,7 @@ export default function Kalkulator(props) {
         <div className="content-wrapper">
           <div className="min-h-[400px] px-4 py-10">
             <HeadSection />
-            <ViewSection product={false} />
+            <ViewSection product={calcProduct} />
           </div>
         </div>
       </div>
