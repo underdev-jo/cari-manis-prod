@@ -1,10 +1,13 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
 import { eq } from "helpers/api";
+import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import Image from "next/image";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCalculatedProduct } from "store/slices/calculated";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -24,7 +27,14 @@ const Placeholder = () => (
   </div>
 );
 
-const ViewSection = ({ product }) => {
+const ViewSection = ({ product, setProduct }) => {
+  const dispatch = useDispatch();
+  const deleteAll = () => {
+    removeCookie("calculated");
+    dispatch(setCalculatedProduct({ product: [], total: 0 }));
+    setProduct([]);
+  };
+
   if (!product) return <Placeholder />;
   else if (product.length < 1)
     return (
@@ -44,14 +54,17 @@ const ViewSection = ({ product }) => {
     <>
       <div className="flex items-center justify-between pb-3 mb-3 border border-transparent border-b-carman-gray-5">
         <div className="text-heading4">Produk Minuman</div>
-        <button className="btn btn-xs bg-carman-red-1 rounded-full text-white border-transparent normal-case hover:bg-carman-red-1 hover:text-white hover:border-transparent">
+        <button
+          className="btn btn-xs bg-carman-red-1 rounded-full text-white border-transparent normal-case hover:bg-carman-red-1 hover:text-white hover:border-transparent"
+          onClick={deleteAll}
+        >
           <Image
             alt="Del"
             width={12}
             height={12}
             src="/icons/fluent_delete-12-regular.svg"
           />
-          <div className="ml-1">Hapus Semua</div>
+          <span className="ml-1">Hapus Semua</span>
         </button>
       </div>
       {product.map((item, index) => (
@@ -113,7 +126,7 @@ export default function Kalkulator({ product, total }) {
         <div className="content-wrapper">
           <div className="min-h-[400px] px-4 py-10">
             <HeadSection />
-            <ViewSection product={calcProduct} />
+            <ViewSection product={calcProduct} setProduct={setProduct} />
           </div>
         </div>
       </div>
