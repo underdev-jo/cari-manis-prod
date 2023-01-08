@@ -2,6 +2,7 @@ import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
 import { eq } from "helpers/api";
 import ErrorLayout from "layouts/Error";
+import Image from "next/image";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
 
@@ -34,14 +35,30 @@ const ViewSection = ({ product }) => {
             minuman pilihanmu agar kami bisa bantu hitung manismu
           </div>
           <div className="flex justify-center pt-2">
-            <Button>Tambah Minuman</Button>
+            <Button size="small">Tambah Minuman</Button>
           </div>
         </div>
       </ErrorLayout>
     );
-  return product.map((item, index) => (
-    <ProductListItem key={index} {...item.data[0]} />
-  ));
+  return (
+    <>
+      <div className="flex items-center justify-between pb-3 mb-3 border border-transparent border-b-carman-gray-5">
+        <div className="text-heading4">Produk Minuman</div>
+        <button className="btn btn-xs bg-carman-red-1 rounded-full text-white border-transparent normal-case hover:bg-carman-red-1 hover:text-white hover:border-transparent">
+          <Image
+            alt="Del"
+            width={12}
+            height={12}
+            src="/icons/fluent_delete-12-regular.svg"
+          />
+          <div className="ml-1">Hapus Semua</div>
+        </button>
+      </div>
+      {product.map((item, index) => (
+        <ProductListItem key={index} {...item.data[0]} />
+      ))}
+    </>
+  );
 };
 
 export function getServerSideProps({ req }) {
@@ -56,6 +73,14 @@ export function getServerSideProps({ req }) {
     },
   };
 }
+
+const FinalCta = () => {
+  return (
+    <div className="bg-carman-gray-10 flex justify-center p-6">
+      <Button model="blue">Hi hi hitung manismu</Button>
+    </div>
+  );
+};
 
 export default function Kalkulator({ product, total }) {
   const [isHit, setHit] = useState(false);
@@ -92,6 +117,7 @@ export default function Kalkulator({ product, total }) {
           </div>
         </div>
       </div>
+      {calcProduct && calcProduct.length > 0 && <FinalCta />}
     </>
   );
 }

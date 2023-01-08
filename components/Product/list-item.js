@@ -38,7 +38,7 @@ const Nutrition = ({ gula, kalori }) => (
   </div>
 );
 
-const Action = ({ qty = 1 }) => {
+const Action = ({ id, qty = 1 }) => {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
@@ -52,6 +52,8 @@ const Action = ({ qty = 1 }) => {
     if (count > 1) setCount(parseInt(count, 0) - 1);
   };
 
+  if (!id) return <div className={`w-[100px] h-6 ${phClass}`} />;
+
   return (
     <div className="w-1/4">
       <div className="flex">
@@ -61,7 +63,7 @@ const Action = ({ qty = 1 }) => {
         >
           -
         </button>
-        <div className="w-6 btn btn-xs disabled rounded-none btn-outline text-center border border-carman-gray-4 pointer-events-none">
+        <div className="w-6 btn btn-xs disabled rounded-none btn-outline text-center border-l-0 border-r-0 border-t-carman-gray-4 border-b-carman-gray-4  pointer-events-none">
           {count}
         </div>
         <button
@@ -85,7 +87,7 @@ export default function ProductListItem(props) {
         <Info {...props} phClass={phClass} />
         <Nutrition {...props} />
       </div>
-      <Action />
+      <Action {...props} />
     </div>
   );
 }
