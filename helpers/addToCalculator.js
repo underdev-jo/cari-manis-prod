@@ -14,10 +14,13 @@ export function addToCalculator(product, substract = false) {
         const targetProduct = parsed.product.filter((i) => i.id === product.id);
         const otherProduct = parsed.product.filter((i) => i.id !== product.id);
         const hasTarget = targetProduct.length > 0;
+        let c = 1;
+        if (hasTarget) {
+          let operation = targetProduct[0].c + 1;
+          if (substract) operation = targetProduct[0].c - 1;
+          c = operation;
+        }
 
-        let operation = targetProduct[0].c + 1;
-        if (substract) operation = targetProduct[0].c - 1;
-        const c = hasTarget ? operation : 1;
         newProduct = [...otherProduct, { id: product.id, c }];
       }
     }
@@ -39,4 +42,28 @@ export function addToCalculator(product, substract = false) {
 
 export function subCalculator(product) {
   return addToCalculator(product, true);
+}
+
+export function delItemCalculator(product) {
+  if (product && typeof product === "object" && product.id) {
+    const currentProduct = getCookie(productCookieName);
+
+    if (currentProduct) {
+      const parsed = JSON.parse(currentProduct);
+      if (typeof parsed.product === "object") {
+        const newProduct = parsed.product.filter((i) => i.id !== product.id);
+
+        let totalProduct = newProduct.reduce((prev, curr) => {
+          return { c: prev.c + curr.c };
+        });
+
+        const productObj = {
+          product: newProduct,
+          total: totalProduct.c || totalProduct,
+        };
+
+        setCookie(productCookieName, JSON.stringify(productObj));
+      }
+    }
+  }
 }

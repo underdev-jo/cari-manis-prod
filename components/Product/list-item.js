@@ -1,4 +1,9 @@
-import { addToCalculator, subCalculator } from "helpers/addToCalculator";
+import {
+  addToCalculator,
+  delItemCalculator,
+  subCalculator,
+} from "helpers/addToCalculator";
+import Image from "next/image";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
 
@@ -42,7 +47,7 @@ const Nutrition = ({ gula, kalori }) => (
 const Action = (product) => {
   const [count, setCount] = useState(1);
 
-  const { id, qty = 1 } = product;
+  const { id, qty = 1, setDeleted } = product;
 
   useEffect(() => {
     setCount(qty);
@@ -58,19 +63,37 @@ const Action = (product) => {
     if (count > 1) {
       setCount(parseInt(count, 0) - 1);
       subCalculator(product);
+    } else {
+      delItemCalculator(product);
+      setDeleted(true);
     }
   };
 
   if (!id) return <div className={`w-[100px] h-6 ${phClass}`} />;
 
+  const isMore = count > 1;
+
   return (
     <div className="w-1/4">
       <div className="flex">
         <button
-          className="btn btn-xs btn-outline border border-carman-gray-4 rounded-r-none rounded-l hover:bg-carman-gray-4 hover:border-carman-gray-4 hover:text-white"
+          className={`${
+            isMore
+              ? "border-carman-gray-4 hover:bg-carman-gray-4 hover:border-carman-gray-4 hover:text-white"
+              : "bg-carman-red-1 text-white border-carman-red-1 hover:bg-carman-red-1 hover:border-carman-red-1"
+          } btn btn-xs btn-outline border rounded-r-none rounded-l`}
           onClick={dec}
         >
-          -
+          {isMore ? (
+            "-"
+          ) : (
+            <Image
+              alt="del"
+              src="/icons/fluent_delete-12-regular.svg"
+              width={10}
+              height={10}
+            />
+          )}
         </button>
         <div className="w-6 btn btn-xs disabled rounded-none btn-outline text-center border-l-0 border-r-0 border-t-carman-gray-4 border-b-carman-gray-4  pointer-events-none">
           {count}
@@ -87,7 +110,10 @@ const Action = (product) => {
 };
 
 export default function ProductListItem(props) {
+  const [deleted, setDeleted] = useState(false);
   const { image } = props;
+
+  if (deleted) return "";
 
   return (
     <div className="flex w-full items-start mb-5">
@@ -96,7 +122,7 @@ export default function ProductListItem(props) {
         <Info {...props} phClass={phClass} />
         <Nutrition {...props} />
       </div>
-      <Action {...props} />
+      <Action setDeleted={setDeleted} {...props} />
     </div>
   );
 }
