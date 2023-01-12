@@ -68,7 +68,6 @@ const ViewSection = ({ product, setProduct, cookie = [] }) => {
         </button>
       </div>
       {product.map((item, index) => {
-        console.log("product loop: ", item, cookie);
         const { id } = item.data[0];
         const qty = cookie.find((i) => i.id === id).c || 1;
         const dataProduct = { ...item.data[0], qty };
