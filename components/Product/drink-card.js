@@ -14,14 +14,20 @@ const DrinkCard = ({
   return (
     <Link href={productUrl} passHref>
       <div className="btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
-        <Image
-          src={image}
-          alt={name}
-          title={name}
-          width={157}
-          height={157}
-          priority
-        />
+        <div className="rounded-lg overflow-hidden">
+          {image ? (
+            <Image
+              src={image}
+              alt={name}
+              title={name}
+              width={157}
+              height={157}
+              priority
+            />
+          ) : (
+            <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
+          )}
+        </div>
         <div className="my-3">
           <div
             className="badge badge-primary badge-sm mb-1 badge-outline"

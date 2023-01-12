@@ -66,6 +66,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
           </label>
         </div>
       </div>
+      {/* Category product label */}
       {catProduct.value && (
         <div className="badge badge-primary badge-outline">
           <Image
@@ -85,16 +86,20 @@ export const ProductImage = ({ image, name }) => {
   return (
     <div className="bg-primary-content">
       <div className="relative h-auto max-h-[240px] aspect-square mx-auto">
-        <Image
-          width={240}
-          height={240}
-          src={image}
-          alt={name}
-          title={name}
-          className="block mx-auto"
-          layout="responsive"
-          priority
-        />
+        {image ? (
+          <Image
+            width={240}
+            height={240}
+            src={image}
+            alt={name}
+            title={name}
+            className="block mx-auto"
+            layout="responsive"
+            priority
+          />
+        ) : (
+          <div className="w-full h-[240px] animate-pulse bg-primary" />
+        )}
       </div>
     </div>
   );
