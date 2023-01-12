@@ -1,3 +1,4 @@
+import { addToCalculator, subCalculator } from "helpers/addToCalculator";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
 
@@ -38,18 +39,26 @@ const Nutrition = ({ gula, kalori }) => (
   </div>
 );
 
-const Action = ({ id, qty = 1 }) => {
+const Action = (product) => {
   const [count, setCount] = useState(1);
+
+  const { id, qty = 1 } = product;
 
   useEffect(() => {
     setCount(qty);
   }, [qty]);
 
   const inc = () => {
-    if (count < 99) setCount(parseInt(count, 0) + 1);
+    if (count < 99) {
+      setCount(parseInt(count, 0) + 1);
+      addToCalculator(product);
+    }
   };
   const dec = () => {
-    if (count > 1) setCount(parseInt(count, 0) - 1);
+    if (count > 1) {
+      setCount(parseInt(count, 0) - 1);
+      subCalculator(product);
+    }
   };
 
   if (!id) return <div className={`w-[100px] h-6 ${phClass}`} />;

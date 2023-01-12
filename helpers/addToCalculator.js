@@ -2,7 +2,7 @@ import { getCookie, setCookie } from "./util";
 
 export const productCookieName = "calculated";
 
-export function addToCalculator(product) {
+export function addToCalculator(product, substract = false) {
   if (product && typeof product === "object" && product.id) {
     const currentProduct = getCookie(productCookieName);
     let newProduct = [{ id: product.id, c: 1 }];
@@ -15,7 +15,9 @@ export function addToCalculator(product) {
         const otherProduct = parsed.product.filter((i) => i.id !== product.id);
         const hasTarget = targetProduct.length > 0;
 
-        const c = hasTarget ? targetProduct[0].c + 1 : 1;
+        let operation = targetProduct[0].c + 1;
+        if (substract) operation = targetProduct[0].c - 1;
+        const c = hasTarget ? operation : 1;
         newProduct = [...otherProduct, { id: product.id, c }];
       }
     }
@@ -33,4 +35,8 @@ export function addToCalculator(product) {
 
     return productObj;
   } else alert("Terjadi kesalahan saat menambahkan produk");
+}
+
+export function subCalculator(product) {
+  return addToCalculator(product, true);
 }

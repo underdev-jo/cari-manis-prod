@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const config = {
-  matcher: ["/", "/_dashboard", "/_adminLogin", "/drinks", "/drinks/:id"],
+  matcher: ["/", "/_dashboard", "/_adminLogin"],
 };
 
 export default function middleware(req: NextRequest) {

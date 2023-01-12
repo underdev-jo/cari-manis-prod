@@ -13,17 +13,10 @@ const DrinkCard = ({
   const productUrl = `/${slugify(name)}/${id}`;
   return (
     <Link href={productUrl} passHref>
-      <div className="btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
-        <div className="rounded-lg overflow-hidden">
+      <div className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
+        <div className="relative w-full h-[160px] overflow-hidden">
           {image ? (
-            <Image
-              src={image}
-              alt={name}
-              title={name}
-              width={157}
-              height={157}
-              priority
-            />
+            <Image src={image} alt={name} title={name} layout="fill" priority />
           ) : (
             <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
           )}

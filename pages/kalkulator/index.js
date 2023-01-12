@@ -27,7 +27,7 @@ const Placeholder = () => (
   </div>
 );
 
-const ViewSection = ({ product, setProduct }) => {
+const ViewSection = ({ product, setProduct, cookie = [] }) => {
   const dispatch = useDispatch();
   const deleteAll = () => {
     removeCookie("calculated");
@@ -67,9 +67,13 @@ const ViewSection = ({ product, setProduct }) => {
           <span className="ml-1">Hapus Semua</span>
         </button>
       </div>
-      {product.map((item, index) => (
-        <ProductListItem key={index} {...item.data[0]} />
-      ))}
+      {product.map((item, index) => {
+        console.log("product loop: ", item, cookie);
+        const { id } = item.data[0];
+        const qty = cookie.find((i) => i.id === id).c || 1;
+        const dataProduct = { ...item.data[0], qty };
+        return <ProductListItem key={index} {...dataProduct} />;
+      })}
     </>
   );
 };
@@ -87,7 +91,7 @@ export function getServerSideProps({ req }) {
   };
 }
 
-const FinalCta = () => {
+const CTACalculate = () => {
   return (
     <div className="bg-carman-gray-10 flex justify-center p-6">
       <Button model="blue">Hi hi hitung manismu</Button>
@@ -113,9 +117,7 @@ export default function Kalkulator({ product, total }) {
       const list = [...product];
       run(list).then((resPromise) => {
         setTimeout(setProduct, 2000, resPromise);
-        console.log("Async done: ", resPromise);
       });
-      console.log("---------HELLO, i'm not hit", { isHit, product });
     }
   }, [isHit, product]);
 
@@ -126,11 +128,15 @@ export default function Kalkulator({ product, total }) {
         <div className="content-wrapper">
           <div className="min-h-[400px] px-4 py-10">
             <HeadSection />
-            <ViewSection product={calcProduct} setProduct={setProduct} />
+            <ViewSection
+              cookie={product}
+              product={calcProduct}
+              setProduct={setProduct}
+            />
           </div>
         </div>
       </div>
-      {calcProduct && calcProduct.length > 0 && <FinalCta />}
+      {calcProduct && calcProduct.length > 0 && <CTACalculate />}
     </>
   );
 }

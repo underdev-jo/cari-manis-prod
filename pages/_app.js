@@ -14,7 +14,7 @@ import Router from "next/router";
 nProgress.configure({
   minimum: 0.1,
   easing: "ease",
-  speed: 500,
+  speed: 100,
 });
 
 Router.events.on("routeChangeStart", () => nProgress.start());
