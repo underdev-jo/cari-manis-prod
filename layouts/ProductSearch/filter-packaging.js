@@ -2,27 +2,16 @@ import Dropdown from "components/Dropdown";
 import { get } from "helpers/api";
 import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 export async function getServerSideProps(context) {
   const { query } = context;
-  return { props: { query } };
+  const { packages = [] } = await get("kemasan_minuman");
+  return { props: { query, packages } };
 }
 
-export default function FilterPackaging({ query }) {
-  const [packages, setPackages] = useState([]);
-
+export default function FilterPackaging({ query, packages = [] }) {
   const { replace, query: queryParam } = useRouter();
   const filtering = query?.kemasan || "";
-
-  useEffect(() => {
-    const hit = async () => {
-      const { data = [] } = await get("kemasan_minuman");
-      setPackages([{ id: "", name: "Semua Jenis" }, ...data] || res);
-    };
-
-    if (packages.length < 1) hit();
-  }, [packages]);
 
   const select = ({ value = "" }) => {
     const kemasan = value !== "Semua Jenis" ? slugify(value || "") : "";
