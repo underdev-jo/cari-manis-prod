@@ -8,6 +8,8 @@ import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
+import { setPopupCalculator } from "store/slices/popupCalc";
+import PopupKalkulator from "./hasil";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -91,9 +93,13 @@ export function getServerSideProps({ req }) {
 }
 
 const CTACalculate = () => {
+  const dispatch = useDispatch();
+  const click = () => dispatch(setPopupCalculator(true));
   return (
     <div className="bg-carman-gray-10 flex justify-center p-6">
-      <Button model="blue">Hi hi hitung manismu</Button>
+      <Button model="blue" onClick={click}>
+        Hi hi hitung manismu
+      </Button>
     </div>
   );
 };
@@ -136,6 +142,7 @@ export default function Kalkulator({ product, total }) {
         </div>
       </div>
       {calcProduct && calcProduct.length > 0 && <CTACalculate />}
+      <PopupKalkulator />
     </>
   );
 }
