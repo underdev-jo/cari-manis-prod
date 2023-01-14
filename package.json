@@ -19,6 +19,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.37.0",
+    "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-use-scroll-direction": "^0.1.0",
     "sass": "^1.55.0",

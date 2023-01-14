@@ -11,43 +11,36 @@ import { supaKey, supaUrl } from "helpers/util";
 
 export async function getServerSideProps(context) {
   const { query } = context;
-  return { props: { query } };
+
+  const { gula = 999, kemasan = "", q = "" } = query;
+
+  let api = get("minuman");
+
+  const clientAPI = createClient(supaUrl(), supaKey());
+  if (q || kemasan || gula)
+    api = clientAPI
+      .from("minuman")
+      .select("*")
+      .ilike("name", `%${q}%`)
+      .ilike("packaging", `%${kemasan}%`)
+      .lte("gula", gula);
+
+  const result = await api;
+
+  return { props: { query, result, propsKeyword: q } };
 }
 
-export default function SearchPage({ query }) {
+export default function SearchPage({ result, propsKeyword }) {
   const [loading, setLoading] = useState(true);
-  const [result, setRes] = useState(false);
   const [keyword, setKeyword] = useState();
 
   useEffect(() => {
-    const search = async (name = "", kemasan = "", gula = 0) => {
-      setLoading(true);
+    setKeyword(propsKeyword);
+  }, [propsKeyword]);
 
-      let api = get("minuman");
-
-      const clientAPI = createClient(supaUrl(), supaKey());
-      if (name || kemasan || gula)
-        api = clientAPI
-          .from("minuman")
-          .select("*")
-          .ilike("name", `%${name}%`)
-          .ilike("packaging", `%${kemasan}%`)
-          .lte("gula", gula);
-
-      const res = await api;
-
-      setTimeout(() => {
-        setRes(res);
-        setLoading(false);
-      }, 1000);
-    };
-
-    const keys = Object.keys(query).length > 0;
-    const { gula = 0, kemasan = "", q = "" } = query;
-    setKeyword(query.q || "");
-    if (keys) search(q || "", kemasan || "", gula || 999);
-    else search("");
-  }, [query]);
+  useEffect(() => {
+    if (result && result.data.length > 0) setLoading(false);
+  }, [result]);
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)

@@ -13,16 +13,16 @@ export async function getServerSideProps({ params, req }) {
     value: params.id,
   });
 
-  const commentParam = { column: "product_id", value: params.id };
-  const count = await getCount("product_comment", commentParam);
-  const { data: dataComm, error: errComm } = await supabase
-    .from("product_comment")
-    .select("*")
-    .eq("product_id", params.id)
-    .order("created_at", { ascending: false });
+  // const commentParam = { column: "product_id", value: params.id };
+  // const count = await getCount("product_comment", commentParam);
+  // const { data: dataComm, error: errComm } = await supabase
+  //   .from("product_comment")
+  //   .select("*")
+  //   .eq("product_id", params.id)
+  //   .order("created_at", { ascending: false });
 
-  const comment = { data: dataComm, error: errComm, count };
-  const props = { product: data[0], comment };
+  // const comment = { data: dataComm, error: errComm, count };
+  const props = { product: data[0] };
 
   if (error)
     return {
