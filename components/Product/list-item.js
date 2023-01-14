@@ -6,6 +6,8 @@ import {
 import Image from "next/image";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductCalc } from "store/slices/calculatedProduct";
 
 const phClass = `bg-slate-200 animate-pulse rounded-md`;
 const minH = "min-h-[16px]";
@@ -49,20 +51,39 @@ const Action = (product) => {
 
   const { id, qty = 1, setDeleted } = product;
 
+  const calcProduct = useSelector(
+    ({ calculatedProduct }) => calculatedProduct.product
+  );
+
+  const dispatch = useDispatch();
+  const dispatchCounter = (passCount) => {
+    const qty = passCount || count;
+    // GET EXIST PRODUCT
+    const target = calcProduct.find((i) => i.data[0].id === product.id);
+    const rest = calcProduct.filter((i) => i.data[0].id !== product.id);
+    const targetProduct = { ...target, data: [{ ...target.data[0], qty }] };
+    const newProduct = [targetProduct, ...rest];
+    dispatch(setProductCalc(newProduct));
+  };
+
   useEffect(() => {
     setCount(qty);
   }, [qty]);
 
   const inc = () => {
     if (count < 99) {
-      setCount(parseInt(count, 0) + 1);
+      const currCount = parseInt(count, 0) + 1;
+      setCount(currCount);
       addToCalculator(product);
+      dispatchCounter(currCount);
     }
   };
   const dec = () => {
     if (count > 1) {
-      setCount(parseInt(count, 0) - 1);
+      const currCount = parseInt(count, 0) - 1;
+      setCount(currCount);
       subCalculator(product);
+      dispatchCounter(currCount);
     } else {
       delItemCalculator(product);
       setDeleted(true);

@@ -145,6 +145,8 @@ export default function Kalkulator({ product, total }) {
     }
   }, [isHit, product, dispatch]);
 
+  console.log(calcProduct);
+
   return (
     <>
       <PageHead title="Kalkulator Manis" />

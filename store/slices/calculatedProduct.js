@@ -9,6 +9,9 @@ const productCalc = createSlice({
     setProductCalc: (state, action) => {
       state.product = action.payload;
     },
+    setProductCalcQty: (state, action) => {
+      state.product;
+    },
   },
 });
 
