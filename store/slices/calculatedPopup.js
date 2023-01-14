@@ -4,6 +4,8 @@ const popupCalc = createSlice({
   name: "popupCalc",
   initialState: {
     popup: false,
+    sugarCount: 0,
+    calorieCount: 0,
   },
   reducers: {
     setPopupCalculator: (state, action) => {

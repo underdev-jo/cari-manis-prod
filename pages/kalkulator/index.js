@@ -6,9 +6,10 @@ import ErrorLayout from "layouts/Error";
 import Image from "next/image";
 import PageHead from "pages/PageHead";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
-import { setPopupCalculator } from "store/slices/popupCalc";
+import { setPopupCalculator } from "store/slices/calculatedPopup";
+import { setProductCalc } from "store/slices/calculatedProduct";
 import PopupKalkulator from "./hasil";
 
 const HeadSection = () => (
@@ -29,12 +30,13 @@ const Placeholder = () => (
   </div>
 );
 
-const ViewSection = ({ product, setProduct, cookie = [] }) => {
+const ViewSection = ({ product, cookie = [] }) => {
   const dispatch = useDispatch();
+
   const deleteAll = () => {
     removeCookie("calculated");
     dispatch(setCalculatedProduct({ product: [], total: 0 }));
-    setProduct([]);
+    dispatch(setProductCalc([]));
   };
 
   if (!product) return <Placeholder />;
@@ -69,13 +71,22 @@ const ViewSection = ({ product, setProduct, cookie = [] }) => {
           <span className="ml-1">Hapus Semua</span>
         </button>
       </div>
-      {product.map((item, index) => {
-        const { id } = item.data[0];
-        const qty = cookie.find((i) => i.id === id).c || 1;
-        const dataProduct = { ...item.data[0], qty };
-        return <ProductListItem key={index} {...dataProduct} />;
-      })}
+      {product.map((item, index) => (
+        <ProductListItem key={index} {...item.data[0]} />
+      ))}
     </>
+  );
+};
+
+const CTACalculate = () => {
+  const dispatch = useDispatch();
+  const click = () => dispatch(setPopupCalculator(true));
+  return (
+    <div className="bg-carman-gray-10 flex justify-center p-6">
+      <Button model="blue" onClick={click}>
+        Hi hi hitung manismu
+      </Button>
+    </div>
   );
 };
 
@@ -92,21 +103,15 @@ export function getServerSideProps({ req }) {
   };
 }
 
-const CTACalculate = () => {
-  const dispatch = useDispatch();
-  const click = () => dispatch(setPopupCalculator(true));
-  return (
-    <div className="bg-carman-gray-10 flex justify-center p-6">
-      <Button model="blue" onClick={click}>
-        Hi hi hitung manismu
-      </Button>
-    </div>
-  );
-};
-
 export default function Kalkulator({ product, total }) {
   const [isHit, setHit] = useState(false);
-  const [calcProduct, setProduct] = useState(false);
+
+  const calcProduct = useSelector(
+    ({ calculatedProduct }) => calculatedProduct.product
+  );
+
+  const dispatch = useDispatch();
+  const setProduct = (value) => dispatch(setProductCalc(value));
 
   useEffect(() => {
     const run = (list) =>
@@ -120,11 +125,25 @@ export default function Kalkulator({ product, total }) {
     if (!isHit) setHit(true);
     else if (isHit && product) {
       const list = [...product];
+
+      const addingQty = (resItem) => {
+        let returnItem = resItem;
+        const target = list.find((i) => i.id === resItem.data[0].id);
+        if (resItem.data[0])
+          returnItem = {
+            ...resItem,
+            data: [{ ...resItem.data[0], qty: target.c }],
+          };
+        return returnItem;
+      };
+
       run(list).then((resPromise) => {
-        setTimeout(setProduct, 2000, resPromise);
+        // adding QTY product
+        const data = resPromise.map((resItem) => addingQty(resItem));
+        dispatch(setProductCalc(data));
       });
     }
-  }, [isHit, product]);
+  }, [isHit, product, dispatch]);
 
   return (
     <>
