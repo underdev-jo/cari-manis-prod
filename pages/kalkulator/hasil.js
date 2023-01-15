@@ -51,7 +51,7 @@ export default function PopupKalkulator() {
         id="modalResult"
       >
         {calcProduct.map((item, index) => (
-          <ProductListItem key={index} {...item.data[0]} />
+          <ProductListItem key={index} model="nutrition" {...item.data[0]} />
         ))}
         <h2 className="text-4xl">ehheheheheh</h2>
         <h2 className="text-4xl">ehheheheheh</h2>
