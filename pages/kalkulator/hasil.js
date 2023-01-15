@@ -1,4 +1,5 @@
 import Button from "components/Button";
+import ProductListItem from "components/Product/list-item";
 import { getCookie } from "helpers/util";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +7,8 @@ import { setPopupCalculator } from "store/slices/calculatedPopup";
 
 export default function PopupKalkulator() {
   const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
-
+  const calcProduct =
+    useSelector(({ calculatedProduct }) => calculatedProduct.product) || [];
   const dispatch = useDispatch();
   const close = () => dispatch(setPopupCalculator(false));
 
@@ -48,6 +50,9 @@ export default function PopupKalkulator() {
         className="content-wrapper relative overflow-y-auto max-h-full border border-red-100"
         id="modalResult"
       >
+        {calcProduct.map((item, index) => (
+          <ProductListItem key={index} {...item.data[0]} />
+        ))}
         <h2 className="text-4xl">ehheheheheh</h2>
         <h2 className="text-4xl">ehheheheheh</h2>
         <h2 className="text-4xl">ehheheheheh</h2>

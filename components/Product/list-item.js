@@ -60,9 +60,10 @@ const Action = (product) => {
     const qty = passCount || count;
     // GET EXIST PRODUCT
     const target = calcProduct.find((i) => i.data[0].id === product.id);
-    const rest = calcProduct.filter((i) => i.data[0].id !== product.id);
+    const tIndex = calcProduct.findIndex((i) => i.data[0].id === product.id);
     const targetProduct = { ...target, data: [{ ...target.data[0], qty }] };
-    const newProduct = [targetProduct, ...rest];
+    const newProduct = [...calcProduct];
+    newProduct[tIndex] = targetProduct;
     dispatch(setProductCalc(newProduct));
   };
 
