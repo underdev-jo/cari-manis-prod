@@ -20,7 +20,7 @@ export default function Dropdown({
   }, [isOpen]);
 
   return (
-    <div className="relative mx-2">
+    <div className="relative mx-2 z-50">
       <button
         onClick={toggle}
         onBlur={close}
@@ -34,7 +34,7 @@ export default function Dropdown({
         </div>
       </button>
       {open && (
-        <div className="absolute top-[100%] left-0 p-2 shadow bg-base-100 rounded-box w-52">
+        <div className="absolute top-[100%] left-0 p-2 shadow-xl bg-base-100 rounded-box w-52">
           {list.map((item, index) => {
             const key = item.key || item || index;
             const display = item.value || item.label || key;
