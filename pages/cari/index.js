@@ -10,11 +10,13 @@ import { createClient } from "@supabase/supabase-js";
 import { supaKey, supaUrl } from "helpers/util";
 
 export async function getStaticProps(context) {
-  const { query = "" } = context;
+  const {
+    query: { gula = 999, kemasan = "", q = "" },
+  } = context;
 
-  const gula = (query && query.gula) || 999;
-  const kemasan = (query && query.kemasasn) || "";
-  const q = (query && query.q) || "";
+  // const gula = (query && query.gula) || 999;
+  // const kemasan = (query && query.kemasasn) || "";
+  // const q = (query && query.q) || "";
 
   let api = get("minuman");
 
