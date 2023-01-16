@@ -1,6 +1,6 @@
 import { linkList } from "helpers/menuList";
-import Image from "next/image";
 import Link from "next/link";
+import LogoCariManis from "public/legal/logo-carimanis";
 import style from "./footer.module.scss";
 
 const LinkItem = (item) => {
@@ -47,13 +47,9 @@ export default function Footer() {
     <div className={style.footer}>
       <div className="content-wrapper text-small">
         <div className={style.product}>
-          <Image
-            src="/legal/logo-carimanis.svg"
-            alt="Logo"
-            title="Logo cari manis"
-            width={68}
-            height={36}
-          />
+          <div className="flex items-center [&>svg]:h-9 pb-2">
+            <LogoCariManis />
+          </div>
           <div>Pusat informasi kandungan gula pada minuman Anda.</div>
         </div>
         <div className={style.action}>
