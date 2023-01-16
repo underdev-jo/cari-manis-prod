@@ -1,6 +1,5 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
-import { supabase } from "helpers/supabase";
 import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import Image from "next/image";
@@ -10,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
-import useSWR from "swr";
 import PopupKalkulator from "./hasil";
 
 const HeadSection = () => (
@@ -98,13 +96,13 @@ export function getServerSideProps({ req }) {
   return {
     props: {
       product: parsed.product || [],
-      total: parsed.total || 0,
-      calculated: parsed,
+      // total: parsed.total || 0,
+      // calculated: parsed,
     },
   };
 }
 
-export default function Kalkulator({ product, total }) {
+export default function Kalkulator({ product }) {
   const [isHit, setHit] = useState(false);
 
   const calcProduct = useSelector(
