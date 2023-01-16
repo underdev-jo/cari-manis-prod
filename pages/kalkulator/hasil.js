@@ -40,38 +40,24 @@ export default function PopupKalkulator() {
           borderRadius: "0",
           overflow: "hidden",
           position: "relative",
+          padding: "0",
         },
       }}
     >
-      <Button className="absolute right-0 top-0" onClick={close}>
-        Close
-      </Button>
+      <div className="content-wrapper text-2xl p-2 center border-b border-black h-[50px]">
+        Hasil perhitungan
+      </div>
       <div
-        className="content-wrapper relative overflow-y-auto max-h-full border border-red-100"
+        className="content-wrapper relative overflow-y-auto !px-0 !py-4"
         id="modalResult"
+        style={{ height: "calc(100% - 124px)" }}
       >
         {calcProduct.map((item, index) => (
           <ProductListItem key={index} model="nutrition" {...item.data[0]} />
         ))}
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
-        <h2 className="text-4xl">ehheheheheh</h2>
+      </div>
+      <div className="bg-carman-gray-10 p-4 w-full flex items-center justify-center h-[74px]">
+        <Button onClick={close}>Close</Button>
       </div>
     </Modal>
   );
