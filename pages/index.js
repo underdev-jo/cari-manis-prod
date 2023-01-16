@@ -26,7 +26,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ drinkList }) {
-  console.log({ drinkList });
   return (
     <>
       <PageHead title="Cari Manis" />

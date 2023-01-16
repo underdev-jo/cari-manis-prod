@@ -21,9 +21,9 @@ export async function getServerSideProps(context) {
     api = clientAPI
       .from("minuman")
       .select("*")
-      .ilike("name", `%${q}%`)
-      .ilike("packaging", `%${kemasan}%`)
-      .lte("gula", gula);
+      .ilike("name", `%${q || ""}%`)
+      .ilike("packaging", `%${kemasan || ""}%`)
+      .lte("gula", gula || 999);
 
   const result = await api;
 
@@ -39,7 +39,7 @@ export default function SearchPage({ result, propsKeyword }) {
   }, [propsKeyword]);
 
   useEffect(() => {
-    if (result && result.data.length > 0) setLoading(false);
+    if (result && result?.data.length > 0) setLoading(false);
   }, [result]);
 
   let render = <Spinner />;

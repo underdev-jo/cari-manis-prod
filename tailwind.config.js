@@ -23,6 +23,7 @@ module.exports = {
       "carman-gray-10": "#f0f6ff",
       "carman-red-1": "#EB5757",
       "carman-black-1": "#06142F",
+      "carman-black-2": "#3D4451",
       "carman-blue-1": "#017FFA",
     },
     fontSize: {

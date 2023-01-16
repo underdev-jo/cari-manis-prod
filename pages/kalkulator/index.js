@@ -1,6 +1,6 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
-import { eq } from "helpers/api";
+import { supabase } from "helpers/supabase";
 import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
+import useSWR from "swr";
 import PopupKalkulator from "./hasil";
 
 const HeadSection = () => (
@@ -117,7 +118,9 @@ export default function Kalkulator({ product, total }) {
     const run = (list) =>
       Promise.all(
         list.map(async (item) => {
-          const res = await eq("minuman", { column: "id", value: item.id });
+          const res = fetch(`api/product-detail?id=${item.id}`, {
+            method: "GET",
+          }).then((res) => res.json());
           return res;
         })
       );

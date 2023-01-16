@@ -21,7 +21,7 @@
 }
 
 .filter-group {
-  @apply -mx-2;
+  @apply -mx-2 flex items-center justify-start pt-4 pb-2;
   transition: 0.15s ease-in-out;
 
   &.hide {

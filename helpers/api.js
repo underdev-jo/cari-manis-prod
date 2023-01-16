@@ -1,10 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
-import { supaKey, supaUrl } from "./util";
+import { supabase } from "./supabase";
 
 export const getCount = (table, eq = { column: "", value: "" }) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { count } = await supa
+    const { count } = await supabase
       .from(table)
       .select("*", { count: "exact" })
       .eq(eq.column, eq.value);
@@ -14,8 +12,7 @@ export const getCount = (table, eq = { column: "", value: "" }) => {
 
 export const eq = (table, eq = { column: "", value: "" }) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .eq(eq.column, eq.value);
@@ -25,8 +22,7 @@ export const eq = (table, eq = { column: "", value: "" }) => {
 
 export const ilike = (table, ilike = { column: "", value: "" }) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .ilike(ilike.column, ilike.value);
@@ -36,8 +32,7 @@ export const ilike = (table, ilike = { column: "", value: "" }) => {
 
 export const lte = (table, col = { column: "", value: "" }) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .lte(col.column, col.value);
@@ -51,8 +46,7 @@ export const ilike2 = (
   col2 = { column: "", value: "" }
 ) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .ilike(col1.column, col1.value)
@@ -67,8 +61,7 @@ export const ilikelte = (
   col2 = { column: "", value: "" }
 ) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .ilike(col1.column, col1.value)
@@ -84,8 +77,7 @@ export const ilike2lte = (
   col3 = { column: "", value: "" }
 ) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .ilike(col1.column, col1.value)
@@ -101,8 +93,7 @@ export const ilikeEq = (
   eq = { column: "", value: "" }
 ) => {
   return new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa
+    const { data, error } = await supabase
       .from(table)
       .select("*")
       .ilike(ilike.column, ilike.value)
@@ -113,7 +104,6 @@ export const ilikeEq = (
 
 export const get = (table) =>
   new Promise(async (resolve, reject) => {
-    const supa = createClient(supaUrl(), supaKey());
-    const { data, error } = await supa.from(table).select("*");
+    const { data, error } = await supabase.from(table).select("*");
     return resolve({ data, error });
   });

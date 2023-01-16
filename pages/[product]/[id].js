@@ -1,12 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
-import { eq } from "helpers/api";
-import { supaKey, supaUrl } from "helpers/util";
+import { supabase } from "helpers/supabase";
 import { ProductView } from "pageElement/product";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import PageHead from "pages/PageHead";
 
 export async function getStaticPaths() {
-  const supabase = createClient(supaUrl(), supaKey());
   const res = await supabase.from("minuman").select("name,id");
   let paths = [];
 
@@ -21,10 +18,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { data, error } = await eq("minuman", {
-    column: "id",
-    value: params.id,
-  });
+  const { data, error } = await supabase
+    .from("minuman")
+    .select("*")
+    .eq("id", params.id);
 
   const props = { product: data[0] };
 

@@ -59,7 +59,7 @@ export default function DrinkCategory() {
             onSelect={({ key }) => setSelected(key)}
             list={list}
           >
-            {list.find((i) => i.key === selected).value} ⯆
+            {list.find((i) => i.key === selected).value}
           </Dropdown>
         </div>
       }

@@ -1,17 +1,14 @@
-import { isFunction } from "helpers/util";
-import Button from "components/Button";
+import { runFunction } from "helpers/util";
 import { useEffect, useState } from "react";
+import ChevronDown from "components/icons/chevron-down";
 
 export default function Dropdown({
   list = [],
   onSelect,
   text = "Dropdown",
-  size = "sm",
   selected,
   isOpen,
   children,
-  className = "",
-  color = "primary",
 }) {
   const [open, setOpen] = useState(isOpen);
 
@@ -22,41 +19,42 @@ export default function Dropdown({
     setOpen(isOpen);
   }, [isOpen]);
 
-  const sizeClass = {
-    xs: "btn-xs",
-    sm: "btn-sm",
-    md: "btn-md",
-    lg: "btn-lg",
-  };
-
-  const btnClass = `${sizeClass[size]} normal-case ${className} btn-${color}`;
-
   return (
-    <div className="relative inline-block z-50">
-      <Button onClick={toggle} onBlur={close} outline className={btnClass}>
-        {children || text}
-      </Button>
+    <div className="mx-2">
+      <button
+        onClick={toggle}
+        onBlur={close}
+        className="btn bg-transparent rounded-lg flex items-center border-carman-black-2 px-2 py-1 normal-case !min-h-0 !h-auto
+       text-medium text-carman-black-2 font-normal
+       hover:bg-slate-200"
+      >
+        <div className="line-clamp-1 flex-1">{children || text}</div>
+        <div className="ml-1">
+          <ChevronDown />
+        </div>
+      </button>
       {open && (
         <div className="absolute top-[100%] left-0 p-2 shadow bg-base-100 rounded-box w-52">
           {list.map((item, index) => {
-            const display =
-              item.value || item.label || item.key || item || index;
-            const isSelect = selected === (item.key || item);
+            const key = item.key || item || index;
+            const display = item.value || item.label || key;
+            const click = () => runFunction(onSelect(item));
+            const isSelected =
+              selected === item.value ||
+              selected === item.key ||
+              selected === item ||
+              selected === index;
             return (
-              <Button
-                key={item.key || item || index}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (isFunction(onSelect)) onSelect(item);
-                  else console.log("Selecting: ", item);
-                  close();
-                }}
-                disabled={isSelect}
-                model="ghost"
-                className="block w-full text-left m-0 btn-sm mb-2 last:mb-[0px]"
+              <button
+                className={`btn bg-transparent min-h-0 h-auto block w-full border-none normal-case text-carman-black-2 rounded-xl text-left text-xs hover:bg-slate-100 py-2 px-4 line-clamp-1 ${
+                  isSelected ? "bg-slate-100" : ""
+                }`}
+                key={key}
+                onClick={click}
+                disabled={isSelected}
               >
                 {display}
-              </Button>
+              </button>
             );
           })}
         </div>

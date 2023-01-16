@@ -23,7 +23,8 @@
     "react-redux": "^8.0.5",
     "react-use-scroll-direction": "^0.1.0",
     "sass": "^1.55.0",
-    "swiper": "^8.4.4"
+    "swiper": "^8.4.4",
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
