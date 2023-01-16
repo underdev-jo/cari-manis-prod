@@ -9,14 +9,10 @@ import { DrinkListView } from "layouts/Product/DrinkList";
 import { createClient } from "@supabase/supabase-js";
 import { supaKey, supaUrl } from "helpers/util";
 
-export async function getStaticProps(context) {
-  const {
-    query: { gula = 999, kemasan = "", q = "" },
-  } = context;
+export async function getServerSideProps(context) {
+  const { query } = context;
 
-  // const gula = (query && query.gula) || 999;
-  // const kemasan = (query && query.kemasasn) || "";
-  // const q = (query && query.q) || "";
+  const { gula = 999, kemasan = "", q = "" } = query;
 
   let api = get("minuman");
 
