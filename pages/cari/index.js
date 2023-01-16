@@ -12,7 +12,9 @@ import { supaKey, supaUrl } from "helpers/util";
 export async function getStaticProps(context) {
   const { query } = context;
 
-  const { gula = 999, kemasan = "", q = "" } = query;
+  const gula = (query && query.gula) || 999;
+  const kemasan = (query && query.kemasasn) || "";
+  const q = (query && query.q) || "";
 
   let api = get("minuman");
 
