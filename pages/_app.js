@@ -43,4 +43,8 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
+export function reportWebVitals(metric) {
+  console.log(`${metric.name}: ${parseInt(metric.startTime)}`);
+}
+
 export default MyApp;

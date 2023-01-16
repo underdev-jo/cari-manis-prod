@@ -53,7 +53,6 @@ export default function Footer() {
             title="Logo cari manis"
             width={68}
             height={36}
-            priority
           />
           <div>Pusat informasi kandungan gula pada minuman Anda.</div>
         </div>

@@ -95,7 +95,6 @@ export const ProductImage = ({ image, name }) => {
             title={name}
             className="block mx-auto"
             layout="responsive"
-            priority
           />
         ) : (
           <div className="w-full h-[240px] animate-pulse bg-primary" />

@@ -6,6 +6,7 @@ import { Burger, Close } from "public/icons";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
+import LogoCariManis from "public/legal/logo-carimanis";
 
 const LeftSide = ({ back }) => {
   const router = useRouter();
@@ -26,7 +27,6 @@ const LeftSide = ({ back }) => {
           width={26}
           height={30}
           onClick={doBack}
-          priority
         />
       </button>
     );
@@ -36,14 +36,9 @@ const LeftSide = ({ back }) => {
       {backButton}
       <Link href="/">
         <button className="btn btn-ghost">
-          <Image
-            src="/legal/logo-carimanis.svg"
-            alt="Logo"
-            title="Logo cari manis"
-            width={68}
-            height={36}
-            priority
-          />
+          <div className="flex items-center [&>svg]:h-9">
+            <LogoCariManis />
+          </div>
         </button>
       </Link>
     </div>

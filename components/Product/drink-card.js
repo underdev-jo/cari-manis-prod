@@ -22,7 +22,6 @@ const DrinkCard = ({
               title={name}
               width={160}
               height={160}
-              priority
             />
           ) : (
             <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
