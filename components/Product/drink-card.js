@@ -16,7 +16,14 @@ const DrinkCard = ({
       <div className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
         <div className="relative w-full h-[160px] overflow-hidden">
           {image ? (
-            <Image src={image} alt={name} title={name} layout="fill" priority />
+            <Image
+              src={image}
+              alt={name}
+              title={name}
+              width={160}
+              height={160}
+              priority
+            />
           ) : (
             <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
           )}
