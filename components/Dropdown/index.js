@@ -20,7 +20,7 @@ export default function Dropdown({
   }, [isOpen]);
 
   return (
-    <div className="mx-2">
+    <div className="relative mx-2">
       <button
         onClick={toggle}
         onBlur={close}
