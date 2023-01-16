@@ -4,7 +4,7 @@ import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const supabase = createClient(supaUrl(), supaKey());
 
   const res = await supabase
