@@ -99,3 +99,27 @@ a {
     transform: scale(1.5) translate(0, 25%);
   }
 }
+
+.selector-drink-home-wrapper {
+  &::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+.selector-drink-home {
+  @apply flex items-center gap-2;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 125%;
+}

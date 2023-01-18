@@ -3,6 +3,7 @@ import { supaKey, supaUrl } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
+import { useState } from "react";
 
 export async function getStaticProps() {
   const supabase = createClient(supaUrl(), supaKey());
@@ -25,7 +26,35 @@ export async function getStaticProps() {
   };
 }
 
+const selectList = [
+  { name: "Rendah Gula", key: "low-sugar" },
+  { name: "Rendah Kalori", key: "low-cal" },
+  { name: "Super Manis", key: "ext-sweet" },
+  { name: "Tinggi Kalori", key: "ext-cal" },
+];
+
+const Selector = ({ active, setActive }) => {
+  return (
+    <div className="overflow-x-auto overflow-y-hidden w-full selector-drink-home-wrapper">
+      <div className="selector-drink-home">
+        {selectList.map((item) => (
+          <button
+            key={item.key}
+            onClick={() => setActive(item.key)}
+            className={`badge badge-primary badge-outline p-3 ${
+              active === item.key ? "bg-black !text-white" : ""
+            } hover:border-black hover:text-black`}
+          >
+            {item.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function Home({ drinkList }) {
+  const [active, setActive] = useState("low-sugar");
   return (
     <>
       <PageHead title="Cari Manis" />
@@ -33,7 +62,10 @@ export default function Home({ drinkList }) {
         <Cover />
         <DrinkCategory />
         <SweetInfo />
-        <DrinkList drinkList={drinkList} />
+        <DrinkList
+          drinkList={drinkList}
+          topEl={<Selector active={active} setActive={setActive} />}
+        />
       </div>
     </>
   );
