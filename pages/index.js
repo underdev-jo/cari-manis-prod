@@ -35,7 +35,12 @@ const selectList = [
 
 const Selector = ({ active, setActive }) => {
   return (
-    <div className="overflow-x-auto overflow-y-hidden w-full selector-drink-home-wrapper xs:-mx-3">
+    <div
+      className="overflow-x-auto overflow-y-hidden w-full selector-drink-home-wrapper -mx-4 px-4 sm:mx-0 sm:px-0 sm:!w-full sm:!max-w-full border border-red-400"
+      style={{
+        width: "calc(100% + 30px)",
+      }}
+    >
       <div className="selector-drink-home">
         {selectList.map((item) => (
           <button
