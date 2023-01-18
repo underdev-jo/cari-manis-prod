@@ -52,6 +52,11 @@ const ProductPackageSelector = () => {
 
 const ProductSugar = () => {
   const [sugar, setSugar] = useState(1);
+  const router = useRouter();
+
+  const searchSugar = () => {
+    router.push(`/cari?gula=${sugar}`);
+  };
 
   const onChange = (e) => {
     const val = e.target.value;
@@ -59,7 +64,7 @@ const ProductSugar = () => {
   };
 
   const max = 50;
-  const btnlist = [1, 10, 20, 30, 50];
+  const btnlist = [1, 13, 25, 37, 50];
 
   let bgBar = "bg-carman-blue-9";
   let colorText = "text-carman-blue-9";
@@ -112,7 +117,7 @@ const ProductSugar = () => {
           <div className="text-carman-gray-4 text-small">Maksimal gula</div>
         </div>
         <div>
-          <Button model="blue">
+          <Button model="blue" onClick={searchSugar}>
             <div className="flex items-center">
               <IconSearch />
               <div>Cari Produk</div>

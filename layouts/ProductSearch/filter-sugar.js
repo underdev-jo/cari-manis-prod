@@ -21,7 +21,7 @@ export default function FilterSugar() {
   let textDropdown = "Kadar Gula";
   if (filtering)
     textDropdown = `Kadar Gula: ${
-      selectorSugar.find((i) => i.key === filtering).value
+      selectorSugar.find((i) => i.key === filtering || i.key > filtering).value
     }`;
 
   return (
