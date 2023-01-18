@@ -68,13 +68,13 @@ const ProductSugar = () => {
 
   let bgBar = "bg-carman-blue-9";
   let colorText = "text-carman-blue-9";
-  if (sugar > 15) {
+  if (sugar > 25) {
     bgBar = "bg-red-700";
     colorText = "text-red-600";
   }
 
   return (
-    <div className="relative block w-full my-4">
+    <div className="relative block w-full my-4 px-2">
       <div className="relative h-5 -mx-[8px]">
         <div
           className="absolute w-full left-0 right-0 top-[50%] h-2 bg-slate-200 rounded-lg"
