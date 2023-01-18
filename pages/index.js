@@ -35,7 +35,7 @@ const selectList = [
 
 const Selector = ({ active, setActive }) => {
   return (
-    <div className="overflow-x-auto overflow-y-hidden w-full selector-drink-home-wrapper">
+    <div className="overflow-x-auto overflow-y-hidden w-full selector-drink-home-wrapper xs:-mx-3">
       <div className="selector-drink-home">
         {selectList.map((item) => (
           <button
