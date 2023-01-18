@@ -21,8 +21,6 @@ export default function PopupKalkulator() {
     else window.document.body.style.overflow = "auto";
   }
 
-  console.log("Hasil: ", calculated);
-
   return (
     <Modal
       appElement={appEl}

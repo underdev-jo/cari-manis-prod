@@ -28,43 +28,66 @@ const Info = ({ netto, packaging }) => {
   );
 };
 
-// const GulaView = ({ gula }) => (
-//   <div className={`${minH} flex-1 mb-2 ${!gula ? phClass : ""}`}>
-//     {gula && `${gula}gr`}
-//   </div>
-// );
+const GulaView = ({ gula }) => (
+  <div className={`${minH} flex-1 ${!gula ? phClass : ""}`}>
+    {gula && `${gula}gr`}
+  </div>
+);
 
-// const KaloriView = ({ kalori }) => (
-//   <div className={`${minH} flex-1 mb-2 ${!kalori ? phClass : ""}`}>
-//     {kalori && `${kalori}kkal`}
-//   </div>
-// );
+const KaloriView = ({ kalori }) => (
+  <div className={`${minH} flex-1 ${!kalori ? phClass : ""}`}>
+    {kalori && `${kalori}kkal`}
+  </div>
+);
+
+const NutriRow = ({ children }) => (
+  <div className="flex flex-1 w-[100%] items-center gap-2 text-medium font-medium mb-1 text-carman-gray-2">
+    {children}
+  </div>
+);
 
 const Nutrition = ({ gula, kalori }) => (
-  <div className="flex flex-1 w-[50%] items-center gap-2 text-medium font-medium mb-1 text-carman-gray-2">
-    <div className={`${minH} flex-1 mb-2 ${!gula ? phClass : ""}`}>
-      {gula && `${gula}gr`}
-    </div>
-    <div className={`${minH} flex-1 mb-2 ${!kalori ? phClass : ""}`}>
-      {kalori && `${kalori}kkal`}
-    </div>
-  </div>
+  <NutriRow>
+    <GulaView gula={gula} />
+    <KaloriView kalori={kalori} />
+  </NutriRow>
 );
 
 const defClass = "flex w-full items-start mb-5";
 
-const LayoutNutrition = ({ props, image }) => (
-  <div className={`${defClass}`}>
-    <Photo image={image} />
-    <div className="flex-1 mr-3 w-2/3">
-      <div className="font-medium">
-        <Name {...props} />
-        <Info {...props} />
+const LayoutNutrition = ({ props, image }) => {
+  const sajian = Math.ceil(props.netto / props.takaran_saji);
+  return (
+    <div className={`${defClass}`}>
+      <Photo image={image} />
+      <div className="flex-1 mr-3 w-2/3">
+        <div className="font-medium">
+          <Name {...props} />
+        </div>
+        <NutriRow>
+          <div className="w-1/3">1 takaran saji</div>
+          <GulaView gula={props.gula} />
+          <KaloriView kalori={props.kalori} />
+        </NutriRow>
+        {sajian > 1 && (
+          <NutriRow>
+            <div className="w-1/3">
+              {props.netto / props.takaran_saji} takaran saji
+            </div>
+            <GulaView
+              gula={parseInt(props.gula * (props.netto / props.takaran_saji))}
+            />
+            <KaloriView
+              kalori={parseInt(
+                props.kalori * (props.netto / props.takaran_saji)
+              )}
+            />
+          </NutriRow>
+        )}
       </div>
-      <Nutrition {...props} />
     </div>
-  </div>
-);
+  );
+};
 
 export default function ProductListItem({ model = "default", ...props }) {
   const [deleted, setDeleted] = useState(false);

@@ -11,7 +11,7 @@ export default function Err505() {
           Server kami dalam kondisi tidak bisa diakses saat ini. Hubungi kami
           bila perlu
         </div>
-        <div className="mt-4 mb-2">
+        <div className="mt-4 mb-2 flex justify-items">
           <Button>Contact us</Button>
         </div>
       </ErrorLayout>
