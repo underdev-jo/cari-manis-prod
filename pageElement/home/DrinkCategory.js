@@ -5,6 +5,8 @@ import Section from "components/Section";
 import Dropdown from "components/Dropdown";
 import { useState } from "react";
 import { selectorPackaging, selectorSugar } from "helpers/drink-selector";
+import Button from "components/Button";
+import { IconSearch } from "public/icons";
 
 function ButtonProductCategory({
   name,
@@ -36,6 +38,92 @@ function ButtonProductCategory({
   );
 }
 
+const ProductPackageSelector = () => {
+  const list = selectorPackaging;
+  return list.map((item) => (
+    <ButtonProductCategory
+      key={item.name}
+      keySlug={item.key}
+      query="kemasan"
+      {...item}
+    />
+  ));
+};
+
+const ProductSugar = () => {
+  const [sugar, setSugar] = useState(1);
+
+  const onChange = (e) => {
+    const val = e.target.value;
+    if (val >= 1 && val) setSugar(val);
+  };
+
+  const max = 50;
+  const btnlist = [1, 10, 20, 30, 50];
+
+  let bgBar = "bg-carman-blue-9";
+  let colorText = "text-carman-blue-9";
+  if (sugar > 15) {
+    bgBar = "bg-red-700";
+    colorText = "text-red-600";
+  }
+
+  return (
+    <div className="relative block w-full my-4">
+      <div className="relative h-5 -mx-[8px]">
+        <div
+          className="absolute w-full left-0 right-0 top-[50%] h-2 bg-slate-200 rounded-lg"
+          style={{ transform: "translate(0, -50%)" }}
+        />
+        <div
+          className={`absolute left-0 right-0 top-[50%] ${bgBar} rounded-full`}
+          style={{
+            transform: "translate(0%, -50%)",
+            minWidth: `2rem`,
+            width: `calc(${sugar * 2}% + ${sugar > 14 ? "1rem" : "1.5rem"})`,
+            maxWidth: "calc(100% + 0.5rem)",
+            height: `calc(100% + 0.5rem)`,
+          }}
+        />
+        <input
+          className="relative sugar-slider"
+          type="range"
+          max={max}
+          value={sugar}
+          onChange={onChange}
+        />
+      </div>
+      <div className="flex justify-between items-center mt-2">
+        {btnlist.map((item, index) => (
+          <button
+            key={item}
+            onClick={() => setSugar(item)}
+            className="w-4 h-4 cursor-pointer text-carman-blue-9 text-xs font-medium"
+          >
+            |
+          </button>
+        ))}
+      </div>
+      <div className="flex justify-between mt-4">
+        <div>
+          <div className={`text-heading2 font-bold ${colorText}`}>
+            {sugar}gr
+          </div>
+          <div className="text-carman-gray-4 text-small">Maksimal gula</div>
+        </div>
+        <div>
+          <Button model="blue">
+            <div className="flex items-center">
+              <IconSearch />
+              <div>Cari Produk</div>
+            </div>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function DrinkCategory() {
   const [selected, setSelected] = useState("kemasan");
 
@@ -65,16 +153,7 @@ export default function DrinkCategory() {
       }
     >
       <div className="flex flex-wrap justify-between">
-        {list
-          .find((i) => i.key === selected)
-          .children.map((item) => (
-            <ButtonProductCategory
-              key={item.name}
-              keySlug={item.key}
-              query={selected}
-              {...item}
-            />
-          ))}
+        {selected === "gula" ? <ProductSugar /> : <ProductPackageSelector />}
       </div>
     </Section>
   );
