@@ -21,42 +21,82 @@ export default function PopupKalkulator() {
     else window.document.body.style.overflow = "auto";
   }
 
+  const defClass =
+    "fixed z-50 bottom-0 left-0 right-0 w-screen h-screen bg-carman-gray-10 transition-all";
+  const openClass = isOpen ? "opacity-100" : "opacity-0 pointer-events-none";
+  const popClass = `${defClass} ${openClass}`;
+
+  const defContent =
+    "h-[86%] bg-white pt-[84px] rounded-b-2xl transition-all duration-300";
+  const openContent = isOpen ? "translate-y-[0%]" : "translate-y-[-50%]";
+  const contentClass = `${defContent}  ${openContent}`;
+
+  const defBtn =
+    "h-[14%] absolute bottom-0 left-0 right-0 flex items-center justify-center transition-all duration-150";
+  const openBtn = isOpen ? "translate-y-[0%]" : "translate-y-[50%]";
+  const btnClass = `${defBtn} ${openBtn}`;
+
   return (
-    <Modal
-      appElement={appEl}
-      isOpen={isOpen}
-      style={{
-        overlay: {
-          zIndex: "999",
-        },
-        content: {
-          border: "none",
-          width: "100%",
-          height: "100%",
-          left: "0",
-          top: "0",
-          borderRadius: "0",
-          overflow: "hidden",
-          position: "relative",
-          padding: "0",
-        },
-      }}
-    >
-      <div className="content-wrapper text-2xl p-2 center border-b border-black h-[50px]">
-        Hasil perhitungan
+    <div className={popClass}>
+      <div className="relative h-[100%]">
+        <div className={contentClass}>
+          <div className="content-wrapper">
+            <div className="px-2 text-heading3 text-carman-gray-2 border-b border-carman-gray-9 pb-3">
+              Hasil Hitung Manismu
+            </div>
+          </div>
+
+          <div className="content-wrapper h-[70%] overflow-y-auto overflow-x-hidden">
+            <div className="px-2">
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+              <div className="mb-4">hehe</div>
+            </div>
+          </div>
+          <div className="content-wrapper">
+            <div className="px-2 border-t border-carman-gray-9">
+              <div className="flex items-start justify-between mt-4">
+                <div className="text-heading3 text-carman-gray-3">
+                  Total Gula
+                </div>
+                <div>
+                  <div className="text-heading4 text-carman-gray-3">60gr</div>
+                </div>
+              </div>
+              <div className="flex items-start justify-between mb-4">
+                <div className="text-heading3 text-carman-gray-3">
+                  Total Kalori
+                </div>
+                <div>
+                  <div className="text-heading4 text-carman-gray-3">
+                    220kkal
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={btnClass}>
+          <div className="w-full max-w-xs mx-auto">
+            <Button onClick={close} className="w-full">
+              Tutup
+            </Button>
+          </div>
+        </div>
       </div>
-      <div
-        className="content-wrapper relative overflow-y-auto !px-0 !py-4"
-        id="modalResult"
-        style={{ height: "calc(100% - 124px)" }}
-      >
-        {calcProduct.map((item, index) => (
-          <ProductListItem key={index} model="nutrition" {...item.data[0]} />
-        ))}
-      </div>
-      <div className="bg-carman-gray-10 p-4 w-full flex items-center justify-center h-[74px]">
-        <Button onClick={close}>Close</Button>
-      </div>
-    </Modal>
+    </div>
   );
 }
