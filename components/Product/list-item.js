@@ -7,7 +7,16 @@ const minH = "min-h-[16px]";
 
 const Photo = ({ name, image }) => {
   let view = <div className={`h-[72px] w-[72px] ${phClass}`} />;
-  if (image) view = <NextImage width={72} height={72} alt={name} src={image} />;
+  if (image)
+    view = (
+      <NextImage
+        className="rounded-lg"
+        width={72}
+        height={72}
+        alt={name}
+        src={image}
+      />
+    );
   return <div className="mr-3">{view}</div>;
 };
 
@@ -53,12 +62,20 @@ const Nutrition = ({ gula, kalori }) => (
   </NutriRow>
 );
 
-const defClass = "flex w-full items-start mb-5";
+const generateClass = (props) => {
+  const defClass =
+    "flex w-full items-start mb-5 p-1 border border-transparent rounded-lg";
+  const isDanger = "bg-red-100";
+
+  let fullClass = defClass;
+  if (props.model === "danger") fullClass = `${defClass} ${isDanger}`;
+  return fullClass;
+};
 
 const LayoutNutrition = ({ props, image }) => {
   const sajian = Math.ceil(props.netto / props.takaran_saji);
   return (
-    <div className={`${defClass}`}>
+    <div className={generateClass(props)}>
       <Photo image={image} />
       <div className="flex-1 mr-3 w-2/3">
         <div className="font-medium">
@@ -99,7 +116,7 @@ export default function ProductListItem({ model = "default", ...props }) {
 
   let layout = {
     default: (
-      <div className={defClass}>
+      <div className={generateClass({ model, ...props })}>
         <Photo image={image} />
         <div className="flex-1 mr-3 w-2/3">
           <div className="font-medium">

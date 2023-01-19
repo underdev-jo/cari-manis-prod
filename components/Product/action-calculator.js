@@ -69,7 +69,7 @@ const ActionCalculator = (product) => {
   const classDelBtn = `${delBtn} ${delBtnMore}`;
 
   return (
-    <div className="w-1/4">
+    <div className="w-1/4 flex justify-end">
       <div className="flex">
         <button className={classDelBtn} onClick={dec}>
           {isMore ? (

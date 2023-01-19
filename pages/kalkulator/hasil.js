@@ -1,11 +1,14 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
 import { getCookie } from "helpers/util";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 
 export default function PopupKalkulator() {
+  const [counter, setCounter] = useState(0);
+
   const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
   const calcProduct =
     useSelector(({ calculatedProduct }) => calculatedProduct.product) || [];
@@ -13,6 +16,9 @@ export default function PopupKalkulator() {
   const close = () => dispatch(setPopupCalculator(false));
 
   const calculated = JSON.parse(getCookie("calculated") || "{}");
+
+  console.log("Product: ", calcProduct);
+  console.log("Calculated: ", calculated);
 
   let appEl = "";
   if (typeof window !== "undefined") {
@@ -68,7 +74,7 @@ export default function PopupKalkulator() {
           </div>
           <div className="content-wrapper">
             <div className="px-2 border-t border-carman-gray-9">
-              <div className="flex items-start justify-between mt-4">
+              <div className="flex items-start justify-between mt-4 mb-1">
                 <div className="text-heading3 text-carman-gray-3">
                   Total Gula
                 </div>

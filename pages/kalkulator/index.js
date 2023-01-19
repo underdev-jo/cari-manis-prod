@@ -70,9 +70,16 @@ const ViewSection = ({ product, cookie = [] }) => {
           <span className="ml-1">Hapus Semua</span>
         </button>
       </div>
-      {product.map((item, index) => (
-        <ProductListItem key={index} {...item.data[0]} />
-      ))}
+      {product.map((item, index) => {
+        console.log(item.xSug);
+        return (
+          <ProductListItem
+            model={item.data[0].xSug > 20 ? "danger" : ""}
+            key={index}
+            {...item.data[0]}
+          />
+        );
+      })}
     </>
   );
 };
@@ -127,20 +134,24 @@ export default function Kalkulator({ product }) {
     else if (isHit && product) {
       const list = [...product];
 
-      const addingQty = (resItem) => {
+      const addingProps = (resItem) => {
         let returnItem = resItem;
-        const target = list.find((i) => i.id === resItem.data[0].id);
-        if (resItem.data[0])
-          returnItem = {
-            ...resItem,
-            data: [{ ...resItem.data[0], qty: target.c }],
-          };
+        const item = resItem.data[0];
+        const target = list.find((i) => i.id === item.id);
+        const count = target.c;
+        const newProps = {
+          qty: count,
+          xSug: count * item.gula,
+          xCal: count * item.kalori,
+        };
+        const newItem = { ...item, ...newProps };
+        if (item) returnItem = { ...resItem, data: [newItem] };
         return returnItem;
       };
 
       run(list).then((resPromise) => {
         // adding QTY product
-        const data = resPromise.map((resItem) => addingQty(resItem));
+        const data = resPromise.map((resItem) => addingProps(resItem));
         dispatch(setProductCalc(data));
       });
     }
