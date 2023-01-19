@@ -25,7 +25,13 @@ const ActionCalculator = (product) => {
     // GET EXIST PRODUCT
     const target = calcProduct.find((i) => i.data[0].id === product.id);
     const tIndex = calcProduct.findIndex((i) => i.data[0].id === product.id);
-    const targetProduct = { ...target, data: [{ ...target.data[0], qty }] };
+    const newProps = {
+      qty,
+      xSug: target.data[0].gula * qty,
+      xCal: target.data[0].kalori * qty,
+    };
+    const newData = { ...target.data[0], ...newProps };
+    const targetProduct = { ...target, data: [newData] };
     const newProduct = [...calcProduct];
     newProduct[tIndex] = targetProduct;
     dispatch(setProductCalc(newProduct));
