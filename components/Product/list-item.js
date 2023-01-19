@@ -1,4 +1,5 @@
 import NextImage from "next/image";
+import SugarCube from "public/icons/SugarCube";
 import { useState } from "react";
 import ActionCalculator from "./action-calculator";
 
@@ -37,14 +38,27 @@ const Info = ({ netto, packaging }) => {
   );
 };
 
-const GulaView = ({ gula }) => (
-  <div className={`${minH} flex-1 ${!gula ? phClass : ""}`}>
-    {gula && `${gula}gr`}
+const nutriClass = (color, adds = "") =>
+  ` flex items-center justify-center text-carman-gray-2 text-small font-medium rounded-full px-2 py-[2px] ${minH} ${color} ${adds}`;
+
+const GulaView = ({ gula, plain }) => (
+  <div
+    className={nutriClass(
+      plain ? "bg-carman-gray-7" : "bg-carman-purple-1",
+      !gula ? phClass : ""
+    )}
+  >
+    <SugarCube /> {gula && `${gula}gr`}
   </div>
 );
 
-const KaloriView = ({ kalori }) => (
-  <div className={`${minH} flex-1 ${!kalori ? phClass : ""}`}>
+const KaloriView = ({ kalori, plain }) => (
+  <div
+    className={nutriClass(
+      plain ? "bg-carman-gray-7" : "bg-carman-yellow-1",
+      !kalori ? phClass : ""
+    )}
+  >
     {kalori && `${kalori}kkal`}
   </div>
 );
@@ -64,7 +78,7 @@ const Nutrition = ({ gula, kalori }) => (
 
 const generateClass = (props) => {
   const defClass =
-    "flex w-full items-start mb-5 p-1 border border-transparent rounded-lg";
+    "flex w-full items-start mb-2 p-2 border border-transparent rounded-lg";
   const isDanger = "bg-red-100";
 
   let fullClass = defClass;
@@ -82,25 +96,9 @@ const LayoutNutrition = ({ props, image }) => {
           <Name {...props} />
         </div>
         <NutriRow>
-          <div className="w-1/3">1 takaran saji</div>
-          <GulaView gula={props.gula} />
-          <KaloriView kalori={props.kalori} />
+          <GulaView gula={props.xSug} plain />
+          <KaloriView kalori={props.xCal} plain />
         </NutriRow>
-        {sajian > 1 && (
-          <NutriRow>
-            <div className="w-1/3">
-              {props.netto / props.takaran_saji} takaran saji
-            </div>
-            <GulaView
-              gula={parseInt(props.gula * (props.netto / props.takaran_saji))}
-            />
-            <KaloriView
-              kalori={parseInt(
-                props.kalori * (props.netto / props.takaran_saji)
-              )}
-            />
-          </NutriRow>
-        )}
       </div>
     </div>
   );

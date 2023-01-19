@@ -20,13 +20,16 @@ module.exports = {
       "carman-gray-4": "#909090",
       "carman-gray-5": "#BBBBBB",
       "carman-gray-6": "#E1E8F5",
+      "carman-gray-7": "#F4F4F4",
       "carman-gray-9": "#E2E8F4",
       "carman-gray-10": "#f0f6ff",
       "carman-red-1": "#EB5757",
       "carman-black-1": "#06142F",
       "carman-black-2": "#3D4451",
       "carman-blue-1": "#017FFA",
-      "carman-blue-9": "#394f69"
+      "carman-blue-9": "#394f69",
+      "carman-purple-1":"#D7E4FF",
+      "carman-yellow-1":"#FFEFD8"
     },
     fontSize: {
       "xs": ["0.75rem", "1rem"],

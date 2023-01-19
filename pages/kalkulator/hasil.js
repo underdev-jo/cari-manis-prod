@@ -33,7 +33,7 @@ export default function PopupKalkulator() {
   const popClass = `${defClass} ${openClass}`;
 
   const defContent =
-    "h-[86%] bg-white pt-[84px] rounded-b-2xl transition-all duration-300";
+    "h-[86%] bg-white pt-[84px] rounded-b-2xl transition-all duration-300 shadow-2xl container";
   const openContent = isOpen ? "translate-y-[0%]" : "translate-y-[-50%]";
   const contentClass = `${defContent}  ${openContent}`;
 
@@ -54,22 +54,13 @@ export default function PopupKalkulator() {
 
           <div className="content-wrapper h-[70%] overflow-y-auto overflow-x-hidden">
             <div className="px-2">
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
-              <div className="mb-4">hehe</div>
+              {calcProduct.map((item, index) => (
+                <ProductListItem
+                  key={index}
+                  model="nutrition"
+                  {...item.data[0]}
+                />
+              ))}
             </div>
           </div>
           <div className="content-wrapper">
