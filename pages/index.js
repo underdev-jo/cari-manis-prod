@@ -29,6 +29,9 @@ export async function getStaticProps() {
 const selectList = [
   { name: "Rendah Gula", key: "low-sugar" },
   { name: "Rendah Kalori", key: "low-cal" },
+  { name: "Susu", key: "milk" },
+  { name: "Kopi", key: "Coffee" },
+  { name: "Jus", key: "Juice" },
   { name: "Super Manis", key: "ext-sweet" },
   { name: "Tinggi Kalori", key: "ext-cal" },
 ];

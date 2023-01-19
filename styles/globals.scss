@@ -121,8 +121,9 @@ a {
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   overflow-y: hidden;
-  width: calc(320px * 1.5);
+  width: calc(320px * 2.25);
+
   @media (min-width: 520px) {
-    width: 125%;
+    width: 175%;
   }
 }
