@@ -6,6 +6,31 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 
+const TotalCounter = ({ title, total, limit, units }) => {
+  return (
+    <div className="flex items-center justify-between mt-4">
+      <div className="text-heading3 text-carman-gray-3">{title}</div>
+      <div className="text-right">
+        <div className="text-heading4 text-carman-gray-3" id="totalCountSugar">
+          {total}
+          {units}
+        </div>
+        <div className="text-small">
+          Setara{" "}
+          <span
+            className={`badge badge-sm font-semibold text-white ${
+              limit > 100 ? "badge-accent" : "badge-info"
+            }`}
+          >
+            {limit}%
+          </span>{" "}
+          kebutuhan harian
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function PopupKalkulator() {
   const [counter, setCounter] = useState(0);
 
@@ -17,8 +42,29 @@ export default function PopupKalkulator() {
 
   const calculated = JSON.parse(getCookie("calculated") || "{}");
 
+  let totalSugar = 0;
+  let totalCalorie = 0;
+  let count = { sugar: 0, calorie: 0 };
+  if (calcProduct && calcProduct.length) {
+    calcProduct.map((item) => {
+      totalSugar = totalSugar + item.data[0].xSug;
+      totalCalorie = totalCalorie + item.data[0].xCal;
+    });
+  }
+
+  useEffect(() => {
+    console.log("SUGAR UP: ", totalSugar);
+  }, [totalSugar]);
+
   console.log("Product: ", calcProduct);
   console.log("Calculated: ", calculated);
+  console.log("Counted: ", { totalSugar, totalCalorie });
+
+  const maxSugar = 50;
+  const maxCal = 2100;
+
+  const limitSugar = parseInt((totalSugar / maxSugar) * 100, 10);
+  const limitCal = parseInt((totalCalorie / maxCal) * 100, 10);
 
   let appEl = "";
   if (typeof window !== "undefined") {
@@ -52,7 +98,7 @@ export default function PopupKalkulator() {
             </div>
           </div>
 
-          <div className="content-wrapper h-[70%] overflow-y-auto overflow-x-hidden">
+          <div className="content-wrapper h-[65%] overflow-y-auto overflow-x-hidden">
             <div className="px-2">
               {calcProduct.map((item, index) => (
                 <ProductListItem
@@ -65,24 +111,18 @@ export default function PopupKalkulator() {
           </div>
           <div className="content-wrapper">
             <div className="px-2 border-t border-carman-gray-9">
-              <div className="flex items-start justify-between mt-4 mb-1">
-                <div className="text-heading3 text-carman-gray-3">
-                  Total Gula
-                </div>
-                <div>
-                  <div className="text-heading4 text-carman-gray-3">60gr</div>
-                </div>
-              </div>
-              <div className="flex items-start justify-between mb-4">
-                <div className="text-heading3 text-carman-gray-3">
-                  Total Kalori
-                </div>
-                <div>
-                  <div className="text-heading4 text-carman-gray-3">
-                    220kkal
-                  </div>
-                </div>
-              </div>
+              <TotalCounter
+                title="Total Gula"
+                limit={limitSugar}
+                total={totalSugar}
+                units="gr"
+              />
+              <TotalCounter
+                title="Total Kalori"
+                limit={limitCal}
+                total={totalCalorie}
+                units="kkal"
+              />
             </div>
           </div>
         </div>

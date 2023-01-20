@@ -29,7 +29,7 @@ module.exports = {
       "carman-blue-1": "#017FFA",
       "carman-blue-9": "#394f69",
       "carman-purple-1":"#D7E4FF",
-      "carman-yellow-1":"#FFEFD8"
+      "carman-yellow-1":"#FFEFD8",
     },
     fontSize: {
       "xs": ["0.75rem", "1rem"],
@@ -72,7 +72,8 @@ module.exports = {
       {
       winter: {
         ...require("daisyui/src/colors/themes")["[data-theme=winter]"],
-        accent:"#EB5757"
+        accent:"#EB5757",
+        info:"#3578F6"
       }
     }
   ],
