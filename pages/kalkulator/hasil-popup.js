@@ -18,7 +18,7 @@ export default function PopupHasil() {
   const dispatch = useDispatch();
   const close = () => {
     setDetail(false);
-    setTimeout(() => dispatch(setPopupCalculator(false)), 350);
+    setTimeout(() => dispatch(setPopupCalculator(false)), 400);
   };
 
   const openDetail = () => setDetail(!detail);
@@ -83,12 +83,14 @@ export default function PopupHasil() {
             clickDetail={openDetail}
             close={close}
           />
-          <PopupKalkulator
-            detail={detail}
-            total={total}
-            limit={limit}
-            calcProduct={calcProduct}
-          />
+          {detail && (
+            <PopupKalkulator
+              detail={detail}
+              total={total}
+              limit={limit}
+              calcProduct={calcProduct}
+            />
+          )}
         </div>
       </div>
       <div className={btnClass}>
