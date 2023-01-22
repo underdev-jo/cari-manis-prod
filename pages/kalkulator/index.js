@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
-import PopupKalkulator from "./hasil";
+import PopupHasil from "./hasil-popup";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -173,7 +173,7 @@ export default function Kalkulator({ product }) {
         </div>
       </div>
       {calcProduct && calcProduct.length > 0 && <CTACalculate />}
-      <PopupKalkulator />
+      <PopupHasil />
     </>
   );
 }

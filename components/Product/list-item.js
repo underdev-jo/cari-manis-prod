@@ -1,4 +1,5 @@
 import NextImage from "next/image";
+import CalorieFire from "public/icons/calorie-fire";
 import SugarCube from "public/icons/SugarCube";
 import { useState } from "react";
 import ActionCalculator from "./action-calculator";
@@ -39,7 +40,7 @@ const Info = ({ netto, packaging }) => {
 };
 
 const nutriClass = (color, adds = "") =>
-  ` flex items-center justify-center text-carman-gray-2 text-small font-medium rounded-full px-2 py-[2px] ${minH} ${color} ${adds}`;
+  ` flex gap-1 items-center justify-center text-carman-gray-2 text-small font-medium rounded-full px-2 py-[2px] ${minH} ${color} ${adds}`;
 
 const GulaView = ({ gula, plain }) => (
   <div
@@ -59,7 +60,7 @@ const KaloriView = ({ kalori, plain }) => (
       !kalori ? phClass : ""
     )}
   >
-    {kalori && `${kalori}kkal`}
+    <CalorieFire /> {kalori && `${kalori}kkal`}
   </div>
 );
 
@@ -100,6 +101,7 @@ const LayoutNutrition = ({ props, image }) => {
           <KaloriView kalori={props.xCal} plain />
         </NutriRow>
       </div>
+      <div className="text-small text-carman-gray-3">x{props.qty}</div>
     </div>
   );
 };

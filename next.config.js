@@ -7,6 +7,7 @@ const nextConfig = {
       "placeimg.com",
       "obqyrahgipvmnyfejdvl.supabase.co",
       "via.placeholder.com",
+      "https://fonts.gstatic.com",
     ],
   },
 };
