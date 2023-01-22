@@ -39,11 +39,11 @@ export default function PopupHasil() {
   };
 
   let hei = "h-[300px]";
-  let posTop = "top-[50%]";
+  let posTop = "top-[50%] w-[80%]";
   let overpacity = "opacity-70";
   if (detail) {
     hei = "h-[87%]";
-    posTop = "top-[0%] !translate-y-0 rounded-t-none";
+    posTop = "top-[0%] !translate-y-0 rounded-t-none w-screen";
     overpacity = "opacity-100";
   }
 
@@ -60,7 +60,7 @@ export default function PopupHasil() {
   const classOverlay = `${defOverlay} ${openOverlay}`;
 
   const defModal =
-    "fixed left-[50%] w-screen max-w-md rounded-2xl bg-white shadow-lg transition-all duration-300 -translate-x-[50%] -translate-y-[50%] z-50";
+    "fixed left-[50%] max-w-md rounded-2xl bg-white shadow-lg transition-all duration-300 -translate-x-[50%] -translate-y-[50%] z-50";
   const openModal = isOpen
     ? `${posTop} ${hei} opacity-100`
     : "top-[70%] opacity-0 pointer-events-none";
