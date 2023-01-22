@@ -33,29 +33,24 @@ const Faces = ({ limit }) => {
   let alt = "🥳";
 
   if (limit > 100) {
-    let webp = "/icons/animoji/dizzy-face.webp";
-    let gif = "/icons/animoji/dizzy-face.gif";
-    let alt = "😵";
+    webp = "/icons/animoji/dizzy-face.webp";
+    gif = "/icons/animoji/dizzy-face.gif";
+    alt = "😵";
   }
 
   return (
     <div className="flex justify-center w-full">
       <picture>
-        <source srcSet="/icons/animoji/dizzy-face.webp" type="image/webp" />
-        <img
-          src="/icons/animoji/dizzy-face.gif"
-          alt="😵"
-          width={64}
-          height={64}
-        />
+        <source srcSet={webp} type="image/webp" />
+        <img src={gif} alt={alt} width={64} height={64} />
       </picture>
     </div>
   );
 };
 
 export default function HasilInfo({
-  total,
-  limit,
+  total = { sugar: 0, calorie: 0 },
+  limit = { sugar: 0, calorie: 0 },
   detail,
   clickDetail,
   close,
