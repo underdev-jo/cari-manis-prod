@@ -18,7 +18,7 @@ export default function PopupHasil() {
   const dispatch = useDispatch();
   const close = () => {
     setDetail(false);
-    dispatch(setPopupCalculator(false));
+    setTimeout(() => dispatch(setPopupCalculator(false)), 350);
   };
 
   const openDetail = () => setDetail(!detail);
