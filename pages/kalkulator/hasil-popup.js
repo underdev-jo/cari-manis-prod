@@ -1,5 +1,5 @@
 import Button from "components/Button";
-import { getCookie } from "helpers/util";
+// import { getCookie } from "helpers/util";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
@@ -9,13 +9,16 @@ import HasilInfo from "./hasil-info";
 export default function PopupHasil() {
   const [detail, setDetail] = useState(false);
 
-  const calculated = JSON.parse(getCookie("calculated") || "{}");
+  // const calculated = JSON.parse(getCookie("calculated") || "{}");
 
   const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
   const calcProduct =
     useSelector(({ calculatedProduct }) => calculatedProduct.product) || [];
 
   const dispatch = useDispatch();
+
+  const directClose = () => dispatch(setPopupCalculator(false));
+
   const close = () => {
     setDetail(false);
     setTimeout(() => dispatch(setPopupCalculator(false)), 400);
@@ -38,7 +41,7 @@ export default function PopupHasil() {
     calorie: limiter(total.calorie, 2100),
   };
 
-  let hei = "h-[40vh]";
+  let hei = "h-auto max-h-[40vh]";
   let posTop = "top-[50%] !w-[80%]";
   let overpacity = "opacity-70";
   if (detail) {
@@ -77,11 +80,12 @@ export default function PopupHasil() {
       <div className={classModal}>
         <div className="relative h-full">
           <HasilInfo
+            isOpen={isOpen}
             detail={detail}
             total={total}
             limit={limit}
             clickDetail={openDetail}
-            close={close}
+            close={directClose}
           />
           {detail && (
             <PopupKalkulator

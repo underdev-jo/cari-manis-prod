@@ -1,13 +1,24 @@
 import Button from "components/Button";
 import { Close } from "public/icons";
 
-const Wording = ({ total, limit }) => {
+const Wording = ({ total, limit, isOpen }) => {
+  if (!isOpen) return "";
+  else if (isOpen === "calorie")
+    return (
+      <div className="mx-auto max-w-xs text-medium mt-5">
+        Jika kamu mengkonsumsi masing-masing kamu akan mengkonsumsi kalori
+        sebanyak {total.calorie}kkal.
+      </div>
+    );
+
   return (
-    <div className="mx-auto max-w-xs text-medium text-center mt-5">
-      Jika kami mengkonsumsi minuman-minuman tadi sebanyak{" "}
+    <div className="mx-auto max-w-xs text-medium mt-5">
+      Jika kamu mengkonsumsi masing-masing sebanyak{" "}
       <span className="font-semibold">1 takaran saji</span>, maka total
       kandungan gulanya sebesar{" "}
-      <span className="font-bold">{total.sugar}gr</span>. Atau setara dengan{" "}
+      <span className="font-bold">{total.sugar}gr</span>.
+      <br />
+      Atau setara dengan{" "}
       <span
         className={`badge font-bold text-white ${
           limit.sugar > 100 ? "badge-accent" : "badge-primary"
@@ -20,19 +31,30 @@ const Wording = ({ total, limit }) => {
   );
 };
 
-const HeadText = ({ limit }) => {
+const HeadText = ({ limit, isOpen }) => {
+  if (!isOpen) return "";
+
   let text = "Yay, Kandungan Gula-nya aman!";
-  if (limit > 100) text = "Wah, kemanisan nih!";
+  if (limit.sugar > 100) text = "Wah, kemanisan nih!";
+
+  if (isOpen === "calorie") {
+    text = "Kalorinya masih aman lah";
+    if (limit.calorie > 100) text = "Jumlah kalorinya bahaya nih!";
+  }
 
   return <div className="text-carman-gray-2 font-bold text-center">{text}</div>;
 };
 
-const Faces = ({ limit }) => {
+const Faces = ({ limit, isOpen }) => {
+  if (!isOpen) return "";
+
   let webp = "/icons/animoji/party-face.webp";
   let gif = "/icons/animoji/party-face.gif";
   let alt = "🥳";
 
-  if (limit > 100) {
+  const checker = isOpen === "calorie" ? limit.calorie : limit.sugar;
+
+  if (checker > 100) {
     webp = "/icons/animoji/dizzy-face.webp";
     gif = "/icons/animoji/dizzy-face.gif";
     alt = "😵";
@@ -54,6 +76,7 @@ export default function HasilInfo({
   detail,
   clickDetail,
   close,
+  isOpen,
 }) {
   return (
     <div
@@ -69,9 +92,9 @@ export default function HasilInfo({
       </button>
       <div className="py-6 px-5">
         <div className="mb-5">
-          <Faces limit={limit} />
-          <HeadText limit={limit} />
-          <Wording total={total} limit={limit} />
+          <Faces limit={limit} isOpen={isOpen} />
+          <HeadText limit={limit} isOpen={isOpen} />
+          <Wording total={total} limit={limit} isOpen={isOpen} />
           <div className="flex justify-center mt-5">
             <Button model="blue" onClick={clickDetail}>
               Lihat Detail

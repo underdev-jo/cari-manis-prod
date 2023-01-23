@@ -4,6 +4,8 @@ import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import Image from "next/image";
 import PageHead from "pages/PageHead";
+import CalorieFire from "public/icons/calorie-fire";
+import SugarCube from "public/icons/SugarCube";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
@@ -71,7 +73,6 @@ const ViewSection = ({ product, cookie = [] }) => {
         </button>
       </div>
       {product.map((item, index) => {
-        console.log(item.xSug);
         return (
           <ProductListItem
             model={item.data[0].xSug > 20 ? "danger" : ""}
@@ -86,11 +87,18 @@ const ViewSection = ({ product, cookie = [] }) => {
 
 const CTACalculate = () => {
   const dispatch = useDispatch();
-  const click = () => dispatch(setPopupCalculator(true));
+  const click = (value = true) => dispatch(setPopupCalculator(value));
+  const clickCal = () => click("calorie");
+  const clickSugar = () => click("sugar");
   return (
-    <div className="bg-carman-gray-10 flex justify-center p-6">
-      <Button model="blue" onClick={click}>
-        Hi hi hitung manismu
+    <div className="bg-carman-gray-10 flex justify-center p-6 gap-4">
+      <Button onClick={clickCal} className="gap-2 text-white">
+        <CalorieFire />
+        Hitung Kalori
+      </Button>
+      <Button model="blue" onClick={clickSugar} className="gap-2 text-white">
+        <SugarCube size={20} />
+        Hitung Gula
       </Button>
     </div>
   );
