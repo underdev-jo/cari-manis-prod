@@ -6,8 +6,7 @@ import PageHead from "pages/PageHead";
 import Alert from "components/Alert";
 import Spinner from "components/Spinner";
 import { DrinkListView } from "layouts/Product/DrinkList";
-import { createClient } from "@supabase/supabase-js";
-import { supaKey, supaUrl } from "helpers/util";
+import { supabase } from "helpers/supabase";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -19,23 +18,23 @@ export async function getServerSideProps(context) {
   let queryName = [];
   if (q) queryName = `${q}`.split(/[ ,]+/);
 
-  const clientAPI = createClient(supaUrl(), supaKey());
   if (q || kemasan || gula)
-    api = clientAPI
+    api = supabase
       .from("minuman")
       .select("*")
-      .or(`name.ilike.%${q}%,kategori.ilike.%${q}%`)
+      .or(
+        `name.ilike.%${q}%,category.cs.${JSON.stringify(queryName)
+          .replace("[", "{")
+          .replace("]", "}")}`
+      )
       .ilike("packaging", `%${kemasan || ""}%`)
       .lte("gula", gula || 999)
       .range(0, 19)
       .order("created_at", { ascending: false });
 
   const result = await api;
-  // console.log("SERVER: ", { queryName, result, kategoriData });
 
-  const resultData = result;
-
-  return { props: { query, result: resultData, propsKeyword: q } };
+  return { props: { query, result, propsKeyword: q } };
 }
 
 export default function SearchPage({ result, propsKeyword }) {
