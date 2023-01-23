@@ -1,30 +1,35 @@
 import Button from "components/Button";
 // import { getCookie } from "helpers/util";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPopupCalculator } from "store/slices/calculatedPopup";
+import {
+  setPopupCalculator,
+  setPopupDetailCalc,
+} from "store/slices/calculatedPopup";
 import PopupKalkulator from "./hasil-produk";
 import HasilInfo from "./hasil-info";
 
 export default function PopupHasil() {
-  const [detail, setDetail] = useState(false);
+  // const [detail, setDetail] = useState(false);
 
   // const calculated = JSON.parse(getCookie("calculated") || "{}");
 
+  const detail = useSelector(({ popupCalc }) => popupCalc.popupDetail);
   const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
   const calcProduct =
     useSelector(({ calculatedProduct }) => calculatedProduct.product) || [];
 
   const dispatch = useDispatch();
 
+  const openDetail = () => dispatch(setPopupDetailCalc(true));
+
   const directClose = () => dispatch(setPopupCalculator(false));
 
   const close = () => {
-    setDetail(false);
+    dispatch(setPopupDetailCalc(false));
     setTimeout(() => dispatch(setPopupCalculator(false)), 400);
   };
 
-  const openDetail = () => setDetail(!detail);
+  // const openDetail = () => setDetail(!detail);
 
   let total = { sugar: 0, calorie: 0 };
   if (calcProduct && calcProduct.length) {
@@ -58,19 +63,19 @@ export default function PopupHasil() {
   }
 
   const defOverlay =
-    "fixed left-0 top-0 h-screen w-screen bg-primary-content transition-all duration-300 z-50";
+    "fixed left-0 top-0 h-screen w-screen bg-primary-content transition-all duration-200 z-50";
   const openOverlay = isOpen ? overpacity : "opacity-0 pointer-events-none";
   const classOverlay = `${defOverlay} ${openOverlay}`;
 
   const defModal =
-    "fixed left-[50%] w-[80%] max-w-md rounded-2xl bg-white shadow-lg transition-all duration-300 -translate-x-[50%] -translate-y-[50%] z-50";
+    "fixed left-[50%] w-[80%] max-w-md rounded-2xl bg-white shadow-lg transition-all duration-200 -translate-x-[50%] -translate-y-[50%] z-50";
   const openModal = isOpen
     ? `${posTop} ${hei} opacity-100`
     : "top-[70%] opacity-0 pointer-events-none";
   const classModal = `${defModal} ${openModal}`;
 
   const defBtn =
-    "h-[14%] fixed bottom-0 left-0 right-0 flex items-center justify-center transition-all duration-150 z-50";
+    "h-[14%] fixed bottom-0 left-0 right-0 flex items-center justify-center transition-all duration-200 z-50";
   const openBtn = isOpen && detail ? "translate-y-[0%]" : "translate-y-[200%]";
   const btnClass = `${defBtn} ${openBtn}`;
 

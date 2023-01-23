@@ -4,7 +4,7 @@ const popupCalc = createSlice({
   name: "popupCalc",
   initialState: {
     popup: false,
-    modalCalculated: false,
+    popupDetail: false,
     sugarCount: 0,
     calorieCount: 0,
   },
@@ -12,8 +12,11 @@ const popupCalc = createSlice({
     setPopupCalculator: (state, action) => {
       state.popup = action.payload;
     },
+    setPopupDetailCalc: (state, action) => {
+      state.popupDetail = action.payload;
+    },
   },
 });
 
-export const { setPopupCalculator } = popupCalc.actions;
+export const { setPopupCalculator, setPopupDetailCalc } = popupCalc.actions;
 export default popupCalc.reducer;

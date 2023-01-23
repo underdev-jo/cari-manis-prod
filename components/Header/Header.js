@@ -7,26 +7,45 @@ import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
 import LogoCariManis from "public/legal/logo-carimanis";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setPopupCalculator,
+  setPopupDetailCalc,
+} from "store/slices/calculatedPopup";
 
 const LeftSide = ({ back }) => {
+  const dispatch = useDispatch();
+
+  const detail = useSelector(({ popupCalc }) => popupCalc.popupDetail);
+  const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
   const router = useRouter();
+
   const { pathname: path, back: backRouter } = router;
+
   const defaultBack = () => backRouter();
-  const doBack = () => runFunction(back, defaultBack);
+
+  const doBack = () => {
+    if (isOpen && detail) {
+      console.log("THIS IF");
+      dispatch(setPopupDetailCalc(false));
+      setTimeout(() => dispatch(setPopupCalculator(false)), 400);
+    } else if (isOpen) {
+      dispatch(setPopupCalculator(false));
+    } else runFunction(back, defaultBack);
+  };
+
   const notHome =
     path !== "/_adminLogin" && path !== "/_dashboard" && path !== "/";
 
   let backButton = "";
   if (notHome)
     backButton = (
-      <button className="btn btn-square btn-ghost text-white">
+      <button className="btn btn-square btn-ghost text-white" onClick={doBack}>
         <Image
           src="/icons/arrow-left-solid.svg"
           alt="Back"
-          title="Back"
           width={26}
           height={30}
-          onClick={doBack}
         />
       </button>
     );

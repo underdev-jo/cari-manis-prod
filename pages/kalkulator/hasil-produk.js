@@ -38,7 +38,7 @@ export default function PopupKalkulator({
   return (
     <div className="!pt-[80px] h-full content-wrapper">
       <div
-        className={`relative overflow-hidden transition-all duration-300 ${
+        className={`relative overflow-hidden transition-all ${
           detail ? "h-[100%]" : "!h-[0px]"
         } `}
       >
