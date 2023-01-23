@@ -23,9 +23,13 @@ export async function getServerSideProps(context) {
       .from("minuman")
       .select("*")
       .or(
-        `name.ilike.%${q}%,category.cs.${JSON.stringify(queryName)
-          .replace("[", "{")
-          .replace("]", "}")}`
+        queryName.length > 0
+          ? `${queryName.map(
+              (qitem) => `name.ilike.%${qitem}%`
+            )},category.cs.${JSON.stringify(queryName)
+              .replace("[", "{")
+              .replace("]", "}")}`
+          : `name.ilike.%${q}%`
       )
       .ilike("packaging", `%${kemasan || ""}%`)
       .lte("gula", gula || 999)
@@ -33,7 +37,7 @@ export async function getServerSideProps(context) {
       .order("created_at", { ascending: false });
 
   const result = await api;
-
+  // console.log({ queryName, q, result });
   return { props: { query, result, propsKeyword: q } };
 }
 
