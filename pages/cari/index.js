@@ -16,45 +16,62 @@ export async function getServerSideProps(context) {
 
   let api = get("minuman");
 
+  let queryName = [];
+  if (q) queryName = `${q}`.split(/[ ,]+/);
+
   const clientAPI = createClient(supaUrl(), supaKey());
   if (q || kemasan || gula)
     api = clientAPI
       .from("minuman")
       .select("*")
-      .ilike("name", `%${q || ""}%`)
+      .or(`name.ilike.%${q}%,kategori.ilike.%${q}%`)
       .ilike("packaging", `%${kemasan || ""}%`)
-      .lte("gula", gula || 999);
+      .lte("gula", gula || 999)
+      .range(0, 19)
+      .order("created_at", { ascending: false });
 
   const result = await api;
+  // console.log("SERVER: ", { queryName, result, kategoriData });
 
-  return { props: { query, result, propsKeyword: q } };
+  const resultData = result;
+
+  return { props: { query, result: resultData, propsKeyword: q } };
 }
 
 export default function SearchPage({ result, propsKeyword }) {
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setKeyword(propsKeyword);
   }, [propsKeyword]);
 
   useEffect(() => {
-    if (result && result?.data.length > 0) setLoading(false);
+    if (Object.keys(result).length > 0) {
+      setLoading(false);
+
+      if (result && result.error) setError(result.error);
+    }
+    // if (result && result?.data?.length > 0) setLoading(false);
   }, [result]);
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)
     render = <DrinkListView list={result.data} />;
-  else if (!loading && (result.data?.length < 1 || result.length < 1))
+  else if (
+    (!loading && (result.data?.length < 1 || result.length < 1)) ||
+    error
+  )
     render = (
       <ErrorLayout
         title="Yah, yang kamu cari gaada :("
         imagePath="/faces/sad-face.svg"
       >
         <div>
-          Coba cari produk manis lain kayak kopi, susu, yogurt atau yang lain
-          deh. Atau cobain cari berdasarkan kemasan minuman manis favorit
-          gimana?
+          {error
+            ? error.message
+            : "Coba cari produk manis lain kayak kopi, susu, yogurt atau yang lain deh. Atau cobain cari berdasarkan kemasan minuman manis favorit gimana?"}
         </div>
       </ErrorLayout>
     );

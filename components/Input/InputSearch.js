@@ -17,6 +17,8 @@ export default function InputSearch({
   }, [value]);
 
   const clickSearch = (e) => {
+    const el = document.querySelector(":focus");
+    if (el) el.blur();
     e.preventDefault();
     if (isFunction(onSearch)) {
       if (inputValue) onSearch(inputValue);
