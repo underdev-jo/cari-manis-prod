@@ -10,7 +10,7 @@ export default function InputSearch({
   allowEmpty = false,
   size = "",
 }) {
-  const [inputValue, setValue] = useState("");
+  const [inputValue, setValue] = useState(value);
 
   useEffect(() => {
     setValue(value);

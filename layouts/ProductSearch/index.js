@@ -33,7 +33,6 @@ export default function ProductSearch({ keyword, query }) {
   }, []);
 
   const classUp = style.shown;
-
   return (
     <div className={`${style["product-search"]} ${style[scrollDir]}`}>
       <div className={style.inner}>

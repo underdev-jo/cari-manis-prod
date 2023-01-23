@@ -7,6 +7,8 @@ import Alert from "components/Alert";
 import Spinner from "components/Spinner";
 import { DrinkListView } from "layouts/Product/DrinkList";
 import { supabase } from "helpers/supabase";
+import { useRouter } from "next/router";
+import AddToCalculator from "pageElement/product/AddToCalculator";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -46,9 +48,13 @@ export default function SearchPage({ result, propsKeyword }) {
   const [keyword, setKeyword] = useState();
   const [error, setError] = useState(false);
 
+  const { query } = useRouter();
+
   useEffect(() => {
-    setKeyword(propsKeyword);
-  }, [propsKeyword]);
+    const nextQuery = query.q || propsKeyword;
+    console.log("set query: ", nextQuery);
+    setKeyword(nextQuery);
+  }, [query, propsKeyword]);
 
   useEffect(() => {
     if (Object.keys(result).length > 0) {
@@ -90,6 +96,7 @@ export default function SearchPage({ result, propsKeyword }) {
           <div className="p-2">{render}</div>
         </div>
       </div>
+      <AddToCalculator product={false} />
     </>
   );
 }
