@@ -10,6 +10,7 @@ import store from "store";
 import useProductCalculator from "customHooks/useProductCalculator";
 import nProgress from "nprogress";
 import Router from "next/router";
+import PopInfo from "components/Product/pop-info";
 
 nProgress.configure({
   minimum: 0.1,
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }) {
         <ModalPriceInfo />
         <Footer />
         <Header />
+        <PopInfo />
       </Provider>
     </>
   );
