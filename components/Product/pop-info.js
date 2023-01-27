@@ -87,7 +87,12 @@ export default function PopInfo() {
             </div>
             <div className="mb-2">
               <div className="flex items-center justify-between gap-2 max-w-xs mx-auto">
-                <NutriBox title="Netto" value={`${product.netto}ml`} />
+                <NutriBox
+                  title="Netto"
+                  value={`${product.netto}${
+                    product.packaging === "Sachet" ? "gr" : "ml"
+                  }`}
+                />
                 <NutriBox title="Gula" value={`${product.gula}gr`} />
                 <NutriBox title="Kalori" value={`${product.kalori}kkal`} />
               </div>

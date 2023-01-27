@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
 
 const DrinkCard = ({
-  packaging = "Minuman Kaleng",
-  name = "Nescafe,Coffee Drink Thai Milk Coffee 220Ml Klg dan sebagainya",
+  packaging = "",
+  name = "",
   id = 1,
   image = "/sample-product-image.jpg",
   gula,
@@ -33,6 +33,7 @@ const DrinkCard = ({
           image,
           name,
           nextUrl: productUrl,
+          packaging,
         })
       );
     }
