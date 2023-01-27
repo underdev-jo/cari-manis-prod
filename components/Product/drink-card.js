@@ -25,7 +25,15 @@ const DrinkCard = ({
     if (path !== "/") {
       e.preventDefault();
       dispatch(
-        setPopProduct({ netto, kalori, gula, image, name, nextUrl: productUrl })
+        setPopProduct({
+          id,
+          netto,
+          kalori,
+          gula,
+          image,
+          name,
+          nextUrl: productUrl,
+        })
       );
     }
   };

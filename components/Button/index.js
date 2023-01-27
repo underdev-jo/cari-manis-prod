@@ -1,6 +1,8 @@
 const modelClass = {
   default: "bg-carman-black-1 text-white",
-  blue: "bg-carman-blue-1 text-white border-carman-blue-1",
+  blue: "bg-carman-blue-1 text-white border-carman-blue-1 hover:bg-carman-blue-0 hover:border-carman-blue-1",
+  white:
+    "bg-white text-carman-blue-1 border-carman-blue-1 hover:bg-carman-blue-9 hover:border-carman-blue-1",
 };
 
 const sizeClass = {
@@ -16,7 +18,7 @@ export default function Button({
   model = "default",
   size = "default",
 }) {
-  const classBtn = "btn flex items-center rounded normal-case px-8";
+  const classBtn = "btn flex items-center rounded normal-case px-8 gap-1";
   const stylingClass = `${modelClass[model]} ${sizeClass[size]}`;
   return (
     <button

@@ -66,8 +66,8 @@ const ProductSugar = () => {
   const max = 50;
   const btnlist = [1, 13, 25, 37, 50];
 
-  let bgBar = "bg-carman-blue-9";
-  let colorText = "text-carman-blue-9";
+  let bgBar = "bg-carman-blue-2";
+  let colorText = "text-carman-blue-2";
   if (sugar > 25) {
     bgBar = "bg-red-700";
     colorText = "text-red-600";
@@ -103,7 +103,7 @@ const ProductSugar = () => {
           <button
             key={item}
             onClick={() => setSugar(item)}
-            className="w-4 h-4 cursor-pointer text-carman-blue-9 text-xs font-medium"
+            className="w-4 h-4 cursor-pointer text-carman-blue-2 text-xs font-medium"
           >
             |
           </button>
