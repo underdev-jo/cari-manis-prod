@@ -15,8 +15,8 @@ const selectList = [
   { name: "Susu", key: "milk" },
   { name: "Kopi", key: "coffee" },
   { name: "Jus", key: "juice" },
-  { name: "Super Manis", key: "exSweet" },
-  { name: "Tinggi Kalori", key: "exCal" },
+  { name: "Paling Manis", key: "mostSweet" },
+  { name: "Kalori Tertinggi", key: "mostCal" },
 ];
 
 export async function getStaticProps() {
@@ -26,42 +26,54 @@ export async function getStaticProps() {
   const res = await supa
     .from(table)
     .select()
-    .range(0, 9)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(0, 9);
 
-  const lowSugar = await supa.from(table).select().range(0, 9).order("gula");
+  const lowSugar = await supa.from(table).select().order("gula").range(0, 9);
 
-  const lowCal = await supa.from(table).select().range(0, 9).order("kalori");
+  const lowCal = await supa.from(table).select().order("kalori").range(0, 9);
 
   const milk = await supa
     .from(table)
     .select()
-    .range(0, 9)
     .or(
       "name.ilike.%susu%,name.ilike.%milk%,kategori.ilike.%susu%,kategori.ilike.%milk%,category.cs.{susu},category.cs.{milk}"
     )
     .filter("name", "not.ilike", "%kopi%")
     .filter("name", "not.ilike", "%teh%")
     .filter("name", "not.ilike", "%tea%")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(0, 9);
 
   const coffee = await supa
     .from(table)
     .select()
-    .range(0, 9)
     .or(
       "name.ilike.%kopi%,name.ilike.%coffee%,kategori.ilike.%kopi%,kategori.ilike.%coffee%,category.cs.{kopi},category.cs.{coffee}"
     )
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(0, 9);
 
   const juice = await supa
     .from(table)
     .select()
-    .range(0, 9)
     .or(
       "name.ilike.%jus%,name.ilike.%juice%,kategori.ilike.%juice%,kategori.ilike.%jus%,category.cs.{jus},category.cs.{juice}"
     )
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(0, 9);
+
+  const mostSweet = await supa
+    .from(table)
+    .select()
+    .order("gula", { ascending: false })
+    .range(0, 9);
+
+  const mostCal = await supa
+    .from(table)
+    .select()
+    .order("kalori", { ascending: false })
+    .range(0, 9);
 
   if (res.error)
     return {
@@ -70,7 +82,15 @@ export async function getStaticProps() {
       },
     };
 
-  const filtered = { lowSugar, lowCal, milk, coffee, juice };
+  const filtered = {
+    lowSugar,
+    lowCal,
+    milk,
+    coffee,
+    juice,
+    mostSweet,
+    mostCal,
+  };
 
   return {
     props: { drinkList: res || null, filtered },
