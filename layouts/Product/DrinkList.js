@@ -17,8 +17,8 @@ export const DrinkListView = ({ list }) => (
   </ThumbnailWrapper>
 );
 
-const DrinkList = ({ drinkList = [], topEl = "" }) => (
-  <Section title="Daftar produk minuman">
+const DrinkList = ({ drinkList = [], topEl = "", sectionTitle = "" }) => (
+  <Section title={sectionTitle}>
     {topEl}
     <DrinkListView list={drinkList} />
   </Section>

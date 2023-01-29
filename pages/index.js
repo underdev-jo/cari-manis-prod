@@ -5,13 +5,66 @@ import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
 import { useState } from "react";
 
-export async function getStaticProps() {
-  const supabase = createClient(supaUrl(), supaKey());
+const selectList = [
+  {
+    name: "Gula Terendah",
+    key: "lowSugar",
+    desc: "Rendah gula adalah produk minuman yang memiliki kandungan gula kurang dari 5gr per 100gr berat minuman",
+  },
+  { name: "Rendah Kalori", key: "lowCal" },
+  { name: "Susu", key: "milk" },
+  { name: "Kopi", key: "coffee" },
+  { name: "Jus", key: "juice" },
+  { name: "Super Manis", key: "exSweet" },
+  { name: "Tinggi Kalori", key: "exCal" },
+];
 
-  const res = await supabase
+export async function getStaticProps() {
+  const supa = createClient(supaUrl(), supaKey());
+
+  const res = await supa
     .from("minuman")
-    .select("*")
+    .select()
     .range(0, 9)
+    .order("created_at", { ascending: false });
+
+  const lowSugar = await supa
+    .from("minuman")
+    .select()
+    .range(0, 9)
+    .order("gula");
+
+  const lowCal = await supa
+    .from("minuman")
+    .select()
+    .range(0, 9)
+    .order("kalori");
+
+  const milk = await supa
+    .from("minuman")
+    .select()
+    .range(0, 9)
+    .or(
+      "name.ilike.%susu%,name.ilike.%milk%,category.cs.{susu},category.cs.{milk}"
+    )
+    .order("created_at", { ascending: false });
+
+  const coffee = await supa
+    .from("minuman")
+    .select()
+    .range(0, 9)
+    .or(
+      "name.ilike.%kopi%,name.ilike.%coffee%,category.cs.{kopi},category.cs.{coffee}"
+    )
+    .order("created_at", { ascending: false });
+
+  const juice = await supa
+    .from("minuman")
+    .select()
+    .range(0, 9)
+    .or(
+      "name.ilike.%jus%,name.ilike.%juice%,category.cs.{jus},category.cs.{juice}"
+    )
     .order("created_at", { ascending: false });
 
   if (res.error)
@@ -21,24 +74,12 @@ export async function getStaticProps() {
       },
     };
 
+  const filtered = { lowSugar, lowCal, milk, coffee, juice };
+
   return {
-    props: { drinkList: res.data || null },
+    props: { drinkList: res || null, filtered },
   };
 }
-
-const selectList = [
-  {
-    name: "Gula Terendah",
-    key: "low-sugar",
-    desc: "Rendah gula adalah produk minuman yang memiliki kandungan gula kurang dari 5gr per 100gr berat minuman",
-  },
-  { name: "Rendah Kalori", key: "low-cal" },
-  { name: "Susu", key: "milk" },
-  { name: "Kopi", key: "Coffee" },
-  { name: "Jus", key: "Juice" },
-  { name: "Super Manis", key: "ext-sweet" },
-  { name: "Tinggi Kalori", key: "ext-cal" },
-];
 
 const Selector = ({ active, setActive }) => {
   return (
@@ -65,8 +106,9 @@ const Selector = ({ active, setActive }) => {
   );
 };
 
-export default function Home({ drinkList }) {
-  const [active, setActive] = useState("low-sugar");
+export default function Home({ drinkList, filtered }) {
+  const [active, setActive] = useState(selectList[0].key);
+
   return (
     <>
       <PageHead title="Cari Manis" />
@@ -75,7 +117,8 @@ export default function Home({ drinkList }) {
         <DrinkCategory />
         <SweetInfo />
         <DrinkList
-          drinkList={drinkList}
+          sectionTitle="Daftar Produk Minuman"
+          drinkList={filtered[active] ? filtered[active].data : drinkList.data}
           topEl={<Selector active={active} setActive={setActive} />}
         />
       </div>
