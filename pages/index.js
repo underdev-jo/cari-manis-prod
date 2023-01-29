@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { supaKey, supaUrl } from "helpers/util";
+import { supaKey, supaUrl, tableMinuman } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
@@ -21,49 +21,45 @@ const selectList = [
 
 export async function getStaticProps() {
   const supa = createClient(supaUrl(), supaKey());
+  const table = tableMinuman;
 
   const res = await supa
-    .from("minuman")
+    .from(table)
     .select()
     .range(0, 9)
     .order("created_at", { ascending: false });
 
-  const lowSugar = await supa
-    .from("minuman")
-    .select()
-    .range(0, 9)
-    .order("gula");
+  const lowSugar = await supa.from(table).select().range(0, 9).order("gula");
 
-  const lowCal = await supa
-    .from("minuman")
-    .select()
-    .range(0, 9)
-    .order("kalori");
+  const lowCal = await supa.from(table).select().range(0, 9).order("kalori");
 
   const milk = await supa
-    .from("minuman")
+    .from(table)
     .select()
     .range(0, 9)
     .or(
-      "name.ilike.%susu%,name.ilike.%milk%,category.cs.{susu},category.cs.{milk}"
+      "name.ilike.%susu%,name.ilike.%milk%,kategori.ilike.%susu%,kategori.ilike.%milk%,category.cs.{susu},category.cs.{milk}"
     )
+    .filter("name", "not.ilike", "%kopi%")
+    .filter("name", "not.ilike", "%teh%")
+    .filter("name", "not.ilike", "%tea%")
     .order("created_at", { ascending: false });
 
   const coffee = await supa
-    .from("minuman")
+    .from(table)
     .select()
     .range(0, 9)
     .or(
-      "name.ilike.%kopi%,name.ilike.%coffee%,category.cs.{kopi},category.cs.{coffee}"
+      "name.ilike.%kopi%,name.ilike.%coffee%,kategori.ilike.%kopi%,kategori.ilike.%coffee%,category.cs.{kopi},category.cs.{coffee}"
     )
     .order("created_at", { ascending: false });
 
   const juice = await supa
-    .from("minuman")
+    .from(table)
     .select()
     .range(0, 9)
     .or(
-      "name.ilike.%jus%,name.ilike.%juice%,category.cs.{jus},category.cs.{juice}"
+      "name.ilike.%jus%,name.ilike.%juice%,kategori.ilike.%juice%,kategori.ilike.%jus%,category.cs.{jus},category.cs.{juice}"
     )
     .order("created_at", { ascending: false });
 
@@ -119,7 +115,8 @@ export default function Home({ drinkList, filtered }) {
         <DrinkList
           sectionTitle="Daftar Produk Minuman"
           drinkList={filtered[active] ? filtered[active].data : drinkList.data}
-          topEl={<Selector active={active} setActive={setActive} />}
+          underTitle={<Selector active={active} setActive={setActive} />}
+          sticky
         />
       </div>
     </>

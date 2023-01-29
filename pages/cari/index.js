@@ -9,20 +9,21 @@ import { DrinkListView } from "layouts/Product/DrinkList";
 import { supabase } from "helpers/supabase";
 import { useRouter } from "next/router";
 import AddToCalculator from "pageElement/product/AddToCalculator";
+import { tableMinuman } from "helpers/util";
 
 export async function getServerSideProps(context) {
   const { query } = context;
 
   const { gula = 999, kemasan = "", q = "" } = query;
 
-  let api = get("minuman");
+  let api = get(tableMinuman);
 
   let queryName = [];
   if (q) queryName = `${q}`.split(/[ ,]+/);
 
   if (q || kemasan || gula)
     api = supabase
-      .from("minuman")
+      .from(tableMinuman)
       .select("*")
       .or(
         queryName.length > 0
@@ -52,7 +53,6 @@ export default function SearchPage({ result, propsKeyword }) {
 
   useEffect(() => {
     const nextQuery = query.q || propsKeyword;
-    console.log("set query: ", nextQuery);
     setKeyword(nextQuery);
   }, [query, propsKeyword]);
 

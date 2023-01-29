@@ -9,16 +9,25 @@ export const ThumbnailWrapper = ({ children }) => {
   );
 };
 
-export const DrinkListView = ({ list }) => (
-  <ThumbnailWrapper>
-    {list.map((item, index) => (
-      <DrinkCard key={item.id || index} {...item} />
-    ))}
-  </ThumbnailWrapper>
-);
+export const DrinkListView = ({ list = [] }) =>
+  list && list.length > 0 ? (
+    <ThumbnailWrapper>
+      {list.map((item, index) => (
+        <DrinkCard key={item.id || index} {...item} />
+      ))}
+    </ThumbnailWrapper>
+  ) : (
+    <div>Produk tidak tersedia</div>
+  );
 
-const DrinkList = ({ drinkList = [], topEl = "", sectionTitle = "" }) => (
-  <Section title={sectionTitle}>
+const DrinkList = ({
+  drinkList = [],
+  topEl = "",
+  sectionTitle = "",
+  sticky,
+  underTitle,
+}) => (
+  <Section title={sectionTitle} sticky={sticky} underTitle={underTitle}>
     {topEl}
     <DrinkListView list={drinkList} />
   </Section>

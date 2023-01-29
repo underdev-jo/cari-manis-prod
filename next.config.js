@@ -8,6 +8,7 @@ const nextConfig = {
       "obqyrahgipvmnyfejdvl.supabase.co",
       "via.placeholder.com",
       "https://fonts.gstatic.com",
+      "assets.klikindomaret.com",
     ],
   },
 };

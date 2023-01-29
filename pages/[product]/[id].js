@@ -1,10 +1,11 @@
 import { supabase } from "helpers/supabase";
+import { tableMinuman } from "helpers/util";
 import { ProductView } from "pageElement/product";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import PageHead from "pages/PageHead";
 
 export async function getStaticPaths() {
-  const res = await supabase.from("minuman").select("name,id");
+  const res = await supabase.from(tableMinuman).select("name,id");
   let paths = [];
 
   paths = res.data.map((x) => ({
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { data, error } = await supabase
-    .from("minuman")
+    .from(tableMinuman)
     .select("*")
     .eq("id", params.id);
 
