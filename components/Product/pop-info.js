@@ -8,6 +8,7 @@ import IconPlus from "public/icons/icon-plus";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const NutriBox = ({ title, value }) => (
   <div className="rounded-lg border border-carman-blue-10 text-carman-blue-1 p-4 flex items-center justify-center text-center w-1/3">
@@ -23,9 +24,10 @@ export default function PopInfo() {
   const product = useSelector(({ popInfoProduct }) => popInfoProduct.product);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const defClass =
-    "fixed top-[50%] left-[50%] bg-white min-h-[20vh] w-[80vw] max-w-sm rounded-[20px] -translate-x-[50%] transition-all shadow-xl z-50 border border-black";
+    "fixed top-[50%] left-[50%] bg-white min-h-[20vh] w-[80vw] max-w-sm rounded-[20px] -translate-x-[50%] transition-all shadow-xl z-50";
   const actClass = product
     ? "-translate-y-[50%] opacity-100"
     : "translate-y-[70%] opacity-0 pointer-events-none";
@@ -38,6 +40,10 @@ export default function PopInfo() {
   };
 
   const productUrl = product ? `/${slugify(product.name)}/${product.id}` : "/";
+  const navToProduct = () => {
+    close();
+    router.push(productUrl);
+  };
 
   const add = () => {
     setAdded(true);
@@ -100,8 +106,8 @@ export default function PopInfo() {
           </div>
           <div className="max-w-[210px] mx-auto flex items-center justify-center gap-2 mb-6">
             {added ? btnToCalc : btnAdd}
-            <Button model="blue" size="small">
-              <Link href={productUrl}>Lihat Detail</Link>
+            <Button model="blue" size="small" onClick={navToProduct}>
+              Lihat Detail
             </Button>
           </div>
           <button
