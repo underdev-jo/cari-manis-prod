@@ -12,11 +12,11 @@ const selectList = [
     desc: "Rendah gula adalah produk minuman yang memiliki kandungan gula kurang dari 5gr per 100gr berat minuman",
   },
   { name: "Rendah Kalori", key: "lowCal" },
+  { name: "Tinggi Kalori", key: "mostCal" },
   { name: "Susu", key: "milk" },
   { name: "Kopi", key: "coffee" },
   { name: "Jus", key: "juice" },
   { name: "Paling Manis", key: "mostSweet" },
-  { name: "Kalori Tertinggi", key: "mostCal" },
 ];
 
 export async function getStaticProps() {
