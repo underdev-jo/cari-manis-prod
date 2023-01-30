@@ -9,7 +9,7 @@ const linkList = [
     text: "Kalkulator Manis",
     url: "/kalkulator",
     image: "/icons/fluent_calculator-20-regular.svg",
-    status: "soon",
+    status: "new",
   },
   {
     text: "Sumber Informasi",

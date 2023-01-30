@@ -2,7 +2,6 @@ import Button from "components/Button";
 import { slugify } from "helpers/util";
 import { addToCalculator } from "helpers/addToCalculator";
 import Image from "next/image";
-import Link from "next/link";
 import { Close } from "public/icons";
 import IconPlus from "public/icons/icon-plus";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +44,11 @@ export default function PopInfo() {
     router.push(productUrl);
   };
 
+  const navToCalculator = () => {
+    close();
+    router.push("/kalkulator");
+  };
+
   const add = () => {
     setAdded(true);
     addToCalculator(product);
@@ -57,11 +61,9 @@ export default function PopInfo() {
   );
 
   const btnToCalc = (
-    <Link href="/kalkulator">
-      <div className="text-center text-medium cursor-pointer">
-        Lihat Kalkulator
-      </div>
-    </Link>
+    <Button size="small" onClick={navToCalculator}>
+      Lihat Kalkulator
+    </Button>
   );
 
   return (

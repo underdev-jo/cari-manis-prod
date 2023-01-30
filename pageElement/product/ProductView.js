@@ -291,7 +291,7 @@ export function ProductInformation({
         <Row name="Kandungan Gula" value={`${gula}gr`} />
         <Row name="Takaran Saji" value={`${takaran_saji}ml`} />
         <Row name="Kalori" value={`${kalori}ml`} />
-        <Row name="Jumlah Sajian" value={`${jumlah_sajian}ml`} />
+        <Row name="Jumlah Sajian" value={jumlah_sajian} />
         <Row name="Total kandungan gula" value={`${total_gula}ml`} />
       </div>
     </div>

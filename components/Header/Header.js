@@ -93,11 +93,11 @@ const MenuView = ({ onBurger, toggleBurger }) => {
             <div onClick={toggleBurger} className={style.linkWrapper}>
               <div className={style.linkBlock}>
                 <div className={style.linkText}>{item.text}</div>
-                {item.status === "soon" && (
+                {item.status === "new" && (
                   <div className="relative">
                     <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
                     <div className="relative badge badge-lg badge-accent">
-                      soon
+                      {item.status}
                     </div>
                   </div>
                 )}
