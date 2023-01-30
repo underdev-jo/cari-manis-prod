@@ -3,6 +3,7 @@ import { SearchDrink as InputSearchDrink } from "components/Input";
 import FilterPackaging from "./filter-packaging";
 import FilterSugar from "./filter-sugar";
 import style from "./product-search.module.scss";
+import FilterSort from "./filter-sort";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -42,6 +43,7 @@ export default function ProductSearch({ keyword, query }) {
         <div className={`${style["filter-group"]} ${classUp}`}>
           <FilterSugar />
           <FilterPackaging />
+          <FilterSort />
         </div>
       </div>
     </div>

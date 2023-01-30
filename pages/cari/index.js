@@ -14,7 +14,7 @@ import { tableMinuman } from "helpers/util";
 export async function getServerSideProps(context) {
   const { query } = context;
 
-  const { gula = 999, kemasan = "", q = "" } = query;
+  const { gula = 999, kemasan = "", q = "", urutkan = "" } = query;
 
   let api = get(tableMinuman);
 
@@ -36,10 +36,13 @@ export async function getServerSideProps(context) {
       )
       .ilike("packaging", `%${kemasan || ""}%`)
       .lte("gula", gula || 999)
-      .range(0, 19)
-      .order("created_at", { ascending: false });
+      .range(0, 19);
 
-  const result = await api;
+  let apiGroup = api.order("created_at", { ascending: false });
+  if (urutkan === "lowsugar") apiGroup = api.order("gula");
+  else if (urutkan === "lowcal") apiGroup = api.order("kalori");
+
+  const result = await apiGroup;
   // console.log({ queryName, q, result });
   return { props: { query, result, propsKeyword: q } };
 }

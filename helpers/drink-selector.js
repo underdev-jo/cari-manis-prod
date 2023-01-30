@@ -30,4 +30,24 @@ const sugar = [
   { key: `50`, value: "Max. 50gr" },
 ];
 
-export { packaging as selectorPackaging, sugar as selectorSugar };
+const sort = [
+  { key: "", value: "Tanggal" },
+  { key: "lowsugar", value: "Gula Terendah" },
+  { key: "lowcal", value: "Kalori Terendah" },
+];
+
+const typeDrink = [
+  { key: "", value: "Semua Jenis" },
+  { key: "teh", value: "Teh" },
+  { key: "kopi", value: "Kopi" },
+  { key: "susu", value: "Susu" },
+  { key: "jus", value: "Jus" },
+  { key: "softdrink", value: "Soft Drink" },
+];
+
+export {
+  packaging as selectorPackaging,
+  sugar as selectorSugar,
+  sort as selectorSort,
+  typeDrink as selectorType,
+};
