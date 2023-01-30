@@ -45,8 +45,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export function reportWebVitals(metric) {
-  console.info(`${metric.name}: ${Math.ceil(metric.value)}ms`);
-}
-
 export default MyApp;
