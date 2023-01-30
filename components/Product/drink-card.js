@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import CalorieFire from "public/icons/calorie-fire";
 import SugarCube from "public/icons/SugarCube";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
 
@@ -18,6 +19,7 @@ const DrinkCard = ({
   kalori,
   unitDisplay,
 }) => {
+  const [img, setImg] = useState(image);
   const { pathname: path } = useRouter();
   const dispatch = useDispatch();
 
@@ -63,14 +65,17 @@ const DrinkCard = ({
         className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5"
         onClick={onClick}
       >
-        <div className="relative w-full h-[160px] overflow-hidden">
+        <div className="relative w-full h-[160px] overflow-hidden [&>span]:!bg-slate-300 ">
           {image ? (
             <Image
-              src={image}
+              src={img}
               alt={name}
               title={name}
               width={160}
               height={160}
+              onError={() =>
+                setImg("https://via.placeholder.com/156x156/989898")
+              }
             />
           ) : (
             <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
