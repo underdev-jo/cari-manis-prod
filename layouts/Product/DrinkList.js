@@ -9,11 +9,11 @@ export const ThumbnailWrapper = ({ children }) => {
   );
 };
 
-export const DrinkListView = ({ list = [] }) =>
+export const DrinkListView = ({ list = [], unitDisplay }) =>
   list && list.length > 0 ? (
     <ThumbnailWrapper>
       {list.map((item, index) => (
-        <DrinkCard key={item.id || index} {...item} />
+        <DrinkCard key={item.id || index} {...item} unitDisplay={unitDisplay} />
       ))}
     </ThumbnailWrapper>
   ) : (
@@ -26,10 +26,11 @@ const DrinkList = ({
   sectionTitle = "",
   sticky,
   underTitle,
+  unitDisplay = "sugar",
 }) => (
   <Section title={sectionTitle} sticky={sticky} underTitle={underTitle}>
     {topEl}
-    <DrinkListView list={drinkList} />
+    <DrinkListView list={drinkList} unitDisplay={unitDisplay} />
   </Section>
 );
 

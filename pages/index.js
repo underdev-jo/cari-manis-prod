@@ -124,6 +124,8 @@ const Selector = ({ active, setActive }) => {
 
 export default function Home({ drinkList, filtered }) {
   const [active, setActive] = useState(selectList[0].key);
+  let unitDisplay = "sugar";
+  if (active === "lowCal" || active === "mostCal") unitDisplay = "calorie";
 
   return (
     <>
@@ -137,6 +139,7 @@ export default function Home({ drinkList, filtered }) {
           drinkList={filtered[active] ? filtered[active].data : drinkList.data}
           underTitle={<Selector active={active} setActive={setActive} />}
           sticky
+          unitDisplay={unitDisplay}
         />
       </div>
     </>

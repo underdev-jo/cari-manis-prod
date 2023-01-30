@@ -2,6 +2,7 @@ import { slugify } from "helpers/util";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CalorieFire from "public/icons/calorie-fire";
 import SugarCube from "public/icons/SugarCube";
 import { useDispatch } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
@@ -15,6 +16,7 @@ const DrinkCard = ({
   price,
   netto,
   kalori,
+  unitDisplay,
 }) => {
   const { pathname: path } = useRouter();
   const dispatch = useDispatch();
@@ -39,6 +41,22 @@ const DrinkCard = ({
     }
   };
 
+  let unitView = (
+    <>
+      <SugarCube /> {gula}gr
+    </>
+  );
+  let unitBadge = "badge-primary";
+
+  if (unitDisplay === "calorie") {
+    unitView = (
+      <>
+        <CalorieFire /> {kalori}kkal
+      </>
+    );
+    unitBadge = "badge-accent";
+  }
+
   return (
     <Link href={productUrl} passHref>
       <div
@@ -60,8 +78,10 @@ const DrinkCard = ({
         </div>
         <div className="mt-3">
           <div className="flex items-center gap-1">
-            <div className="badge badge-primary badge-sm mb-1 text-white gap-1 text-small font-medium">
-              <SugarCube /> {gula}gr
+            <div
+              className={`badge ${unitBadge} badge-sm mb-1 text-white gap-1 text-small font-medium`}
+            >
+              {unitView}
             </div>
             <div
               className="badge badge-primary badge-sm mb-1 badge-outline"

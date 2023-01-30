@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const Title = ({ title, rightHead, sticky, underTitle, overTitle }) => {
   const classSticky = sticky ? `sticky top-16 z-50 bg-white pt-2` : "";
   return (
@@ -34,19 +32,20 @@ export default function Section({
       />
     );
 
-  useEffect(() => {
-    let parent = document.querySelector(".sticky")?.parentElement;
+  // parent - scroll - checker
+  // useEffect(() => {
+  //   let parent = document.querySelector(".sticky")?.parentElement;
 
-    if (parent) {
-      while (parent) {
-        const hasOverflow = getComputedStyle(parent).overflow;
-        if (hasOverflow !== "visible") {
-          console.log(hasOverflow, parent);
-        }
-        parent = parent.parentElement;
-      }
-    }
-  });
+  //   if (parent) {
+  //     while (parent) {
+  //       const hasOverflow = getComputedStyle(parent).overflow;
+  //       if (hasOverflow !== "visible") {
+  //         console.log(hasOverflow, parent);
+  //       }
+  //       parent = parent.parentElement;
+  //     }
+  //   }
+  // });
 
   return (
     <section className="my-8 w-11/12 max-w-sm mx-auto">
