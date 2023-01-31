@@ -21,7 +21,7 @@
 }
 
 .filter-group {
-  @apply -mx-2 flex items-center justify-start pt-4 pb-2;
+  @apply -mx-4 px-2 flex items-center justify-start pt-4 pb-2 overflow-x-auto overflow-y-hidden;
   transition: 0.15s ease-in-out;
 
   &.hide {
