@@ -1,5 +1,5 @@
 .product-search {
-  @apply sticky top-[64.4px] bg-white z-50 py-4 px-4 pb-2 bg-[#F0F6FF];
+  @apply sticky top-[64px] bg-white z-50 py-4 px-4 pb-2 bg-[#F0F6FF];
   transition: 0.25s ease-in-out;
 
   &.up {

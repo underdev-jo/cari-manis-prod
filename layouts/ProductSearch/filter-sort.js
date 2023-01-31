@@ -1,4 +1,3 @@
-import Dropdown from "components/Dropdown";
 import SelectDropdown from "components/Dropdown/dropdown";
 import { selectorSort as selector } from "helpers/drink-selector";
 import { slugify } from "helpers/util";
@@ -16,14 +15,13 @@ export default function FilterSort() {
   };
 
   const onSelectSugar = (e) => {
-    replacePaarams(e.key);
+    replacePaarams(e.key || e.value);
   };
 
-  let textDropdown = "Urutkan: Tanggal";
-  if (filtering) {
-    const target = selector.find((i) => i.key === filtering).value;
-    textDropdown = `Urutkan: ${target}`;
-  }
+  let textDropdown = "Urut: Tanggal";
+  const target = selector.findIndex((i) => i.value === filtering);
+
+  if (filtering) textDropdown = `Urut: ${target.value}`;
 
   return (
     <SelectDropdown
@@ -31,6 +29,7 @@ export default function FilterSort() {
       text={textDropdown}
       onSelect={onSelectSugar}
       id="filterSort"
+      selected={selector[target]}
     />
   );
 }

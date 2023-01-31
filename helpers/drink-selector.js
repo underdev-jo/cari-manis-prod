@@ -22,18 +22,18 @@ const packaging = [
 ];
 
 const sugar = [
-  { key: "", value: "Semua Kadar" },
-  { key: `5`, value: "Max. 5gr" },
-  { key: `10`, value: "Max. 10gr" },
-  { key: `20`, value: "Max. 20gr" },
-  { key: `30`, value: "Max. 30gr" },
-  { key: `50`, value: "Max. 50gr" },
+  { value: "", label: "Semua Kadar", isSelected: true },
+  { value: `5`, label: "Max. 5gr" },
+  { value: `10`, label: "Max. 10gr" },
+  { value: `20`, label: "Max. 20gr" },
+  { value: `30`, label: "Max. 30gr" },
+  { value: `50`, label: "Max. 50gr" },
 ];
 
 const sort = [
-  { key: "", value: "Tanggal" },
-  { key: "lowsugar", value: "Gula Terendah" },
-  { key: "lowcal", value: "Kalori Terendah" },
+  { value: "", label: "Tanggal", isSelected: true },
+  { value: "lowsugar", label: "Gula Terendah" },
+  { value: "lowcal", label: "Kalori Terendah" },
 ];
 
 const typeDrink = [

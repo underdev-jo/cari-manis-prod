@@ -1,10 +1,7 @@
-import Dropdown from "components/Dropdown";
 import useSWR from "swr";
-import { get } from "helpers/api";
 import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { supabase } from "helpers/supabase";
+import SelectDropdown from "components/Dropdown/dropdown";
 
 const fetcher = (url) =>
   fetch(url, { method: "GET" }).then((res) => res.json());
@@ -34,17 +31,20 @@ export default function FilterPackaging() {
     replace(`/cari?${newParams}`);
   };
 
+  const options = dataPackages.map((i) => ({
+    value: `${i.name}`.toLowerCase(),
+    label: i.name,
+  }));
+
+  const selIndex = options.findIndex((i) => i.value === filtering);
+
   return (
-    <Dropdown
-      size="xs"
+    <SelectDropdown
+      id="filterKemasan"
       text={`Kemasan${filtering ? `: ${capitalize(filtering)}` : ""}`}
       onSelect={select}
-      list={dataPackages.map((item) => ({ key: item.id, value: item.name }))}
-      selected={
-        dataPackages.length > 0
-          ? dataPackages.find((item) => filtering === item.name)
-          : ""
-      }
+      list={options}
+      selected={options[selIndex]}
     />
   );
 }

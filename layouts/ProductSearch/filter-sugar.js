@@ -1,5 +1,5 @@
-import Dropdown from "components/Dropdown";
-import { selectorSugar } from "helpers/drink-selector";
+import SelectDropdown from "components/Dropdown/dropdown";
+import { selectorSugar as selector } from "helpers/drink-selector";
 import { slugify } from "helpers/util";
 import { useRouter } from "next/router";
 
@@ -15,23 +15,25 @@ export default function FilterSugar() {
   };
 
   const onSelectSugar = (e) => {
-    replacePaarams(e.key);
+    replacePaarams(e.key || e.value);
   };
 
   let textDropdown = "Kadar Gula";
-  if (filtering)
-    textDropdown = `Kadar Gula: ${
-      selectorSugar.find((i) => parseInt(i.key, 10) >= parseInt(filtering, 10))
-        .value
-    }`;
+  let target = 0;
+  if (filtering) {
+    textDropdown = `Kadar Gula: ${selector[target].value}`;
+    target = selector.findIndex(
+      (i) => parseInt(i.value) >= parseInt(filtering)
+    );
+  }
 
   return (
-    <Dropdown
-      list={selectorSugar}
-      selected={filtering}
+    <SelectDropdown
+      list={selector}
+      selected={selector[target]}
       text={textDropdown}
       onSelect={onSelectSugar}
-      size="xs"
+      id="filterSugar"
     />
   );
 }
