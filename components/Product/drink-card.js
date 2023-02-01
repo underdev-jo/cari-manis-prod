@@ -14,7 +14,6 @@ const DrinkCard = ({
   id = 1,
   image = "/sample-product-image.jpg",
   gula,
-  price,
   netto,
   kalori,
   unitDisplay,
