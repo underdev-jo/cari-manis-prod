@@ -44,7 +44,7 @@ export async function getServerSideProps(context) {
   if (urutkan === "lowsugar") apiGroup = apiGroupType.order("gula");
   else if (urutkan === "lowcal") apiGroup = apiGroupType.order("kalori");
 
-  const result = await apiGroup.range(0, 19);
+  const result = await apiGroup.range(0, 29);
   return { props: { query, result, propsKeyword: q } };
 }
 
