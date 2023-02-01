@@ -3,6 +3,7 @@ import { supaKey, supaUrl, tableMinuman } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
+import LogoCariManis from "public/legal/logo-carimanis";
 import { useState } from "react";
 
 const selectList = [

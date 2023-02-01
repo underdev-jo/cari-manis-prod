@@ -54,7 +54,7 @@ const LeftSide = ({ back }) => {
       {backButton}
       <Link href="/">
         <button className="btn btn-ghost">
-          <div className="flex items-center [&>svg]:h-9">
+          <div className="flex items-center [&>svg]:w-[83px] [&>svg]:h-[38px]">
             <LogoCariManis />
           </div>
         </button>

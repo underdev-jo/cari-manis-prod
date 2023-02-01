@@ -8,7 +8,7 @@ export default function PageHead({
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon-cari-manis.png" />
     </Head>
   );
 }
