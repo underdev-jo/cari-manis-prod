@@ -34,6 +34,7 @@ export default function FilterSugar() {
       text={textDropdown}
       onSelect={onSelectSugar}
       id="filterSugar"
+      title="Kandungan Gula"
     />
   );
 }

@@ -63,11 +63,16 @@ export default function SearchPage({ result, propsKeyword }) {
   useEffect(() => {
     if (Object.keys(result).length > 0) {
       setLoading(false);
-
-      if (result && result.error) setError(result.error);
+      if (result && result.error) {
+        let err = "Terjadi kesalahan pada saat melakukan permintaan data";
+        if (process.env.enviroment === "local") err = result.error;
+        setError(result.error);
+      }
     }
-    // if (result && result?.data?.length > 0) setLoading(false);
   }, [result]);
+
+  if (typeof window === "object")
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)

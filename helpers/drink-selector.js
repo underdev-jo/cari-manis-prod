@@ -37,12 +37,12 @@ const sort = [
 ];
 
 const typeDrink = [
-  { key: "", value: "Semua Jenis" },
-  { key: "teh", value: "Teh" },
-  { key: "kopi", value: "Kopi" },
-  { key: "susu", value: "Susu" },
-  { key: "jus", value: "Jus" },
-  { key: "softdrink", value: "Soft Drink" },
+  { value: "", label: "Semua Jenis", isSelected: true },
+  { value: "teh", label: "Teh" },
+  { value: "kopi", label: "Kopi" },
+  { value: "susu", label: "Susu" },
+  { value: "jus", label: "Jus" },
+  { value: "softdrink", label: "Soft Drink" },
 ];
 
 export {

@@ -14,22 +14,21 @@ export default function FilterType() {
     replace(`/cari?${params}`);
   };
 
-  const onSelectSugar = (e) => {
-    replacePaarams(e.key);
-  };
+  const onSelectSugar = (e) => replacePaarams(e.value);
 
   let textDropdown = "Semua Jenis";
-  if (filtering) {
-    const target = selector.find((i) => i.key === filtering).value;
-    textDropdown = `Jenis: ${target}`;
-  }
+  const target = selector.findIndex((i) => i.value === filtering);
+
+  if (filtering) textDropdown = `Jenis: ${selector[target].value}`;
 
   return (
     <SelectDropdown
       list={selector}
       text={textDropdown}
       onSelect={onSelectSugar}
+      selected={selector[target]}
       id="filterType"
+      title="Jenis Minuman"
     />
   );
 }

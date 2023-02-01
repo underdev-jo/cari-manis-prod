@@ -1,13 +1,16 @@
 import { runFunction } from "helpers/util";
-import style from "./dropdown.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { setModalFilter } from "store/slices/modal-filter";
 
-export default function SelectDropdown({ list, text, onSelect, id, selected }) {
-  const modal = useSelector((state) => state.modalFilter);
+export default function SelectDropdown({
+  list,
+  text,
+  onSelect,
+  selected,
+  title = "",
+}) {
   const dispatch = useDispatch();
-
-  const open = modal.modal;
 
   const generateOptions = () => {
     return (
@@ -22,7 +25,7 @@ export default function SelectDropdown({ list, text, onSelect, id, selected }) {
             <div key={item.value} className="flex items-center">
               <button
                 onClick={onClick}
-                className={`btn btn-ghost btn-sm normal-case font-normal flex-1 text-left block my-1 hover:bg-primary-content ${
+                className={`btn btn-ghost btn-sm normal-case font-normal flex-1 block my-1 hover:bg-primary-content ${
                   isSelected ? "bg-carman-blue-1 text-white" : ""
                 }`}
               >
@@ -36,25 +39,21 @@ export default function SelectDropdown({ list, text, onSelect, id, selected }) {
   };
 
   function doOpen() {
-    dispatch(setModalFilter({ modal: true, view: generateOptions() }));
+    dispatch(setModalFilter({ modal: true, view: generateOptions(), title }));
     document.body.style.overflow = "hidden";
   }
 
   function doClose() {
-    dispatch(setModalFilter({ modal: false, view: false }));
+    dispatch(setModalFilter({ modal: false, view: false, title: "" }));
     document.body.removeAttribute("style");
   }
 
-  function doToggle() {
-    if (open) doClose();
-    else doOpen();
-  }
-
   return (
-    <div className="mx-2">
-      <button className={style.carmanDropdown} onClick={doToggle}>
-        {text}
-      </button>
-    </div>
+    <button
+      className="mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border border-carman-black-2 px-2 py-1 normal-case text-medium min-h-0 h-auto text-carman-black-2 font-normal hover:bg-slate-200 focus:border-carman-black-2 active:border-carman-black-2"
+      onClick={doOpen}
+    >
+      {text}
+    </button>
   );
 }

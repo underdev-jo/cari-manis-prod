@@ -30,6 +30,7 @@ export default function FilterSort() {
       onSelect={onSelectSugar}
       id="filterSort"
       selected={selector[target]}
+      title="Urutkan Data"
     />
   );
 }

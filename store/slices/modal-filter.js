@@ -5,11 +5,13 @@ const modalFilter = createSlice({
   initialState: {
     modal: false,
     view: false,
+    title: "",
   },
   reducers: {
     setModalFilter: (state, { payload }) => {
       state.modal = payload.modal;
       state.view = payload.view;
+      state.title = payload.title;
     },
   },
 });

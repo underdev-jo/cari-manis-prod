@@ -40,6 +40,7 @@ export default function FilterPackaging() {
       onSelect={select}
       list={options}
       selected={options[selIndex]}
+      title="Jenis Kemasan"
     />
   );
 }

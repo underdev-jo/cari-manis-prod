@@ -66,7 +66,7 @@ module.exports = {
           lineHeight: "24px",
           fontWeight: "bold",
         },
-      ],
+      ]
     },
   },
   plugins: [require("daisyui"), require("@tailwindcss/line-clamp")],

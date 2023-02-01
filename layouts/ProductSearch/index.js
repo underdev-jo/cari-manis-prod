@@ -4,7 +4,7 @@ import FilterPackaging from "./filter-packaging";
 import FilterSugar from "./filter-sugar";
 import style from "./product-search.module.scss";
 import FilterSort from "./filter-sort";
-// import FilterType from "./filter-type";
+import FilterType from "./filter-type";
 
 export async function getServerSideProps(context) {
   const { query } = context;
@@ -45,7 +45,7 @@ export default function ProductSearch({ keyword, query }) {
           <FilterSugar />
           <FilterPackaging />
           <FilterSort />
-          {/* <FilterType /> */}
+          <FilterType />
         </div>
       </div>
     </div>
