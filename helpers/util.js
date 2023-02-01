@@ -72,7 +72,7 @@ export function capitalize(string = "") {
   return `${`${string}`.charAt(0).toUpperCase()}${`${string}`.slice(1)}`;
 }
 
-export const tableMinuman = "minuman";
+export const tableMinuman = "minuman_new";
 
 const helper = { capitalize, diffDate, slugify };
 export default helper;
