@@ -57,7 +57,6 @@ const Input = React.forwardRef(
 
     const togglePassword = (e) => {
       e.preventDefault();
-      console.log({ inType });
       if (inType === "password") setInType("text");
       else setInType("password");
     };

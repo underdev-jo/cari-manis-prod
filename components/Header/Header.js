@@ -26,7 +26,6 @@ const LeftSide = ({ back }) => {
 
   const doBack = () => {
     if (isOpen && detail) {
-      console.log("THIS IF");
       dispatch(setPopupDetailCalc(false));
       setTimeout(() => dispatch(setPopupCalculator(false)), 400);
     } else if (isOpen) {

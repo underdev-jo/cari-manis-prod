@@ -32,9 +32,6 @@ export default function PopupKalkulator({
   limit = { sugar: 0, calorie: 0 },
   total = { sugar: 0, calorie: 0 },
 }) {
-  // console.log("Product: ", calcProduct);
-  // console.log("Counted: ", total);
-
   return (
     <div className="!pt-[80px] h-full content-wrapper">
       <div
