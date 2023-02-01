@@ -1,5 +1,6 @@
 import { linkList } from "helpers/menuList";
 import Link from "next/link";
+import TwitterLogo from "public/icons/twitter-logo";
 import LogoCariManis from "public/legal/logo-carimanis";
 import style from "./footer.module.scss";
 
@@ -33,9 +34,12 @@ const TwitterButton = ({ username }) => {
       >
         <a
           target="_blank"
-          className="mt-2 py-1 px-2 rounded-xl bg-primary inline-block text-center"
+          className="mt-2 py-1 px-2 rounded-xl bg-primary inline-block"
         >
-          {username}
+          <div className="flex items-center text-left [&>svg]:w-4 [&>svg]:h-4">
+            <TwitterLogo />
+            <span className="ml-2">{username}</span>
+          </div>
         </a>
       </Link>
     </div>
