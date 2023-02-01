@@ -12,14 +12,6 @@ export default function FilterPackaging() {
     revalidateOnFocus: false,
   });
   const packages = (data && data.data) || [];
-  const dataPackages = [
-    {
-      id: "01",
-      name: "Semua Kemasan",
-      created_at: new Date().toISOString(),
-    },
-    ...packages,
-  ];
 
   const { replace, query: queryParam } = useRouter();
   const filtering = queryParam?.kemasan || "";
@@ -31,10 +23,13 @@ export default function FilterPackaging() {
     replace(`/cari?${newParams}`);
   };
 
-  const options = dataPackages.map((i) => ({
-    value: `${i.name}`.toLowerCase(),
-    label: i.name,
-  }));
+  const options = [
+    { value: "", label: "Semua Kemasan" },
+    ...packages.map((i) => ({
+      value: `${i.name}`.toLowerCase(),
+      label: i.name,
+    })),
+  ];
 
   const selIndex = options.findIndex((i) => i.value === filtering);
 

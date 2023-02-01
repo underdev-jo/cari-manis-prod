@@ -1,5 +1,5 @@
 .product-search {
-  @apply sticky top-[64px] bg-white z-50 py-4 px-4 pb-2 bg-[#F0F6FF];
+  @apply fixed top-[64px] z-50 py-4 px-4 pb-2 bg-[#F0F6FF] w-screen;
   transition: 0.25s ease-in-out;
 
   &.up {
@@ -21,7 +21,7 @@
 }
 
 .filter-group {
-  @apply -mx-4 px-2 flex items-center justify-start pt-4 pb-2 overflow-x-auto overflow-y-hidden;
+  @apply -mx-2 flex items-center justify-start pt-4 pb-2;
   transition: 0.15s ease-in-out;
 
   &.hide {

@@ -21,7 +21,7 @@ export default function FilterSort() {
   let textDropdown = "Urut: Tanggal";
   const target = selector.findIndex((i) => i.value === filtering);
 
-  if (filtering) textDropdown = `Urut: ${target.value}`;
+  if (filtering) textDropdown = `Urut: ${selector[target].value}`;
 
   return (
     <SelectDropdown

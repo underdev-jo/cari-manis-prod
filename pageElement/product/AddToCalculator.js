@@ -41,7 +41,7 @@ export default function AddToCalculator({ product }) {
           className="btn flex-1 block rounded-none bg-carman-black-1 normal-case text-white"
           onClick={fnAdd}
         >
-          {product ? "+ Tambah ke Kalkulator" : "Kembali ke Kalkulator"}
+          {product ? "+ Tambah ke Kalkulator" : "Lihat Kalkulator"}
         </button>
       </div>
     </div>

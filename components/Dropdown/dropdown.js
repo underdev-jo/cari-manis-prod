@@ -1,27 +1,60 @@
-import ReactSelect from "react-select";
 import { runFunction } from "helpers/util";
 import style from "./dropdown.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setModalFilter } from "store/slices/modal-filter";
 
 export default function SelectDropdown({ list, text, onSelect, id, selected }) {
-  const changes = (target) => runFunction(onSelect(target));
+  const modal = useSelector((state) => state.modalFilter);
+  const dispatch = useDispatch();
+
+  const open = modal.modal;
+
+  const generateOptions = () => {
+    return (
+      <div>
+        {list.map((item) => {
+          const onClick = () => {
+            runFunction(onSelect(item));
+            doClose();
+          };
+          const isSelected = selected.value === item.value;
+          return (
+            <div key={item.value} className="flex items-center">
+              <button
+                onClick={onClick}
+                className={`btn btn-ghost btn-sm normal-case font-normal flex-1 text-left block my-1 hover:bg-primary-content ${
+                  isSelected ? "bg-carman-blue-1 text-white" : ""
+                }`}
+              >
+                {item.label}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  function doOpen() {
+    dispatch(setModalFilter({ modal: true, view: generateOptions() }));
+    document.body.style.overflow = "hidden";
+  }
+
+  function doClose() {
+    dispatch(setModalFilter({ modal: false, view: false }));
+    document.body.removeAttribute("style");
+  }
+
+  function doToggle() {
+    if (open) doClose();
+    else doOpen();
+  }
 
   return (
-    <ReactSelect
-      value={selected}
-      options={list}
-      onChange={changes}
-      instanceId={id}
-      classNames={{
-        control: () =>
-          "!border !border-carman-black-2 text-small !rounded-lg !shadow-none w-[120px] mx-2 !bg-transparent !min-h-0 !h-auto",
-        placeholder: () => "text-small !line-clamp-1",
-        option: () => "!text-small",
-        input: () => "!p-0 text-small",
-        indicatorSeparator: () => "hidden",
-        indicatorsContainer: () => "",
-        dropdownIndicator: () => "!p-1",
-      }}
-      placeholder={text}
-    />
+    <div className="mx-2">
+      <button className={style.carmanDropdown} onClick={doToggle}>
+        {text}
+      </button>
+    </div>
   );
 }

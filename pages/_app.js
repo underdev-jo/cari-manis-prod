@@ -11,6 +11,7 @@ import useProductCalculator from "customHooks/useProductCalculator";
 import nProgress from "nprogress";
 import Router from "next/router";
 import PopInfo from "components/Product/pop-info";
+import ModalOptionFilter from "layouts/ProductSearch/modal-option-filter";
 
 nProgress.configure({
   minimum: 0.1,
@@ -40,6 +41,7 @@ function MyApp({ Component, pageProps }) {
         <Footer />
         <Header />
         <PopInfo />
+        <ModalOptionFilter />
       </Provider>
     </>
   );
