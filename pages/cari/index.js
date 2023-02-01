@@ -66,7 +66,7 @@ export default function SearchPage({ result, propsKeyword }) {
       if (result && result.error) {
         let err = "Terjadi kesalahan pada saat melakukan permintaan data";
         if (process.env.enviroment === "local") err = result.error;
-        setError(result.error);
+        setError(err);
       }
     }
   }, [result]);
