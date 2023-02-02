@@ -129,20 +129,24 @@ export default function SearchPage({ result, propsKeyword, query, page }) {
         <div className="container">
           <div className="p-2 pt-[120px] max-w-sm mx-auto">{render}</div>
           {nums > 1 ? (
-            <div className="mt-4 mb-8">
+            <div className="mt-4 mb-8 text-center">
               Kamu aktif pada pencarian ke:
-              <div>
-                {arrPaging.map((i) => (
-                  <button
-                    key={i}
-                    className={`btn btn-outline btn-sm btn-ghost m-1 btn-square ${
-                      parseInt(page) === i ? "btn-disabled" : ""
-                    }`}
-                    onClick={() => (page !== i ? replaceParams(i) : undefined)}
-                  >
-                    {i}
-                  </button>
-                ))}
+              <div className="flex justify-center">
+                <div className="mx-auto btn-group">
+                  {arrPaging.map((i) => (
+                    <button
+                      key={i}
+                      className={`btn btn-ghost btn-sm btn-square ${
+                        parseInt(page) === i ? "btn-disabled" : ""
+                      }`}
+                      onClick={() =>
+                        page !== i ? replaceParams(i) : undefined
+                      }
+                    >
+                      {i}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
