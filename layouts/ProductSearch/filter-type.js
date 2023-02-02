@@ -1,6 +1,6 @@
 import SelectDropdown from "components/Dropdown/dropdown";
 import { selectorType as selector } from "helpers/drink-selector";
-import { slugify } from "helpers/util";
+import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
 
 export default function FilterType() {
@@ -19,7 +19,7 @@ export default function FilterType() {
   let textDropdown = "Semua Jenis";
   const target = selector.findIndex((i) => i.value === filtering);
 
-  if (filtering) textDropdown = `Jenis: ${selector[target].value}`;
+  if (filtering) textDropdown = capitalize(`${selector[target].value}`);
 
   return (
     <SelectDropdown
