@@ -30,7 +30,7 @@ export default function FilterSugar() {
   return (
     <SelectDropdown
       list={selector}
-      selected={selector[target]}
+      selected={target}
       text={textDropdown}
       onSelect={onSelectSugar}
       id="filterSugar"

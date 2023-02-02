@@ -39,7 +39,7 @@ export default function FilterPackaging() {
       text={`Kemasan${filtering ? ` ${capitalize(filtering)}` : ""}`}
       onSelect={select}
       list={options}
-      selected={options[selIndex]}
+      selected={selIndex}
       title="Jenis Kemasan"
     />
   );

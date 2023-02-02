@@ -26,7 +26,7 @@ export default function FilterType() {
       list={selector}
       text={textDropdown}
       onSelect={onSelectSugar}
-      selected={selector[target]}
+      selected={target}
       id="filterType"
       title="Jenis Minuman"
     />

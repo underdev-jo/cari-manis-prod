@@ -27,7 +27,7 @@ export default function FilterSort() {
       text={textDropdown}
       onSelect={onSelectSugar}
       id="filterSort"
-      selected={selector[target]}
+      selected={target}
       title="Urutkan Data"
     />
   );

@@ -1,5 +1,4 @@
 import { runFunction } from "helpers/util";
-
 import { useDispatch } from "react-redux";
 import { setModalFilter } from "store/slices/modal-filter";
 
@@ -7,7 +6,7 @@ export default function SelectDropdown({
   list,
   text,
   onSelect,
-  selected,
+  selected = 0,
   title = "",
 }) {
   const dispatch = useDispatch();
@@ -20,14 +19,14 @@ export default function SelectDropdown({
             runFunction(onSelect(item));
             doClose();
           };
-          const isSelected = selected.value === item.value;
+          const selectedItem = list[selected];
+          const isSelected = selectedItem.value === item.value;
+          const selectedClass = isSelected ? "bg-carman-blue-1 text-white" : "";
           return (
             <div key={item.value} className="flex items-center">
               <button
                 onClick={onClick}
-                className={`btn btn-ghost btn-sm normal-case font-normal flex-1 block my-1 hover:bg-primary-content ${
-                  isSelected ? "bg-carman-blue-1 text-white" : ""
-                }`}
+                className={`btn btn-ghost btn-sm normal-case font-normal flex-1 block my-1 hover:bg-primary-content ${selectedClass}`}
               >
                 {item.label}
               </button>
@@ -48,9 +47,16 @@ export default function SelectDropdown({
     document.body.removeAttribute("style");
   }
 
+  const isSelected = selected > 0;
+  let borderColor = isSelected
+    ? "border-carman-blue-1"
+    : "border-carman-black-2";
+  let textColor = isSelected ? "text-carman-blue-1" : "text-carman-black-2";
+  let bgColor = isSelected ? "bg-primary-content" : "bg-slate-200";
+
   return (
     <button
-      className="mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border border-carman-blue-1 hover:border-carman-blue-1 px-2 py-1 normal-case text-medium min-h-0 h-auto text-carman-blue-1 font-normal hover:bg-primary-content focus:border-carman-blue-1 active:border-carman-blue-1"
+      className={`mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColor} hover:${textColor} focus:${borderColor} active:${borderColor}`}
       onClick={doOpen}
     >
       {text}
