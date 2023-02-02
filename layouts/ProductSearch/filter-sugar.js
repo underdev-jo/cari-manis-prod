@@ -9,7 +9,7 @@ export default function FilterSugar() {
 
   const replacePaarams = (value) => {
     const gula = slugify(value || "");
-    let newQuery = { ...queryParam, gula };
+    let newQuery = { ...queryParam, gula, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
     replace(`/cari?${params}`);
   };
@@ -18,13 +18,13 @@ export default function FilterSugar() {
     replacePaarams(e.key || e.value);
   };
 
-  let textDropdown = "Semua Kadar";
+  let textDropdown = "Semua Kadar Gula";
   let target = 0;
   if (filtering) {
     target = selector.findIndex(
       (i) => parseInt(i.value) >= parseInt(filtering)
     );
-    textDropdown = `Gula: ≥ ${selector[target].value}gr`;
+    textDropdown = `Gula ≥ ${selector[target].value}gr`;
   }
 
   return (

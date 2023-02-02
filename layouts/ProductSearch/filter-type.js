@@ -9,7 +9,7 @@ export default function FilterType() {
 
   const replacePaarams = (value) => {
     const jenis = slugify(value || "");
-    let newQuery = { ...queryParam, jenis };
+    let newQuery = { ...queryParam, jenis, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
     replace(`/cari?${params}`);
   };

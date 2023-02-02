@@ -17,8 +17,8 @@ export default function FilterPackaging() {
   const filtering = queryParam?.kemasan || "";
 
   const select = ({ value = "" }) => {
-    const kemasan = value !== "Semua Kemasan" ? slugify(value || "") : "";
-    let newQuery = { ...queryParam, kemasan };
+    const kemasan = slugify(value || "");
+    let newQuery = { ...queryParam, kemasan, page: 1 };
     const newParams = new URLSearchParams(newQuery).toString();
     replace(`/cari?${newParams}`);
   };

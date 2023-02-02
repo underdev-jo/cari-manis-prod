@@ -9,7 +9,7 @@ export default function FilterSort() {
 
   const replacePaarams = (value) => {
     const urutkan = slugify(value || "");
-    let newQuery = { ...queryParam, urutkan };
+    let newQuery = { ...queryParam, urutkan, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
     replace(`/cari?${params}`);
   };

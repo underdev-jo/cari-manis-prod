@@ -74,5 +74,8 @@ export function capitalize(string = "") {
 
 export const tableMinuman = "minuman_new";
 
+export const arrStringObj = (arr = []) =>
+  `${JSON.stringify(arr)}`.replace("[", "{").replace("]", "}");
+
 const helper = { capitalize, diffDate, slugify };
 export default helper;
