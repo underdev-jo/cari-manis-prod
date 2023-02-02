@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ErrorLayout from "layouts/Error";
-import { get } from "helpers/api";
 import ProductSearch from "layouts/ProductSearch";
 import PageHead from "pages/PageHead";
 import Alert from "components/Alert";
@@ -15,7 +14,7 @@ export async function getServerSideProps(context) {
 
   const { gula = 999, kemasan = "", q = "", urutkan = "", jenis = "" } = query;
 
-  let api = get(tableMinuman);
+  let api = supabase.from(tableMinuman).select("*");
 
   let queryName = [];
   if (q) queryName = `${q}`.split(/[ ,]+/);

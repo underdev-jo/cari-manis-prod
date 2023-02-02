@@ -51,12 +51,13 @@ export default function SelectDropdown({
   let borderColor = isSelected
     ? "border-carman-blue-1"
     : "border-carman-black-2";
-  let textColor = isSelected ? "text-carman-blue-1" : "text-carman-black-2";
-  let bgColor = isSelected ? "bg-primary-content" : "bg-slate-200";
+  let textColor = isSelected ? "text-white" : "text-carman-black-2";
+  let bgColorHover = isSelected ? "bg-carman-blue-1" : "bg-slate-200";
+  let bgColor = isSelected ? "bg-carman-blue-1" : "bg-transparent";
 
   return (
     <button
-      className={`mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColor} hover:${textColor} focus:${borderColor} active:${borderColor}`}
+      className={`mx-2 btn btn-ghost min-w-[112px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
       onClick={doOpen}
     >
       {text}
