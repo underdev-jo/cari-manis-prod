@@ -103,7 +103,7 @@ export default function SearchPage({ result, propsKeyword, query }) {
       <div className="relative min-h-[400px]">
         <ProductSearch keyword={keyword} />
         <div className="container">
-          <div className="p-2 pt-[120px]">{render}</div>
+          <div className="p-2 pt-[120px] max-w-sm mx-auto">{render}</div>
         </div>
       </div>
       <AddToCalculator product={false} />
