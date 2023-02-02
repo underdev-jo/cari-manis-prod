@@ -18,13 +18,13 @@ export default function FilterSugar() {
     replacePaarams(e.key || e.value);
   };
 
-  let textDropdown = "Kadar Gula";
+  let textDropdown = "Semua Kadar";
   let target = 0;
   if (filtering) {
-    textDropdown = `Kadar Gula: ${selector[target].value}`;
     target = selector.findIndex(
       (i) => parseInt(i.value) >= parseInt(filtering)
     );
+    textDropdown = `Gula: ≥ ${selector[target].value}gr`;
   }
 
   return (
@@ -34,7 +34,7 @@ export default function FilterSugar() {
       text={textDropdown}
       onSelect={onSelectSugar}
       id="filterSugar"
-      title="Kandungan Gula"
+      title="Kandungan Gula Maksimal"
     />
   );
 }

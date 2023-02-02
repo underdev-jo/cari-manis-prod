@@ -16,7 +16,7 @@ export default function ModalOptionFilter({}) {
   let classContent = "-translate-y-[70%] opacity-0 pointer-events-none";
 
   if (isOpen) {
-    classOverlay = "opacity-50 z-50";
+    classOverlay = "opacity-70 z-50";
     classContent = "-translate-y-[50%] opacity-100 shadow-lg";
   }
 

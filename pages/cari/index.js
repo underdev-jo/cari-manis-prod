@@ -7,7 +7,6 @@ import Alert from "components/Alert";
 import Spinner from "components/Spinner";
 import { DrinkListView } from "layouts/Product/DrinkList";
 import { supabase } from "helpers/supabase";
-import { useRouter } from "next/router";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import { tableMinuman } from "helpers/util";
 
@@ -48,12 +47,14 @@ export async function getServerSideProps(context) {
   return { props: { query, result, propsKeyword: q } };
 }
 
-export default function SearchPage({ result, propsKeyword }) {
+export default function SearchPage({ result, propsKeyword, query }) {
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState();
   const [error, setError] = useState(false);
 
-  const { query } = useRouter();
+  const { urutkan = "" } = query;
+
+  const unitDisplay = urutkan === "lowcal" ? "calorie" : "sugar";
 
   useEffect(() => {
     const nextQuery = query.q || propsKeyword;
@@ -76,7 +77,7 @@ export default function SearchPage({ result, propsKeyword }) {
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)
-    render = <DrinkListView list={result.data} />;
+    render = <DrinkListView list={result.data} unitDisplay={unitDisplay} />;
   else if (
     (!loading && (result.data?.length < 1 || result.length < 1)) ||
     error

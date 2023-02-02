@@ -50,7 +50,7 @@ export default function SelectDropdown({
 
   return (
     <button
-      className="mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border border-carman-black-2 px-2 py-1 normal-case text-medium min-h-0 h-auto text-carman-black-2 font-normal hover:bg-slate-200 focus:border-carman-black-2 active:border-carman-black-2"
+      className="mx-2 btn btn-ghost min-w-[112px] text-left bg-transparent rounded-lg border border-carman-blue-1 hover:border-carman-blue-1 px-2 py-1 normal-case text-medium min-h-0 h-auto text-carman-blue-1 font-normal hover:bg-primary-content focus:border-carman-blue-1 active:border-carman-blue-1"
       onClick={doOpen}
     >
       {text}

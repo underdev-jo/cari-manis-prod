@@ -36,7 +36,7 @@ export default function FilterPackaging() {
   return (
     <SelectDropdown
       id="filterKemasan"
-      text={`Kemasan${filtering ? `: ${capitalize(filtering)}` : ""}`}
+      text={`Kemasan${filtering ? ` ${capitalize(filtering)}` : ""}`}
       onSelect={select}
       list={options}
       selected={options[selIndex]}
