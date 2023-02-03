@@ -237,6 +237,7 @@ export function ProductNutrition({
   takaran_saji,
   gula,
   kalori,
+  packaging,
 }) {
   const [info, setInfo] = useState(false);
 
@@ -249,13 +250,16 @@ export function ProductNutrition({
   const calorieData = { kalori, jumlah_sajian };
   const nettoData = { netto, takaran_saji, ...sugarData, ...calorieData };
 
+  let nettoUnits = "ml";
+  if (`${packaging}`.toLowerCase() === "sachet") nettoUnits = "gr";
+
   return (
     <div>
       <div className="text-medium font-medium mb-3 px-6">
         Klik kotak berikut untuk informasi lebih detail
       </div>
       <div className="flex justify-between px-6">
-        <Block title="Netto" info={`${netto}ml`} setPopup={click} />
+        <Block title="Netto" info={`${netto}${nettoUnits}`} setPopup={click} />
         <Block title="Gula" info={`${gula}gr`} setPopup={click} />
         <Block title="Kalori" info={`${kalori}kkal`} setPopup={click} />
       </div>
