@@ -51,7 +51,7 @@ export default function Footer() {
     <div className={style.footer}>
       <div className="content-wrapper text-small">
         <div className={style.product}>
-          <div className="flex items-center [&>svg]:h-9 pb-2">
+          <div className="flex items-center [&>svg]:h-9 [&>svg]:w-20 pb-2">
             <LogoCariManis />
           </div>
           <div>Pusat informasi kandungan gula pada minuman Anda.</div>

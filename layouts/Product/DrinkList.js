@@ -1,5 +1,7 @@
+import Button from "components/Button";
 import DrinkCard from "components/Product/drink-card";
 import Section from "components/Section";
+import { useRouter } from "next/router";
 
 export const ThumbnailWrapper = ({ children }) => {
   return (
@@ -20,6 +22,23 @@ export const DrinkListView = ({ list = [], unitDisplay }) =>
     <div>Produk tidak tersedia</div>
   );
 
+const MoreButton = ({ filter = "" }) => {
+  const { push } = useRouter();
+
+  const click = () => push(filter || "/cari");
+
+  return (
+    <div className="flex justify-center mx-4">
+      <button
+        className="btn btn-ghost normal-case text-carman-blue-0 text-medium font-medium"
+        onClick={click}
+      >
+        Lihat Produk Lainnya
+      </button>
+    </div>
+  );
+};
+
 const DrinkList = ({
   drinkList = [],
   topEl = "",
@@ -27,10 +46,12 @@ const DrinkList = ({
   sticky,
   underTitle,
   unitDisplay = "sugar",
+  filter = "",
 }) => (
   <Section title={sectionTitle} sticky={sticky} underTitle={underTitle}>
     {topEl}
     <DrinkListView list={drinkList} unitDisplay={unitDisplay} />
+    <MoreButton filter={filter} />
   </Section>
 );
 

@@ -1,4 +1,4 @@
-import SelectDropdown from "components/Dropdown/dropdown";
+import SelectDropdown from "components/Dropdown/pop-dropdown";
 import { selectorSugar as selector } from "helpers/drink-selector";
 import { slugify } from "helpers/util";
 import { useRouter } from "next/router";

@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { capitalize, slugify } from "helpers/util";
 import { useRouter } from "next/router";
-import SelectDropdown from "components/Dropdown/dropdown";
+import SelectDropdown from "components/Dropdown/pop-dropdown";
 
 const fetcher = (url) =>
   fetch(url, { method: "GET" }).then((res) => res.json());

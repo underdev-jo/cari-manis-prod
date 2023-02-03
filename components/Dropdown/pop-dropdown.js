@@ -2,7 +2,7 @@ import { runFunction } from "helpers/util";
 import { useDispatch } from "react-redux";
 import { setModalFilter } from "store/slices/modal-filter";
 
-export default function SelectDropdown({
+export default function PopDropdown({
   list,
   text,
   onSelect,
@@ -57,7 +57,7 @@ export default function SelectDropdown({
 
   return (
     <button
-      className={`mx-2 btn btn-ghost min-w-[112px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
+      className={`btn btn-ghost min-w-[112px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
       onClick={doOpen}
     >
       {text}

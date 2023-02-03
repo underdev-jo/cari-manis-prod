@@ -3,7 +3,6 @@ import { supaKey, supaUrl, tableMinuman } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
-import LogoCariManis from "public/legal/logo-carimanis";
 import { useState } from "react";
 
 const selectList = [
@@ -11,24 +10,31 @@ const selectList = [
     name: "Gula Terendah",
     key: "lowSugar",
     desc: "Rendah gula adalah produk minuman yang memiliki kandungan gula kurang dari 5gr per 100gr berat minuman",
+    searchFilter: "/cari?urutkan=lowsugar",
   },
-  { name: "Rendah Kalori", key: "lowCal" },
-  { name: "Tinggi Kalori", key: "mostCal" },
-  { name: "Susu", key: "milk" },
-  { name: "Kopi", key: "coffee" },
-  { name: "Jus", key: "juice" },
-  { name: "Paling Manis", key: "mostSweet" },
+  {
+    name: "Rendah Kalori",
+    key: "lowCal",
+    searchFilter: "/cari?urutkan=lowcal",
+  },
+  {
+    name: "Tinggi Kalori",
+    key: "highCal",
+    searchFilter: "/cari?urutkan=highcal",
+  },
+  { name: "Susu", key: "milk", searchFilter: "/cari?jenis=susu" },
+  { name: "Kopi", key: "coffee", searchFilter: "/cari?jenis=kopi" },
+  { name: "Jus", key: "juice", searchFilter: "/cari?jenis=jus" },
+  {
+    name: "Paling Manis",
+    key: "mostSweet",
+    searchFilter: "/cari?urutkan=highsugar",
+  },
 ];
 
 export async function getStaticProps() {
   const supa = createClient(supaUrl(), supaKey());
   const table = tableMinuman;
-
-  const res = await supa
-    .from(table)
-    .select()
-    .order("created_at", { ascending: false })
-    .range(0, 9);
 
   const lowSugar = await supa.from(table).select().order("gula").range(0, 9);
 
@@ -70,13 +76,13 @@ export async function getStaticProps() {
     .order("gula", { ascending: false })
     .range(0, 9);
 
-  const mostCal = await supa
+  const highCal = await supa
     .from(table)
     .select()
     .order("kalori", { ascending: false })
     .range(0, 9);
 
-  if (res.error)
+  if (lowSugar.error)
     return {
       redirect: {
         destination: "/502",
@@ -90,11 +96,11 @@ export async function getStaticProps() {
     coffee,
     juice,
     mostSweet,
-    mostCal,
+    highCal,
   };
 
   return {
-    props: { drinkList: res || null, filtered },
+    props: { filtered },
   };
 }
 
@@ -126,7 +132,7 @@ const Selector = ({ active, setActive }) => {
 export default function Home({ drinkList, filtered }) {
   const [active, setActive] = useState(selectList[0].key);
   let unitDisplay = "sugar";
-  if (active === "lowCal" || active === "mostCal") unitDisplay = "calorie";
+  if (active === "lowCal" || active === "highCal") unitDisplay = "calorie";
 
   return (
     <>
@@ -137,10 +143,11 @@ export default function Home({ drinkList, filtered }) {
         <SweetInfo />
         <DrinkList
           sectionTitle="Daftar Produk Minuman"
-          drinkList={filtered[active] ? filtered[active].data : drinkList.data}
+          drinkList={filtered[active].data}
           underTitle={<Selector active={active} setActive={setActive} />}
           sticky
           unitDisplay={unitDisplay}
+          filter={selectList.find((i) => i.key === active).searchFilter}
         />
       </div>
     </>

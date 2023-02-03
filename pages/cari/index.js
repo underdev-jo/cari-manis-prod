@@ -49,7 +49,11 @@ export async function getServerSideProps(context) {
 
   let apiGroup = apiGroupType.order("created_at", { ascending: false });
   if (urutkan === "lowsugar") apiGroup = apiGroupType.order("gula");
+  else if (urutkan === "highsugar")
+    apiGroup = apiGroupType.order("gula", { ascending: false });
   else if (urutkan === "lowcal") apiGroup = apiGroupType.order("kalori");
+  else if (urutkan === "highcal")
+    apiGroup = apiGroupType.order("kalori", { ascending: false });
 
   const startLen = (page - 1) * maxData;
   const maxLen = startLen + maxData;
