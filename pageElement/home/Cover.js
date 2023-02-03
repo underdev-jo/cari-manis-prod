@@ -23,7 +23,7 @@ const Cover = () => (
     <div className={`${style.asset} ${style.two}`}>
       <CoffeeTime />
     </div>
-    <SearchDrink />
+    <SearchDrink placeholder="400+ produk cari manis, cari disini..." />
   </div>
 );
 

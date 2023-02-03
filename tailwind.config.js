@@ -21,6 +21,7 @@ module.exports = {
       "carman-gray-5": "#BBBBBB",
       "carman-gray-6": "#E1E8F5",
       "carman-gray-7": "#F4F4F4",
+      "carman-gray-8": "#828282",
       "carman-gray-9": "#E2E8F4",
       "carman-gray-10": "#f0f6ff",
       "carman-red-1": "#EB5757",

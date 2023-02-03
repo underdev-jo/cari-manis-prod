@@ -95,7 +95,15 @@ export default function SearchPage({ result, propsKeyword, query, page }) {
 
   let render = <Spinner />;
   if (!loading && result.data?.length > 0)
-    render = <DrinkListView list={result.data} unitDisplay={unitDisplay} />;
+    render = (
+      <div>
+        <div className="flex items-center gap-1 my-4">
+          <span className="font-bold text-black">Hasil Pencarian</span>
+          <span className="text-carman-gray-8">({result.count}produk)</span>
+        </div>
+        <DrinkListView list={result.data} unitDisplay={unitDisplay} />
+      </div>
+    );
   else if (
     (!loading && (result.data?.length < 1 || result.length < 1)) ||
     error
