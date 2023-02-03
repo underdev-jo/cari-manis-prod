@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { setCalculatedProduct } from "store/slices/calculated";
 
 const NutriBox = ({ title, value }) => (
   <div className="rounded-lg border border-carman-blue-10 text-carman-blue-1 p-4 flex items-center justify-center text-center w-1/3">
@@ -51,7 +52,8 @@ export default function PopInfo() {
 
   const add = () => {
     setAdded(true);
-    addToCalculator(product);
+    const added = addToCalculator(product);
+    dispatch(setCalculatedProduct(added));
   };
 
   const btnAdd = (
