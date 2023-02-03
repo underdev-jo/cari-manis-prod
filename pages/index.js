@@ -148,6 +148,7 @@ export default function Home({ drinkList, filtered }) {
           sticky
           unitDisplay={unitDisplay}
           filter={selectList.find((i) => i.key === active).searchFilter}
+          useMoreBtn
         />
       </div>
     </>

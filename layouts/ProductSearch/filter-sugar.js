@@ -18,7 +18,7 @@ export default function FilterSugar() {
     replacePaarams(e.key || e.value);
   };
 
-  let textDropdown = "Semua Kadar Gula";
+  let textDropdown = "Kadar Gula";
   let target = 0;
   if (filtering) {
     target = selector.findIndex(

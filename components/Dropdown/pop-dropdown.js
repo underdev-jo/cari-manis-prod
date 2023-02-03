@@ -20,7 +20,7 @@ export default function PopDropdown({
             doClose();
           };
           const selectedItem = list[selected];
-          const isSelected = selectedItem.value === item.value;
+          const isSelected = selectedItem?.value === item.value || false;
           const selectedClass = isSelected ? "bg-carman-blue-1 text-white" : "";
           return (
             <div key={item.value} className="flex items-center">
@@ -57,7 +57,7 @@ export default function PopDropdown({
 
   return (
     <button
-      className={`btn btn-ghost min-w-[112px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
+      className={`btn btn-ghost min-w-[70px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
       onClick={doOpen}
     >
       {text}

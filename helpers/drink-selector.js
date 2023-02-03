@@ -31,9 +31,11 @@ const sugar = [
 ];
 
 const sort = [
-  { value: "", label: "Tanggal", isSelected: true },
-  { value: "lowsugar", label: "Gula Terendah" },
-  { value: "lowcal", label: "Kalori Terendah" },
+  { value: "", label: "Produk Terbaru", isSelected: true },
+  { value: "lowsugar", label: "Rendah Gula" },
+  { value: "lowcal", label: "Rendah Kalori" },
+  { value: "highsugar", label: "Tinggi Gula" },
+  { value: "highcal", label: "Tinggi Kalori" },
 ];
 
 const typeDrink = [

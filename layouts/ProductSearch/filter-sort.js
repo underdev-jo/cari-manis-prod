@@ -18,8 +18,12 @@ export default function FilterSort() {
     replacePaarams(e.key || e.value);
   };
 
-  const target = selector.findIndex((i) => i.value === filtering);
-  let textDropdown = selector[target].label;
+  let textDropdown = "Urutkan";
+  let target = 0;
+  if (filtering) {
+    target = selector.findIndex((i) => i.value === filtering);
+    textDropdown = selector[target]?.label || "Urutkan";
+  }
 
   return (
     <SelectDropdown

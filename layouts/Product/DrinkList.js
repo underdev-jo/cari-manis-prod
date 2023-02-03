@@ -1,4 +1,3 @@
-import Button from "components/Button";
 import DrinkCard from "components/Product/drink-card";
 import Section from "components/Section";
 import { useRouter } from "next/router";
@@ -28,7 +27,7 @@ const MoreButton = ({ filter = "" }) => {
   const click = () => push(filter || "/cari");
 
   return (
-    <div className="flex justify-center mx-4">
+    <div className="flex justify-center my-4">
       <button
         className="btn btn-ghost normal-case text-carman-blue-0 text-medium font-medium"
         onClick={click}
@@ -47,11 +46,12 @@ const DrinkList = ({
   underTitle,
   unitDisplay = "sugar",
   filter = "",
+  useMoreBtn,
 }) => (
   <Section title={sectionTitle} sticky={sticky} underTitle={underTitle}>
     {topEl}
     <DrinkListView list={drinkList} unitDisplay={unitDisplay} />
-    <MoreButton filter={filter} />
+    {useMoreBtn && <MoreButton filter={filter} />}
   </Section>
 );
 

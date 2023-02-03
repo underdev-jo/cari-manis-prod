@@ -16,7 +16,7 @@ export default function FilterType() {
 
   const onSelectSugar = (e) => replacePaarams(e.value);
 
-  let textDropdown = "Semua Jenis";
+  let textDropdown = "Jenis";
   const target = selector.findIndex((i) => i.value === filtering);
 
   if (filtering) textDropdown = capitalize(`${selector[target].value}`);
