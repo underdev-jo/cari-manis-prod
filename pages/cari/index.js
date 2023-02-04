@@ -7,8 +7,9 @@ import Spinner from "components/Spinner";
 import { DrinkListView } from "layouts/Product/DrinkList";
 import { supabase } from "helpers/supabase";
 import AddToCalculator from "pageElement/product/AddToCalculator";
-import { arrStringObj, slugify, tableMinuman } from "helpers/util";
+import { arrStringObj, tableMinuman } from "helpers/util";
 import { useRouter } from "next/router";
+import ProductPagination from "pageElement/product/Pagination";
 
 const maxData = 40;
 
@@ -123,47 +124,16 @@ export default function SearchPage({ result, propsKeyword, query, page }) {
   else if (!loading && result.error)
     render = <Alert type="error" message={result.error?.message || "Error!"} />;
 
-  const nums = Math.ceil(result.count / maxData);
-  const arrPaging = Array.from({ length: nums }, (_, i) => i + 1);
-
-  const replaceParams = (value) => {
-    const pageParams = slugify(value || "");
-    let newQuery = { ...queryParam, page: pageParams };
-    const params = new URLSearchParams(newQuery).toString();
-    replace(`/cari?${params}`);
-  };
+  const amount = Math.ceil(result.count / maxData);
 
   return (
     <>
       <PageHead title={`Cari: ${keyword || "manis"}`} />
       <div className="relative min-h-[400px]">
         <ProductSearch keyword={keyword} />
-        <div className="container">
+        <div className="container mb-12">
           <div className="p-2 pt-[120px] max-w-sm mx-auto">{render}</div>
-          {nums > 1 ? (
-            <div className="mt-4 mb-8 text-center">
-              Kamu aktif pada pencarian ke:
-              <div className="flex justify-center">
-                <div className="mx-auto btn-group">
-                  {arrPaging.map((i) => (
-                    <button
-                      key={i}
-                      className={`btn btn-ghost btn-sm btn-square ${
-                        parseInt(page) === i ? "btn-disabled" : ""
-                      }`}
-                      onClick={() =>
-                        page !== i ? replaceParams(i) : undefined
-                      }
-                    >
-                      {i}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
+          <ProductPagination amount={amount} />
         </div>
       </div>
       <AddToCalculator product={false} />

@@ -83,6 +83,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
 };
 
 export const ProductImage = ({ image, name }) => {
+  let fallback = "/legal/cari-manis-broken-large.jpg";
   return (
     <div className="bg-primary-content">
       <div className="relative h-auto max-h-[240px] aspect-square mx-auto">
@@ -95,6 +96,8 @@ export const ProductImage = ({ image, name }) => {
             title={name}
             className="block mx-auto"
             layout="responsive"
+            onError={(e) => (e.currentTarget.src = fallback)}
+            quality={75}
           />
         ) : (
           <div className="w-full h-[240px] animate-pulse bg-primary" />
