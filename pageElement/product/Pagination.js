@@ -69,7 +69,7 @@ export default function ProductPagination({ amount = 0 }) {
         <div className={style["pagination-wrapper"]}>
           {more4 && (
             <div className="mr-4">
-              <ButtonPage num="min" />
+              <ButtonPage num="min" disabled={numPage == 1} />
             </div>
           )}
           {numList.map((i) => (
