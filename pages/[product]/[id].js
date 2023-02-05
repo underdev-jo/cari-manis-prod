@@ -44,7 +44,6 @@ export default function ProductDetail({ product }) {
       <PageHead title={product.name || "Produk Detail - cari manis"} />
       <ProductView product={product} />
       <AddToCalculator product={product} />
-      {/* <ProductComment comment={comment} /> */}
     </>
   );
 }

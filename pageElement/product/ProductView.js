@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import InfoSymbol from "components/Action/InfoSymbol";
 import Badge from "components/Daisy/Badge";
-import { convertRupiah, getCookie } from "helpers/util";
+import { convertRupiah, dailyMaxCalorie, dailyMaxSugar } from "helpers/util";
 import Progress from "components/Daisy/Progress";
 import style from "./Product.module.scss";
 import { selectorPackaging } from "helpers/drink-selector";
+import { colors } from "helpers/colors";
 
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="badge-sm font-bold">
@@ -74,7 +76,7 @@ export const ProductSummary = ({ name, packaging, harga }) => {
             src={catProduct.image}
             width={16}
             height={16}
-          />{" "}
+          />
           <div className="text-small">Minuman {catProduct.value}</div>
         </div>
       )}
@@ -107,21 +109,10 @@ export const ProductImage = ({ image, name }) => {
   );
 };
 
-const Block = ({ title, info, setPopup }) => (
-  <button
-    type="button"
-    className={style["info-cta"]}
-    onClick={() => setPopup({ title, info })}
-  >
-    <h1 className={style.title}>{title}</h1>
-    <h2 className={style.info}>{info}</h2>
-  </button>
-);
-
 const CalorieInfo = ({ kalori, jumlah_sajian }) => {
   const [serving, setServing] = useState(1);
 
-  const dailyCal = parseInt(getCookie("dailyCalLimit") || 2100, 10);
+  const dailyCal = dailyMaxCalorie;
   const value = kalori * serving;
   const percent = Math.ceil((value / dailyCal) * 100);
 
@@ -156,7 +147,7 @@ const CalorieInfo = ({ kalori, jumlah_sajian }) => {
 const SugarInfo = ({ gula, netto, jumlah_sajian }) => {
   const [serving, setServing] = useState(1);
 
-  const dailySugar = parseInt(getCookie("dailySugarLimit") || 50, 10);
+  const dailySugar = dailyMaxSugar;
   const value = gula * serving;
   const percent = (value / dailySugar) * 100;
 
@@ -234,6 +225,26 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
   );
 };
 
+const Block = ({ title, info, setPopup, index, active, value, max }) => (
+  <motion.button
+    initial={{ color: colors["carman-blue-1"] }}
+    animate={{
+      color:
+        index === active
+          ? "#fff"
+          : value > max
+          ? colors["carman-red-1"]
+          : colors["carman-blue-1"],
+    }}
+    type="button"
+    className={`relative rounded-2xl h-[68px] w-1/3`}
+    onClick={() => setPopup(index)}
+  >
+    <div className="text-medium font-bold">{title}</div>
+    <div className="text-large">{info}</div>
+  </motion.button>
+);
+
 export function ProductNutrition({
   netto,
   jumlah_sajian,
@@ -242,12 +253,9 @@ export function ProductNutrition({
   kalori,
   packaging,
 }) {
-  const [info, setInfo] = useState(false);
+  const [active, setActive] = useState(0);
 
-  const click = (e) => {
-    if (info === e.title) setInfo(false);
-    else setInfo(e.title);
-  };
+  const click = (e) => setActive(e);
 
   const sugarData = { gula, jumlah_sajian };
   const calorieData = { kalori, jumlah_sajian };
@@ -256,20 +264,61 @@ export function ProductNutrition({
   let nettoUnits = "ml";
   if (`${packaging}`.toLowerCase() === "sachet") nettoUnits = "gr";
 
+  const btnLoop = [
+    { title: "Netto", value: netto, info: `${netto}${nettoUnits}` },
+    { title: "Gula", value: gula, info: `${gula}gr`, max: dailyMaxSugar },
+    {
+      title: "Kalori",
+      value: kalori,
+      info: `${kalori}kkal`,
+      max: dailyMaxCalorie,
+    },
+  ];
+
+  const posLeft = (100 / btnLoop.length) * active;
+
+  const tabActive = btnLoop[active];
+  const titleActive = tabActive.title;
+  const over = tabActive.value > tabActive.max;
+
   return (
     <div>
       <div className="text-medium font-medium mb-3 px-6">
         Klik kotak berikut untuk informasi lebih detail
       </div>
-      <div className="flex justify-between px-6">
-        <Block title="Netto" info={`${netto}${nettoUnits}`} setPopup={click} />
-        <Block title="Gula" info={`${gula}gr`} setPopup={click} />
-        <Block title="Kalori" info={`${kalori}kkal`} setPopup={click} />
-      </div>
-      <div className={`${style["nutrition-box"]} ${info ? style.open : ""}`}>
-        {info === "Gula" && <SugarInfo {...sugarData} />}
-        {info === "Kalori" && <CalorieInfo {...calorieData} />}
-        {info === "Netto" && <NettoInfo {...nettoData} />}
+      <div className="bg-primary-content rounded-lg p-3">
+        <div className="relative flex justify-between bg-white rounded-2xl">
+          <motion.div
+            animate={{
+              left: `${posLeft}%`,
+              background: over
+                ? colors["carman-red-1"]
+                : colors["carman-blue-1"],
+            }}
+            className={`w-1/3 h-full absolute top-0 rounded-2xl bg-carman-blue-1`}
+          />
+          {btnLoop.map((item, index) => (
+            <Block
+              key={item.info}
+              {...item}
+              setPopup={click}
+              index={index}
+              active={active}
+            />
+          ))}
+        </div>
+        <motion.div
+          animate={{
+            borderColor: over
+              ? colors["carman-red-1"]
+              : colors["carman-blue-1"],
+          }}
+          className={style["nutrition-box"]}
+        >
+          {titleActive === "Gula" && <SugarInfo {...sugarData} />}
+          {titleActive === "Kalori" && <CalorieInfo {...calorieData} />}
+          {titleActive === "Netto" && <NettoInfo {...nettoData} />}
+        </motion.div>
       </div>
     </div>
   );
