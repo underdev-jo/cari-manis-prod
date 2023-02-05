@@ -28,7 +28,7 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-export default function TambahProduk({ dataSearch }) {
+export default function TambahProduk({ dataSearch = {} }) {
   const [open, setOpen] = useState(false);
 
   console.log("Tambah: ", dataSearch);

@@ -1,7 +1,10 @@
 import { supabase } from "helpers/supabase";
 import { arrStringObj, tableMinuman } from "helpers/util";
 
-const productSearch = async (req = NextApiRequest, res = NextApiResponse) => {
+const getProductSearch = async (
+  req = NextApiRequest,
+  res = NextApiResponse
+) => {
   const maxData = 40;
   if (req.method === "GET") {
     const {
@@ -56,4 +59,4 @@ const productSearch = async (req = NextApiRequest, res = NextApiResponse) => {
   }
 };
 
-export default productSearch;
+export default getProductSearch;
