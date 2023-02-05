@@ -37,8 +37,6 @@ const ViewSection = ({ product, cookie = [] }) => {
   const { push } = useRouter();
   const dispatch = useDispatch();
 
-  console.log("View Section: ", product);
-
   const deleteAll = () => {
     removeCookie("calculated");
     dispatch(setCalculatedProduct({ product: [], total: 0 }));

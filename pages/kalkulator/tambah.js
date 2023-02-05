@@ -1,6 +1,5 @@
 import SearchPage from "pages/cari";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 export async function getServerSideProps({ query }) {
   const {
@@ -40,9 +39,9 @@ export default function TambahProduk({ dataSearch }) {
     return () => setOpen(false);
   }, []);
 
-  let defClass = "transition-all duration-500";
-  let stateClass = "translate-y-[30%] opacity-0 pointer-events-none";
-  if (open) stateClass = "translate-y-0 opacity-100";
+  let defClass = "transition-all duration-300";
+  let stateClass = "mt-[300px] opacity-0 pointer-events-none";
+  if (open) stateClass = "mt-[0px] opacity-100";
 
   const className = `${defClass} ${stateClass}`;
 
