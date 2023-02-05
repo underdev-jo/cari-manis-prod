@@ -79,7 +79,7 @@ export const arrStringObj = (arr = []) =>
 
 export const baseUrl = process.env.base_url;
 
-export const maxFetchData = 20;
+export const maxFetchData = 16;
 
 const helper = { capitalize, diffDate, slugify };
 export default helper;
