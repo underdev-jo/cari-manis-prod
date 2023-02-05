@@ -1,21 +1,26 @@
+import CategoryBottleIcon from "public/icons/bottle";
+import CategoryCartonIcon from "public/icons/carton";
+import CategoryCupIcon from "public/icons/cup";
+import CategorySachetIcon from "public/icons/sachet";
+
 const packaging = [
   {
-    image: "/icons/bottle.svg",
+    image: <CategoryBottleIcon />,
     value: "Minuman Botol",
     key: "Botol",
   },
   {
-    image: "/icons/cup.svg",
+    image: <CategoryCupIcon />,
     value: "Minuman Kaleng",
     key: "Kaleng",
   },
   {
-    image: "/icons/carton.svg",
+    image: <CategoryCartonIcon />,
     value: "Minuman Karton",
     key: "Karton",
   },
   {
-    image: "/icons/sachet.svg",
+    image: <CategorySachetIcon />,
     value: "Minuman Sachet",
     key: "Sachet",
   },

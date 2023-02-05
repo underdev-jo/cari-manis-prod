@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { slugify } from "helpers/util";
 import Section from "components/Section";
@@ -22,17 +21,7 @@ function ButtonProductCategory({
 
   return (
     <button type="button" className={classBtnFilter} onClick={onClick}>
-      {image && (
-        <div className="mr-3">
-          <Image
-            src={image}
-            alt={value || name}
-            title={value || name}
-            width={32}
-            height={32}
-          />
-        </div>
-      )}
+      {image && <div className="mr-3">{image}</div>}
       <div className="text-small medium">{value || name}</div>
     </button>
   );

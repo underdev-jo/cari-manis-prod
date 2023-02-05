@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { addToCalculator } from "helpers/addToCalculator";
 import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct as setCalc } from "store/slices/calculated";
+import PhCalculatorIcon from "public/icons/PhCalculator";
 
 export default function AddToCalculator({ product }) {
   const dispatch = useDispatch();
@@ -28,12 +28,7 @@ export default function AddToCalculator({ product }) {
             className="btn btn-primary btn-sm rounded-[16px] text-white flex items-center justify-center w-[62px] h-[40px] p-0 gap-1"
             onClick={fnInfo}
           >
-            <Image
-              width={24}
-              height={24}
-              src="/icons/ph_calculator.svg"
-              alt="Calculator Icon"
-            />
+            <PhCalculatorIcon />
             <span className="text-white text-small">{countView}</span>
           </button>
         )}
