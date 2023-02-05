@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { slugify } from "helpers/util";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,48 +60,48 @@ const DrinkCard = ({
   }
 
   return (
-    <Link href={productUrl} passHref>
-      <div
-        className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5"
-        onClick={onClick}
-      >
-        <div className="relative w-full h-[180px] overflow-hidden [&>span]:!bg-slate-300">
-          {image ? (
-            <Image
-              src={img}
-              alt={name}
-              title={name}
-              width={180}
-              height={180}
-              onError={() => setImg("/legal/cari-manis-broken.jpg")}
-              quality={50}
-            />
-          ) : (
-            <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
-          )}
-        </div>
-        <div className="mt-3">
-          <div className="flex items-center gap-1">
-            <div
-              className={`badge ${unitBadge} badge-sm mb-1 text-white gap-1 text-small font-medium`}
-            >
-              {unitView}
-            </div>
-            <div
-              className="badge badge-primary badge-sm mb-1 badge-outline"
-              title={packaging}
-            >
-              {packaging}
-            </div>
+    <motion.div
+      layoutId={`product${id}`}
+      className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5"
+    >
+      <Link href={productUrl} passHref>
+        <div className="" onClick={onClick}>
+          <div className="relative w-full h-[180px] overflow-hidden [&>span]:!bg-slate-300">
+            {image ? (
+              <Image
+                src={img}
+                alt={name}
+                title={name}
+                width={180}
+                height={180}
+                onError={() => setImg("/legal/cari-manis-broken.jpg")}
+                quality={50}
+              />
+            ) : (
+              <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
+            )}
           </div>
-          <Link href={productUrl} title={name} passHref>
+          <div className="mt-3">
+            <div className="flex items-center gap-1">
+              <div
+                className={`badge ${unitBadge} badge-sm mb-1 text-white gap-1 text-small font-medium`}
+              >
+                {unitView}
+              </div>
+              <div
+                className="badge badge-primary badge-sm mb-1 badge-outline"
+                title={packaging}
+              >
+                {packaging}
+              </div>
+            </div>
             <div className="text-small medium line-clamp-2" title={name}>
               {name}
             </div>
-          </Link>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 };
 

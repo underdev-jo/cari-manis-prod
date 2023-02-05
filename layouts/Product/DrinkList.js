@@ -10,16 +10,24 @@ export const ThumbnailWrapper = ({ children }) => {
   );
 };
 
-export const DrinkListView = ({ list = [], unitDisplay }) =>
-  list && list.length > 0 ? (
-    <ThumbnailWrapper>
-      {list.map((item, index) => (
-        <DrinkCard key={item.id || index} {...item} unitDisplay={unitDisplay} />
-      ))}
-    </ThumbnailWrapper>
-  ) : (
-    <div>Produk tidak tersedia</div>
-  );
+export const DrinkListView = ({ list = [], unitDisplay }) => {
+  let view = <div>Produk tidak tersedia</div>;
+
+  if (list && list.length > 0)
+    view = (
+      <ThumbnailWrapper>
+        {list.map((item, index) => (
+          <DrinkCard
+            key={item.id || index}
+            {...item}
+            unitDisplay={unitDisplay}
+          />
+        ))}
+      </ThumbnailWrapper>
+    );
+
+  return <>{view}</>;
+};
 
 const MoreButton = ({ filter = "" }) => {
   const { push } = useRouter();

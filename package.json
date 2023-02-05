@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/web": "^9.6.1",
     "@reduxjs/toolkit": "^1.9.1",
     "@supabase/supabase-js": "^1.35.7",
     "@tailwindcss/line-clamp": "^0.4.2",

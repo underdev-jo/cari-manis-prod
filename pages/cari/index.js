@@ -10,6 +10,8 @@ import AddToCalculator from "pageElement/product/AddToCalculator";
 import { useRouter } from "next/router";
 import ProductPagination from "pageElement/product/Pagination";
 import { baseUrl, maxFetchData } from "helpers/util";
+import { useDispatch, useSelector } from "react-redux";
+import { setPopProduct } from "store/slices/popinfo-product";
 
 const maxData = maxFetchData;
 
@@ -46,6 +48,11 @@ export default function SearchPage({
   const [error, setError] = useState(false);
 
   const { query: queryParam } = useRouter();
+
+  const product = useSelector(({ popInfoProduct }) => popInfoProduct.product);
+  const dispatch = useDispatch();
+
+  const close = () => dispatch(setPopProduct(false));
 
   const { urutkan = "" } = queryParam;
 

@@ -70,14 +70,9 @@ export const ProductSummary = ({ name, packaging, harga }) => {
       </div>
       {/* Category product label */}
       {catProduct.value && (
-        <div className="badge badge-primary badge-outline">
-          <Image
-            alt={catProduct.value}
-            src={catProduct.image}
-            width={16}
-            height={16}
-          />
-          <div className="text-small">Minuman {catProduct.value}</div>
+        <div className="badge badge-primary badge-outline [&>svg]:w-4 [&>svg]:h-4">
+          {catProduct.image}
+          <div className="text-small">{catProduct.value}</div>
         </div>
       )}
     </div>
