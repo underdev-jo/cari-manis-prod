@@ -9,9 +9,9 @@ import { DrinkListView } from "layouts/Product/DrinkList";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import { useRouter } from "next/router";
 import ProductPagination from "pageElement/product/Pagination";
-import { baseUrl } from "helpers/util";
+import { baseUrl, maxFetchData } from "helpers/util";
 
-const maxData = 40;
+const maxData = maxFetchData;
 
 export async function getServerSideProps(context) {
   const {

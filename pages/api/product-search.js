@@ -1,11 +1,11 @@
 import { supabase } from "helpers/supabase";
-import { arrStringObj, tableMinuman } from "helpers/util";
+import { arrStringObj, maxFetchData, tableMinuman } from "helpers/util";
 
 const getProductSearch = async (
   req = NextApiRequest,
   res = NextApiResponse
 ) => {
-  const maxData = 40;
+  const maxData = maxFetchData;
   if (req.method === "GET") {
     const {
       gula = 999,
