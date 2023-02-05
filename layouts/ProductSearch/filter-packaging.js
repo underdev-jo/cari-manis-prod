@@ -7,7 +7,7 @@ const fetcher = (url) =>
   fetch(url, { method: "GET" }).then((res) => res.json());
 
 export default function FilterPackaging() {
-  const { data, error } = useSWR("api/get-packaging", fetcher, {
+  const { data, error } = useSWR("/api/get-packaging", fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
   });

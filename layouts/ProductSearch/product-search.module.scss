@@ -1,5 +1,5 @@
 .product-search {
-  @apply fixed top-[64px] z-50 py-4 px-4 pb-2 bg-[#F0F6FF] w-screen;
+  @apply fixed top-[64px] z-50 py-4 px-4 pb-2 bg-[#F0F6FF] w-full;
   transition: 0.25s ease-in-out;
 
   &.up {

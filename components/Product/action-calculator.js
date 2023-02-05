@@ -33,7 +33,8 @@ const ActionCalculator = (product) => {
     const newData = { ...target.data[0], ...newProps };
     const targetProduct = { ...target, data: [newData] };
     const newProduct = [...calcProduct];
-    newProduct[tIndex] = targetProduct;
+    if (passCount === 0) newProduct.splice(tIndex, 1);
+    else newProduct[tIndex] = targetProduct;
     dispatch(setProductCalc(newProduct));
   };
 
@@ -56,6 +57,7 @@ const ActionCalculator = (product) => {
       subCalculator(product);
       dispatchCounter(currCount);
     } else {
+      dispatchCounter(0);
       delItemCalculator(product);
       setDeleted(true);
     }
@@ -86,6 +88,7 @@ const ActionCalculator = (product) => {
               src="/icons/fluent_delete-12-regular.svg"
               width={10}
               height={10}
+              quality={50}
             />
           )}
         </button>

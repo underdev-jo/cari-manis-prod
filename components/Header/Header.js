@@ -12,12 +12,14 @@ import {
   setPopupCalculator,
   setPopupDetailCalc,
 } from "store/slices/calculatedPopup";
+import { setPopupAdd } from "store/slices/addProduct";
 
 const LeftSide = ({ back }) => {
   const dispatch = useDispatch();
 
   const detail = useSelector(({ popupCalc }) => popupCalc.popupDetail);
   const isOpen = useSelector(({ popupCalc }) => popupCalc.popup);
+  const isAddCalcOpen = useSelector(({ addProduct }) => addProduct.popup);
   const router = useRouter();
 
   const { pathname: path, back: backRouter } = router;
@@ -25,7 +27,10 @@ const LeftSide = ({ back }) => {
   const defaultBack = () => backRouter();
 
   const doBack = () => {
-    if (isOpen && detail) {
+    if (isAddCalcOpen) {
+      dispatch(setPopupAdd(false));
+      document.body.removeAttribute("style");
+    } else if (isOpen && detail) {
       dispatch(setPopupDetailCalc(false));
       setTimeout(() => dispatch(setPopupCalculator(false)), 400);
     } else if (isOpen) {

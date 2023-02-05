@@ -3,6 +3,7 @@ import ProductListItem from "components/Product/list-item";
 import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import PageHead from "pages/PageHead";
 import CalorieFire from "public/icons/calorie-fire";
 import SugarCube from "public/icons/SugarCube";
@@ -13,7 +14,6 @@ import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
 import PopupHasil from "./hasil-popup";
-import TambahProduk from "./tambah";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -34,7 +34,10 @@ const Placeholder = () => (
 );
 
 const ViewSection = ({ product, cookie = [] }) => {
+  const { push } = useRouter();
   const dispatch = useDispatch();
+
+  console.log("View Section: ", product);
 
   const deleteAll = () => {
     removeCookie("calculated");
@@ -42,7 +45,11 @@ const ViewSection = ({ product, cookie = [] }) => {
     dispatch(setProductCalc([]));
   };
 
-  const openPop = () => dispatch(setPopupAdd(true));
+  const openPop = () => {
+    // dispatch(setPopupAdd(true));
+    // document.body.style.overflow = "hidden";
+    push("/kalkulator/tambah");
+  };
 
   if (!product) return <Placeholder />;
   else if (product.length < 1)
@@ -115,22 +122,9 @@ export async function getServerSideProps({ req, query }) {
   const data = cookies.calculated || "{}";
   const parsed = JSON.parse(data);
 
-  const {
-    gula = 999,
-    kemasan = "",
-    q = "",
-    urutkan = "",
-    jenis = "",
-    page = 1,
-  } = query;
-  let baseurl = "http://localhost:3000/api/product-search";
-  const params = `gula=${gula}&kemasan=${kemasan}&q=${q}&urutkan=${urutkan}&jenis=${jenis}&page=${page}`;
-  const dataSearch = await (await fetch(`${baseurl}?${params}`)).json();
-
   return {
     props: {
       product: parsed.product || [],
-      dataSearch,
     },
   };
 }
@@ -200,7 +194,6 @@ export default function Kalkulator({ product, dataSearch }) {
       </div>
       {calcProduct && calcProduct.length > 0 && <CTACalculate />}
       <PopupHasil />
-      <TambahProduk dataSearch={dataSearch} />
     </>
   );
 }
