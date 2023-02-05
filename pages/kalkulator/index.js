@@ -135,7 +135,7 @@ export async function getServerSideProps({ req, query }) {
   };
 }
 
-export default function Kalkulator({ product, productSearch }) {
+export default function Kalkulator({ product, dataSearch }) {
   const [isHit, setHit] = useState(false);
 
   const calcProduct = useSelector(
@@ -200,7 +200,7 @@ export default function Kalkulator({ product, productSearch }) {
       </div>
       {calcProduct && calcProduct.length > 0 && <CTACalculate />}
       <PopupHasil />
-      <TambahProduk />
+      <TambahProduk dataSearch={dataSearch} />
     </>
   );
 }

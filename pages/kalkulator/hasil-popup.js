@@ -46,7 +46,7 @@ export default function PopupHasil() {
     calorie: limiter(total.calorie, 2100),
   };
 
-  let hei = "h-auto max-h-[40vh]";
+  let hei = "h-auto max-h-[60vh]";
   let posTop = "top-[50%] !w-[80%]";
   let overpacity = "opacity-70";
   if (detail) {

@@ -1,22 +1,11 @@
 import SearchPage from "pages/cari";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function TambahProduk() {
-  const [dataSearch, setData] = useState(false);
+export default function TambahProduk({ dataSearch }) {
+  console.log("Tambah: ", dataSearch);
 
   const addProduct = useSelector((state) => state.addProduct);
   const { popup } = addProduct;
-
-  useEffect(() => {
-    const f = async () => {
-      const res = await (await fetch("api/product-search")).json();
-      console.log("Res data: ", res);
-      setData(res);
-    };
-
-    f();
-  }, []);
 
   return (
     <div

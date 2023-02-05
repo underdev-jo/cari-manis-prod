@@ -1,4 +1,4 @@
-import { getCookie, setCookie } from "./util";
+import { getCookie, setCookie, removeCookie } from "./util";
 
 export const productCookieName = "calculated";
 
@@ -53,16 +53,23 @@ export function delItemCalculator(product) {
       if (typeof parsed.product === "object") {
         const newProduct = parsed.product.filter((i) => i.id !== product.id);
 
-        let totalProduct = newProduct.reduce((prev, curr) => {
-          return { c: prev.c + curr.c };
-        });
+        let totalProduct = { c: 0 };
+        console.log(newProduct);
+
+        const hasNew = newProduct.length > 0;
+
+        if (hasNew)
+          totalProduct = newProduct.reduce((prev, curr) => {
+            return { c: prev.c + curr.c };
+          });
 
         const productObj = {
           product: newProduct,
           total: totalProduct.c || totalProduct,
         };
 
-        setCookie(productCookieName, JSON.stringify(productObj));
+        if (hasNew) setCookie(productCookieName, JSON.stringify(productObj));
+        else removeCookie(productCookieName);
       }
     }
   }
