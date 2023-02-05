@@ -77,5 +77,7 @@ export const tableMinuman = "minuman_new";
 export const arrStringObj = (arr = []) =>
   `${JSON.stringify(arr)}`.replace("[", "{").replace("]", "}");
 
+export const baseUrl = process.env.base_url;
+
 const helper = { capitalize, diffDate, slugify };
 export default helper;

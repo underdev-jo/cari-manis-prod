@@ -1,3 +1,4 @@
+import { baseUrl } from "helpers/util";
 import SearchPage from "pages/cari";
 import { useEffect, useState } from "react";
 
@@ -10,7 +11,6 @@ export async function getServerSideProps({ query }) {
     jenis = "",
     page = 1,
   } = query;
-  let baseurl = "http://localhost:3000/api/product-search";
   const params = new URLSearchParams({
     q,
     gula,
@@ -19,7 +19,8 @@ export async function getServerSideProps({ query }) {
     jenis,
     page,
   }).toString();
-  const dataSearch = await (await fetch(`${baseurl}?${params}`)).json();
+  const apiUrl = `${baseUrl}/api/product-search?${params}`;
+  const dataSearch = await (await fetch(apiUrl)).json();
 
   return {
     props: {

@@ -9,13 +9,29 @@ import { DrinkListView } from "layouts/Product/DrinkList";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import { useRouter } from "next/router";
 import ProductPagination from "pageElement/product/Pagination";
-import getProductSearch from "pages/api/product-search";
-import { NextRequest, NextResponse } from "next/server";
+import { baseUrl } from "helpers/util";
 
 const maxData = 40;
 
 export async function getServerSideProps(context) {
-  const data = await getProductSearch(NextRequest, NextResponse);
+  const {
+    gula = 999,
+    kemasan = "",
+    q = "",
+    urutkan = "",
+    jenis = "",
+    page = 1,
+  } = context.query;
+  const params = new URLSearchParams({
+    q,
+    gula,
+    kemasan,
+    urutkan,
+    jenis,
+    page,
+  }).toString();
+  const apiUrl = `${baseUrl}/api/product-search?${params}`;
+  const data = await (await fetch(apiUrl)).json();
   return { props: { ...data } };
 }
 
