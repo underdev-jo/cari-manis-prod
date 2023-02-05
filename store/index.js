@@ -4,6 +4,7 @@ import popupCalc from "./slices/calculatedPopup";
 import calculatedProduct from "./slices/calculatedProduct";
 import popInfoProduct from "./slices/popinfo-product";
 import modalFilter from "./slices/modal-filter";
+import addProduct from "./slices/addProduct";
 
 export default configureStore({
   middleware: () =>
@@ -18,5 +19,6 @@ export default configureStore({
     calculatedProduct,
     popInfoProduct,
     modalFilter,
+    addProduct,
   },
 });

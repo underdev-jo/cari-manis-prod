@@ -8,10 +8,12 @@ import CalorieFire from "public/icons/calorie-fire";
 import SugarCube from "public/icons/SugarCube";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setPopupAdd } from "store/slices/addProduct";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
 import PopupHasil from "./hasil-popup";
+import TambahProduk from "./tambah";
 
 const HeadSection = () => (
   <div className="mb-8">
@@ -40,6 +42,8 @@ const ViewSection = ({ product, cookie = [] }) => {
     dispatch(setProductCalc([]));
   };
 
+  const openPop = () => dispatch(setPopupAdd(true));
+
   if (!product) return <Placeholder />;
   else if (product.length < 1)
     return (
@@ -50,7 +54,9 @@ const ViewSection = ({ product, cookie = [] }) => {
             minuman pilihanmu agar kami bisa bantu hitung manismu
           </div>
           <div className="flex justify-center pt-2">
-            <Button size="small">Tambah Minuman</Button>
+            <Button size="small" onClick={openPop}>
+              Tambah Minuman
+            </Button>
           </div>
         </div>
       </ErrorLayout>
@@ -104,20 +110,32 @@ const CTACalculate = () => {
   );
 };
 
-export function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, query }) {
   const { cookies } = req;
   const data = cookies.calculated || "{}";
   const parsed = JSON.parse(data);
+
+  const {
+    gula = 999,
+    kemasan = "",
+    q = "",
+    urutkan = "",
+    jenis = "",
+    page = 1,
+  } = query;
+  let baseurl = "http://localhost:3000/api/product-search";
+  const params = `gula=${gula}&kemasan=${kemasan}&q=${q}&urutkan=${urutkan}&jenis=${jenis}&page=${page}`;
+  const dataSearch = await (await fetch(`${baseurl}?${params}`)).json();
+
   return {
     props: {
       product: parsed.product || [],
-      // total: parsed.total || 0,
-      // calculated: parsed,
+      dataSearch,
     },
   };
 }
 
-export default function Kalkulator({ product }) {
+export default function Kalkulator({ product, productSearch }) {
   const [isHit, setHit] = useState(false);
 
   const calcProduct = useSelector(
@@ -182,6 +200,7 @@ export default function Kalkulator({ product }) {
       </div>
       {calcProduct && calcProduct.length > 0 && <CTACalculate />}
       <PopupHasil />
+      <TambahProduk />
     </>
   );
 }

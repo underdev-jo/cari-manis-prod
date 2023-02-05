@@ -2,11 +2,3 @@
   @apply bg-white rounded-md p-1 flex items-center justify-center w-auto;
   box-shadow: 0px 4px 8px rgba(156, 156, 156, 0.2);
 }
-
-.pagination-page {
-  @apply btn btn-sm btn-square;
-
-  .active {
-    @apply border-carman-blue-1 text-carman-blue-1;
-  }
-}

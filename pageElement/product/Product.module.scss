@@ -1,5 +1,5 @@
 .info-cta {
-  @apply btn btn-ghost block h-auto w-[30%] max-w-[110px] bg-primary-content p-4 normal-case text-primary;
+  @apply btn btn-ghost block h-auto w-[30%] max-w-[110px] bg-primary-content p-4 normal-case text-primary border-2 border-carman-blue-1;
 
   .title {
     @apply w-full text-small font-bold;
