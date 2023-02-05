@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 import { runFunction } from "helpers/util";
-import { Burger, Close } from "public/icons";
+import { ArrowLeftSolid, Burger, Close } from "public/icons";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
@@ -44,13 +44,11 @@ const LeftSide = ({ back }) => {
   let backButton = "";
   if (notHome)
     backButton = (
-      <button className="btn btn-square btn-ghost text-white" onClick={doBack}>
-        <Image
-          src="/icons/arrow-left-solid.svg"
-          alt="Back"
-          width={26}
-          height={30}
-        />
+      <button
+        className="btn btn-square btn-ghost text-white [&>svg]:w-[26px] [&>svg]:h-[30px]"
+        onClick={doBack}
+      >
+        <ArrowLeftSolid />
       </button>
     );
 
@@ -89,35 +87,52 @@ const RightSide = ({ toggleBurger, onBurger }) => {
 };
 
 const MenuView = ({ onBurger, toggleBurger }) => {
+  const variants = {
+    hidden: { y: -20, opacity: 0, transition: { duration: 0.2 } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
+  };
+
   return (
     <div className={`${style["menu-list"]} ${onBurger ? style.show : ""}`}>
-      <div className="pt-20 max-w-md mx-auto">
+      <motion.div
+        className="pt-20 max-w-md mx-auto"
+        animate={onBurger ? "visible" : "hidden"}
+        variants={{
+          visible: {
+            transition: {
+              type: "spring",
+              duration: 0.2,
+              delayChildren: 0.1,
+              staggerChildren: 0.05,
+            },
+          },
+        }}
+      >
         {linkList.map((item) => (
-          <Link key={item.url} href={item.url} passHref>
-            <div onClick={toggleBurger} className={style.linkWrapper}>
-              <div className={style.linkBlock}>
-                <div className={style.linkText}>{item.text}</div>
-                {item.status === "new" && (
-                  <div className="relative">
-                    <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
-                    <div className="relative badge badge-lg badge-accent">
-                      {item.status}
+          <motion.div key={item.url} variants={variants}>
+            <Link href={item.url} passHref>
+              <div onClick={toggleBurger} className={style.linkWrapper}>
+                <div className={style.linkBlock}>
+                  <div className={style.linkText}>{item.text}</div>
+                  {item.status === "new" && (
+                    <div className="relative">
+                      <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
+                      <div className="relative badge badge-lg badge-accent">
+                        {item.status}
+                      </div>
                     </div>
-                  </div>
-                )}
-                <div>
-                  <Image
-                    alt={item.text}
-                    src={item.image}
-                    width={32}
-                    height={32}
-                  />
+                  )}
+                  <div>{item.image}</div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div className={style.devLabel}>
         <div className={style["portfolio-experiment"]}>

@@ -1,25 +1,31 @@
+import FluentCalculatorIcon from "public/icons/FluentCalculator";
+import FluentHomeIcon from "public/icons/FluentHome";
+import FluentInfoIcon from "public/icons/FluentInfo";
+import FluentPeopleIcon from "public/icons/FluentPeople";
+import FluentSearchIcon from "public/icons/FluentSearch";
+
 const linkList = [
-  { text: "Home", url: "/", image: "/icons/fluent_home-20-regular.svg" },
+  { text: "Home", url: "/", image: <FluentHomeIcon /> },
   {
     text: "Cari Minuman",
     url: "/cari",
-    image: "/icons/fluent_search-16-regular.svg",
+    image: <FluentSearchIcon />,
   },
   {
     text: "Kalkulator Manis",
     url: "/kalkulator",
-    image: "/icons/fluent_calculator-20-regular.svg",
+    image: <FluentCalculatorIcon />,
     status: "new",
   },
   {
     text: "Sumber Informasi",
     url: "/sumber-informasi",
-    image: "/icons/fluent_info-20-regular.svg",
+    image: <FluentInfoIcon />,
   },
   {
     text: "Tentang Pembuat",
     url: "/tentang-pembuat",
-    image: "/icons/fluent_people-28-regular.svg",
+    image: <FluentPeopleIcon />,
   },
 ];
 
