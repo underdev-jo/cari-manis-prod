@@ -2,6 +2,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "nprogress/nprogress.css";
 import "styles/globals.scss";
+import { Analytics } from "@vercel/analytics/react";
 import Header from "components/Header/Header";
 import Footer from "components/footer";
 import ModalPriceInfo from "components/Modal/PriceInfo";
@@ -43,6 +44,7 @@ function MyApp({ Component, pageProps }) {
         <PopInfo />
         <ModalOptionFilter />
       </Provider>
+      <Analytics mode={process.env.environment} />
     </>
   );
 }
