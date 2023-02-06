@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import PageHead from "pages/PageHead";
 import CalorieFire from "public/icons/calorie-fire";
+import IconPlus from "public/icons/icon-plus";
 import SugarCube from "public/icons/SugarCube";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,6 +93,14 @@ const ViewSection = ({ product, cookie = [] }) => {
           />
         );
       })}
+      <div className="flex justify-end">
+        <Button onClick={openPop} className="!rounded-2xl !btn-sm">
+          <div className="flex items-center justify-between gap-1">
+            <IconPlus />
+            <span>Tambah Minuman</span>
+          </div>
+        </Button>
+      </div>
     </>
   );
 };
