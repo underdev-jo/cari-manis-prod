@@ -1,5 +1,4 @@
 import Button from "components/Button";
-import { animated, useSpring } from "@react-spring/web";
 import { slugify } from "helpers/util";
 import { addToCalculator } from "helpers/addToCalculator";
 import Image from "next/image";
@@ -62,40 +61,11 @@ export default function PopInfo() {
   );
 
   const defClass =
-    "fixed top-[50%] left-[50%] bg-white min-h-[20vh] w-[80vw] max-w-sm rounded-[20px] -translate-x-[50%] -translate-y-[50%] shadow-xl z-50";
-  const actClass = product ? "" : "pointer-events-none";
-
+    "fixed top-[50%] left-[50%] bg-white min-h-[20vh] w-[80vw] max-w-sm rounded-[20px] -translate-x-[50%] transition-all shadow-xl z-50";
+  const actClass = product
+    ? "-translate-y-[50%] opacity-100"
+    : "-translate-y-[40%] opacity-0 pointer-events-none";
   const fullClass = `${defClass} ${actClass}`;
-
-  const [springs, api] = useSpring(() => ({
-    from: {
-      opacity: 0,
-      transform: "translate(-50%, -50%) scale(0.5)",
-    },
-  }));
-
-  if (product)
-    api.start({
-      from: {
-        opacity: 0,
-        transform: "translate(-50%, -50%) scale(0.5)",
-      },
-      to: {
-        opacity: 1,
-        transform: "translate(-50%, -50%) scale(1)",
-      },
-    });
-  else
-    api.start({
-      to: {
-        opacity: 0,
-        transform: "translate(-50%, -50%) scale(0.5)",
-      },
-      from: {
-        opacity: 1,
-        transform: "translate(-50%, -50%) scale(1)",
-      },
-    });
 
   return (
     <>
@@ -105,7 +75,7 @@ export default function PopInfo() {
           onClick={close}
         />
       )}
-      <animated.div style={{ ...springs }} className={fullClass}>
+      <div className={fullClass}>
         <div className="relative">
           <div className="relative py-6 px-5">
             <div className="mb-3">
@@ -150,7 +120,7 @@ export default function PopInfo() {
             <Close size={18} />
           </button>
         </div>
-      </animated.div>
+      </div>
     </>
   );
 }
