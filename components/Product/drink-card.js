@@ -75,6 +75,7 @@ const DrinkCard = ({
                 height={180}
                 onError={() => setImg("/legal/cari-manis-broken.jpg")}
                 quality={50}
+                priority
               />
             ) : (
               <div className="bg-slate-200 animate-pulse w-full h-[158px]" />
