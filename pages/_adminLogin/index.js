@@ -46,6 +46,7 @@ export default function FormLogin() {
               alt="Architecture"
               width={400}
               height={225}
+              quality={75}
             />
           </figure>
           <form className="card-body" onSubmit={onSubmit}>

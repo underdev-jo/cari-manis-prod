@@ -1,5 +1,5 @@
 import Section from "components/Section";
-import Image from "next/image";
+import IllustrationInfo from "public/icons/IllustrationInfo";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "./SweetInfo.module.scss";
@@ -40,12 +40,7 @@ export default function SweetInfo() {
             </Swiper>
           </div>
           <div className="flex items-center justify-center">
-            <Image
-              alt="Information"
-              src="/icons/information.svg"
-              width={63}
-              height={77}
-            />
+            <IllustrationInfo />
           </div>
         </div>
       </div>

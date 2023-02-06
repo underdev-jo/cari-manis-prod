@@ -3,7 +3,7 @@ import {
   delItemCalculator,
   subCalculator,
 } from "helpers/addToCalculator";
-import Image from "next/image";
+import FluentDeleteIcon from "public/icons/FluentDeleteIcon";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductCalc } from "store/slices/calculatedProduct";
@@ -80,17 +80,7 @@ const ActionCalculator = (product) => {
     <div className="w-1/4 flex justify-end">
       <div className="flex">
         <button className={classDelBtn} onClick={dec}>
-          {isMore ? (
-            "-"
-          ) : (
-            <Image
-              alt="del"
-              src="/icons/fluent_delete-12-regular.svg"
-              width={10}
-              height={10}
-              quality={50}
-            />
-          )}
+          {isMore ? "-" : <FluentDeleteIcon />}
         </button>
         <div className="w-6 btn btn-xs disabled rounded-none btn-outline text-center border-l-0 border-r-0 border-t-carman-gray-4 border-b-carman-gray-4  pointer-events-none">
           {count}

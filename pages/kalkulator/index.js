@@ -2,10 +2,10 @@ import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
 import { removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import PageHead from "pages/PageHead";
 import CalorieFire from "public/icons/calorie-fire";
+import FluentDeleteIcon from "public/icons/FluentDeleteIcon";
 import IconPlus from "public/icons/icon-plus";
 import SugarCube from "public/icons/SugarCube";
 import { useEffect, useState } from "react";
@@ -75,12 +75,7 @@ const ViewSection = ({ product, cookie = [] }) => {
           className="btn btn-xs bg-carman-red-1 rounded-full text-white border-transparent normal-case hover:bg-carman-red-1 hover:text-white hover:border-transparent"
           onClick={deleteAll}
         >
-          <Image
-            alt="Del"
-            width={12}
-            height={12}
-            src="/icons/fluent_delete-12-regular.svg"
-          />
+          <FluentDeleteIcon />
           <span className="ml-1">Hapus Semua</span>
         </button>
       </div>

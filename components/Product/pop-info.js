@@ -86,6 +86,7 @@ export default function PopInfo() {
                       alt={product.name}
                       src={product.image}
                       layout="fill"
+                      quality={50}
                     />
                   )}
                 </div>
