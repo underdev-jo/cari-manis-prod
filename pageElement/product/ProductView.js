@@ -277,7 +277,7 @@ export function ProductNutrition({
   const over = tabActive.value > tabActive.max;
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <div className="text-medium font-medium mb-3 px-6">
         Klik kotak berikut untuk informasi lebih detail
       </div>
