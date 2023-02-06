@@ -18,22 +18,24 @@ const getProductSearch = async (
 
     const count = { count: "exact" };
 
+    console.log("Fetch: ", req.query);
+
     let api = supabase.from(tableMinuman).select("*", count);
 
-    let queryName = [];
-    if (q) queryName = `${q}`.split(/[ ,]+/);
+    let qName = [];
+    if (q) qName = `${q}`.split(/[ ,]+/);
 
     if (q || kemasan || gula) {
       let orName = `name.ilike.%${q}%`;
-      if (queryName.length > 0)
-        orName = queryName.map((qitem) => `name.ilike.%${qitem}}%`);
+      if (qName.length > 0)
+        orName = qName.map((qitem) => `name.ilike.%${qitem}%`);
 
-      const orCat = `category.cs.${arrStringObj(queryName)}`;
+      const orCat = `category.cs.${arrStringObj(qName)}`;
 
       api = supabase
         .from(tableMinuman)
         .select("*", count)
-        .or(`${orName},${orCat},kategori.ilike.%${jenis}%`)
+        .or(`${orName},${orCat}`)
         .ilike("packaging", `%${kemasan}%`)
         .lte("gula", gula);
     }

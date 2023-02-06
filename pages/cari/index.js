@@ -33,6 +33,7 @@ export async function getServerSideProps(context) {
     page,
   }).toString();
   const apiUrl = `${baseUrl}/api/product-search?${params}`;
+
   const data = await (await fetch(apiUrl)).json();
   return { props: { ...data } };
 }
