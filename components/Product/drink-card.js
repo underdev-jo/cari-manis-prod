@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { slugify } from "helpers/util";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,7 +59,7 @@ const DrinkCard = ({
   }
 
   return (
-    <motion.div
+    <div
       layoutId={`product${id}`}
       className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5"
     >
@@ -101,7 +100,7 @@ const DrinkCard = ({
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
