@@ -1,5 +1,5 @@
 import { supabase } from "helpers/supabase";
-import { tableMinuman } from "helpers/util";
+import { baseUrl, tableMinuman } from "helpers/util";
 import { ProductView } from "pageElement/product";
 import AddToCalculator from "pageElement/product/AddToCalculator";
 import PageHead from "pages/PageHead";
@@ -19,10 +19,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { data, error } = await supabase
-    .from(tableMinuman)
-    .select("*")
-    .eq("id", params.id);
+  const { data, error } = await (
+    await fetch(`${baseUrl}/api/product-detail?id=${params.id}`)
+  ).json();
 
   const props = { product: data[0] };
 

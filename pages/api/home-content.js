@@ -43,7 +43,7 @@ export default async function apiHomeContent(req, res) {
     highCal: await apiSort("kalori", true),
   };
 
-  if (data.lowSugar.error) res.redirect([502], "/502");
+  if (data.lowSugar.error) return res.redirect([502], "/502");
 
-  res.status(200).json(data);
+  return res.status(200).json(data);
 }
