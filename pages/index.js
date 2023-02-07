@@ -1,5 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
-import { supaKey, supaUrl, tableMinuman } from "helpers/util";
+import { baseUrl } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
@@ -33,71 +32,7 @@ const selectList = [
 ];
 
 export async function getStaticProps() {
-  const supa = createClient(supaUrl(), supaKey());
-  const table = tableMinuman;
-
-  const lowSugar = await supa.from(table).select().order("gula").range(0, 9);
-
-  const lowCal = await supa.from(table).select().order("kalori").range(0, 9);
-
-  const milk = await supa
-    .from(table)
-    .select()
-    .or(
-      "name.ilike.%susu%,name.ilike.%milk%,kategori.ilike.%susu%,kategori.ilike.%milk%,category.cs.{susu},category.cs.{milk}"
-    )
-    .filter("name", "not.ilike", "%kopi%")
-    .filter("name", "not.ilike", "%teh%")
-    .filter("name", "not.ilike", "%tea%")
-    .order("created_at", { ascending: false })
-    .range(0, 9);
-
-  const coffee = await supa
-    .from(table)
-    .select()
-    .or(
-      "name.ilike.%kopi%,name.ilike.%coffee%,kategori.ilike.%kopi%,kategori.ilike.%coffee%,category.cs.{kopi},category.cs.{coffee}"
-    )
-    .order("created_at", { ascending: false })
-    .range(0, 9);
-
-  const juice = await supa
-    .from(table)
-    .select()
-    .or(
-      "name.ilike.%jus%,name.ilike.%juice%,kategori.ilike.%juice%,kategori.ilike.%jus%,category.cs.{jus},category.cs.{juice}"
-    )
-    .order("created_at", { ascending: false })
-    .range(0, 9);
-
-  const mostSweet = await supa
-    .from(table)
-    .select()
-    .order("gula", { ascending: false })
-    .range(0, 9);
-
-  const highCal = await supa
-    .from(table)
-    .select()
-    .order("kalori", { ascending: false })
-    .range(0, 9);
-
-  if (lowSugar.error)
-    return {
-      redirect: {
-        destination: "/502",
-      },
-    };
-
-  const filtered = {
-    lowSugar,
-    lowCal,
-    milk,
-    coffee,
-    juice,
-    mostSweet,
-    highCal,
-  };
+  const filtered = await (await fetch(`${baseUrl}/api/home-content`)).json();
 
   return {
     props: { filtered },

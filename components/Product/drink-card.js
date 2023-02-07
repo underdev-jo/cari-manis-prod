@@ -59,10 +59,7 @@ const DrinkCard = ({
   }
 
   return (
-    <div
-      layoutId={`product${id}`}
-      className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5"
-    >
+    <div className="overflow-hidden btn btn-ghost text-left h-auto bg-white hover:bg-white normal-case block border-[#E2E8F5] hover:border-[#E2E8F5] rounded-md p-3 m-2.5">
       <Link href={productUrl} passHref>
         <div className="" onClick={onClick}>
           <div className="relative w-full h-[180px] overflow-hidden [&>span]:!bg-slate-300">
