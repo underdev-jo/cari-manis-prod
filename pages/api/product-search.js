@@ -18,8 +18,6 @@ const getProductSearch = async (
 
     const count = { count: "exact" };
 
-    console.log("Fetch: ", req.query);
-
     let api = supabase.from(tableMinuman).select("*", count);
 
     let qName = [];
