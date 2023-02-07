@@ -52,7 +52,7 @@ export default function ProductPagination({ amount = 0 }) {
 
   if (amount < 2) return "";
 
-  let numSet = [1, 2, 3, 4];
+  let numSet = Array.from({ length: amount }, (_, i) => i + 1);
   const numPage = parseInt(page, 10);
   const more4 = amount > 4;
   if (more4) {
