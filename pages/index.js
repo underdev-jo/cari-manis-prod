@@ -28,18 +28,18 @@ const selectList = [
 ];
 
 export async function getStaticProps() {
-  // let fetching = await fetch(`${baseUrl}/api/home-content`);
-  // console.log("FETCHED: ", fetching);
-  // const filtered = fetching ? await fetching.json() : null;
+  let fetching = await fetch(`${baseUrl}/api/home-content`);
+  console.log("FETCHED: ", fetching);
+  const filtered = fetching ? await fetching.json() : null;
 
-  const filtered = {
-    lowSugar: await apiSort("gula"),
-    lowCal: await apiSort("kalori"),
-    milk: await requestMilk(),
-    coffee: await apiSelection("kopi", "coffee"),
-    juice: await apiSelection("jus", "juice"),
-    mostSweet: await apiSort("gula", true),
-  };
+  // const filtered = {
+  //   lowSugar: await apiSort("gula"),
+  //   lowCal: await apiSort("kalori"),
+  //   milk: await requestMilk(),
+  //   coffee: await apiSelection("kopi", "coffee"),
+  //   juice: await apiSelection("jus", "juice"),
+  //   mostSweet: await apiSort("gula", true),
+  // };
 
   return {
     props: { filtered },
