@@ -21,9 +21,7 @@ const apiSelection = async (name1, name2) => {
   const request = await supabase
     .from(tableMinuman)
     .select()
-    .or(
-      `name.ilike.%${name1}%,name.ilike.%${name2}%,category.cs.{${name1}},category.cs.{${name2}}`
-    )
+    .or(orLogic(name1, name2))
     .order("created_at", { ascending: true })
     .range(0, 5);
   let status = request.status;
@@ -45,16 +43,18 @@ const requestMilk = async () => {
 };
 
 export default async function apiHomeContent(req, res) {
-  const data = {
-    lowSugar: await apiSort("gula"),
-    lowCal: await apiSort("kalori"),
-    milk: await requestMilk(),
-    coffee: await apiSelection("kopi", "coffee"),
-    juice: await apiSelection("jus", "juice"),
-    mostSweet: await apiSort("gula", true),
-  };
+  if (req.method === "GET") {
+    const data = {
+      lowSugar: await apiSort("gula"),
+      lowCal: await apiSort("kalori"),
+      milk: await requestMilk(),
+      coffee: await apiSelection("kopi", "coffee"),
+      juice: await apiSelection("jus", "juice"),
+      mostSweet: await apiSort("gula", true),
+    };
 
-  if (data.lowSugar.error) return res.redirect([502], "/502");
+    if (data.lowSugar.error) return res.redirect([502], "/502");
 
-  return res.status(200).json(data);
+    return res.status(200).json(data);
+  }
 }
