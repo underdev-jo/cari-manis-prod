@@ -1,4 +1,5 @@
 import { apiSelection, apiSort } from "helpers/supabase";
+import { baseUrl } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
