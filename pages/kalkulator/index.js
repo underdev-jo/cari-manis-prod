@@ -130,7 +130,7 @@ export async function getServerSideProps({ req, query }) {
       list.map(async (item) => {
         let url = `${baseUrl}/api/product-detail`;
         const res = await fetch(`${url}?id=${item.id}`, { method: "GET" });
-        return (await res).json();
+        return res;
       })
     );
 
