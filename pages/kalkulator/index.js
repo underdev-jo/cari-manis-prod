@@ -1,6 +1,6 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
-import { removeCookie } from "helpers/util";
+import { baseUrl, removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import { useRouter } from "next/router";
 import PageHead from "pages/PageHead";
@@ -123,18 +123,45 @@ export async function getServerSideProps({ req, query }) {
   const data = cookies.calculated || "{}";
   const parsed = JSON.parse(data);
 
-  console.log("ServerSideKalkulator: ", parsed);
+  let list = parsed.product ? [...parsed.product] : [];
+
+  const runList = () =>
+    Promise.all(
+      list.map(async (item) => {
+        let url = `${baseUrl}/api/product-detail`;
+        const res = await fetch(`${url}?id=${item.id}`, { method: "GET" });
+        return (await res).json();
+      })
+    );
+
+  const propsing = (resItem) => {
+    let returnItem = resItem;
+    const item = resItem.data[0];
+    const target = list.find((i) => i.id === item.id);
+    const count = target.c;
+    const newProps = {
+      qty: count,
+      xSug: count * item.gula,
+      xCal: count * item.kalori,
+    };
+    const newItem = { ...item, ...newProps };
+    if (item) returnItem = { ...resItem, data: [newItem] };
+    return returnItem;
+  };
+
+  const productsCalc = await runList().then((res) =>
+    res.map((item) => propsing(item))
+  );
 
   return {
     props: {
-      product: parsed.product || [],
+      product: list,
+      productsCalc,
     },
   };
 }
 
-export default function Kalkulator({ product, dataSearch }) {
-  const [isHit, setHit] = useState(false);
-
+export default function Kalkulator({ product, productsCalc }) {
   const calcProduct = useSelector(
     ({ calculatedProduct }) => calculatedProduct.product
   );
@@ -143,42 +170,8 @@ export default function Kalkulator({ product, dataSearch }) {
   const setProduct = (value) => dispatch(setProductCalc(value));
 
   useEffect(() => {
-    const run = (list) =>
-      Promise.all(
-        list.map(async (item) => {
-          const res = fetch(`api/product-detail?id=${item.id}`, {
-            method: "GET",
-          }).then((res) => res.json());
-          return res;
-        })
-      );
-
-    if (!isHit) setHit(true);
-    else if (isHit && product) {
-      const list = [...product];
-
-      const addingProps = (resItem) => {
-        let returnItem = resItem;
-        const item = resItem.data[0];
-        const target = list.find((i) => i.id === item.id);
-        const count = target.c;
-        const newProps = {
-          qty: count,
-          xSug: count * item.gula,
-          xCal: count * item.kalori,
-        };
-        const newItem = { ...item, ...newProps };
-        if (item) returnItem = { ...resItem, data: [newItem] };
-        return returnItem;
-      };
-
-      run(list).then((resPromise) => {
-        // adding QTY product
-        const data = resPromise.map((resItem) => addingProps(resItem));
-        dispatch(setProductCalc(data));
-      });
-    }
-  }, [isHit, product, dispatch]);
+    if (productsCalc) dispatch(setProductCalc(productsCalc));
+  }, [productsCalc, dispatch]);
 
   return (
     <>
