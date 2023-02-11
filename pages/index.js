@@ -29,7 +29,7 @@ const selectList = [
 export async function getStaticProps() {
   let fetching = await fetch(`${baseUrl}/api/home-content`);
   console.log("FETCHED: ", fetching);
-  const filtered = fetching ? fetching.json() : null;
+  const filtered = fetching ? await fetching.json() : null;
   return {
     props: { filtered },
     revalidate: 3600,
