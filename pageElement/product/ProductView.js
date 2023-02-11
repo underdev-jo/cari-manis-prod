@@ -359,13 +359,15 @@ export function ProductSource({ source }) {
 }
 
 export default function ProductView({ product }) {
+  const jmlSajian = Math.abs(product.netto / product.takaran_saji);
+  const newProduct = { ...product, jumlah_sajian: jmlSajian };
   return (
     <div className="container">
-      <ProductImage {...product} />
-      <ProductSummary {...product} />
-      <ProductNutrition {...product} />
-      <ProductInformation {...product} />
-      <ProductSource {...product} />
+      <ProductImage {...newProduct} />
+      <ProductSummary {...newProduct} />
+      <ProductNutrition {...newProduct} />
+      <ProductInformation {...newProduct} />
+      <ProductSource {...newProduct} />
       <div className="h-20" />
     </div>
   );
