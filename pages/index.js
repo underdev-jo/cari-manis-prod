@@ -1,8 +1,9 @@
-import { baseUrl } from "helpers/util";
+import { apiSelection, apiSort } from "helpers/supabase";
 import DrinkList from "layouts/Product/DrinkList";
 import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
 import PageHead from "pages/PageHead";
 import { useState } from "react";
+import { requestMilk } from "./api/home-content";
 
 const selectList = [
   {
@@ -27,9 +28,19 @@ const selectList = [
 ];
 
 export async function getStaticProps() {
-  let fetching = await fetch(`${baseUrl}/api/home-content`);
-  console.log("FETCHED: ", fetching);
-  const filtered = fetching ? await fetching.json() : null;
+  // let fetching = await fetch(`${baseUrl}/api/home-content`);
+  // console.log("FETCHED: ", fetching);
+  // const filtered = fetching ? await fetching.json() : null;
+
+  const filtered = {
+    lowSugar: await apiSort("gula"),
+    lowCal: await apiSort("kalori"),
+    milk: await requestMilk(),
+    coffee: await apiSelection("kopi", "coffee"),
+    juice: await apiSelection("jus", "juice"),
+    mostSweet: await apiSort("gula", true),
+  };
+
   return {
     props: { filtered },
     revalidate: 3600,

@@ -1,34 +1,7 @@
-import { supabase } from "helpers/supabase";
+import { apiSelection, apiSort, orLogic, supabase } from "helpers/supabase";
 import { tableMinuman } from "helpers/util";
 
-const apiSort = async (tableName = "", descending) => {
-  const options = { ascending: descending ? false : true };
-  if (!tableName && typeof tableName !== "string")
-    return { error: { message: "No table name provided" } };
-  const res = await supabase
-    .from(tableMinuman)
-    .select()
-    .order(tableName, options)
-    .range(0, 5);
-  let status = res.status;
-  return status === 200 ? res : null;
-};
-
-const orLogic = (name1, name2) =>
-  `name.ilike.%${name1}%,name.ilike.%${name2}%,category.cs.{${name1}},category.cs.{${name2}}`;
-
-const apiSelection = async (name1, name2) => {
-  const request = await supabase
-    .from(tableMinuman)
-    .select()
-    .or(orLogic(name1, name2))
-    .order("created_at", { ascending: true })
-    .range(0, 5);
-  let status = request.status;
-  return status === 200 ? request : null;
-};
-
-const requestMilk = async () => {
+export const requestMilk = async () => {
   const reqStitch = await supabase
     .from(tableMinuman)
     .select()
@@ -42,10 +15,7 @@ const requestMilk = async () => {
   return status === 200 ? reqStitch : null;
 };
 
-export default async function apiHomeContent(
-  req = NextApiRequest,
-  res = NextApiResponse
-) {
+export default async function apiHomeContent(req, res) {
   if (req.method === "GET") {
     const data = {
       lowSugar: await apiSort("gula"),
