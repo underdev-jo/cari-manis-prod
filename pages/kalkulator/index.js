@@ -10,7 +10,6 @@ import IconPlus from "public/icons/icon-plus";
 import SugarCube from "public/icons/SugarCube";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPopupAdd } from "store/slices/addProduct";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
 import { setProductCalc } from "store/slices/calculatedProduct";
@@ -123,6 +122,8 @@ export async function getServerSideProps({ req, query }) {
   const { cookies } = req;
   const data = cookies.calculated || "{}";
   const parsed = JSON.parse(data);
+
+  console.log("ServerSideKalkulator: ", parsed);
 
   return {
     props: {

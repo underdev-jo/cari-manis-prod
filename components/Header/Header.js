@@ -98,7 +98,9 @@ const Badge = ({ status }) => {
   return (
     <div className="relative">
       {ping}
-      <div className="relative badge badge-lg badge-accent">{status}</div>
+      <div className="relative badge badge-lg badge-accent font-medium">
+        {status}
+      </div>
     </div>
   );
 };
