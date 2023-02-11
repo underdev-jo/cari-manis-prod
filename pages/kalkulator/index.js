@@ -130,11 +130,12 @@ export async function getServerSideProps({ req, query }) {
       list.map(async (item) => {
         let url = `${baseUrl}/api/product-detail`;
         const res = await fetch(`${url}?id=${item.id}`, { method: "GET" });
-        return res;
+        return res.json();
       })
     );
 
   const propsing = (resItem) => {
+    console.log("Resitem: ", resItem);
     let returnItem = resItem;
     const item = resItem.data[0];
     const target = list.find((i) => i.id === item.id);
@@ -149,9 +150,9 @@ export async function getServerSideProps({ req, query }) {
     return returnItem;
   };
 
-  const productsCalc = await runList().then((res) =>
-    res.map((item) => propsing(item))
-  );
+  const productsCalc = await runList()
+    .then((res) => res)
+    .then((item) => item.map((i) => propsing(i)));
 
   return {
     props: {
