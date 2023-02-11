@@ -5,7 +5,7 @@ export default function DevLabel({}) {
     <div className={style.devLabel}>
       <div className={`${style["portfolio-experiment"]}`}>
         Develop by <span className={style["experiment-title"]}>underline</span>{" "}
-        team © 2022
+        team © 2023
       </div>
     </div>
   );
