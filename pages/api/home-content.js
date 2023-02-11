@@ -10,7 +10,8 @@ const apiSort = async (tableName = "", descending) => {
     .select()
     .order(tableName, options)
     .range(0, 5);
-  return res;
+  let status = res.status;
+  return status === 200 ? res : null;
 };
 
 const orLogic = (name1, name2) =>
@@ -20,10 +21,11 @@ const apiSelection = async (name1, name2) => {
   const request = supabase
     .from(tableMinuman)
     .select()
-    .or(
-      `name.ilike.%${name1}%,name.ilike.%${name2}%,category.cs.{${name1}},category.cs.{${name2}}`
-    );
-  return request.order("created_at", { ascending: false }).range(0, 5);
+    .or(orLogic(name1, name2))
+    .order("created_at", { ascending: true })
+    .range(0, 5);
+  let status = request.status;
+  return status === 200 ? request : null;
 };
 
 const requestMilk = async () => {
@@ -36,7 +38,8 @@ const requestMilk = async () => {
     .filter("name", "not.ilike", "%teh%")
     .filter("name", "not.ilike", "%tea%")
     .range(0, 5);
-  return reqStitch;
+  let status = reqStitch.status;
+  return status === 200 ? reqStitch : null;
 };
 
 export default async function apiHomeContent(req, res) {
