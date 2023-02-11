@@ -9,6 +9,11 @@ import style from "./Product.module.scss";
 import { selectorPackaging } from "helpers/drink-selector";
 import { colors } from "helpers/colors";
 
+const carman = {
+  blue: colors["carman-blue-1"],
+  red: colors["carman-red-1"],
+};
+
 const NutritionBadge = ({ children, type }) => (
   <Badge type={type} className="badge-sm font-bold">
     {children}
@@ -220,25 +225,23 @@ const NettoInfo = ({ gula, kalori, jumlah_sajian, takaran_saji }) => {
   );
 };
 
-const Block = ({ title, info, setPopup, index, active, value, max }) => (
-  <motion.button
-    initial={{ color: colors["carman-blue-1"] }}
-    animate={{
-      color:
-        index === active
-          ? "#fff"
-          : value > max
-          ? colors["carman-red-1"]
-          : colors["carman-blue-1"],
-    }}
-    type="button"
-    className={`relative rounded-2xl h-[68px] w-1/3`}
-    onClick={() => setPopup(index)}
-  >
-    <div className="text-medium font-bold">{title}</div>
-    <div className="text-large">{info}</div>
-  </motion.button>
-);
+const Block = ({ title, info, setPopup, index, active, value, max }) => {
+  let color = carman.blue;
+  if (index === active) color = "#ffffff";
+  else if (value >= 0.5 * max) color = carman.red;
+  return (
+    <motion.button
+      initial={{ color: carman.blue }}
+      animate={{ color }}
+      type="button"
+      className="relative rounded-2xl h-[68px] w-1/3"
+      onClick={() => setPopup(index)}
+    >
+      <div className="text-medium font-bold">{title}</div>
+      <div className="text-large">{info}</div>
+    </motion.button>
+  );
+};
 
 export function ProductNutrition({
   netto,
@@ -274,7 +277,7 @@ export function ProductNutrition({
 
   const tabActive = btnLoop[active];
   const titleActive = tabActive.title;
-  const over = tabActive.value > tabActive.max;
+  const over = tabActive.value >= tabActive.max * 0.5;
 
   return (
     <div className="overflow-x-hidden">
@@ -286,11 +289,9 @@ export function ProductNutrition({
           <motion.div
             animate={{
               left: `${posLeft}%`,
-              background: over
-                ? colors["carman-red-1"]
-                : colors["carman-blue-1"],
+              background: carman[over ? "red" : "blue"],
             }}
-            className={`w-1/3 h-full absolute top-0 rounded-2xl bg-carman-blue-1`}
+            className="w-1/3 h-full absolute top-0 rounded-2xl bg-carman-blue-1"
           />
           {btnLoop.map((item, index) => (
             <Block
@@ -303,11 +304,7 @@ export function ProductNutrition({
           ))}
         </div>
         <motion.div
-          animate={{
-            borderColor: over
-              ? colors["carman-red-1"]
-              : colors["carman-blue-1"],
-          }}
+          animate={{ borderColor: carman[over ? "red" : "blue"] }}
           className={style["nutrition-box"]}
         >
           {titleActive === "Gula" && <SugarInfo {...sugarData} />}
