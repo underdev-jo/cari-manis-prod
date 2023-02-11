@@ -1,4 +1,3 @@
-import { baseUrl } from "helpers/util";
 import DrinkList from "layouts/Product/DrinkList";
 import { useState } from "react";
 
@@ -55,7 +54,9 @@ export default function MinumanBerkategori({ filtered }) {
   let unitDisplay = "sugar";
   if (active === "lowCal" || active === "highCal") unitDisplay = "calorie";
 
-  console.log("Filtered: ", filtered);
+  console.log("Filtereds: ", filtered);
+
+  if (!filtered) return "";
 
   return (
     <DrinkList
