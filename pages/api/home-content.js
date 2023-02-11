@@ -18,10 +18,12 @@ const orLogic = (name1, name2) =>
   `name.ilike.%${name1}%,name.ilike.%${name2}%,category.cs.{${name1}},category.cs.{${name2}}`;
 
 const apiSelection = async (name1, name2) => {
-  const request = supabase
+  const request = await supabase
     .from(tableMinuman)
     .select()
-    .or(orLogic(name1, name2))
+    .or(
+      `name.ilike.%${name1}%,name.ilike.%${name2}%,category.cs.{${name1}},category.cs.{${name2}}`
+    )
     .order("created_at", { ascending: true })
     .range(0, 5);
   let status = request.status;
