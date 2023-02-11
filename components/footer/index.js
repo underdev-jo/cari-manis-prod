@@ -1,4 +1,5 @@
 import { TwitterButton } from "components/Button/twitter";
+import DevLabel from "components/legal/dev-label";
 import { linkList } from "helpers/menuList";
 import Link from "next/link";
 import LogoCariManis from "public/legal/logo-carimanis";
@@ -28,6 +29,9 @@ const LinkItem = (item) => {
 export default function Footer() {
   return (
     <div className={style.footer}>
+      <div className={`text-small !text-white ${style.dev}`}>
+        <DevLabel color="white" />
+      </div>
       <div className="content-wrapper text-small">
         <div className={style.product}>
           <div className="flex items-center [&>svg]:h-9 [&>svg]:w-20 pb-2">
@@ -51,9 +55,6 @@ export default function Footer() {
             <TwitterButton username="mukharomf" />
           </div>
         </div>
-      </div>
-      <div className={`text-small ${style.dev}`}>
-        Developed by underline &copy; 2022
       </div>
     </div>
   );

@@ -16,19 +16,18 @@ const selectList = [
     key: "lowCal",
     searchFilter: "/cari?urutkan=lowcal",
   },
-  {
-    name: "Tinggi Kalori",
-    key: "highCal",
-    searchFilter: "/cari?urutkan=highcal",
-  },
   { name: "Susu", key: "milk", searchFilter: "/cari?jenis=susu" },
   { name: "Kopi", key: "coffee", searchFilter: "/cari?jenis=kopi" },
   { name: "Jus", key: "juice", searchFilter: "/cari?jenis=jus" },
+  {
+    name: "Paling Manis",
+    key: "mostSweet",
+    searchFilter: "/cari?urutkan=highsugar",
+  },
 ];
 
 export async function getStaticProps() {
   const filtered = await (await fetch(`${baseUrl}/api/home-content`)).json();
-  console.log("Data", filtered);
   return {
     props: { filtered },
     revalidate: 3600,

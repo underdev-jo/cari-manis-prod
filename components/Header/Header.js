@@ -13,6 +13,7 @@ import {
   setPopupDetailCalc,
 } from "store/slices/calculatedPopup";
 import { setPopupAdd } from "store/slices/addProduct";
+import DevLabel from "components/legal/dev-label";
 
 const LeftSide = ({ back }) => {
   const dispatch = useDispatch();
@@ -144,11 +145,7 @@ const MenuView = ({ onBurger, toggleBurger }) => {
       </motion.div>
 
       <div className={style.devLabel}>
-        <div className={style["portfolio-experiment"]}>
-          Develop by{" "}
-          <span className={style["experiment-title"]}>underline</span> team ©
-          2022
-        </div>
+        <DevLabel />
       </div>
     </div>
   );

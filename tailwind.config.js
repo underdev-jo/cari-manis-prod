@@ -30,6 +30,7 @@ module.exports = {
       "carman-blue-0": "#005fbb",
       "carman-blue-1": "#017FFA",
       "carman-blue-2": "#394f69",
+      "carman-blue-3":"#203e86",
       "carman-blue-9": "#dae8fc",
       "carman-blue-10": "#D1E3FC",
       "carman-purple-1":"#D7E4FF",

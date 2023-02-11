@@ -46,7 +46,7 @@ export default async function apiHomeContent(req, res) {
     milk: await requestMilk(),
     coffee: await apiSelection("kopi", "coffee"),
     juice: await apiSelection("jus", "juice"),
-    highCal: await apiSort("kalori", true),
+    mostSweet: await apiSort("gula", true),
   };
 
   if (data.lowSugar.error) return res.redirect([502], "/502");
