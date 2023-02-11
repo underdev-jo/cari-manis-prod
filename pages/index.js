@@ -27,8 +27,9 @@ const selectList = [
 ];
 
 export async function getStaticProps() {
-  let filtered = await (await fetch(`${baseUrl}/api/home-content`)).json();
-  console.log("FILTERED: ", filtered);
+  let fetch = await fetch(`${baseUrl}/api/home-content`);
+  console.log("FETCHED: ", fetch);
+  const filtered = fetch ? fetch.json() : null;
   return {
     props: { filtered },
     revalidate: 3600,
