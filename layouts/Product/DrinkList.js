@@ -58,7 +58,9 @@ const DrinkList = ({
 }) => (
   <Section title={sectionTitle} sticky={sticky} underTitle={underTitle}>
     {topEl}
-    <DrinkListView list={drinkList} unitDisplay={unitDisplay} />
+    {drinkList && drinkList.data && drinkList.data.length > 0 && (
+      <DrinkListView list={drinkList.data} unitDisplay={unitDisplay} />
+    )}
     {useMoreBtn && <MoreButton filter={filter} />}
   </Section>
 );

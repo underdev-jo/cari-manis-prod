@@ -32,7 +32,7 @@ export async function getStaticProps({ params }) {
       },
     };
 
-  return { props };
+  return { props, revalidate: 3600 };
 }
 
 export default function ProductDetail({ product }) {

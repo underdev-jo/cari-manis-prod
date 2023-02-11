@@ -9,6 +9,8 @@ const nextConfig = {
       "via.placeholder.com",
       "https://fonts.gstatic.com",
       "assets.klikindomaret.com",
+      "media.monotaro.id",
+      "images.tokopedia.net",
     ],
   },
 };

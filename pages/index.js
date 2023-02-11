@@ -24,18 +24,14 @@ const selectList = [
   { name: "Susu", key: "milk", searchFilter: "/cari?jenis=susu" },
   { name: "Kopi", key: "coffee", searchFilter: "/cari?jenis=kopi" },
   { name: "Jus", key: "juice", searchFilter: "/cari?jenis=jus" },
-  {
-    name: "Paling Manis",
-    key: "mostSweet",
-    searchFilter: "/cari?urutkan=highsugar",
-  },
 ];
 
 export async function getStaticProps() {
   const filtered = await (await fetch(`${baseUrl}/api/home-content`)).json();
-
+  console.log("Data", filtered);
   return {
     props: { filtered },
+    revalidate: 3600,
   };
 }
 
@@ -78,7 +74,7 @@ export default function Home({ drinkList, filtered }) {
         <SweetInfo />
         <DrinkList
           sectionTitle="Daftar Produk Minuman"
-          drinkList={filtered[active].data}
+          drinkList={filtered[active]}
           underTitle={<Selector active={active} setActive={setActive} />}
           sticky
           unitDisplay={unitDisplay}
