@@ -42,7 +42,10 @@ const requestMilk = async () => {
   return status === 200 ? reqStitch : null;
 };
 
-export default async function apiHomeContent(req, res) {
+export default async function apiHomeContent(
+  req = NextApiRequest,
+  res = NextApiResponse
+) {
   if (req.method === "GET") {
     const data = {
       lowSugar: await apiSort("gula"),
@@ -53,7 +56,7 @@ export default async function apiHomeContent(req, res) {
       mostSweet: await apiSort("gula", true),
     };
 
-    if (data.lowSugar.error) return res.redirect([502], "/502");
+    // if (data.lowSugar.error) return res.redirect([502], "/502");
 
     return res.status(200).json(data);
   }
