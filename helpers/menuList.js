@@ -1,3 +1,4 @@
+import BalanceIcon from "public/icons/BalanceIcon";
 import FluentCalculatorIcon from "public/icons/FluentCalculator";
 import FluentHomeIcon from "public/icons/FluentHome";
 import FluentInfoIcon from "public/icons/FluentInfo";
@@ -16,6 +17,12 @@ const linkList = [
     url: "/kalkulator",
     image: <FluentCalculatorIcon />,
     status: "new",
+  },
+  {
+    text: "Bandingin Manis",
+    url: "/banding",
+    image: <BalanceIcon />,
+    status: "soon",
   },
   {
     text: "Sumber Informasi",

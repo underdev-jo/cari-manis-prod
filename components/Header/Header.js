@@ -86,6 +86,22 @@ const RightSide = ({ toggleBurger, onBurger }) => {
   );
 };
 
+const Badge = ({ status }) => {
+  if (!status) return "";
+  const isSoon = status === "soon";
+  const ping = isSoon ? (
+    <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
+  ) : (
+    ""
+  );
+  return (
+    <div className="relative">
+      {ping}
+      <div className="relative badge badge-lg badge-accent">{status}</div>
+    </div>
+  );
+};
+
 const MenuView = ({ onBurger, toggleBurger }) => {
   const variants = {
     hidden: { y: -20, opacity: 0, transition: { duration: 0.2 } },
@@ -118,14 +134,7 @@ const MenuView = ({ onBurger, toggleBurger }) => {
               <div onClick={toggleBurger} className={style.linkWrapper}>
                 <div className={style.linkBlock}>
                   <div className={style.linkText}>{item.text}</div>
-                  {item.status === "new" && (
-                    <div className="relative">
-                      <div className="absolute top-0 left-0 w-full h-full bg-accent rounded-xl animate-ping opacity-30" />
-                      <div className="relative badge badge-lg badge-accent">
-                        {item.status}
-                      </div>
-                    </div>
-                  )}
+                  <Badge status={item.status} />
                   <div>{item.image}</div>
                 </div>
               </div>
