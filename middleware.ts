@@ -65,8 +65,13 @@ export default function middleware(req: NextRequest) {
 
     const env = process.env.environment;
     const table = env === "production" ? "activation" : "activation_staging";
-    console.log("MIDDLEWAREs: ", { uid, ip, geo });
-    supabase.from(table).insert({ uid, ip: { ip, geo } });
+    console.log("activation_staging: ", { uid, ip, geo });
+    console.log("Middleware: ", { req, table, env });
+    // supabase.from(table).insert({ uid, ip: `${ip, geo: }` });
+    supabase
+      .from(table)
+      .insert({ uid, ip: `${{ ip, geo }}` })
+      .then(() => res.cookies.set("uid", uid));
     res.cookies.set("uid", uid);
   }
 
