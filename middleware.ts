@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { v4 } from "uuid";
+import { supabase } from "helpers/supabase";
+import { forwardRef } from "react";
 
 export const config = {
   matcher: ["/", "/_dashboard", "/_adminLogin"],
@@ -47,7 +50,27 @@ export default function middleware(req: NextRequest) {
   } else url.pathname = "/404";
 
   const res = NextResponse.rewrite(url);
+
   if (!req.cookies.get("dailySugarLimit"))
     res.cookies.set("dailySugarLimit", 50);
+
+  if (!req.cookies.get("dailyCalLimit")) res.cookies.set("dailyCalLimit", 2100);
+
+  if (!req.cookies.get("uid")) {
+    const uid = v4();
+    // const ip = requestIp.getClientIp(req);
+    let ip = req.ip ?? req.headers.get("x-real-ip");
+    const forwardedFor = req.headers.get("x-forwarded-for");
+    if (!ip && forwardedFor) {
+      ip = forwardedFor.split(",").at(0) ?? "Unknown";
+    }
+
+    const env = process.env.environment;
+    const table = env === "local" ? "activation_staging" : "activation";
+    // console.log("MIDDLEWARE: ", { uid, ip });
+    supabase.from(table).insert({ uid }).then();
+    res.cookies.set("uid", uid);
+  }
+
   return res;
 }
