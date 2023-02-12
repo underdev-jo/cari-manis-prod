@@ -12,32 +12,26 @@ const sizeClass = {
   small: "min-h-[36px] h-[36px] !px-3",
 };
 
-const Button = React.forwardRef(
-  (
-    {
-      type = "button",
-      onClick,
-      children,
-      className = "",
-      model = "default",
-      size = "default",
-    },
-    ref
-  ) => {
-    const classBtn = "btn flex items-center rounded normal-case px-8 gap-1";
-    const stylingClass = `${modelClass[model]} ${sizeClass[size]}`;
-    return (
-      <button
-        ref={ref}
-        className={`${className} ${stylingClass} ${classBtn}`}
-        type={type}
-        onClick={onClick}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+const Button = ({
+  type = "button",
+  onClick,
+  children,
+  className = "",
+  model = "default",
+  size = "default",
+}) => {
+  const classBtn = "btn flex items-center rounded normal-case px-8 gap-1";
+  const stylingClass = `${modelClass[model]} ${sizeClass[size]}`;
+  return (
+    <button
+      className={`${className} ${stylingClass} ${classBtn}`}
+      type={type}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
 
 Button.displayName = "Button";
 
