@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { v4 } from "uuid";
 import { supabase } from "helpers/supabase";
-import { forwardRef } from "react";
 
 export const config = {
   matcher: ["/", "/_dashboard", "/_adminLogin"],
@@ -59,16 +58,15 @@ export default function middleware(req: NextRequest) {
   if (!req.cookies.get("uid")) {
     const uid = v4();
     // const ip = requestIp.getClientIp(req);
-    let ip = req.ip ?? req.headers.get("x-real-ip");
+    let ip = req.ip ?? req.headers.get("x-real-ip") ?? req;
     const forwardedFor = req.headers.get("x-forwarded-for");
-    if (!ip && forwardedFor) {
-      ip = forwardedFor.split(",").at(0) ?? "Unknown";
-    }
+    if (!ip && forwardedFor) ip = forwardedFor.split(",").at(0) ?? "Unknown";
+    const geo = req.geo;
 
     const env = process.env.environment;
     const table = env === "production" ? "activation" : "activation_staging";
-    // console.log("MIDDLEWARE: ", { uid, ip });
-    supabase.from(table).insert({ uid, ip }).then();
+    console.log("MIDDLEWAREs: ", { uid, ip, geo });
+    supabase.from(table).insert({ uid, ip: { ip, geo } });
     res.cookies.set("uid", uid);
   }
 
