@@ -11,22 +11,35 @@ export default function middleware(req: NextRequest) {
 
   const hostname = req.headers.get("host") || "";
 
-  const inLocal = "localhost:3000";
-  const inProd = "cari-manis.vercel.app";
-  const inDomain = "www.cari-manis.my.id";
+  // const inLocal = "localhost:3000";
+  // const inProd = "cari-manis.vercel.app";
+
+  const env = process.env.environment;
+
+  let inDomain = "localhost:3000";
+  if (env === "staging") inDomain = "stg-cari-manis.vercel.app";
+  else if (env === "production") inDomain = "cari-manis.vercel.app";
+
+  const globalDomain = "www.cari-manis.my.id";
 
   const parts = hostname.split(".");
   const subdomain = parts.shift();
 
   if (pathname.startsWith("/_dashboard") || pathname.startsWith("/_adminLogin"))
     url.pathname = "/404";
+  // else if (
+  //   subdomain === inLocal ||
+  //   subdomain === inProd ||
+  //   pathname === inProd ||
+  //   hostname === inProd ||
+  //   pathname === inDomain ||
+  //   hostname === inDomain
+  // )
   else if (
-    subdomain === inLocal ||
-    subdomain === inProd ||
-    pathname === inProd ||
-    hostname === inProd ||
+    subdomain === inDomain ||
     pathname === inDomain ||
-    hostname === inDomain
+    pathname === globalDomain ||
+    hostname === globalDomain
   )
     url.pathname = pathname;
   else if (subdomain === "onlymin") {

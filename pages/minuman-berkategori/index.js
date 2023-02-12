@@ -54,8 +54,6 @@ export default function MinumanBerkategori({ filtered }) {
   let unitDisplay = "sugar";
   if (active === "lowCal" || active === "highCal") unitDisplay = "calorie";
 
-  console.log("Filtereds: ", filtered);
-
   if (!filtered) return "";
 
   return (
