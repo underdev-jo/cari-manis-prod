@@ -21,19 +21,22 @@ const getProductSearch = async (
     let api = supabase.from(tableMinuman).select("*", count);
 
     let qName = [];
-    if (q) qName = `${q}`.split(/[ ,]+/);
+    if (q) qName = `${q}`.split(/[,]+/);
 
     if (q || kemasan || gula) {
+      const hasComma = `${q}`.includes(",");
+
       let orName = `name.ilike.%${q}%`;
-      if (qName.length > 0)
-        orName = qName.map((qitem) => `name.ilike.%${qitem}%`);
+      if (hasComma)
+        orName = qName.map((qitem) => `name.ilike.%${`${qitem}`.trim()}%`);
 
       const orCat = `category.cs.${arrStringObj(qName)}`;
+      const categories = hasComma ? "" : `,${orCat}`;
 
       api = supabase
         .from(tableMinuman)
         .select("*", count)
-        .or(`${orName},${orCat}`)
+        .or(`${orName}${categories}`)
         .ilike("packaging", `%${kemasan}%`)
         .lte("gula", gula);
     }
@@ -41,7 +44,7 @@ const getProductSearch = async (
     let apiGroupType = api;
     if (jenis) apiGroupType = api.contains("category", `{${jenis}}`);
 
-    let apiGroup = apiGroupType.order("created_at", { ascending: false });
+    let apiGroup = apiGroupType.order("name");
     if (urutkan === "lowsugar") apiGroup = apiGroupType.order("gula");
     else if (urutkan === "highsugar")
       apiGroup = apiGroupType.order("gula", { ascending: false });

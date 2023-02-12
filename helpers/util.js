@@ -79,7 +79,7 @@ export const arrStringObj = (arr = []) =>
 
 export const baseUrl = process.env.base_url;
 
-export const maxFetchData = 12;
+export const maxFetchData = 19;
 
 export const dailyMaxSugar = parseInt(getCookie("dailySugarLimit")) || 50;
 
