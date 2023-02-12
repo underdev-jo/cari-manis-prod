@@ -8,7 +8,7 @@ import CalorieFire from "public/icons/calorie-fire";
 import FluentDeleteIcon from "public/icons/FluentDeleteIcon";
 import IconPlus from "public/icons/icon-plus";
 import SugarCube from "public/icons/SugarCube";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCalculatedProduct } from "store/slices/calculated";
 import { setPopupCalculator } from "store/slices/calculatedPopup";
@@ -135,7 +135,6 @@ export async function getServerSideProps({ req, query }) {
     );
 
   const propsing = (resItem) => {
-    console.log("Resitem: ", resItem);
     let returnItem = resItem;
     const item = resItem.data[0];
     const target = list.find((i) => i.id === item.id);

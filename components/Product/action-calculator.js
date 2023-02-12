@@ -21,10 +21,15 @@ const ActionCalculator = (product) => {
 
   const dispatch = useDispatch();
   const dispatchCounter = (passCount) => {
+    //DEFINE
     const qty = passCount || count;
+    const newProduct = [...calcProduct];
+
     // GET EXIST PRODUCT
     const target = calcProduct.find((i) => i.data[0].id === product.id);
     const tIndex = calcProduct.findIndex((i) => i.data[0].id === product.id);
+
+    //MANAGING PROPS
     const newProps = {
       qty,
       xSug: target.data[0].gula * qty,
@@ -32,7 +37,7 @@ const ActionCalculator = (product) => {
     };
     const newData = { ...target.data[0], ...newProps };
     const targetProduct = { ...target, data: [newData] };
-    const newProduct = [...calcProduct];
+
     if (passCount === 0) newProduct.splice(tIndex, 1);
     else newProduct[tIndex] = targetProduct;
     dispatch(setProductCalc(newProduct));
@@ -59,7 +64,7 @@ const ActionCalculator = (product) => {
     } else {
       dispatchCounter(0);
       delItemCalculator(product);
-      setDeleted(true);
+      // setDeleted(true);
     }
   };
 
