@@ -80,13 +80,13 @@ export default function PopInfo() {
           <div className="relative py-6 px-5">
             <div className="mb-3">
               <div className="mb-2">
-                <div className="relative w-[157px] h-[157px] bg-slate-400 mx-auto">
+                <div className="relative w-[157px] h-[157px] mx-auto">
                   {product.image && (
                     <Image
                       alt={product.name}
                       src={product.image}
                       layout="fill"
-                      quality={50}
+                      quality={25}
                     />
                   )}
                 </div>
