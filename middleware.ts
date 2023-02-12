@@ -11,19 +11,19 @@ export default function middleware(req: NextRequest) {
 
   const hostname = req.headers.get("host") || "";
 
-  // const inLocal = "localhost:3000";
-  // const inProd = "cari-manis.vercel.app";
-
-  const env = process.env.environment;
-
-  let inDomain = "localhost:3000";
-  if (env === "staging") inDomain = "stg-cari-manis.vercel.app";
-  else if (env === "production") inDomain = "cari-manis.vercel.app";
-
+  const inLocal = "localhost:3000";
+  const inStg = "stg-cari-manis.vercel.app";
+  const inProd = "cari-manis.vercel.app";
   const globalDomain = "www.cari-manis.my.id";
 
   const parts = hostname.split(".");
   const subdomain = parts.shift();
+
+  const checkSub =
+    subdomain === inLocal || subdomain === inStg || subdomain === inProd;
+  const checkStg = pathname === inStg || hostname === inStg;
+  const checkProd = pathname === inProd || hostname === inProd;
+  const checkGlob = pathname === globalDomain || hostname === globalDomain;
 
   if (pathname.startsWith("/_dashboard") || pathname.startsWith("/_adminLogin"))
     url.pathname = "/404";
@@ -32,15 +32,10 @@ export default function middleware(req: NextRequest) {
   //   subdomain === inProd ||
   //   pathname === inProd ||
   //   hostname === inProd ||
-  //   pathname === inDomain ||
-  //   hostname === inDomain
+  //   pathname === globalDomain ||
+  //   hostname === globalDomain
   // )
-  else if (
-    subdomain === inDomain ||
-    pathname === inDomain ||
-    pathname === globalDomain ||
-    hostname === globalDomain
-  )
+  else if (checkSub || checkStg || checkProd || checkGlob)
     url.pathname = pathname;
   else if (subdomain === "onlymin") {
     const adminCookie = req.cookies.get("onlymin");
