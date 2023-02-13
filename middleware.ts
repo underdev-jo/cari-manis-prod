@@ -58,7 +58,7 @@ export default function middleware(req: NextRequest) {
   if (!req.cookies.get("uid")) {
     const uid = v4();
     // const ip = requestIp.getClientIp(req);
-    let ip = req.ip ?? req.headers.get("x-real-ip") ?? req;
+    let ip = req.ip ?? req.headers.get("x-real-ip");
     const forwardedFor = req.headers.get("x-forwarded-for");
     if (!ip && forwardedFor) ip = forwardedFor.split(",").at(0) ?? "Unknown";
     const geo = req.geo;
@@ -70,8 +70,8 @@ export default function middleware(req: NextRequest) {
     // supabase.from(table).insert({ uid, ip: `${ip, geo: }` });
     supabase
       .from(table)
-      .insert({ uid, ip: `${{ ip, geo }}` })
-      .then(() => res.cookies.set("uid", uid));
+      .insert({ uid, ip: JSON.stringify({ ip, geo }) })
+      .then((res) => console.log("SUPABASE SEND: ", res));
     res.cookies.set("uid", uid);
   }
 
