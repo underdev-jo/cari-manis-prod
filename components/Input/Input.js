@@ -70,7 +70,6 @@ const Input = ({
   let inputEl = (
     <input
       {...props}
-      ref={ref}
       type={inType}
       placeholder={placeholder}
       className={classInput}
