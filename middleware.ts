@@ -7,7 +7,7 @@ export const config = {
   matcher: ["/", "/_dashboard", "/_adminLogin"],
 };
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   let url = req.nextUrl.clone();
   const { pathname } = req.nextUrl;
 
@@ -68,7 +68,7 @@ export default function middleware(req: NextRequest) {
     console.log("activation_staging: ", { uid, ip, geo });
     console.log("Middleware: ", { req, table, env });
     // supabase.from(table).insert({ uid, ip: `${ip, geo: }` });
-    supabase
+    await supabase
       .from(table)
       .insert({ uid, ip: JSON.stringify({ ip, geo }) })
       .then((res) => console.log("SUPABASE SEND: ", res));
