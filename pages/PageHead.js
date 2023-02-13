@@ -1,9 +1,10 @@
+import { baseUrl } from "helpers/util";
 import Head from "next/head";
 
 export default function PageHead({
   title = "cari-manis.id",
   description = "Cari tahu seberapa manis minumanmu",
-  image = "/legal/thumbnail-carimanis-med.jpg",
+  image = `${baseUrl}/legal/thumbnail-carimanis-med.jpg`,
   url = "https://cari-manis.my.id",
 }) {
   return (
