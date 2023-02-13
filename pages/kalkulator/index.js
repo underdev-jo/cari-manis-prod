@@ -1,6 +1,7 @@
 import Button from "components/Button";
 import ProductListItem from "components/Product/list-item";
-import { baseUrl, removeCookie } from "helpers/util";
+import { supabase } from "helpers/supabase";
+import { baseUrl, getCookie, removeCookie } from "helpers/util";
 import ErrorLayout from "layouts/Error";
 import { useRouter } from "next/router";
 import PageHead from "pages/PageHead";
@@ -125,18 +126,22 @@ export async function getServerSideProps({ req, query }) {
 
   let list = parsed.product ? [...parsed.product] : [];
 
+  const items = [];
+
   const runList = () =>
     Promise.all(
       list.map(async (item) => {
         let url = `${baseUrl}/api/product-detail`;
         const res = await fetch(`${url}?id=${item.id}`, { method: "GET" });
-        return res.json();
+        const datares = res.json();
+        return datares;
       })
     );
 
   const propsing = (resItem) => {
     let returnItem = resItem;
     const item = resItem.data[0];
+    items.push({ id: item.id, kal: item.kalori, gul: item.gula });
     const target = list.find((i) => i.id === item.id);
     const count = target.c;
     const newProps = {
@@ -149,16 +154,22 @@ export async function getServerSideProps({ req, query }) {
     return returnItem;
   };
 
+  const env = process.env.environment;
+  const envProd = env === "production";
+  const analyticTable = `anal_kalkulator_${envProd ? "production" : "staging"}`;
+  const uid = cookies.uid;
+
   const productsCalc = await runList()
     .then((res) => res)
-    .then((item) => item.map((i) => propsing(i)));
+    .then((item) => item.map((i) => propsing(i)))
+    .then(async (itemprops) => {
+      await supabase
+        .from(analyticTable)
+        .insert({ uid, product: JSON.stringify(items) });
+      return itemprops;
+    });
 
-  return {
-    props: {
-      product: list,
-      productsCalc,
-    },
-  };
+  return { props: { product: list, productsCalc } };
 }
 
 export default function Kalkulator({ product, productsCalc }) {
