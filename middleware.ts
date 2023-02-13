@@ -65,14 +65,14 @@ export default async function middleware(req: NextRequest) {
 
     const env = process.env.environment;
     const table = env === "production" ? "activation" : "activation_staging";
-    console.log("activation_staging: ", { uid, ip, geo });
-    console.log("Middleware: ", { req, table, env });
     // supabase.from(table).insert({ uid, ip: `${ip, geo: }` });
     await supabase
       .from(table)
       .insert({ uid, ip: JSON.stringify({ ip, geo }) })
-      .then((res) => console.log("SUPABASE SEND: ", res));
-    res.cookies.set("uid", uid);
+      .then((supares) => {
+        console.log("SUPABASE SEND: ", supares);
+        res.cookies.set("uid", uid);
+      });
   }
 
   return res;
