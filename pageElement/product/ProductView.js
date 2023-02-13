@@ -243,6 +243,12 @@ const Block = ({ title, info, setPopup, index, active, value, max }) => {
   );
 };
 
+const nettoUnits = (packaging) => {
+  let units = "ml";
+  if (`${packaging}`.toLowerCase() === "sachet") units = "gr";
+  return units;
+};
+
 export function ProductNutrition({
   netto,
   jumlah_sajian,
@@ -259,11 +265,8 @@ export function ProductNutrition({
   const calorieData = { kalori, jumlah_sajian };
   const nettoData = { netto, takaran_saji, ...sugarData, ...calorieData };
 
-  let nettoUnits = "ml";
-  if (`${packaging}`.toLowerCase() === "sachet") nettoUnits = "gr";
-
   const btnLoop = [
-    { title: "Netto", value: netto, info: `${netto}${nettoUnits}` },
+    { title: "Netto", value: netto, info: `${netto}${nettoUnits(packaging)}` },
     { title: "Gula", value: gula, info: `${gula}gr`, max: dailyMaxSugar },
     {
       title: "Kalori",
@@ -323,6 +326,7 @@ export function ProductInformation({
   takaran_saji,
   jumlah_sajian,
   total_gula,
+  packaging,
 }) {
   const Row = ({ name, value }) => (
     <div className={style["nutrition-row"]}>
@@ -335,12 +339,15 @@ export function ProductInformation({
     <div className={style["nutrition-table"]}>
       <h3 className="text-heading4 mb-4">Informasi kandungan minuman</h3>
       <div>
-        <Row name="Netto" value={`${netto}ml`} />
+        <Row name="Netto" value={`${netto}${nettoUnits(packaging)}`} />
         <Row name="Kandungan Gula" value={`${gula}gr`} />
-        <Row name="Takaran Saji" value={`${takaran_saji}ml`} />
-        <Row name="Kalori" value={`${kalori}ml`} />
+        <Row
+          name="Takaran Saji"
+          value={`${takaran_saji}${nettoUnits(packaging)}`}
+        />
+        <Row name="Kalori" value={`${kalori}kkal`} />
         <Row name="Jumlah Sajian" value={jumlah_sajian} />
-        <Row name="Total kandungan gula" value={`${total_gula}ml`} />
+        <Row name="Total kandungan gula" value={`${total_gula}gr`} />
       </div>
     </div>
   );

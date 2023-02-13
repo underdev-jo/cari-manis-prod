@@ -48,60 +48,65 @@ const Error = ({ error }) => {
   );
 };
 
-const Input = React.forwardRef(
-  ({ label, type = "text", placeholder, error, after, ...props }, ref) => {
-    const [inType, setInType] = useState(type);
+const Input = ({
+  label,
+  type = "text",
+  placeholder,
+  error,
+  after,
+  ...props
+}) => {
+  const [inType, setInType] = useState(type);
 
-    const classInput =
-      "input input-bordered border-base-300 w-full focus:input-primary disabled:bg-base-300 disabled:border-base-300";
+  const classInput =
+    "input input-bordered border-base-300 w-full focus:input-primary disabled:bg-base-300 disabled:border-base-300";
 
-    const togglePassword = (e) => {
-      e.preventDefault();
-      if (inType === "password") setInType("text");
-      else setInType("password");
-    };
+  const togglePassword = (e) => {
+    e.preventDefault();
+    if (inType === "password") setInType("text");
+    else setInType("password");
+  };
 
-    let inputEl = (
-      <input
-        {...props}
-        ref={ref}
-        type={inType}
-        placeholder={placeholder}
-        className={classInput}
-      />
-    );
+  let inputEl = (
+    <input
+      {...props}
+      ref={ref}
+      type={inType}
+      placeholder={placeholder}
+      className={classInput}
+    />
+  );
 
-    const labelView = (
-      <label className="label">
-        <span className="label-text">{label}</span>
+  const labelView = (
+    <label className="label">
+      <span className="label-text">{label}</span>
+    </label>
+  );
+
+  const passwordToggle = (
+    <PasswordToggle
+      type={type}
+      inType={inType}
+      onToggle={togglePassword}
+      disabled={props.disabled}
+    />
+  );
+
+  let afterView = "";
+  if (type === "password") afterView = passwordToggle;
+  else if (after) afterView = <span>{after}</span>;
+
+  return (
+    <div className="form-control mb-2">
+      {label && labelView}
+      <label className={after || type === "password" ? "input-group" : ""}>
+        {inputEl}
+        {afterView}
       </label>
-    );
-
-    const passwordToggle = (
-      <PasswordToggle
-        type={type}
-        inType={inType}
-        onToggle={togglePassword}
-        disabled={props.disabled}
-      />
-    );
-
-    let afterView = "";
-    if (type === "password") afterView = passwordToggle;
-    else if (after) afterView = <span>{after}</span>;
-
-    return (
-      <div className="form-control mb-2">
-        {label && labelView}
-        <label className={after || type === "password" ? "input-group" : ""}>
-          {inputEl}
-          {afterView}
-        </label>
-        <Error error={error} />
-      </div>
-    );
-  }
-);
+      <Error error={error} />
+    </div>
+  );
+};
 
 Input.displayName = "Input";
 

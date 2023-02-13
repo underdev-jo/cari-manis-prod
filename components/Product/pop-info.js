@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { setCalculatedProduct } from "store/slices/calculated";
 
 const NutriBox = ({ title, value }) => (
-  <div className="rounded-lg border border-carman-blue-10 text-carman-blue-1 p-4 flex items-center justify-center text-center w-1/3">
+  <div className="rounded-lg border border-carman-blue-10 text-carman-blue-1 px-4 py-2 flex items-center justify-center text-center w-1/3">
     <div>
       <div className="text-medium font-bold">{title}</div>
       <div className="text-large">{value}</div>
