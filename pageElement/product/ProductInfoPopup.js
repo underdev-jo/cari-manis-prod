@@ -1,5 +1,5 @@
 import { runFunction } from "helpers/util";
-import { Close } from "public/icons";
+import Close from "public/icons/Close";
 import { useEffect, useState } from "react";
 import style from "./product-info-popup.module.scss";
 

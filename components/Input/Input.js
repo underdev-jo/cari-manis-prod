@@ -1,4 +1,5 @@
-import { Moon, Sun } from "public/icons";
+import Moon from "public/icons/Moon";
+import Sun from "public/icons/Sun";
 import React, { useState } from "react";
 
 const PasswordToggle = ({ type, inType, onToggle, disabled }) => {

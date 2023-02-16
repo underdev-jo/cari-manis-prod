@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { runFunction } from "helpers/util";
-import { ArrowLeftSolid, Burger, Close } from "public/icons";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
 import { linkList } from "helpers/menuList";
@@ -14,6 +13,9 @@ import {
 } from "store/slices/calculatedPopup";
 import { setPopupAdd } from "store/slices/addProduct";
 import DevLabel from "components/legal/dev-label";
+import ArrowLeftSolid from "public/icons/ArrowLeftSolid";
+import Burger from "public/icons/Burger";
+import Close from "public/icons/Close";
 
 const LeftSide = ({ back }) => {
   const dispatch = useDispatch();

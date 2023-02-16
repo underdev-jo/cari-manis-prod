@@ -1,4 +1,4 @@
-import { InfoCircle } from "public/icons";
+import InfoCircle from "public/icons/InfoCircle";
 
 export default function InfoSymbol({ color = "primary" }) {
   return (

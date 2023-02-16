@@ -1,5 +1,6 @@
 import SearchDrink from "components/Input/InputSearchDrink";
-import { CoffeeCup, CoffeeTime } from "public/icons";
+import CoffeeCup from "public/icons/CoffeeCup";
+import CoffeeTime from "public/icons/CoffeeTime";
 import style from "./Cover.module.scss";
 
 const Cover = () => (

@@ -5,7 +5,7 @@ import Dropdown from "components/Dropdown";
 import { useState } from "react";
 import { selectorPackaging, selectorSugar } from "helpers/drink-selector";
 import Button from "components/Button";
-import { IconSearch } from "public/icons";
+import IconSearch from "public/icons/IconSearch";
 
 function ButtonProductCategory({
   name,

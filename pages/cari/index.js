@@ -48,7 +48,7 @@ export default function SearchPage({
 
   const { query: queryParam } = useRouter();
 
-  const { urutkan = "", filter } = queryParam;
+  const { urutkan = "", filter = "" } = queryParam;
 
   const qUrutkan = urutkan.includes("cal");
   const qFilter = filter.includes("kalori");
@@ -108,7 +108,7 @@ export default function SearchPage({
 
   return (
     <>
-      <PageHead title={`Cari: ${keyword || "manis"}`} />
+      <PageHead title={`Cari${keyword ? `: ${keyword}` : "Manis"}`} />
       <motion.div
         animate={{
           translateY: ["10%", "0%"],

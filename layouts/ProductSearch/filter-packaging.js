@@ -13,14 +13,16 @@ export default function FilterPackaging() {
   });
   const packages = (data && data.data) || [];
 
-  const { replace, query: queryParam } = useRouter();
+  const { replace, push, query: queryParam, pathname: path } = useRouter();
   const filtering = queryParam?.kemasan || "";
 
   const select = ({ value = "" }) => {
     const kemasan = slugify(value || "");
+    delete queryParam.filter;
     let newQuery = { ...queryParam, kemasan, page: 1 };
-    const newParams = new URLSearchParams(newQuery).toString();
-    replace(`/cari?${newParams}`);
+    const params = new URLSearchParams(newQuery).toString();
+    const linker = path === "/cari" ? replace : push;
+    linker(`/cari?${params}`);
   };
 
   const options = [

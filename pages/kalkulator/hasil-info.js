@@ -1,5 +1,5 @@
 import Button from "components/Button";
-import { Close } from "public/icons";
+import Close from "public/icons/Close";
 
 const Wording = ({ total, limit, isOpen }) => {
   if (!isOpen) return "";

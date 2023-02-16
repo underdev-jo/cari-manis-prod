@@ -1,5 +1,5 @@
 import { isFunction } from "helpers/util";
-import { IconSearch } from "public/icons";
+import IconSearch from "public/icons/IconSearch";
 import { useEffect, useState } from "react";
 import style from "./input-search.module.scss";
 

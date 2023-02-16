@@ -4,14 +4,16 @@ import { slugify } from "helpers/util";
 import { useRouter } from "next/router";
 
 export default function FilterSort() {
-  const { replace, query: queryParam } = useRouter();
+  const { replace, push, query: queryParam, pathname: path } = useRouter();
   const filtering = queryParam?.urutkan || "";
 
   const replacePaarams = (value) => {
     const urutkan = slugify(value || "");
-    let newQuery = { ...queryParam, urutkan, page: 1 };
+    delete queryParam.filter;
+    let newQuery = { ...queryParam.delete, urutkan, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
-    replace(`/cari?${params}`);
+    const linker = path === "/cari" ? replace : push;
+    linker(`/cari?${params}`);
   };
 
   const onSelectSugar = (e) => {

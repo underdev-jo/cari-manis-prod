@@ -2,13 +2,13 @@ import Button from "components/Button";
 import { slugify } from "helpers/util";
 import { addToCalculator } from "helpers/addToCalculator";
 import Image from "next/image";
-import { Close } from "public/icons";
 import IconPlus from "public/icons/icon-plus";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopProduct } from "store/slices/popinfo-product";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { setCalculatedProduct } from "store/slices/calculated";
+import Close from "public/icons/Close";
 
 const NutriBox = ({ title, value }) => (
   <div className="rounded-lg border border-carman-blue-10 text-carman-blue-1 px-4 py-2 flex items-center justify-center text-center w-1/3">

@@ -4,14 +4,16 @@ import { slugify } from "helpers/util";
 import { useRouter } from "next/router";
 
 export default function FilterSugar() {
-  const { replace, query: queryParam } = useRouter();
+  const { replace, push, query: queryParam, pathname: path } = useRouter();
   const filtering = queryParam?.gula || "";
 
   const replacePaarams = (value) => {
     const gula = slugify(value || "");
+    delete queryParam.filter;
     let newQuery = { ...queryParam, gula, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
-    replace(`/cari?${params}`);
+    const linker = path === "/cari" ? replace : push;
+    linker(`/cari?${params}`);
   };
 
   const onSelectSugar = (e) => {
