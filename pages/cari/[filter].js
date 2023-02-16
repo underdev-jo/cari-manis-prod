@@ -39,8 +39,8 @@ export async function getStaticProps(context) {
 
   const urlParams = new URLSearchParams(params).toString();
   const apiUrl = `${baseUrl}/api/product-search?${urlParams}`;
-  console.log({ apiUrl, urlParams });
   const fetchAPI = await (await fetch(apiUrl)).json();
+  console.log({ apiUrl, urlParams, fetchAPI });
 
   return { props: { filter, ...fetchAPI } };
 }
