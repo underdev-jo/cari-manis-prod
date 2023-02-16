@@ -1,8 +1,7 @@
-import PageHead from "pages/PageHead";
 import { baseUrl, capitalize } from "helpers/util";
 import SearchPage from ".";
 
-export function getStaticPaths(context) {
+export function getStaticPaths() {
   const pathKemasan = [
     { params: { filter: "kemasan-botol" } },
     { params: { filter: "kemasan-karton" } },
@@ -17,7 +16,6 @@ export function getStaticPaths(context) {
     { params: { filter: "jus" } },
     { params: { filter: "tinggi-gula" } },
   ];
-  console.log("");
   const pathList = [...pathKemasan, ...pathType];
   return {
     paths: pathList,
@@ -26,7 +24,6 @@ export function getStaticPaths(context) {
 }
 
 export async function getStaticProps(context) {
-  console.log("STATIC PROPS: ", context);
   const { filter } = context.params;
 
   let params = "";

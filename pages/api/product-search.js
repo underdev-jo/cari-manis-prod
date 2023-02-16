@@ -11,7 +11,6 @@ const getProductSearch = async (
       gula,
       kemasan = "",
       q = "",
-      filter = "",
       urutkan = "",
       jenis = "",
       page = 1,
@@ -22,12 +21,10 @@ const getProductSearch = async (
     const rawAPI = supabase.from(tableMinuman).select("*", count);
     let api = rawAPI;
 
-    const qf = q || filter;
-
     let qName = [];
-    if (qf) {
-      qName = `${qf}`.split(/[,]+/);
-      const hasComma = `${qf}`.includes(",");
+    if (q) {
+      qName = `${q}`.split(/[,]+/);
+      const hasComma = `${q}`.includes(",");
       const orName = qName.map((qitem) => `name.ilike.%${`${qitem}`.trim()}%`);
       const orCat = `category.cs.${arrStringObj(qName)}`;
       const categories = hasComma ? "" : `,${orCat}`;
