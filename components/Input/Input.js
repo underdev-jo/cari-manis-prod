@@ -107,8 +107,6 @@ const Input = ({
   );
 };
 
-Input.displayName = "Input";
-
 // FOR MORE INPUT CONFIGURATION CAN SEE ON:
 // https://daisyui.com/components/input/
 

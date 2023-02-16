@@ -1,4 +1,4 @@
-import { SearchDrink } from "components/Input";
+import SearchDrink from "components/Input/InputSearchDrink";
 import { CoffeeCup, CoffeeTime } from "public/icons";
 import style from "./Cover.module.scss";
 

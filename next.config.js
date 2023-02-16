@@ -11,6 +11,7 @@ const nextConfig = {
       "assets.klikindomaret.com",
       "media.monotaro.id",
       "images.tokopedia.net",
+      "lzd-img-global.slatic.net",
     ],
   },
 };

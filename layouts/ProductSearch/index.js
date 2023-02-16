@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SearchDrink as InputSearchDrink } from "components/Input";
+import InputSearchDrink from "components/Input/InputSearchDrink";
 import FilterPackaging from "./filter-packaging";
 import FilterSugar from "./filter-sugar";
 import style from "./product-search.module.scss";

@@ -69,7 +69,17 @@ export function diffDate(date) {
 }
 
 export function capitalize(string = "") {
-  return `${`${string}`.charAt(0).toUpperCase()}${`${string}`.slice(1)}`;
+  const joiner = (word = "") =>
+    `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
+
+  // IF STRING CONTAINS SPACE
+  if (string.includes(" "))
+    return string
+      .split(" ")
+      .map((i) => joiner(i))
+      .join(" ");
+  // ELSE LET UPPERCASE THE BEAST!
+  return joiner(string);
 }
 
 export const tableMinuman = "minuman_new";

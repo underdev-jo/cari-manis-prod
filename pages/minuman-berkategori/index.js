@@ -7,19 +7,37 @@ const selectList = [
     key: "lowSugar",
     desc: "Rendah gula adalah produk minuman yang memiliki kandungan gula kurang dari 5gr per 100gr berat minuman",
     searchFilter: "/cari?urutkan=lowsugar",
+    slugFilter: "/cari/rendah-gula",
   },
   {
     name: "Rendah Kalori",
     key: "lowCal",
     searchFilter: "/cari?urutkan=lowcal",
+    slugFilter: "/cari/rendah-kalori",
   },
-  { name: "Susu", key: "milk", searchFilter: "/cari?jenis=susu" },
-  { name: "Kopi", key: "coffee", searchFilter: "/cari?jenis=kopi" },
-  { name: "Jus", key: "juice", searchFilter: "/cari?jenis=jus" },
+  {
+    name: "Susu",
+    key: "milk",
+    searchFilter: "/cari?jenis=susu",
+    slugFilter: "/cari/susu",
+  },
+  {
+    name: "Kopi",
+    key: "coffee",
+    searchFilter: "/cari?jenis=kopi",
+    slugFilter: "/cari/kopi",
+  },
+  {
+    name: "Jus",
+    key: "juice",
+    searchFilter: "/cari?jenis=jus",
+    slugFilter: "/cari/jus",
+  },
   {
     name: "Paling Manis",
     key: "mostSweet",
     searchFilter: "/cari?urutkan=highsugar",
+    slugFilter: "/cari/tinggi-gula",
   },
 ];
 
@@ -63,7 +81,7 @@ export default function MinumanBerkategori({ filtered }) {
       underTitle={<Selector active={active} setActive={setActive} />}
       sticky
       unitDisplay={unitDisplay}
-      filter={selectList.find((i) => i.key === active).searchFilter}
+      filter={selectList.find((i) => i.key === active).slugFilter}
       useMoreBtn
     />
   );

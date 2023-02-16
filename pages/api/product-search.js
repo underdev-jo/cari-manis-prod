@@ -8,7 +8,7 @@ const getProductSearch = async (
   const maxData = maxFetchData;
   if (req.method === "GET") {
     const {
-      gula = 999,
+      gula,
       kemasan = "",
       q = "",
       urutkan = "",
@@ -18,33 +18,44 @@ const getProductSearch = async (
 
     const count = { count: "exact" };
 
-    let api = supabase.from(tableMinuman).select("*", count);
+    const rawAPI = supabase.from(tableMinuman).select("*", count);
+    let api = rawAPI;
 
     let qName = [];
-    if (q) qName = `${q}`.split(/[,]+/);
-
-    if (q || kemasan || gula) {
+    if (q) {
+      qName = `${q}`.split(/[,]+/);
       const hasComma = `${q}`.includes(",");
-
-      let orName = `name.ilike.%${q}%`;
-      if (hasComma)
-        orName = qName.map((qitem) => `name.ilike.%${`${qitem}`.trim()}%`);
-
+      const orName = qName.map((qitem) => `name.ilike.%${`${qitem}`.trim()}%`);
       const orCat = `category.cs.${arrStringObj(qName)}`;
       const categories = hasComma ? "" : `,${orCat}`;
-
-      api = supabase
-        .from(tableMinuman)
-        .select("*", count)
-        .or(`${orName}${categories}`)
-        .ilike("packaging", `%${kemasan}%`)
-        .lte("gula", gula);
+      api = api.or(`${orName}${categories}`);
     }
+
+    if (kemasan) api = api.ilike("packaging", `%${kemasan}%`);
+
+    if (gula) api = api.lte("gula", gula);
+
+    // if (q || kemasan || gula) {
+    //   const hasComma = `${q}`.includes(",");
+
+    //   let orName = `name.ilike.%${q}%`;
+    //   if (hasComma)
+    //     orName = qName.map((qitem) => `name.ilike.%${`${qitem}`.trim()}%`);
+
+    //   const orCat = `category.cs.${arrStringObj(qName)}`;
+    //   const categories = hasComma ? "" : `,${orCat}`;
+
+    //   api = supabase
+    //     .from(tableMinuman)
+    //     .select("*", count)
+    //     .or(`${orName}${categories}`)
+    //     .ilike("packaging", `%${kemasan}%`)
+    // }
 
     let apiGroupType = api;
     if (jenis) apiGroupType = api.contains("category", `{${jenis}}`);
 
-    let apiGroup = apiGroupType.order("name");
+    let apiGroup = apiGroupType;
     if (urutkan === "lowsugar") apiGroup = apiGroupType.order("gula");
     else if (urutkan === "highsugar")
       apiGroup = apiGroupType.order("gula", { ascending: false });

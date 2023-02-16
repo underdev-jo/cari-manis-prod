@@ -10,8 +10,6 @@ import AddToCalculator from "pageElement/product/AddToCalculator";
 import { useRouter } from "next/router";
 import ProductPagination from "pageElement/product/Pagination";
 import { baseUrl, maxFetchData } from "helpers/util";
-import { useDispatch, useSelector } from "react-redux";
-import { setPopProduct } from "store/slices/popinfo-product";
 
 const maxData = maxFetchData;
 
@@ -50,14 +48,12 @@ export default function SearchPage({
 
   const { query: queryParam } = useRouter();
 
-  const product = useSelector(({ popInfoProduct }) => popInfoProduct.product);
-  const dispatch = useDispatch();
+  const { urutkan = "", filter } = queryParam;
 
-  const close = () => dispatch(setPopProduct(false));
-
-  const { urutkan = "" } = queryParam;
-
-  const unitDisplay = urutkan === "lowcal" ? "calorie" : "sugar";
+  const qUrutkan = urutkan.includes("cal");
+  const qFilter = filter.includes("kalori");
+  const logic = qUrutkan || qFilter;
+  const unitDisplay = logic ? "calorie" : "sugar";
 
   useEffect(() => {
     const nextQuery = (query && query.q) || propsKeyword;
