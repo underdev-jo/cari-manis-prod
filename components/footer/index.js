@@ -1,6 +1,6 @@
-import { TwitterButton } from "components/Button/twitter";
+import TwitterButton from "components/Button/twitter";
 import DevLabel from "components/legal/dev-label";
-import { linkList } from "helpers/menuList";
+import linkList from "helpers/menuList";
 import Link from "next/link";
 import LogoCariManis from "public/legal/logo-carimanis";
 import style from "./footer.module.scss";

@@ -10,7 +10,7 @@ export default function FilterSort() {
   const replacePaarams = (value) => {
     const urutkan = slugify(value || "");
     delete queryParam.filter;
-    let newQuery = { ...queryParam.delete, urutkan, page: 1 };
+    let newQuery = { ...queryParam, urutkan, page: 1 };
     const params = new URLSearchParams(newQuery).toString();
     const linker = path === "/cari" ? replace : push;
     linker(`/cari?${params}`);

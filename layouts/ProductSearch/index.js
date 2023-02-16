@@ -6,14 +6,9 @@ import style from "./product-search.module.scss";
 import FilterSort from "./filter-sort";
 import FilterType from "./filter-type";
 
-export async function getServerSideProps(context) {
-  const { query } = context;
-  return { props: { query } };
-}
-
 let lastScroll = 0;
 
-export default function ProductSearch({ keyword, query }) {
+export default function ProductSearch({ keyword }) {
   const [scrollDir, setScrolldir] = useState("up");
 
   useEffect(() => {

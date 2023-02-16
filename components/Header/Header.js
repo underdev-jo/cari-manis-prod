@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { runFunction } from "helpers/util";
 import { useEffect, useState } from "react";
 import style from "./header.module.scss";
-import { linkList } from "helpers/menuList";
+import linkList from "helpers/menuList";
 import LogoCariManis from "public/legal/logo-carimanis";
 import { useDispatch, useSelector } from "react-redux";
 import {

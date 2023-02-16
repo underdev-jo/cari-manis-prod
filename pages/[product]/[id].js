@@ -1,7 +1,7 @@
 import { supabase } from "helpers/supabase";
 import { baseUrl, tableMinuman } from "helpers/util";
-import { ProductView } from "pageElement/product";
 import AddToCalculator from "pageElement/product/AddToCalculator";
+import ProductView from "pageElement/product/ProductView";
 import PageHead from "pages/PageHead";
 
 export async function getStaticPaths() {

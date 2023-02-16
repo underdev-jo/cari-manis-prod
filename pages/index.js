@@ -1,14 +1,13 @@
+import ContentLoading from "components/Loading/content";
 import { baseUrl } from "helpers/util";
 import dynamic from "next/dynamic";
-import { Cover, DrinkCategory, SweetInfo } from "pageElement/home";
+import Cover from "pageElement/home/Cover";
+import DrinkCategory from "pageElement/home/DrinkCategory";
+import SweetInfo from "pageElement/home/SweetInfo";
 import PageHead from "pages/PageHead";
 
 const DynamicSection = dynamic(() => import("./minuman-berkategori"), {
-  loading: (
-    <div className="bg-carman-blue-0 h-screen">
-      <div className="text-2xl animate-bounce">...</div>
-    </div>
-  ),
+  loading: () => <ContentLoading />,
 });
 
 export async function getStaticProps() {

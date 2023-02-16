@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { slugify } from "helpers/util";
 import Section from "components/Section";
 import Dropdown from "components/Dropdown";
 import { useState } from "react";
@@ -11,13 +10,12 @@ function ButtonProductCategory({
   name,
   value,
   image,
-  slug,
-  keySlug,
+  keySlug = "",
   query = "kemasan",
 }) {
   const { push } = useRouter();
   const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 h-auto flex justify-start items-center normal-case w-[48%] max-w-[186px] border-[#E2E8F5]`;
-  const onClick = () => push(`/cari?${query}=${slugify(keySlug || slug)}`);
+  const onClick = () => push(`/cari/${query}-${keySlug.toLowerCase()}`);
 
   return (
     <button type="button" className={classBtnFilter} onClick={onClick}>

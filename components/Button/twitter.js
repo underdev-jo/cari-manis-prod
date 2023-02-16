@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TwitterLogo from "public/icons/twitter-logo";
 
-export const TwitterButton = ({ username }) => {
+export default function TwitterButton({ username }) {
   return (
     <div className="text-small text-white font-medium inline-block">
       <Link href={`https://twitter.com/${username}`} passHref>
@@ -17,4 +17,4 @@ export const TwitterButton = ({ username }) => {
       </Link>
     </div>
   );
-};
+}

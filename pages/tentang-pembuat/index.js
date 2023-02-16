@@ -1,4 +1,4 @@
-import { TwitterButton } from "components/Button/twitter";
+import TwitterButton from "components/Button/twitter";
 import SectionStatic from "components/Section/static";
 import PageHead from "pages/PageHead";
 

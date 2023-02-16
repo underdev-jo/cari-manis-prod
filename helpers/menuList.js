@@ -36,4 +36,4 @@ const linkList = [
   },
 ];
 
-export { linkList };
+export default linkList;
