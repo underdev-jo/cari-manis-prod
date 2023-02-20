@@ -12,6 +12,8 @@ const nextConfig = {
       "media.monotaro.id",
       "images.tokopedia.net",
       "lzd-img-global.slatic.net",
+      "cdn.shopify.com",
+      "cf.shopee.co.id",
     ],
   },
 };

@@ -16,6 +16,7 @@ const getProductSearch = async (
       page = 1,
     } = req.query;
 
+    const numPage = parseInt(page, 10);
     const count = { count: "exact" };
 
     const rawAPI = supabase.from(tableMinuman).select("*", count);
@@ -63,13 +64,13 @@ const getProductSearch = async (
     else if (urutkan === "highcal")
       apiGroup = apiGroupType.order("kalori", { ascending: false });
 
-    const startLen = (page - 1) * maxData;
+    const startLen = (numPage - 1) * maxData;
     const maxLen = startLen + maxData;
 
     const result = await apiGroup.range(startLen, maxLen);
     return res
       .status(200)
-      .json({ query: req.query, result, propsKeyword: q, page });
+      .json({ query: req.query, result, propsKeyword: q, page: numPage });
   }
 };
 

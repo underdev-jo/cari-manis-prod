@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import style from "./Pagination.module.scss";
 
 const ButtonPage = ({ num, disabled }) => {
-  const { replace, query, pathname } = useRouter();
+  const { replace, query, pathname: path, asPath, push } = useRouter();
   const { page = 1 } = query;
 
   const numPage = parseInt(page, 10);
@@ -14,8 +14,14 @@ const ButtonPage = ({ num, disabled }) => {
   const replaceParams = (value) => {
     const pageParams = slugify(value || "");
     let newQuery = { ...query, page: pageParams };
-    const params = new URLSearchParams(newQuery).toString();
-    replace(`${pathname}?${params}`);
+    let params = new URLSearchParams(newQuery).toString();
+    const linker = path === "/cari" ? replace : push;
+    let newPath = `${path}?${params}`;
+    if (path !== "/cari") {
+      const splitpath = asPath.split("/");
+      newPath = `${splitpath.slice(0, -1).join("/")}/${pageParams}`;
+    }
+    linker(newPath);
   };
 
   let click = undefined;

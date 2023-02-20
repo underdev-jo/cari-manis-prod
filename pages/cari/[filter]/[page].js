@@ -1,20 +1,20 @@
 import { baseUrl, capitalize } from "helpers/util";
-import SearchPage from ".";
+import CariFiltered from "../[filter]";
 
 export function getStaticPaths() {
   const pathKemasan = [
-    { params: { filter: "kemasan-botol" } },
-    { params: { filter: "kemasan-karton" } },
-    { params: { filter: "kemasan-kaleng" } },
-    { params: { filter: "kemasan-sachet" } },
+    { params: { filter: "kemasan-botol", page: `1` } },
+    { params: { filter: "kemasan-karton", page: `1` } },
+    { params: { filter: "kemasan-kaleng", page: `1` } },
+    { params: { filter: "kemasan-sachet", page: `1` } },
   ];
   const pathType = [
-    { params: { filter: "rendah-gula" } },
-    { params: { filter: "rendah-kalori" } },
-    { params: { filter: "susu" } },
-    { params: { filter: "kopi" } },
-    { params: { filter: "jus" } },
-    { params: { filter: "tinggi-gula" } },
+    { params: { filter: "rendah-gula", page: `1` } },
+    { params: { filter: "rendah-kalori", page: `1` } },
+    { params: { filter: "susu", page: `1` } },
+    { params: { filter: "kopi", page: `1` } },
+    { params: { filter: "jus", page: `1` } },
+    { params: { filter: "tinggi-gula", page: `1` } },
   ];
   const pathList = [...pathKemasan, ...pathType];
   return {
@@ -24,9 +24,7 @@ export function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const { filter } = context.params;
-  console.log("STATIC: ", context);
-  console.log("WIN: ", window);
+  const { filter, page } = context.params;
 
   let params = "";
   if (`${filter}`.includes("kemasan")) {
@@ -39,18 +37,13 @@ export async function getStaticProps(context) {
   else if (filter === "susu" || filter === "kopi" || filter === "jus")
     params = { jenis: filter };
 
-  const urlParams = new URLSearchParams({ ...params, page: 1 }).toString();
-  console.log("get-static-: ", urlParams);
+  const urlParams = new URLSearchParams({ ...params, page }).toString();
   const apiUrl = `${baseUrl}/api/product-search?${urlParams}`;
   const fetchAPI = await (await fetch(apiUrl)).json();
-  console.log({ apiUrl, urlParams, fetchAPI });
 
   return { props: { filter, ...fetchAPI }, revalidate: 3600 };
 }
 
-export default function CariFiltered({ filter, ...props }) {
-  const filterWord = `${filter}`.split("-").join(" ");
-  let title = "Cari Manis";
-  if (filter && filterWord) title = `Cari: ${capitalize(filterWord)}`;
-  return <SearchPage {...props} />;
+export default function CariFilter({ filter, ...props }) {
+  return <CariFiltered filter={filter} {...props} />;
 }
