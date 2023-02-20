@@ -37,7 +37,7 @@ const MoreButton = ({ filter = "" }) => {
   return (
     <div className="flex justify-center my-4">
       <button
-        className="btn btn-ghost normal-case text-carman-blue-0 text-medium font-medium"
+        className="btn btn-ghost border-2 normal-case text-carman-blue-0 text-medium font-semibold hover:border-carman-blue-1 hover:bg-blue-50"
         onClick={click}
       >
         Lihat Produk Lainnya

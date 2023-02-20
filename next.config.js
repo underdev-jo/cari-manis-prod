@@ -14,6 +14,8 @@ const nextConfig = {
       "lzd-img-global.slatic.net",
       "cdn.shopify.com",
       "cf.shopee.co.id",
+      "www.static-src.com",
+      "assets.lyreco.com",
     ],
   },
 };

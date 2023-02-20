@@ -81,7 +81,7 @@ export default function MinumanBerkategori({ filtered }) {
       underTitle={<Selector active={active} setActive={setActive} />}
       sticky
       unitDisplay={unitDisplay}
-      filter={selectList.find((i) => i.key === active).slugFilter}
+      filter={`${selectList.find((i) => i.key === active).slugFilter}/1`}
       useMoreBtn
     />
   );

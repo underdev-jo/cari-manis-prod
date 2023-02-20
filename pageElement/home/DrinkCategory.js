@@ -14,8 +14,8 @@ function ButtonProductCategory({
   query = "kemasan",
 }) {
   const { push } = useRouter();
-  const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 h-auto flex justify-start items-center normal-case w-[48%] max-w-[186px] border-[#E2E8F5]`;
-  const onClick = () => push(`/cari/${query}-${keySlug.toLowerCase()}`);
+  const classBtnFilter = `btn btn-ghost my-2 py-3 px-2 border-2 h-auto flex justify-start items-center normal-case w-[48%] max-w-[186px] border-[#E2E8F5] hover:border-carman-blue-1 hover:bg-blue-50`;
+  const onClick = () => push(`/cari/${query}-${keySlug.toLowerCase()}/1`);
 
   return (
     <button type="button" className={classBtnFilter} onClick={onClick}>

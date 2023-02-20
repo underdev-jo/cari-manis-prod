@@ -55,6 +55,8 @@ export default function SearchPage({
   const logic = qUrutkan || qFilter;
   const unitDisplay = logic ? "calorie" : "sugar";
 
+  const amount = result && result.count ? Math.ceil(result.count / maxData) : 0;
+
   useEffect(() => {
     const nextQuery = (query && query.q) || propsKeyword;
     setKeyword(nextQuery);
@@ -82,7 +84,9 @@ export default function SearchPage({
           <span className="font-bold text-black">Hasil Pencarian</span>
           <span className="text-carman-gray-8">({result.count}produk)</span>
         </div>
+        <ProductPagination amount={amount} />
         <DrinkListView list={result.data} unitDisplay={unitDisplay} />
+        <ProductPagination amount={amount} />
       </div>
     );
   else if (
@@ -104,8 +108,6 @@ export default function SearchPage({
   else if (!loading && result.error)
     render = <Alert type="error" message={result.error?.message || "Error!"} />;
 
-  const amount = result && result.count ? Math.ceil(result.count / maxData) : 0;
-
   return (
     <>
       <PageHead title={`Cari${keyword ? `: ${keyword}` : "Manis"}`} />
@@ -117,7 +119,6 @@ export default function SearchPage({
         <div className={`relative min-h-[400px] ${classes}`}>
           <div className="container mb-12">
             <div className={`pt-[120px] p-2 max-w-sm mx-auto`}>{render}</div>
-            <ProductPagination amount={amount} />
           </div>
         </div>
       </motion.div>

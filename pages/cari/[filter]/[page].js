@@ -1,5 +1,6 @@
 import { baseUrl, capitalize } from "helpers/util";
-import CariFiltered from "../[filter]";
+import SearchPage from "..";
+// import CariFiltered from "../[filter]";
 
 export function getStaticPaths() {
   const pathKemasan = [
@@ -45,5 +46,8 @@ export async function getStaticProps(context) {
 }
 
 export default function CariFilter({ filter, ...props }) {
-  return <CariFiltered filter={filter} {...props} />;
+  const filterWord = `${filter}`.split("-").join(" ");
+  let title = "Cari Manis";
+  if (filter && filterWord) title = `Cari: ${capitalize(filterWord)}`;
+  return <SearchPage {...props} />;
 }

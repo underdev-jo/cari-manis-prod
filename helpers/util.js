@@ -95,5 +95,13 @@ export const dailyMaxSugar = parseInt(getCookie("dailySugarLimit")) || 50;
 
 export const dailyMaxCalorie = parseInt(getCookie("dailyCalLimit")) || 2100;
 
+export const getPagination = (page, size = maxFetchData) => {
+  const limit = size ? +size : maxFetchData;
+  const from = page ? page * limit : 0;
+  const to = page ? from + size : size;
+
+  return { from, to };
+};
+
 const helper = { capitalize, diffDate, slugify };
 export default helper;
