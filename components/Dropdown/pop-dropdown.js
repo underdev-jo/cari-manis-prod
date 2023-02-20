@@ -52,14 +52,17 @@ export default function PopDropdown({
     ? "border-carman-blue-1"
     : "border-carman-black-2";
   let textColor = isSelected ? "text-white" : "text-carman-black-2";
-  let bgColorHover = isSelected ? "bg-carman-blue-1" : "bg-slate-200";
   let bgColor = isSelected ? "bg-carman-blue-1" : "bg-transparent";
+  let hoverClass = isSelected
+    ? "hover:bg-carman-blue-1 hover:text-white"
+    : "hover:bg-blue-100 hover:text-carman-black-2";
+  const actClass = `focus:${borderColor} active:${borderColor}`;
+  const modelClass = `${bgColor} ${borderColor} ${textColor}`;
+  const fixedClass = `btn btn-ghost min-w-[70px] text-left rounded-lg border px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:border-carman-blue-1`;
+  const fullClass = `${fixedClass} ${modelClass} ${hoverClass} ${actClass}`;
 
   return (
-    <button
-      className={`btn btn-ghost min-w-[70px] text-left ${bgColor} rounded-lg border ${borderColor} ${textColor} px-2 py-1 normal-case text-medium min-h-0 h-auto font-normal hover:${borderColor} hover:${bgColorHover} hover:${textColor} focus:${borderColor} active:${borderColor}`}
-      onClick={doOpen}
-    >
+    <button className={fullClass} onClick={doOpen}>
       {text}
     </button>
   );
